@@ -1,8 +1,8 @@
 ---
 title: "Bitácora"
-subtitle: "C3VD · V9, VN19-A/B | SCARED · VN18"
+subtitle: "C3VD · V9, VN19-A/B | SCARED · VN18 y V9 adaptado"
 author: "Santiago Hernández Chávez"
-date: 2026-11-14
+date: 2026-11-17
 date-format: "DD/MM/YYYY"
 lang: es
 format:
@@ -29,7 +29,7 @@ execute:
 
 **V9, VN19-A y VN19-B: qué entrenamos, qué cambió y qué aprendimos.** 
 
-[Resumen](#estado){.pill} [Entrenamientos](#entrenamientos){.pill} [Comparaciones](#comparaciones){.pill} [Vistas](#vistas){.pill} [Experimentos](#experimentos){.pill} [SCARED VN18](#scared-vn18){.pill} [Comparadores](#comparadores){.pill} [Tablas históricas](tablas/index.html){.pill}
+[Resumen](#estado){.pill} [Entrenamientos](#entrenamientos){.pill} [Comparaciones](#comparaciones){.pill} [Vistas](#vistas){.pill} [Experimentos](#experimentos){.pill} [SCARED VN18](#scared-vn18){.pill} [SCARED V9](#scared-v9){.pill} [Comparadores](#comparadores){.pill} [Tablas históricas](tablas/index.html){.pill}
 :::
 
 ## Resumen de C3VD {#estado}
@@ -1597,9 +1597,127 @@ Esta comparación también cambia la receta de entrenamiento. No aísla causalme
 **Límite:** SCARED no aporta GT temporal independiente validada para estas ventanas. El visor distingue la trayectoria predicha y no inventa una trayectoria GT. VN19-SCARED A/B sigue en espera.
 
 
+<!-- SCARED_V9_RESULTS_START -->
+
+## SCARED · V9 adaptado {#scared-v9}
+
+Entrenamiento completado: **1.000 actualizaciones**, 2.000 exposiciones densas de 20 anclas medidas distintas. Reconstrucciones mostradas: **paso 1000**, V9-SCARED · candidato diagnóstico. **Ningún checkpoint afinado pasó todas las guardas**: se muestra un candidato diagnóstico elegido por VAL; el selector conserva los pesos oficiales de paso0.
+
+La mejora conjunta media alineada fue **37.67 %**, pero hubo regresiones superiores al 2 % en los keyframes **4**. Esta guarda añadida de investigación impide promocionar una mejora media que perjudica casos particulares; no es un criterio de aceptación del paper.
+
+La cámara permanece congelada. Estas métricas describen profundidad/puntos en las anclas, no certifican la trayectoria o toda la reconstrucción temporal. La compatibilidad de ejecución y gradientes se comprobó; el registro físico RGB/XYZ independiente sigue siendo una limitación, distinta del chequeo algebraico D/K.
+
+<details>
+<summary>Receta, adaptación y split</summary>
+
+
+| Elemento | V9-C3VD de referencia | V9 adaptado a SCARED |
+| --- | --- | --- |
+| Inicio | Pesos oficiales frescos | Pesos oficiales frescos; no continúa C3VD ni VN18 |
+| Actualizar | Cámara + profundidad + puntos | Profundidad + puntos; cámara congelada por falta de GT temporal validada |
+| Congelar | Encoder / TTT externo | Encoder / TTT externo; TTT interno de 2 pasos conservado |
+| Pérdida | 3 L_XYZ + L_logD + 0,2 L_gradXYZ + 0,2 L_camera | Misma parte densa, omitiendo L_camera |
+| Unidades | Referencia fija 0,03 m | Referencia fija 0,03 m; sin escala GT ajustada en TRAIN |
+| Resolución / ventanas | 336²; 3/6/12/50 | 336×266; 3/6/12/50 + seis excepciones N=1 |
+| Presupuesto | 1.000 pasos / 2.000 exposiciones densas | 1.000 pasos / 2.000 exposiciones; dos anclas en contextos independientes por paso |
+| Optimizador | AdamW LR1e-5, WD0,01; clipping global1 | Igual; betas0,9/0,95, eps1e-6, warmup25 + coseno |
+| Muestreo | Equilibrio por secuencia y giro | Rotación de datasets1/2/3/6; dos anclas distintas aleatorias; semilla1234 |
+| TRAIN / VAL / reserva | Split histórico C3VD | 1/2/3/6:20 anclas y62 ventanas; VAL7:5 anclas; reserva8/9 |
+| Exclusiones | Según geometría C3VD | 4/5 en cuarentena; vídeo6/KF1 excluido, ancla medida conservada |
+| Comparación | Referencia histórica | Adaptación de receta; no reproducción literal ni ablación causal de un único factor |
+
+
+Frente a VN18-SCARED cambian pérdidas, unidades, clipping, contextos, muestreo y presupuesto. Se comparan recetas completas bajo evaluación común; este contraste no identifica causalmente el efecto de una sola modificación.
+
+</details>
+
+<details>
+<summary>Métricas de validación: zero-shot, VN18 y V9; medias y keyframes</summary>
+
+Las columnas alineadas usan una escala positiva del ancla compartida por profundidad y puntos, sin ICP. No se comparan directamente las unidades raw normalizadas de VN18 con la referencia fija de V9.
+
+**Ancla aislada · N=1**
+
+| Pesos | AbsRel ↓ | δ1 (%) ↑ | XYZ (cm) ↓ | p95 (cm) ↓ | Δ AbsRel / ZS | Δ XYZ / ZS |
+| --- | --- | --- | --- | --- | --- | --- |
+| zero_shot | 0.15528 | 74.03142 | 1.62304 | 3.50388 | +0.00 % | +0.00 % |
+| VN18_final | 0.10636 | 84.76748 | 0.92969 | 2.29237 | +31.50 % | +42.72 % |
+| V9_best_candidate | 0.09711 | 90.98480 | 0.82205 | 1.87885 | +37.46 % | +49.35 % |
+| V9_selected | 0.15528 | 74.03142 | 1.62304 | 3.50388 | +0.00 % | +0.00 % |
+| V9_final | 0.09711 | 90.98480 | 0.82205 | 1.87885 | +37.46 % | +49.35 % |
+
+
+**Contextos largos · mismas ventanas VN18**
+
+| Pesos | AbsRel ↓ | δ1 (%) ↑ | XYZ (cm) ↓ | p95 (cm) ↓ | Δ AbsRel / ZS | Δ XYZ / ZS |
+| --- | --- | --- | --- | --- | --- | --- |
+| zero_shot | 0.13913 | 79.99277 | 1.51221 | 3.47420 | +0.00 % | +0.00 % |
+| VN18_final | 0.08823 | 90.15824 | 0.87642 | 2.13812 | +36.59 % | +42.04 % |
+| V9_best_candidate | 0.10835 | 87.15597 | 0.88095 | 2.16914 | +22.13 % | +41.74 % |
+| V9_selected | 0.13913 | 79.99277 | 1.51221 | 3.47420 | +0.00 % | +0.00 % |
+| V9_final | 0.10835 | 87.15597 | 0.88095 | 2.16914 | +22.13 % | +41.74 % |
+
+
+**Por keyframe, contextos largos (peso igual por keyframe)**
+
+| KF | AbsRel ZS | AbsRel candidato | Δ favorable | XYZ ZS (cm) | XYZ candidato (cm) | Δ favorable |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | 0.27962 | 0.18234 | +34.79 % | 2.72642 | 1.33575 | +51.01 % |
+| 2 | 0.18365 | 0.14046 | +23.52 % | 1.52107 | 1.03459 | +31.98 % |
+| 3 | 0.07023 | 0.06417 | +8.63 % | 0.87451 | 0.45715 | +47.72 % |
+| 4 | 0.06891 | 0.09620 | -39.59 % | 0.67004 | 0.85901 | -28.20 % |
+| 5 | 0.09325 | 0.05856 | +37.20 % | 1.76900 | 0.71827 | +59.40 % |
+
+
+![Evolución real de TRAIN y VAL; sin elegir pesos por los resultados reservados.](imagenes/SCARED_V9_curvas.png){loading="lazy"}
+
+</details>
+
+<details>
+<summary>SCARED8: reconstrucción reservada, cuatro vistas y comparación interactiva</summary>
+
+Mismos 50 RGB y soporte GT histórico. El keyframe original0 es el único medido; los otros49 frames aportan contexto. Escala positiva del ancla solo al evaluar/visualizar, sin ICP. **4.468.800 puntos por nube, sin submuestreo**. Reservas ya inspeccionadas históricamente; no son test clínico ciego nuevo.
+
+| Pesos | AbsRel ↓ | δ1 (%) ↑ | XYZ (cm) ↓ | p95 (cm) ↓ | Δ AbsRel / ZS | Δ XYZ / ZS |
+| --- | --- | --- | --- | --- | --- | --- |
+| VGG-T³ · zero-shot | 0.03890 | 99.95325 | 1.87279 | 2.74452 | +0.00 % | +0.00 % |
+| VN18 · entrenado con SCARED | 0.05378 | 99.12174 | 0.91006 | 2.47462 | -38.26 % | +51.41 % |
+| V9 · entrenado con C3VD | 0.07698 | 94.37771 | 2.51041 | 7.22945 | -97.91 % | -34.05 % |
+| VN19-A · entrenado con C3VD | 0.09638 | 92.07015 | 4.23054 | 9.61134 | -147.81 % | -125.89 % |
+| V9-SCARED · candidato diagnóstico | 0.08300 | 94.95566 | 0.93464 | 2.42242 | -113.39 % | +50.09 % |
+
+
+![Cuatro vistas con orientación y encuadre comunes de VN18 y V9-SCARED. Se proyectan todos los puntos con z-buffer; no se usa ICP.](imagenes/SCARED8_V9_vs_VN18_cuatro_vistas.png){loading="lazy"}
+<div class="book-actions"><button type="button" class="book-open-clouds" data-clouds="scared8-vn18,scared8-scared-v9,scared8-v9,scared8-vn19-a">Comparar nubes y trayectorias predichas</button><button type="button" class="book-open-metrics" data-metrics="scared8-vn18,scared8-scared-v9,scared8-v9,scared8-vn19-a">Comparar métricas</button></div>
+
+</details>
+
+<details>
+<summary>SCARED9: reconstrucción reservada, cuatro vistas y comparación interactiva</summary>
+
+Mismos 50 RGB y soporte GT histórico. El keyframe original0 es el único medido; los otros49 frames aportan contexto. Escala positiva del ancla solo al evaluar/visualizar, sin ICP. **4.468.800 puntos por nube, sin submuestreo**. Reservas ya inspeccionadas históricamente; no son test clínico ciego nuevo.
+
+| Pesos | AbsRel ↓ | δ1 (%) ↑ | XYZ (cm) ↓ | p95 (cm) ↓ | Δ AbsRel / ZS | Δ XYZ / ZS |
+| --- | --- | --- | --- | --- | --- | --- |
+| VGG-T³ · zero-shot | 0.13738 | 79.09464 | 2.34485 | 5.21760 | +0.00 % | +0.00 % |
+| VN18 · entrenado con SCARED | 0.06105 | 98.41720 | 0.65165 | 1.71356 | +55.56 % | +72.21 % |
+| V9 · entrenado con C3VD | 0.12774 | 82.19280 | 2.79592 | 5.32090 | +7.02 % | -19.24 % |
+| VN19-A · entrenado con C3VD | 0.12288 | 80.37739 | 2.77307 | 5.60324 | +10.56 % | -18.26 % |
+| V9-SCARED · candidato diagnóstico | 0.07533 | 97.38356 | 1.31196 | 2.39606 | +45.17 % | +44.05 % |
+
+
+![Cuatro vistas con orientación y encuadre comunes de VN18 y V9-SCARED. Se proyectan todos los puntos con z-buffer; no se usa ICP.](imagenes/SCARED9_V9_vs_VN18_cuatro_vistas.png){loading="lazy"}
+<div class="book-actions"><button type="button" class="book-open-clouds" data-clouds="scared9-vn18,scared9-scared-v9,scared9-v9,scared9-vn19-a">Comparar nubes y trayectorias predichas</button><button type="button" class="book-open-metrics" data-metrics="scared9-vn18,scared9-scared-v9,scared9-v9,scared9-vn19-a">Comparar métricas</button></div>
+
+</details>
+
+[Descargar métricas de validación](tablas/scared_v9_validation.csv) · [Datos del resultado](tablas/scared_v9_resultados.json)
+
+<!-- SCARED_V9_RESULTS_END -->
+
 ## Comparadores interactivos {#comparadores}
 
-Esta edición web ofrece **12 nubes principales completas** de C3VD y SCARED. Cada nube conserva el **100 % de sus puntos guardados**. Las demás exportaciones del archivo local no se incluyen en esta publicación.
+Esta edición web ofrece **14 nubes principales completas** de C3VD y SCARED. Cada nube conserva el **100 % de sus puntos guardados**. Las demás exportaciones del archivo local no se incluyen en esta publicación.
 
 
 Abre **Nubes 3D** para elegir hasta cuatro archivos y manipularlos lado a lado. Abre **Tablas de métricas** para elegir resultados o tablas de los papers. Las nubes se cargan bajo demanda y conservan todos los puntos guardados. La carga puede ser pesada; **Liberar 3D** elimina sus buffers gráficos.

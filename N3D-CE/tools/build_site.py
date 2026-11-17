@@ -29,7 +29,9 @@ def verify(site):
             elif not u.path and u.fragment and unquote(u.fragment) not in d.ids:errors.append([str(p.relative_to(site)),link,'missing anchor'])
     app=site/'N3D-CE/reconstrucciones/interactivo'
     registry=json.loads((app/'clouds.json').read_text(encoding='utf8'))['clouds']
-    assert len(registry)==12 and all(r['available'] and r['all_source_pixels'] for r in registry)
+    expected=json.loads((site/'N3D-CE/publication_manifest.json').read_text(encoding='utf8'))['public_clouds']
+    assert {r['id'] for r in registry}=={r['id'] for r in expected}
+    assert all(r['available'] and r['all_source_pixels'] for r in registry)
     for r in registry:
         f=app/r['path'];assert f.is_file() and f.stat().st_size==r['package_bytes']
     size=sum(p.stat().st_size for p in site.rglob('*') if p.is_file())
@@ -37,7 +39,7 @@ def verify(site):
     files=[p for p in site.rglob('*') if p.is_file()]
     if any(p.stat().st_size>=100*2**20 for p in files):errors.append(['site','','file exceeds 100 MiB'])
     if errors:raise RuntimeError(json.dumps(errors,ensure_ascii=False))
-    print(json.dumps({'link_checks':checked,'broken_links':0,'site_bytes':size,'clouds':12,'all_points_preserved':True}))
+    print(json.dumps({'link_checks':checked,'broken_links':0,'site_bytes':size,'clouds':len(registry),'all_points_preserved':True}))
 
 def main():
     p=argparse.ArgumentParser();p.add_argument('--root',type=Path,default=Path(__file__).resolve().parents[2]);args=p.parse_args()

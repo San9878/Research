@@ -8442,6 +8442,608 @@
           ]
         ]
       }
+    },
+    {
+      "id": "scared8-zero-new",
+      "label": "VGG-T³ · zero-shot · SCARED8/KF0",
+      "group": "SCARED · Reservas8/9 · ancla medida",
+      "dataset": "SCARED",
+      "case": "dataset8/KF0",
+      "kind": "metrics",
+      "comparison_key": "SCARED|8|KF0|RGB50-336x266|single-anchor|positive-depth-scale|noICP",
+      "context": "50 RGB idénticos a la comparación histórica. Solo el ancla tiene GT; escala positiva compartida D/P, sin ICP. No evalúa la trayectoria ni la superficie temporal completa.",
+      "values": [
+        {
+          "key": "depth_absrel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.0388951301574707
+        },
+        {
+          "key": "depth_delta1",
+          "label": "δ <1,25",
+          "unit": "%",
+          "higher": true,
+          "value": 99.95325381760489
+        },
+        {
+          "key": "depth_rmse_mm",
+          "label": "RMSE profundidad",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.558509349822998
+        },
+        {
+          "key": "point_raw_mm",
+          "label": "XYZ medio",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.8727926254272462
+        },
+        {
+          "key": "point_p95_mm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 2.7445192337036133
+        }
+      ],
+      "cloud_id": null
+    },
+    {
+      "id": "scared8-scared-v9",
+      "label": "V9-SCARED · candidato diagnóstico · SCARED8/KF0",
+      "group": "SCARED · Reservas8/9 · ancla medida",
+      "dataset": "SCARED",
+      "case": "dataset8/KF0",
+      "kind": "metrics",
+      "comparison_key": "SCARED|8|KF0|RGB50-336x266|single-anchor|positive-depth-scale|noICP",
+      "context": "50 RGB idénticos a la comparación histórica. Solo el ancla tiene GT; escala positiva compartida D/P, sin ICP. No evalúa la trayectoria ni la superficie temporal completa. Candidato diagnóstico: ningún ajuste pasó todas las guardas; el seleccionado operativo sigue siendo oficial.",
+      "values": [
+        {
+          "key": "depth_absrel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.0829995796084404
+        },
+        {
+          "key": "depth_delta1",
+          "label": "δ <1,25",
+          "unit": "%",
+          "higher": true,
+          "value": 94.95566195427372
+        },
+        {
+          "key": "depth_rmse_mm",
+          "label": "RMSE profundidad",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.2433719635009766
+        },
+        {
+          "key": "point_raw_mm",
+          "label": "XYZ medio",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.9346431732177735
+        },
+        {
+          "key": "point_p95_mm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 2.4224216461181642
+        }
+      ],
+      "cloud_id": "scared8-scared-v9"
+    },
+    {
+      "id": "scared9-zero-new",
+      "label": "VGG-T³ · zero-shot · SCARED9/KF0",
+      "group": "SCARED · Reservas8/9 · ancla medida",
+      "dataset": "SCARED",
+      "case": "dataset9/KF0",
+      "kind": "metrics",
+      "comparison_key": "SCARED|9|KF0|RGB50-336x266|single-anchor|positive-depth-scale|noICP",
+      "context": "50 RGB idénticos a la comparación histórica. Solo el ancla tiene GT; escala positiva compartida D/P, sin ICP. No evalúa la trayectoria ni la superficie temporal completa.",
+      "values": [
+        {
+          "key": "depth_absrel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.13738377392292023
+        },
+        {
+          "key": "depth_delta1",
+          "label": "δ <1,25",
+          "unit": "%",
+          "higher": true,
+          "value": 79.0946377449901
+        },
+        {
+          "key": "depth_rmse_mm",
+          "label": "RMSE profundidad",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.3546419143676758
+        },
+        {
+          "key": "point_raw_mm",
+          "label": "XYZ medio",
+          "unit": "cm",
+          "higher": false,
+          "value": 2.344852828979492
+        },
+        {
+          "key": "point_p95_mm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 5.217601394653321
+        }
+      ],
+      "cloud_id": null
+    },
+    {
+      "id": "scared9-scared-v9",
+      "label": "V9-SCARED · candidato diagnóstico · SCARED9/KF0",
+      "group": "SCARED · Reservas8/9 · ancla medida",
+      "dataset": "SCARED",
+      "case": "dataset9/KF0",
+      "kind": "metrics",
+      "comparison_key": "SCARED|9|KF0|RGB50-336x266|single-anchor|positive-depth-scale|noICP",
+      "context": "50 RGB idénticos a la comparación histórica. Solo el ancla tiene GT; escala positiva compartida D/P, sin ICP. No evalúa la trayectoria ni la superficie temporal completa. Candidato diagnóstico: ningún ajuste pasó todas las guardas; el seleccionado operativo sigue siendo oficial.",
+      "values": [
+        {
+          "key": "depth_absrel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.07532912492752075
+        },
+        {
+          "key": "depth_delta1",
+          "label": "δ <1,25",
+          "unit": "%",
+          "higher": true,
+          "value": 97.38356088967188
+        },
+        {
+          "key": "depth_rmse_mm",
+          "label": "RMSE profundidad",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.8979768753051758
+        },
+        {
+          "key": "point_raw_mm",
+          "label": "XYZ medio",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.311964988708496
+        },
+        {
+          "key": "point_p95_mm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 2.396063232421875
+        }
+      ],
+      "cloud_id": "scared9-scared-v9"
+    },
+    {
+      "id": "scared-v9-val-zero_shot-short",
+      "label": "zero_shot · VAL7 short",
+      "group": "SCARED · V9 adaptado · validación común",
+      "dataset": "SCARED",
+      "case": "dataset7/short",
+      "kind": "metrics",
+      "comparison_key": "SCARED|dataset7|short|VN18-fixed-support|equal-keyframe|positive-depth-scale|noICP",
+      "context": "Mismos cinco keyframes y ventanas VN18. Media de contextos dentro de cada keyframe y después media igual de cinco keyframes. Solo ancla medida. Unidades raw VN18 y V9 no se equiparan.",
+      "values": [
+        {
+          "key": "aligned_depth_absrel",
+          "label": "AbsRel alineado",
+          "unit": "",
+          "higher": false,
+          "value": 0.15527963638305664
+        },
+        {
+          "key": "aligned_depth_delta1",
+          "label": "δ <1,25",
+          "unit": "%",
+          "higher": true,
+          "value": 74.03142412928767
+        },
+        {
+          "key": "aligned_point_mean_mm",
+          "label": "XYZ medio",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.6230368709564211
+        },
+        {
+          "key": "aligned_point_p95_mm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 3.503877639770508
+        }
+      ],
+      "cloud_id": null
+    },
+    {
+      "id": "scared-v9-val-zero_shot-long",
+      "label": "zero_shot · VAL7 long",
+      "group": "SCARED · V9 adaptado · validación común",
+      "dataset": "SCARED",
+      "case": "dataset7/long",
+      "kind": "metrics",
+      "comparison_key": "SCARED|dataset7|long|VN18-fixed-support|equal-keyframe|positive-depth-scale|noICP",
+      "context": "Mismos cinco keyframes y ventanas VN18. Media de contextos dentro de cada keyframe y después media igual de cinco keyframes. Solo ancla medida. Unidades raw VN18 y V9 no se equiparan.",
+      "values": [
+        {
+          "key": "aligned_depth_absrel",
+          "label": "AbsRel alineado",
+          "unit": "",
+          "higher": false,
+          "value": 0.13913302160799504
+        },
+        {
+          "key": "aligned_depth_delta1",
+          "label": "δ <1,25",
+          "unit": "%",
+          "higher": true,
+          "value": 79.9927676180097
+        },
+        {
+          "key": "aligned_point_mean_mm",
+          "label": "XYZ medio",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.5122073101997378
+        },
+        {
+          "key": "aligned_point_p95_mm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 3.4741999244689943
+        }
+      ],
+      "cloud_id": null
+    },
+    {
+      "id": "scared-v9-val-vn18_final-short",
+      "label": "VN18_final · VAL7 short",
+      "group": "SCARED · V9 adaptado · validación común",
+      "dataset": "SCARED",
+      "case": "dataset7/short",
+      "kind": "metrics",
+      "comparison_key": "SCARED|dataset7|short|VN18-fixed-support|equal-keyframe|positive-depth-scale|noICP",
+      "context": "Mismos cinco keyframes y ventanas VN18. Media de contextos dentro de cada keyframe y después media igual de cinco keyframes. Solo ancla medida. Unidades raw VN18 y V9 no se equiparan.",
+      "values": [
+        {
+          "key": "aligned_depth_absrel",
+          "label": "AbsRel alineado",
+          "unit": "",
+          "higher": false,
+          "value": 0.10636078864336014
+        },
+        {
+          "key": "aligned_depth_delta1",
+          "label": "δ <1,25",
+          "unit": "%",
+          "higher": true,
+          "value": 84.7674805243295
+        },
+        {
+          "key": "aligned_point_mean_mm",
+          "label": "XYZ medio",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.9296923732757568
+        },
+        {
+          "key": "aligned_point_p95_mm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 2.2923730850219726
+        }
+      ],
+      "cloud_id": null
+    },
+    {
+      "id": "scared-v9-val-vn18_final-long",
+      "label": "VN18_final · VAL7 long",
+      "group": "SCARED · V9 adaptado · validación común",
+      "dataset": "SCARED",
+      "case": "dataset7/long",
+      "kind": "metrics",
+      "comparison_key": "SCARED|dataset7|long|VN18-fixed-support|equal-keyframe|positive-depth-scale|noICP",
+      "context": "Mismos cinco keyframes y ventanas VN18. Media de contextos dentro de cada keyframe y después media igual de cinco keyframes. Solo ancla medida. Unidades raw VN18 y V9 no se equiparan.",
+      "values": [
+        {
+          "key": "aligned_depth_absrel",
+          "label": "AbsRel alineado",
+          "unit": "",
+          "higher": false,
+          "value": 0.0882300416007638
+        },
+        {
+          "key": "aligned_depth_delta1",
+          "label": "δ <1,25",
+          "unit": "%",
+          "higher": true,
+          "value": 90.15824337234024
+        },
+        {
+          "key": "aligned_point_mean_mm",
+          "label": "XYZ medio",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.8764176630973817
+        },
+        {
+          "key": "aligned_point_p95_mm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 2.1381203365325927
+        }
+      ],
+      "cloud_id": null
+    },
+    {
+      "id": "scared-v9-val-v9_best_candidate-short",
+      "label": "V9_best_candidate · VAL7 short",
+      "group": "SCARED · V9 adaptado · validación común",
+      "dataset": "SCARED",
+      "case": "dataset7/short",
+      "kind": "metrics",
+      "comparison_key": "SCARED|dataset7|short|VN18-fixed-support|equal-keyframe|positive-depth-scale|noICP",
+      "context": "Mismos cinco keyframes y ventanas VN18. Media de contextos dentro de cada keyframe y después media igual de cinco keyframes. Solo ancla medida. Unidades raw VN18 y V9 no se equiparan.",
+      "values": [
+        {
+          "key": "aligned_depth_absrel",
+          "label": "AbsRel alineado",
+          "unit": "",
+          "higher": false,
+          "value": 0.09710540473461152
+        },
+        {
+          "key": "aligned_depth_delta1",
+          "label": "δ <1,25",
+          "unit": "%",
+          "higher": true,
+          "value": 90.98480485395612
+        },
+        {
+          "key": "aligned_point_mean_mm",
+          "label": "XYZ medio",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.822050428390503
+        },
+        {
+          "key": "aligned_point_p95_mm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.8788498687744142
+        }
+      ],
+      "cloud_id": null
+    },
+    {
+      "id": "scared-v9-val-v9_best_candidate-long",
+      "label": "V9_best_candidate · VAL7 long",
+      "group": "SCARED · V9 adaptado · validación común",
+      "dataset": "SCARED",
+      "case": "dataset7/long",
+      "kind": "metrics",
+      "comparison_key": "SCARED|dataset7|long|VN18-fixed-support|equal-keyframe|positive-depth-scale|noICP",
+      "context": "Mismos cinco keyframes y ventanas VN18. Media de contextos dentro de cada keyframe y después media igual de cinco keyframes. Solo ancla medida. Unidades raw VN18 y V9 no se equiparan.",
+      "values": [
+        {
+          "key": "aligned_depth_absrel",
+          "label": "AbsRel alineado",
+          "unit": "",
+          "higher": false,
+          "value": 0.10834706574678421
+        },
+        {
+          "key": "aligned_depth_delta1",
+          "label": "δ <1,25",
+          "unit": "%",
+          "higher": true,
+          "value": 87.15596533374696
+        },
+        {
+          "key": "aligned_point_mean_mm",
+          "label": "XYZ medio",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.8809544444084167
+        },
+        {
+          "key": "aligned_point_p95_mm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 2.1691406679153444
+        }
+      ],
+      "cloud_id": null
+    },
+    {
+      "id": "scared-v9-val-v9_selected-short",
+      "label": "V9_selected · VAL7 short",
+      "group": "SCARED · V9 adaptado · validación común",
+      "dataset": "SCARED",
+      "case": "dataset7/short",
+      "kind": "metrics",
+      "comparison_key": "SCARED|dataset7|short|VN18-fixed-support|equal-keyframe|positive-depth-scale|noICP",
+      "context": "Mismos cinco keyframes y ventanas VN18. Media de contextos dentro de cada keyframe y después media igual de cinco keyframes. Solo ancla medida. Unidades raw VN18 y V9 no se equiparan.",
+      "values": [
+        {
+          "key": "aligned_depth_absrel",
+          "label": "AbsRel alineado",
+          "unit": "",
+          "higher": false,
+          "value": 0.15527963638305664
+        },
+        {
+          "key": "aligned_depth_delta1",
+          "label": "δ <1,25",
+          "unit": "%",
+          "higher": true,
+          "value": 74.03142412928767
+        },
+        {
+          "key": "aligned_point_mean_mm",
+          "label": "XYZ medio",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.6230368709564211
+        },
+        {
+          "key": "aligned_point_p95_mm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 3.503877639770508
+        }
+      ],
+      "cloud_id": null
+    },
+    {
+      "id": "scared-v9-val-v9_selected-long",
+      "label": "V9_selected · VAL7 long",
+      "group": "SCARED · V9 adaptado · validación común",
+      "dataset": "SCARED",
+      "case": "dataset7/long",
+      "kind": "metrics",
+      "comparison_key": "SCARED|dataset7|long|VN18-fixed-support|equal-keyframe|positive-depth-scale|noICP",
+      "context": "Mismos cinco keyframes y ventanas VN18. Media de contextos dentro de cada keyframe y después media igual de cinco keyframes. Solo ancla medida. Unidades raw VN18 y V9 no se equiparan.",
+      "values": [
+        {
+          "key": "aligned_depth_absrel",
+          "label": "AbsRel alineado",
+          "unit": "",
+          "higher": false,
+          "value": 0.13913302160799504
+        },
+        {
+          "key": "aligned_depth_delta1",
+          "label": "δ <1,25",
+          "unit": "%",
+          "higher": true,
+          "value": 79.9927676180097
+        },
+        {
+          "key": "aligned_point_mean_mm",
+          "label": "XYZ medio",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.5122073101997378
+        },
+        {
+          "key": "aligned_point_p95_mm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 3.4741999244689943
+        }
+      ],
+      "cloud_id": null
+    },
+    {
+      "id": "scared-v9-val-v9_final-short",
+      "label": "V9_final · VAL7 short",
+      "group": "SCARED · V9 adaptado · validación común",
+      "dataset": "SCARED",
+      "case": "dataset7/short",
+      "kind": "metrics",
+      "comparison_key": "SCARED|dataset7|short|VN18-fixed-support|equal-keyframe|positive-depth-scale|noICP",
+      "context": "Mismos cinco keyframes y ventanas VN18. Media de contextos dentro de cada keyframe y después media igual de cinco keyframes. Solo ancla medida. Unidades raw VN18 y V9 no se equiparan.",
+      "values": [
+        {
+          "key": "aligned_depth_absrel",
+          "label": "AbsRel alineado",
+          "unit": "",
+          "higher": false,
+          "value": 0.09710540473461152
+        },
+        {
+          "key": "aligned_depth_delta1",
+          "label": "δ <1,25",
+          "unit": "%",
+          "higher": true,
+          "value": 90.98480485395612
+        },
+        {
+          "key": "aligned_point_mean_mm",
+          "label": "XYZ medio",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.822050428390503
+        },
+        {
+          "key": "aligned_point_p95_mm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.8788498687744142
+        }
+      ],
+      "cloud_id": null
+    },
+    {
+      "id": "scared-v9-val-v9_final-long",
+      "label": "V9_final · VAL7 long",
+      "group": "SCARED · V9 adaptado · validación común",
+      "dataset": "SCARED",
+      "case": "dataset7/long",
+      "kind": "metrics",
+      "comparison_key": "SCARED|dataset7|long|VN18-fixed-support|equal-keyframe|positive-depth-scale|noICP",
+      "context": "Mismos cinco keyframes y ventanas VN18. Media de contextos dentro de cada keyframe y después media igual de cinco keyframes. Solo ancla medida. Unidades raw VN18 y V9 no se equiparan.",
+      "values": [
+        {
+          "key": "aligned_depth_absrel",
+          "label": "AbsRel alineado",
+          "unit": "",
+          "higher": false,
+          "value": 0.10834706574678421
+        },
+        {
+          "key": "aligned_depth_delta1",
+          "label": "δ <1,25",
+          "unit": "%",
+          "higher": true,
+          "value": 87.15596533374696
+        },
+        {
+          "key": "aligned_point_mean_mm",
+          "label": "XYZ medio",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.8809544444084167
+        },
+        {
+          "key": "aligned_point_p95_mm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 2.1691406679153444
+        }
+      ],
+      "cloud_id": null
     }
   ],
   "no_metric_recalculation": true,
