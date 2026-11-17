@@ -1,0 +1,7 @@
+_site/
+N3D-CE/Bitacora.html
+N3D-CE/Bitacora_files/
+**/__pycache__/
+**/.quarto/
+.env
+.env.*

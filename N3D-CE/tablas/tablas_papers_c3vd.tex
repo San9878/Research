@@ -1,0 +1,384 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{lmodern,amsmath,booktabs,tabularx,array,xcolor,microtype,textcomp}
+\usepackage[margin=18mm]{geometry}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.35}
+\definecolor{header}{HTML}{193C35}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}
+\begin{document}
+{\Large\bfseries\color{header} VGGT-TTT}\par
+\vspace{5mm}
+{\large\bfseries Tabla 1. Pointmap estimation on dense (-D) and sparse (-S) split}\par
+\vspace{4mm}
+{\small\bfseries Paper \textperiodcentered{} VGG-T\textsuperscript{3} \textperiodcentered{} unidades originales del benchmark}\par
+\vspace{2mm}
+\begingroup\small
+\begin{tabularx}{\textwidth}{@{}LRR@{}}
+\toprule
+\textbf{Dataset} & \textbf{CD \(\downarrow\)} & \textbf{NC \(\uparrow\)} \\
+\midrule
+7Scenes-D & 0.030 & 0.679 \\
+7Scenes-S & 0.107 & 0.716 \\
+DTU & 1.654 & 0.685 \\
+ETH3D & 0.480 & 0.789 \\
+NRGBD-D & 0.029 & 0.867 \\
+NRGBD-S & 0.056 & 0.893 \\
+\bottomrule
+\end{tabularx}
+\endgroup
+\vspace{6mm}
+{\small\bfseries C3VD \textperiodcentered{} Reservadas, mismo phantom\\cecum\_t2\_a + trans\_t1\_a\\CD: Sim(3) + ICP \textperiodcentered{} 50 vistas \textperiodcentered{} 336 \(\times\) 336}\par
+\vspace{2mm}
+\begingroup\small
+\begin{tabularx}{\textwidth}{@{}LRRR@{}}
+\toprule
+\textbf{Métrica} & \textbf{Zero-shot} & \textbf{Fine-tuning V9} & \textbf{Cambio favorable (\%)} \\
+\midrule
+CD (cm) \(\downarrow\) & 0.22377 & 0.14711 & +34.26 \\
+NC \(\uparrow\) & 0.71698 & 0.62603 & -12.68 \\
+\bottomrule
+\end{tabularx}
+\endgroup
+\vspace{6mm}
+{\small\bfseries C3VD \textperiodcentered{} Validación, selección de pesos\\trans\_t1\_b + trans\_t4\_b\\CD: Sim(3) + ICP \textperiodcentered{} 50 vistas \textperiodcentered{} 336 \(\times\) 336}\par
+\vspace{2mm}
+\begingroup\small
+\begin{tabularx}{\textwidth}{@{}LRRR@{}}
+\toprule
+\textbf{Métrica} & \textbf{Zero-shot} & \textbf{Fine-tuning V9} & \textbf{Cambio favorable (\%)} \\
+\midrule
+CD (cm) \(\downarrow\) & 0.21257 & 0.14364 & +32.43 \\
+NC \(\uparrow\) & 0.70353 & 0.64228 & -8.71 \\
+\bottomrule
+\end{tabularx}
+\endgroup
+\vspace{6mm}
+\clearpage
+{\Large\bfseries\color{header} VGGT-TTT}\par
+\vspace{5mm}
+{\large\bfseries Tabla 2. Video depth estimation}\par
+\vspace{4mm}
+{\small\bfseries Paper \textperiodcentered{} VGG-T\textsuperscript{3}}\par
+\vspace{2mm}
+\begingroup\small
+\begin{tabularx}{\textwidth}{@{}LRR@{}}
+\toprule
+\textbf{Dataset} & \textbf{\(\delta\) < 1.25 \(\uparrow\)} & \textbf{Abs Rel \(\downarrow\)} \\
+\midrule
+Bonn & 0.963 & 0.063 \\
+KITTI & 0.967 & 0.076 \\
+Sintel & 0.581 & 0.345 \\
+\bottomrule
+\end{tabularx}
+\endgroup
+\vspace{6mm}
+{\small\bfseries C3VD \textperiodcentered{} Reservadas, mismo phantom\\cecum\_t2\_a + trans\_t1\_a\\Escala única por secuencia \textperiodcentered{} 50 vistas \textperiodcentered{} 336 \(\times\) 336}\par
+\vspace{2mm}
+\begingroup\small
+\begin{tabularx}{\textwidth}{@{}LRRR@{}}
+\toprule
+\textbf{Métrica} & \textbf{Zero-shot} & \textbf{Fine-tuning V9} & \textbf{Cambio favorable (\%)} \\
+\midrule
+\(\delta\) < 1,25 \(\uparrow\) & 0.68468 & 0.88522 & +29.29 \\
+Abs Rel \(\downarrow\) & 0.19141 & 0.10427 & +45.53 \\
+\bottomrule
+\end{tabularx}
+\endgroup
+\vspace{6mm}
+{\small\bfseries C3VD \textperiodcentered{} Validación, selección de pesos\\trans\_t1\_b + trans\_t4\_b\\Escala única por secuencia \textperiodcentered{} 50 vistas \textperiodcentered{} 336 \(\times\) 336}\par
+\vspace{2mm}
+\begingroup\small
+\begin{tabularx}{\textwidth}{@{}LRRR@{}}
+\toprule
+\textbf{Métrica} & \textbf{Zero-shot} & \textbf{Fine-tuning V9} & \textbf{Cambio favorable (\%)} \\
+\midrule
+\(\delta\) < 1,25 \(\uparrow\) & 0.69555 & 0.79482 & +14.27 \\
+Abs Rel \(\downarrow\) & 0.18339 & 0.15607 & +14.90 \\
+\bottomrule
+\end{tabularx}
+\endgroup
+\vspace{6mm}
+\clearpage
+{\Large\bfseries\color{header} VGGT-TTT}\par
+\vspace{5mm}
+{\large\bfseries Tabla 3. Camera pose estimation}\par
+\vspace{4mm}
+{\small\bfseries Paper \textperiodcentered{} VGG-T\textsuperscript{3} \textperiodcentered{} ATE/RPEt: unidades originales; RPEr: grados}\par
+\vspace{2mm}
+\begingroup\small
+\begin{tabularx}{\textwidth}{@{}LRRR@{}}
+\toprule
+\textbf{Dataset} & \textbf{ATE \(\downarrow\)} & \textbf{RPEr \(\downarrow\) (\(^{\circ}\))} & \textbf{RPEt \(\downarrow\)} \\
+\midrule
+ScanNet & 0.070 & 0.878 & 0.034 \\
+Sintel & 0.234 & 1.553 & 0.117 \\
+TUM & 0.037 & 0.533 & 0.028 \\
+\bottomrule
+\end{tabularx}
+\endgroup
+\vspace{6mm}
+{\small\bfseries C3VD \textperiodcentered{} Reservadas, mismo phantom\\cecum\_t2\_a + trans\_t1\_a\\Sim(3) global \textperiodcentered{} RPE entre vistas seleccionadas consecutivas}\par
+\vspace{2mm}
+\begingroup\small
+\begin{tabularx}{\textwidth}{@{}LRRR@{}}
+\toprule
+\textbf{Métrica} & \textbf{Zero-shot} & \textbf{Fine-tuning V9} & \textbf{Cambio favorable (\%)} \\
+\midrule
+ATE \textperiodcentered{} RMSE (cm) \(\downarrow\) & 0.55621 & 0.52393 & +5.80 \\
+RPEr \textperiodcentered{} RMSE (\(^{\circ}\)) \(\downarrow\) & 1.01695 & 1.18046 & -16.08 \\
+RPEt \textperiodcentered{} RMSE (cm) \(\downarrow\) & 0.26458 & 0.23721 & +10.34 \\
+\bottomrule
+\end{tabularx}
+\endgroup
+\vspace{6mm}
+{\small\bfseries C3VD \textperiodcentered{} Validación, selección de pesos\\trans\_t1\_b + trans\_t4\_b\\Sim(3) global \textperiodcentered{} RPE entre vistas seleccionadas consecutivas}\par
+\vspace{2mm}
+\begingroup\small
+\begin{tabularx}{\textwidth}{@{}LRRR@{}}
+\toprule
+\textbf{Métrica} & \textbf{Zero-shot} & \textbf{Fine-tuning V9} & \textbf{Cambio favorable (\%)} \\
+\midrule
+ATE \textperiodcentered{} RMSE (cm) \(\downarrow\) & 0.10312 & 0.10240 & +0.69 \\
+RPEr \textperiodcentered{} RMSE (\(^{\circ}\)) \(\downarrow\) & 0.99091 & 0.99472 & -0.38 \\
+RPEt \textperiodcentered{} RMSE (cm) \(\downarrow\) & 0.05626 & 0.05217 & +7.28 \\
+\bottomrule
+\end{tabularx}
+\endgroup
+\vspace{6mm}
+\clearpage
+{\Large\bfseries\color{header} VGGT-TTT}\par
+\vspace{5mm}
+{\large\bfseries Tabla 4. Reconstruction latency}\par
+\vspace{4mm}
+{\small\bfseries Paper \textperiodcentered{} VGG-T\textsuperscript{3} \textperiodcentered{} una GPU A100 de 80 GB}\par
+\vspace{2mm}
+\begingroup\small
+\begin{tabularx}{\textwidth}{@{}LR@{}}
+\toprule
+\textbf{Imágenes} & \textbf{Tiempo con 1 GPU (s)} \\
+\midrule
+1500 & 173.1 \\
+2000 & 230.7 \\
+\bottomrule
+\end{tabularx}
+\endgroup
+\vspace{6mm}
+{\small\bfseries C3VD \textperiodcentered{} Reservadas, mismo phantom\\cecum\_t2\_a + trans\_t1\_a\\Inferencia histórica del wrapper \textperiodcentered{} RTX 5060 \textperiodcentered{} 1 GPU \textperiodcentered{} 50 vistas \textperiodcentered{} 336 \(\times\) 336 \textperiodcentered{} 2 pasos TTT}\par
+\vspace{2mm}
+\begingroup\small
+\begin{tabularx}{\textwidth}{@{}LRRR@{}}
+\toprule
+\textbf{Métrica} & \textbf{Zero-shot} & \textbf{Fine-tuning V9} & \textbf{Cambio favorable (\%)} \\
+\midrule
+Inferencia histórica (s) \(\downarrow\) & 8.639 & 8.593 & +0.54 \\
+\bottomrule
+\end{tabularx}
+\endgroup
+\vspace{6mm}
+{\small\bfseries C3VD \textperiodcentered{} Validación, selección de pesos\\trans\_t1\_b + trans\_t4\_b\\Inferencia histórica del wrapper \textperiodcentered{} RTX 5060 \textperiodcentered{} 1 GPU \textperiodcentered{} 50 vistas \textperiodcentered{} 336 \(\times\) 336 \textperiodcentered{} 2 pasos TTT}\par
+\vspace{2mm}
+\begingroup\small
+\begin{tabularx}{\textwidth}{@{}LRRR@{}}
+\toprule
+\textbf{Métrica} & \textbf{Zero-shot} & \textbf{Fine-tuning V9} & \textbf{Cambio favorable (\%)} \\
+\midrule
+Inferencia histórica (s) \(\downarrow\) & 9.728 & 9.307 & +4.33 \\
+\bottomrule
+\end{tabularx}
+\endgroup
+\vspace{6mm}
+\clearpage
+{\Large\bfseries\color{header} VGGT}\par
+\vspace{5mm}
+{\large\bfseries Tabla 1. Camera Pose Estimation}\par
+\vspace{4mm}
+{\small\bfseries Paper \textperiodcentered{} Re10K / CO3Dv2 \textperiodcentered{} 10 vistas \textperiodcentered{} H100}\par
+\vspace{2mm}
+\begingroup\small
+\begin{tabularx}{\textwidth}{@{}LRRR@{}}
+\toprule
+\textbf{Método} & \textbf{Re10K AUC@30 \(\uparrow\) (\%)} & \textbf{CO3Dv2 AUC@30 \(\uparrow\) (\%)} & \textbf{Tiempo (s)} \\
+\midrule
+Feed-forward & 85.3 & 88.2 & \(\approx\)0.2 \\
+Con BA & 93.5 & 91.8 & \(\approx\)1.8 \\
+\bottomrule
+\end{tabularx}
+\endgroup
+\vspace{6mm}
+{\small\bfseries C3VD \textperiodcentered{} Reservadas, mismo phantom\\cecum\_t2\_a + trans\_t1\_a\\Sin BA \textperiodcentered{} tiempo del wrapper \textperiodcentered{} RTX 5060 \textperiodcentered{} 50 vistas \textperiodcentered{} 336 \(\times\) 336}\par
+\vspace{2mm}
+\begingroup\small
+\begin{tabularx}{\textwidth}{@{}LRRR@{}}
+\toprule
+\textbf{Métrica} & \textbf{Zero-shot} & \textbf{Fine-tuning} & \textbf{Cambio favorable (\%)} \\
+\midrule
+Pose AUC@30 (\%) \(\uparrow\) & 42.96190 & 46.01088 & +7.10 \\
+Inferencia histórica (s) \(\downarrow\) & 11.600 & 11.747 & -1.26 \\
+\bottomrule
+\end{tabularx}
+\endgroup
+\vspace{6mm}
+{\small\bfseries C3VD \textperiodcentered{} Validación, selección de pesos\\trans\_t1\_b + trans\_t4\_b\\Sin BA \textperiodcentered{} tiempo del wrapper \textperiodcentered{} RTX 5060 \textperiodcentered{} 50 vistas \textperiodcentered{} 336 \(\times\) 336}\par
+\vspace{2mm}
+\begingroup\small
+\begin{tabularx}{\textwidth}{@{}LRRR@{}}
+\toprule
+\textbf{Métrica} & \textbf{Zero-shot} & \textbf{Fine-tuning} & \textbf{Cambio favorable (\%)} \\
+\midrule
+Pose AUC@30 (\%) \(\uparrow\) & 30.25306 & 27.04898 & -10.59 \\
+Inferencia histórica (s) \(\downarrow\) & 11.870 & 11.872 & -0.02 \\
+\bottomrule
+\end{tabularx}
+\endgroup
+\vspace{6mm}
+\clearpage
+{\Large\bfseries\color{header} VGGT}\par
+\vspace{5mm}
+{\large\bfseries Tabla 2. Dense MVS Estimation}\par
+\vspace{4mm}
+{\small\bfseries Paper \textperiodcentered{} DTU \textperiodcentered{} unidades originales del benchmark}\par
+\vspace{2mm}
+\begingroup\small
+\begin{tabularx}{\textwidth}{@{}LRRRR@{}}
+\toprule
+\textbf{Cámaras GT de entrada} & \textbf{Modelo} & \textbf{Acc. \(\downarrow\)} & \textbf{Comp. \(\downarrow\)} & \textbf{Overall \(\downarrow\)} \\
+\midrule
+No & VGGT & 0.389 & 0.374 & 0.382 \\
+\bottomrule
+\end{tabularx}
+\endgroup
+\vspace{6mm}
+{\small\bfseries C3VD \textperiodcentered{} Reservadas, mismo phantom\\cecum\_t2\_a + trans\_t1\_a\\D + pose predichas + K calibrada \textperiodcentered{} Sim(3), sin ICP \textperiodcentered{} 50 vistas \textperiodcentered{} 336 \(\times\) 336}\par
+\vspace{2mm}
+\begingroup\small
+\begin{tabularx}{\textwidth}{@{}LRRR@{}}
+\toprule
+\textbf{Métrica} & \textbf{Zero-shot} & \textbf{Fine-tuning} & \textbf{Cambio favorable (\%)} \\
+\midrule
+Accuracy (cm) \(\downarrow\) & 0.42109 & 0.25879 & +38.54 \\
+Completeness (cm) \(\downarrow\) & 0.25480 & 0.08506 & +66.62 \\
+Overall (cm) \(\downarrow\) & 0.33795 & 0.17192 & +49.13 \\
+\bottomrule
+\end{tabularx}
+\endgroup
+\vspace{6mm}
+{\small\bfseries C3VD \textperiodcentered{} Validación, selección de pesos\\trans\_t1\_b + trans\_t4\_b\\D + pose predichas + K calibrada \textperiodcentered{} Sim(3), sin ICP \textperiodcentered{} 50 vistas \textperiodcentered{} 336 \(\times\) 336}\par
+\vspace{2mm}
+\begingroup\small
+\begin{tabularx}{\textwidth}{@{}LRRR@{}}
+\toprule
+\textbf{Métrica} & \textbf{Zero-shot} & \textbf{Fine-tuning} & \textbf{Cambio favorable (\%)} \\
+\midrule
+Accuracy (cm) \(\downarrow\) & 0.27956 & 0.26609 & +4.82 \\
+Completeness (cm) \(\downarrow\) & 0.06064 & 0.11185 & -84.46 \\
+Overall (cm) \(\downarrow\) & 0.17010 & 0.18897 & -11.10 \\
+\bottomrule
+\end{tabularx}
+\endgroup
+\vspace{6mm}
+\clearpage
+{\Large\bfseries\color{header} VGGT}\par
+\vspace{5mm}
+{\large\bfseries Tabla 3. Point Map Estimation}\par
+\vspace{4mm}
+{\small\bfseries Paper \textperiodcentered{} ETH3D \textperiodcentered{} unidades originales del benchmark}\par
+\vspace{2mm}
+\begingroup\small
+\begin{tabularx}{\textwidth}{@{}LRRRR@{}}
+\toprule
+\textbf{Salida} & \textbf{Acc. \(\downarrow\)} & \textbf{Comp. \(\downarrow\)} & \textbf{Overall \(\downarrow\)} & \textbf{Tiempo (s)} \\
+\midrule
+Point head & 0.901 & 0.518 & 0.709 & \(\approx\)0.2 \\
+Depth + Cam & 0.873 & 0.482 & 0.677 & \(\approx\)0.2 \\
+\bottomrule
+\end{tabularx}
+\endgroup
+\vspace{6mm}
+{\small\bfseries C3VD \textperiodcentered{} Reservadas, mismo phantom\\cecum\_t2\_a + trans\_t1\_a\\D + pose + K calibrada \textperiodcentered{} misma geometría C3VD que la tabla 2 \textperiodcentered{} tiempo del wrapper}\par
+\vspace{2mm}
+\begingroup\small
+\begin{tabularx}{\textwidth}{@{}LRRR@{}}
+\toprule
+\textbf{Métrica} & \textbf{Zero-shot} & \textbf{Fine-tuning} & \textbf{Cambio favorable (\%)} \\
+\midrule
+Accuracy (cm) \(\downarrow\) & 0.42109 & 0.25879 & +38.54 \\
+Completeness (cm) \(\downarrow\) & 0.25480 & 0.08506 & +66.62 \\
+Overall (cm) \(\downarrow\) & 0.33795 & 0.17192 & +49.13 \\
+Inferencia histórica (s) \(\downarrow\) & 11.600 & 11.747 & -1.26 \\
+\bottomrule
+\end{tabularx}
+\endgroup
+\vspace{6mm}
+{\small\bfseries C3VD \textperiodcentered{} Validación, selección de pesos\\trans\_t1\_b + trans\_t4\_b\\D + pose + K calibrada \textperiodcentered{} misma geometría C3VD que la tabla 2 \textperiodcentered{} tiempo del wrapper}\par
+\vspace{2mm}
+\begingroup\small
+\begin{tabularx}{\textwidth}{@{}LRRR@{}}
+\toprule
+\textbf{Métrica} & \textbf{Zero-shot} & \textbf{Fine-tuning} & \textbf{Cambio favorable (\%)} \\
+\midrule
+Accuracy (cm) \(\downarrow\) & 0.27956 & 0.26609 & +4.82 \\
+Completeness (cm) \(\downarrow\) & 0.06064 & 0.11185 & -84.46 \\
+Overall (cm) \(\downarrow\) & 0.17010 & 0.18897 & -11.10 \\
+Inferencia histórica (s) \(\downarrow\) & 11.870 & 11.872 & -0.02 \\
+\bottomrule
+\end{tabularx}
+\endgroup
+\vspace{6mm}
+\clearpage
+{\Large\bfseries\color{header} VGGT}\par
+\vspace{5mm}
+{\large\bfseries Tabla 9. Runtime and peak GPU memory}\par
+\vspace{4mm}
+{\small\bfseries Paper \textperiodcentered{} solo backbone \textperiodcentered{} H100 \textperiodcentered{} 336 \(\times\) 518 \textperiodcentered{} memoria en GB}\par
+\vspace{2mm}
+\begingroup\small
+\begin{tabularx}{\textwidth}{@{}LRR@{}}
+\toprule
+\textbf{Vistas} & \textbf{Tiempo (s)} & \textbf{Memoria (GB)} \\
+\midrule
+1 & 0.04 & 1.88 \\
+2 & 0.05 & 2.07 \\
+4 & 0.07 & 2.45 \\
+8 & 0.11 & 3.23 \\
+10 & 0.14 & 3.63 \\
+20 & 0.31 & 5.58 \\
+50 & 1.04 & 11.41 \\
+100 & 3.12 & 21.15 \\
+200 & 8.75 & 40.63 \\
+\bottomrule
+\end{tabularx}
+\endgroup
+\vspace{6mm}
+{\small\bfseries C3VD \textperiodcentered{} Reservadas, mismo phantom\\cecum\_t2\_a + trans\_t1\_a\\Wrapper \textperiodcentered{} RTX 5060 \textperiodcentered{} 1 GPU \textperiodcentered{} 50 vistas \textperiodcentered{} 336 \(\times\) 336 \textperiodcentered{} memoria en GiB}\par
+\vspace{2mm}
+\begingroup\small
+\begin{tabularx}{\textwidth}{@{}LRRR@{}}
+\toprule
+\textbf{Métrica} & \textbf{Zero-shot} & \textbf{Fine-tuning} & \textbf{Cambio favorable (\%)} \\
+\midrule
+Inferencia histórica (s) \(\downarrow\) & 11.600 & 11.747 & -1.26 \\
+Pico CUDA asignado (GiB) \(\downarrow\) & 5.620 & 5.620 & +0.00 \\
+\bottomrule
+\end{tabularx}
+\endgroup
+\vspace{6mm}
+{\small\bfseries C3VD \textperiodcentered{} Validación, selección de pesos\\trans\_t1\_b + trans\_t4\_b\\Wrapper \textperiodcentered{} RTX 5060 \textperiodcentered{} 1 GPU \textperiodcentered{} 50 vistas \textperiodcentered{} 336 \(\times\) 336 \textperiodcentered{} memoria en GiB}\par
+\vspace{2mm}
+\begingroup\small
+\begin{tabularx}{\textwidth}{@{}LRRR@{}}
+\toprule
+\textbf{Métrica} & \textbf{Zero-shot} & \textbf{Fine-tuning} & \textbf{Cambio favorable (\%)} \\
+\midrule
+Inferencia histórica (s) \(\downarrow\) & 11.870 & 11.872 & -0.02 \\
+Pico CUDA asignado (GiB) \(\downarrow\) & 5.623 & 5.623 & +0.00 \\
+\bottomrule
+\end{tabularx}
+\endgroup
+\vspace{6mm}
+\end{document}

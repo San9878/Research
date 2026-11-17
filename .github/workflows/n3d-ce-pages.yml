@@ -1,0 +1,49 @@
+name: Publish N3D-CE notebook
+
+on:
+  push:
+    branches: [main]
+    paths: ['N3D-CE/**', 'index.html', '.github/workflows/n3d-ce-pages.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+      - uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: '1.11.9'
+      - uses: actions/configure-pages@v5
+      - name: Render the current notebook
+        run: quarto render N3D-CE/Bitacora.qmd --to html
+      - name: Assemble and check public resources
+        run: python3 N3D-CE/tools/build_site.py --root .
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+          retention-days: 1
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy notebook
+        id: deployment
+        uses: actions/deploy-pages@v4

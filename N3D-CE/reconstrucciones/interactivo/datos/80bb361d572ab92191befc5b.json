@@ -1,0 +1,26 @@
+{
+  "key": "80bb361d572ab92191befc5b",
+  "points": 4468800,
+  "position_bytes": 4,
+  "codec": "xor-byteplanes-v1",
+  "bbox": [
+    [
+      -0.5312095880508423,
+      -0.5917650461196899,
+      0.4047833979129791
+    ],
+    [
+      0.742537260055542,
+      0.3680868446826935,
+      1.3397718667984009
+    ]
+  ],
+  "chunks": 18,
+  "source_sha256": "80bb361d572ab92191befc5b1064862fb0226f71e13b1d9870780da48c7e2fec",
+  "raw_payload_sha256": "a447506608f5a43596706143e8943e1c2a2678fe7285b89f022b198882383571",
+  "package_sha256": "3eaf84ba8e3a486a5fde09246e576cc4629236f173e3b4ce277b2f2f2f2fd80f",
+  "package_bytes": 58515140,
+  "path": "datos/80bb361d572ab92191befc5b.js",
+  "all_vertices_preserved": true,
+  "lossless_compression_roundtrip": true
+}

@@ -1,0 +1,21 @@
+{
+  "slots": [
+    {
+      "path": "C:\\Users\\PC\\Desktop\\KAUST\\VGGT\\study_vn19\\scratch\\checkpoints\\slot_C.pt",
+      "step": 3132,
+      "arm": "B_coverage_full",
+      "SHA256": "68c095e3d6ab89b9cdb795965f8b220fa7fbcc535d141265248d56e612541e75",
+      "heads_present": true
+    },
+    {
+      "path": "E:\\Kaust_VN19_checkpoints\\slot_E.pt",
+      "step": 3240,
+      "arm": "B_coverage_full",
+      "SHA256": "9c198388fbba4e120ab1d427259885525ae348a33cedf10a42a304f6d8c05b5e",
+      "heads_present": true
+    }
+  ],
+  "A_intermediates": "validation metrics retained; no accepted best head export or A rolling intermediate remains",
+  "B_intermediate": "only the rolling intermediate listed here is available; other steps have recorded metrics, not preserved weights",
+  "no_replayed_training": true
+}

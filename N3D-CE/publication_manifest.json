@@ -1,0 +1,75 @@
+{
+  "project": "N3D-CE",
+  "source_qmd_sha256": "01da4f3b08bae50917b3ac49324a461cda5e1540bf676ff11b423f9e2cfd267a",
+  "public_qmd_sha256": "76a976cd2f3a2880f71116774fea4ff71085f1ada654aa5052a89b0d60d0ad4b",
+  "source_data_tables_preserved": 73,
+  "experiment_cards": 44,
+  "public_clouds": [
+    {
+      "id": "c3vd-v9",
+      "points": 5644800,
+      "package_sha256": "4a349aad45b6fc21464161ea40a06f789064018a284286a5a9ed644d7dfc6392"
+    },
+    {
+      "id": "c3vd-vn19-a",
+      "points": 5644800,
+      "package_sha256": "118ae3629e16a50eca9cbbb9c8394c61059972207f9ad1229b8163b9302564e0"
+    },
+    {
+      "id": "c3vd-vn19-b",
+      "points": 5644800,
+      "package_sha256": "908c518e755e829db6b335237522c7adf9d5e6df181f19ac43af17a334699109"
+    },
+    {
+      "id": "c3vd-vn18",
+      "points": 5644800,
+      "package_sha256": "35be08cdb98b71081907c4dd70a31bf1711c8ac7459c77f44eea4d0aa5c08e2e"
+    },
+    {
+      "id": "c3vd-zero",
+      "points": 5644800,
+      "package_sha256": "3ef42ce7aead7c22086cc5302cb60ac6b62bec694a9b0f9170701a6b1143f2ee"
+    },
+    {
+      "id": "scared8-vn18",
+      "points": 4468800,
+      "package_sha256": "0d2e5cba7ae70776464117fd8c3d8b43cbdd0cffcae28e37810030aec3e4d5d9"
+    },
+    {
+      "id": "scared8-v9",
+      "points": 4468800,
+      "package_sha256": "015685dd3c1b41db293f405d62c4200d37f7c38332fcde46e4fa92868f089871"
+    },
+    {
+      "id": "scared8-vn19-a",
+      "points": 4468800,
+      "package_sha256": "99f2349f22735c768ab86f2fe915221aaf2f733a03d0252280c6d9b4dbd38e78"
+    },
+    {
+      "id": "scared9-vn18",
+      "points": 4468800,
+      "package_sha256": "3eaf84ba8e3a486a5fde09246e576cc4629236f173e3b4ce277b2f2f2f2fd80f"
+    },
+    {
+      "id": "scared9-v9",
+      "points": 4468800,
+      "package_sha256": "cea7848430cbbbd6fdef02d0f723271a5b324b01c1598472a93a370b6cc4ec3d"
+    },
+    {
+      "id": "scared9-vn19-a",
+      "points": 4468800,
+      "package_sha256": "c375cf6904bfcd072ad1e9101d1126535847138d1e3400bd61a88f28362740d8"
+    },
+    {
+      "id": "c3vd-scared-vn18",
+      "points": 5644800,
+      "package_sha256": "a297ecb6036bd3ea77ad6a5765a3be17a2eccc601948becec6173781e0ec9825"
+    }
+  ],
+  "cloud_bytes": 779757122,
+  "metric_entries": 146,
+  "historical_tables": 496,
+  "all_saved_vertices_preserved": true,
+  "new_training": false,
+  "new_inference": false
+}
