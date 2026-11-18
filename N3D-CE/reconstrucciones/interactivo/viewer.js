@@ -8,6 +8,16 @@ const pose=()=>({direction:[...PRESETS.oblique.direction],up:[...PRESETS.oblique
 const registry=new Map(CLOUD_REGISTRY.clouds.filter(x=>x.available).map(x=>[x.id,x]));
 const packRequests=new Map();window.__receiveCloudPack=(key,data)=>{const p=packRequests.get(key);if(p){packRequests.delete(key);p.resolve(data)}};
 async function pack(meta){
+ if(meta.container==='binary-chunks-v1'){
+  const response=await fetch(meta.path);if(!response.ok)throw Error('No se pudo leer el paquete binario: '+response.status);
+  const buffer=await response.arrayBuffer(),bytes=new Uint8Array(buffer),view=new DataView(buffer);
+  if(new TextDecoder().decode(bytes.subarray(0,8))!=='N3DPACK1')throw Error('Cabecera binaria incompatible');
+  const length=view.getUint32(8,true),h=JSON.parse(new TextDecoder().decode(bytes.subarray(12,12+length)));
+  if(h.key!==meta.pack_key||h.count!==meta.points)throw Error('Identidad o cantidad de puntos incompatible');
+  let offset=12+length,total=0;const chunks=h.chunks.map(c=>{const end=offset+c.bytes;if(end>bytes.length)throw Error('Paquete binario incompleto');const chunk={count:c.count,binary:bytes.subarray(offset,end)};offset=end;total+=c.count;return chunk});
+  if(offset!==bytes.length||total!==h.count)throw Error('La población del paquete binario difiere');
+  return {...h,chunks};
+ }
  if(packRequests.has(meta.pack_key))return packRequests.get(meta.pack_key).promise;
  let script=document.createElement('script'),timer,resolve,reject;
  let promise=new Promise((r,j)=>{resolve=r;reject=j});packRequests.set(meta.pack_key,{promise,resolve,reject});
@@ -17,7 +27,7 @@ async function pack(meta){
  try{return await promise}finally{clearTimeout(timer);script.remove();packRequests.delete(meta.pack_key)}
 }
 async function decode(chunk,bpp){
- const str=atob(chunk.data),compressed=new Uint8Array(str.length);for(let i=0;i<str.length;i++)compressed[i]=str.charCodeAt(i);
+ let compressed;if(chunk.binary){compressed=chunk.binary;chunk.binary=null}else{const str=atob(chunk.data);compressed=new Uint8Array(str.length);for(let i=0;i<str.length;i++)compressed[i]=str.charCodeAt(i)};
  chunk.data='';const buffer=await new Response(new Blob([compressed]).stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer(),bytes=new Uint8Array(buffer),n=chunk.count;
  if(bytes.length!==n*(3*bpp+3))throw Error('Paquete incompleto. No se reduce el número de puntos para continuar.');
  const raw=new ArrayBuffer(n*3*bpp),bits=new Uint32Array(raw),native=bpp===4?new Float32Array(raw):new Float64Array(raw),colors=new Uint8Array(n*3);

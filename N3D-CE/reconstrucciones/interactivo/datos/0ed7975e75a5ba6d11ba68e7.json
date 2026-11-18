@@ -18,9 +18,13 @@
   "chunks": 18,
   "source_sha256": "0ed7975e75a5ba6d11ba68e7f0d4a40efad95aab662b0e8fcce1e2ff753b735e",
   "raw_payload_sha256": "4d8d989788d5e347874a089aa982df4d10446c152366a90bb05deee9543e4ae0",
-  "package_sha256": "d6da673c073d9c6e3e889363a53ecd33b3744e20bec3007852c4c9b2d3ed19dd",
-  "package_bytes": 57703116,
-  "path": "datos/0ed7975e75a5ba6d11ba68e7.js",
+  "package_sha256": "2dfbd36d52ac1db019ef94c8aaebf9f0c9e02df1ef354aa32a9892a0494f92c8",
+  "package_bytes": 43277540,
+  "path": "datos/0ed7975e75a5ba6d11ba68e7.bin",
   "all_vertices_preserved": true,
-  "lossless_compression_roundtrip": true
+  "lossless_compression_roundtrip": true,
+  "container": "binary-chunks-v1",
+  "source_js_package_sha256": "d6da673c073d9c6e3e889363a53ecd33b3744e20bec3007852c4c9b2d3ed19dd",
+  "compressed_chunks_SHA256": "70d82f31d0edac01a27b5ccdf3f62e2192bc5e73e7467d3211a5ab7067817490",
+  "binary_container_roundtrip_exact": true
 }

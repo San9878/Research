@@ -3151,366 +3151,6 @@
       "cloud_id": null
     },
     {
-      "id": "c3vd-zero",
-      "label": "VGG-T³ zero-shot · trans_t4_b",
-      "group": "C3VD · Geometría/pose sin ICP",
-      "dataset": "C3VD",
-      "case": "trans_t4_b",
-      "kind": "metrics",
-      "comparison_key": "C3VD|trans_t4_b|RGB50-336|GT16|shared-depth-scale|noICP|joint-v1",
-      "context": "50 RGB a 336²; 16 objetivos GT comunes. Una escala GT compartida de profundidad; sin ICP. Roles V9/VN19: validation/validation. El RMSE de centros no es ATE Sim(3).",
-      "values": [
-        {
-          "key": "depth_absrel",
-          "label": "AbsRel",
-          "unit": "",
-          "higher": false,
-          "value": 0.18235506188447256
-        },
-        {
-          "key": "depth_delta1",
-          "label": "δ <1,25",
-          "unit": "%",
-          "higher": true,
-          "value": 72.09577026333774
-        },
-        {
-          "key": "depth_rmse_mm",
-          "label": "RMSE profundidad",
-          "unit": "cm",
-          "higher": false,
-          "value": 0.7252360683710082
-        },
-        {
-          "key": "point_raw_mm",
-          "label": "XYZ medio",
-          "unit": "cm",
-          "higher": false,
-          "value": 0.724184838478254
-        },
-        {
-          "key": "point_p95_mm",
-          "label": "XYZ p95",
-          "unit": "cm",
-          "higher": false,
-          "value": 2.1306009469873604
-        },
-        {
-          "key": "derived_point_mm",
-          "label": "D+K+pose",
-          "unit": "cm",
-          "higher": false,
-          "value": 0.7711213246680493
-        },
-        {
-          "key": "rotation_deg",
-          "label": "Rotación media",
-          "unit": "°",
-          "higher": false,
-          "value": 10.796602387998519
-        },
-        {
-          "key": "translation_rmse_mm",
-          "label": "RMSE centros anclados",
-          "unit": "cm",
-          "higher": false,
-          "value": 0.19504393479604126
-        },
-        {
-          "key": "RPEr_RMSE_deg",
-          "label": "RPEr histórico",
-          "unit": "°",
-          "higher": false,
-          "value": 1.7592197305566717
-        },
-        {
-          "key": "RPEt_RMSE_mm",
-          "label": "RPEt histórico",
-          "unit": "cm",
-          "higher": false,
-          "value": 0.06533383466980923
-        },
-        {
-          "key": "focal_relative_error",
-          "label": "Error focal relativo",
-          "unit": "%",
-          "higher": false,
-          "value": 20.477107167243958
-        }
-      ],
-      "cloud_id": "c3vd-zero"
-    },
-    {
-      "id": "c3vd-v9",
-      "label": "V9 · C3VD · trans_t4_b",
-      "group": "C3VD · Geometría/pose sin ICP",
-      "dataset": "C3VD",
-      "case": "trans_t4_b",
-      "kind": "metrics",
-      "comparison_key": "C3VD|trans_t4_b|RGB50-336|GT16|shared-depth-scale|noICP|joint-v1",
-      "context": "50 RGB a 336²; 16 objetivos GT comunes. Una escala GT compartida de profundidad; sin ICP. Roles V9/VN19: validation/validation. El RMSE de centros no es ATE Sim(3).",
-      "values": [
-        {
-          "key": "depth_absrel",
-          "label": "AbsRel",
-          "unit": "",
-          "higher": false,
-          "value": 0.14860396987492175
-        },
-        {
-          "key": "depth_delta1",
-          "label": "δ <1,25",
-          "unit": "%",
-          "higher": true,
-          "value": 78.38487008629686
-        },
-        {
-          "key": "depth_rmse_mm",
-          "label": "RMSE profundidad",
-          "unit": "cm",
-          "higher": false,
-          "value": 0.6977883501905466
-        },
-        {
-          "key": "point_raw_mm",
-          "label": "XYZ medio",
-          "unit": "cm",
-          "higher": false,
-          "value": 0.4756255656305663
-        },
-        {
-          "key": "point_p95_mm",
-          "label": "XYZ p95",
-          "unit": "cm",
-          "higher": false,
-          "value": 1.3048150138320753
-        },
-        {
-          "key": "derived_point_mm",
-          "label": "D+K+pose",
-          "unit": "cm",
-          "higher": false,
-          "value": 0.5999614637996475
-        },
-        {
-          "key": "rotation_deg",
-          "label": "Rotación media",
-          "unit": "°",
-          "higher": false,
-          "value": 6.90674271013931
-        },
-        {
-          "key": "translation_rmse_mm",
-          "label": "RMSE centros anclados",
-          "unit": "cm",
-          "higher": false,
-          "value": 0.1806577795283023
-        },
-        {
-          "key": "RPEr_RMSE_deg",
-          "label": "RPEr histórico",
-          "unit": "°",
-          "higher": false,
-          "value": 1.4757387766084633
-        },
-        {
-          "key": "RPEt_RMSE_mm",
-          "label": "RPEt histórico",
-          "unit": "cm",
-          "higher": false,
-          "value": 0.06500697010424338
-        },
-        {
-          "key": "focal_relative_error",
-          "label": "Error focal relativo",
-          "unit": "%",
-          "higher": false,
-          "value": 3.631230443716049
-        }
-      ],
-      "cloud_id": "c3vd-v9"
-    },
-    {
-      "id": "c3vd-vn19-a",
-      "label": "VN19-A final · C3VD · trans_t4_b",
-      "group": "C3VD · Geometría/pose sin ICP",
-      "dataset": "C3VD",
-      "case": "trans_t4_b",
-      "kind": "metrics",
-      "comparison_key": "C3VD|trans_t4_b|RGB50-336|GT16|shared-depth-scale|noICP|joint-v1",
-      "context": "50 RGB a 336²; 16 objetivos GT comunes. Una escala GT compartida de profundidad; sin ICP. Roles V9/VN19: validation/validation. El RMSE de centros no es ATE Sim(3).",
-      "values": [
-        {
-          "key": "depth_absrel",
-          "label": "AbsRel",
-          "unit": "",
-          "higher": false,
-          "value": 0.17214230312758533
-        },
-        {
-          "key": "depth_delta1",
-          "label": "δ <1,25",
-          "unit": "%",
-          "higher": true,
-          "value": 74.8696743113493
-        },
-        {
-          "key": "depth_rmse_mm",
-          "label": "RMSE profundidad",
-          "unit": "cm",
-          "higher": false,
-          "value": 0.5921618041078501
-        },
-        {
-          "key": "point_raw_mm",
-          "label": "XYZ medio",
-          "unit": "cm",
-          "higher": false,
-          "value": 0.5682522698475888
-        },
-        {
-          "key": "point_p95_mm",
-          "label": "XYZ p95",
-          "unit": "cm",
-          "higher": false,
-          "value": 1.3013051755133849
-        },
-        {
-          "key": "derived_point_mm",
-          "label": "D+K+pose",
-          "unit": "cm",
-          "higher": false,
-          "value": 0.5789098849519835
-        },
-        {
-          "key": "rotation_deg",
-          "label": "Rotación media",
-          "unit": "°",
-          "higher": false,
-          "value": 6.34010514091592
-        },
-        {
-          "key": "translation_rmse_mm",
-          "label": "RMSE centros anclados",
-          "unit": "cm",
-          "higher": false,
-          "value": 0.19901699617295174
-        },
-        {
-          "key": "RPEr_RMSE_deg",
-          "label": "RPEr histórico",
-          "unit": "°",
-          "higher": false,
-          "value": 1.2606501137225345
-        },
-        {
-          "key": "RPEt_RMSE_mm",
-          "label": "RPEt histórico",
-          "unit": "cm",
-          "higher": false,
-          "value": 0.062105036463154274
-        },
-        {
-          "key": "focal_relative_error",
-          "label": "Error focal relativo",
-          "unit": "%",
-          "higher": false,
-          "value": 1.2810646556317806
-        }
-      ],
-      "cloud_id": "c3vd-vn19-a"
-    },
-    {
-      "id": "c3vd-vn19-b",
-      "label": "VN19-B final · C3VD · trans_t4_b",
-      "group": "C3VD · Geometría/pose sin ICP",
-      "dataset": "C3VD",
-      "case": "trans_t4_b",
-      "kind": "metrics",
-      "comparison_key": "C3VD|trans_t4_b|RGB50-336|GT16|shared-depth-scale|noICP|joint-v1",
-      "context": "50 RGB a 336²; 16 objetivos GT comunes. Una escala GT compartida de profundidad; sin ICP. Roles V9/VN19: validation/validation. El RMSE de centros no es ATE Sim(3).",
-      "values": [
-        {
-          "key": "depth_absrel",
-          "label": "AbsRel",
-          "unit": "",
-          "higher": false,
-          "value": 0.1721618939192637
-        },
-        {
-          "key": "depth_delta1",
-          "label": "δ <1,25",
-          "unit": "%",
-          "higher": true,
-          "value": 73.02578521333231
-        },
-        {
-          "key": "depth_rmse_mm",
-          "label": "RMSE profundidad",
-          "unit": "cm",
-          "higher": false,
-          "value": 0.5922540253615252
-        },
-        {
-          "key": "point_raw_mm",
-          "label": "XYZ medio",
-          "unit": "cm",
-          "higher": false,
-          "value": 0.5750570797484804
-        },
-        {
-          "key": "point_p95_mm",
-          "label": "XYZ p95",
-          "unit": "cm",
-          "higher": false,
-          "value": 1.3369971014096669
-        },
-        {
-          "key": "derived_point_mm",
-          "label": "D+K+pose",
-          "unit": "cm",
-          "higher": false,
-          "value": 0.5730181351147418
-        },
-        {
-          "key": "rotation_deg",
-          "label": "Rotación media",
-          "unit": "°",
-          "higher": false,
-          "value": 6.169099397360916
-        },
-        {
-          "key": "translation_rmse_mm",
-          "label": "RMSE centros anclados",
-          "unit": "cm",
-          "higher": false,
-          "value": 0.19944853111530972
-        },
-        {
-          "key": "RPEr_RMSE_deg",
-          "label": "RPEr histórico",
-          "unit": "°",
-          "higher": false,
-          "value": 1.2498012688619082
-        },
-        {
-          "key": "RPEt_RMSE_mm",
-          "label": "RPEt histórico",
-          "unit": "cm",
-          "higher": false,
-          "value": 0.06219394311646679
-        },
-        {
-          "key": "focal_relative_error",
-          "label": "Error focal relativo",
-          "unit": "%",
-          "higher": false,
-          "value": 1.3149186968803406
-        }
-      ],
-      "cloud_id": "c3vd-vn19-b"
-    },
-    {
       "id": "c3vd-vn19-b3132",
       "label": "VN19-B intermedio3132 · C3VD · trans_t4_b",
       "group": "C3VD · Geometría/pose sin ICP",
@@ -4501,96 +4141,6 @@
       "cloud_id": null
     },
     {
-      "id": "c3vd-vn18",
-      "label": "VN18-C3VD · trans_t4_b",
-      "group": "C3VD · Geometría/pose sin ICP",
-      "dataset": "C3VD",
-      "case": "trans_t4_b",
-      "kind": "metrics",
-      "comparison_key": "C3VD|trans_t4_b|RGB50-336|GT16|shared-depth-scale|noICP|joint-v1",
-      "context": "Mismos50 RGB y16 objetivos GT del readout común; escala compartida, sin ICP. Profundidad/puntos ajustados, cámara congelada.",
-      "values": [
-        {
-          "key": "depth_absrel",
-          "label": "AbsRel",
-          "unit": "",
-          "higher": false,
-          "value": 0.13050364919310364
-        },
-        {
-          "key": "depth_delta1",
-          "label": "δ <1,25",
-          "unit": "%",
-          "higher": true,
-          "value": 82.87737448974465
-        },
-        {
-          "key": "depth_rmse_mm",
-          "label": "RMSE profundidad",
-          "unit": "cm",
-          "higher": false,
-          "value": 0.47587876618899677
-        },
-        {
-          "key": "point_raw_mm",
-          "label": "XYZ medio",
-          "unit": "cm",
-          "higher": false,
-          "value": 0.4655546345920401
-        },
-        {
-          "key": "point_p95_mm",
-          "label": "XYZ p95",
-          "unit": "cm",
-          "higher": false,
-          "value": 1.1262753280449205
-        },
-        {
-          "key": "derived_point_mm",
-          "label": "D+K+pose",
-          "unit": "cm",
-          "higher": false,
-          "value": 0.6419674787856181
-        },
-        {
-          "key": "rotation_deg",
-          "label": "Rotación media",
-          "unit": "°",
-          "higher": false,
-          "value": 10.796602387998519
-        },
-        {
-          "key": "translation_rmse_mm",
-          "label": "RMSE centros anclados",
-          "unit": "cm",
-          "higher": false,
-          "value": 0.20039220928129367
-        },
-        {
-          "key": "RPEr_RMSE_deg",
-          "label": "RPEr histórico",
-          "unit": "°",
-          "higher": false,
-          "value": 1.7592197305566717
-        },
-        {
-          "key": "RPEt_RMSE_mm",
-          "label": "RPEt histórico",
-          "unit": "cm",
-          "higher": false,
-          "value": 0.06769438574881832
-        },
-        {
-          "key": "focal_relative_error",
-          "label": "Error focal relativo",
-          "unit": "%",
-          "higher": false,
-          "value": 20.477107167243958
-        }
-      ],
-      "cloud_id": "c3vd-vn18"
-    },
-    {
       "id": "scared8-vn18",
       "label": "VN18 · entrenado con SCARED · SCARED8/KF0",
       "group": "SCARED · Reservas8/9 · ancla medida",
@@ -4877,96 +4427,6 @@
         }
       ],
       "cloud_id": "scared9-vn19-a"
-    },
-    {
-      "id": "c3vd-scared-vn18",
-      "label": "VN18-SCARED · transferencia a trans_t4_b",
-      "group": "C3VD · Geometría/pose sin ICP",
-      "dataset": "C3VD",
-      "case": "trans_t4_b",
-      "kind": "metrics",
-      "comparison_key": "C3VD|trans_t4_b|RGB50-336|GT16|shared-depth-scale|noICP|joint-v1",
-      "context": "Pesos entrenados enSCARED, evaluados en el mismo contexto C3VD50/GT16. Una escala compartida; sin ICP. Final3240 diagnóstico.",
-      "values": [
-        {
-          "key": "depth_absrel",
-          "label": "AbsRel",
-          "unit": "",
-          "higher": false,
-          "value": 0.1942071363266836
-        },
-        {
-          "key": "depth_delta1",
-          "label": "δ <1,25",
-          "unit": "%",
-          "higher": true,
-          "value": 61.42918336007477
-        },
-        {
-          "key": "depth_rmse_mm",
-          "label": "RMSE profundidad",
-          "unit": "cm",
-          "higher": false,
-          "value": 0.5725162855309525
-        },
-        {
-          "key": "point_raw_mm",
-          "label": "XYZ medio",
-          "unit": "cm",
-          "higher": false,
-          "value": 0.7985833315789104
-        },
-        {
-          "key": "point_p95_mm",
-          "label": "XYZ p95",
-          "unit": "cm",
-          "higher": false,
-          "value": 1.7162606592618919
-        },
-        {
-          "key": "derived_point_mm",
-          "label": "D+K+pose",
-          "unit": "cm",
-          "higher": false,
-          "value": 0.7705382078656354
-        },
-        {
-          "key": "rotation_deg",
-          "label": "Rotación media",
-          "unit": "°",
-          "higher": false,
-          "value": 10.796602387998519
-        },
-        {
-          "key": "translation_rmse_mm",
-          "label": "RMSE centros anclados",
-          "unit": "cm",
-          "higher": false,
-          "value": 0.1961352604820878
-        },
-        {
-          "key": "RPEr_RMSE_deg",
-          "label": "RPEr histórico",
-          "unit": "°",
-          "higher": false,
-          "value": 1.7592197305566717
-        },
-        {
-          "key": "RPEt_RMSE_mm",
-          "label": "RPEt histórico",
-          "unit": "cm",
-          "higher": false,
-          "value": 0.06642805265502523
-        },
-        {
-          "key": "focal_relative_error",
-          "label": "Error focal relativo",
-          "unit": "%",
-          "higher": false,
-          "value": 20.477107167243958
-        }
-      ],
-      "cloud_id": "c3vd-scared-vn18"
     },
     {
       "id": "scared7-macro5-zero_shot",
@@ -9041,6 +8501,1243 @@
           "unit": "cm",
           "higher": false,
           "value": 2.1691406679153444
+        }
+      ],
+      "cloud_id": null
+    },
+    {
+      "id": "c3vd-zero",
+      "label": "Zero-shot · VGG-T³ · trans_t4_b",
+      "group": "C3VD · Geometría/pose sin ICP",
+      "dataset": "C3VD",
+      "case": "trans_t4_b",
+      "kind": "metrics",
+      "comparison_key": "C3VD|trans_t4_b|RGB50-336|GT16|shared-depth-scale|noICP|joint-v1",
+      "context": "Mismos50 RGB a336²; mismos16 objetivos GT y1.771.907 píxeles válidos. Una escala positiva GT de profundidad compartida; sin ICP. XYZ procede de la cabeza global de puntos. Caso de desarrollo, no test clínico ciego.",
+      "values": [
+        {
+          "key": "depth_absrel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.18235506093694215
+        },
+        {
+          "key": "depth_delta1",
+          "label": "δ <1,25",
+          "unit": "%",
+          "higher": true,
+          "value": 72.09577026333774
+        },
+        {
+          "key": "depth_rmse_mm",
+          "label": "RMSE profundidad",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.725236075859449
+        },
+        {
+          "key": "point_raw_mm",
+          "label": "XYZ medio",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.7241848446668149
+        },
+        {
+          "key": "point_p95_mm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 2.130600845442063
+        },
+        {
+          "key": "derived_point_mm",
+          "label": "D+K+pose",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.7711213256517649
+        },
+        {
+          "key": "cross_head_mm",
+          "label": "Coherencia entre cabezas",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.4501652233079166
+        },
+        {
+          "key": "rotation_deg",
+          "label": "Rotación media",
+          "unit": "°",
+          "higher": false,
+          "value": 10.796602387998519
+        },
+        {
+          "key": "translation_rmse_mm",
+          "label": "RMSE centros anclados",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.19504393563863914
+        },
+        {
+          "key": "RPEr_RMSE_deg",
+          "label": "RPEr histórico",
+          "unit": "°",
+          "higher": false,
+          "value": 1.7592197305566717
+        },
+        {
+          "key": "RPEt_RMSE_mm",
+          "label": "RPEt histórico",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.065333832998102
+        },
+        {
+          "key": "focal_relative_error",
+          "label": "Error focal relativo",
+          "unit": "%",
+          "higher": false,
+          "value": 20.477107167243958
+        }
+      ],
+      "cloud_id": "c3vd-zero"
+    },
+    {
+      "id": "c3vd-scared-vn18",
+      "label": "VN18-SCARED · final diagnóstico · trans_t4_b",
+      "group": "C3VD · Geometría/pose sin ICP",
+      "dataset": "C3VD",
+      "case": "trans_t4_b",
+      "kind": "metrics",
+      "comparison_key": "C3VD|trans_t4_b|RGB50-336|GT16|shared-depth-scale|noICP|joint-v1",
+      "context": "Mismos50 RGB a336²; mismos16 objetivos GT y1.771.907 píxeles válidos. Una escala positiva GT de profundidad compartida; sin ICP. XYZ procede de la cabeza global de puntos. Caso de desarrollo, no test clínico ciego. Transferencia desde SCARED, sin entrenamiento adicional en C3VD; cámara congelada.",
+      "values": [
+        {
+          "key": "depth_absrel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.1942071363266836
+        },
+        {
+          "key": "depth_delta1",
+          "label": "δ <1,25",
+          "unit": "%",
+          "higher": true,
+          "value": 61.42918336007477
+        },
+        {
+          "key": "depth_rmse_mm",
+          "label": "RMSE profundidad",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.5725162855309525
+        },
+        {
+          "key": "point_raw_mm",
+          "label": "XYZ medio",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.7985833315789104
+        },
+        {
+          "key": "point_p95_mm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.7162606592618919
+        },
+        {
+          "key": "derived_point_mm",
+          "label": "D+K+pose",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.7705382078656354
+        },
+        {
+          "key": "cross_head_mm",
+          "label": "Coherencia entre cabezas",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.5117910006898648
+        },
+        {
+          "key": "rotation_deg",
+          "label": "Rotación media",
+          "unit": "°",
+          "higher": false,
+          "value": 10.796602387998519
+        },
+        {
+          "key": "translation_rmse_mm",
+          "label": "RMSE centros anclados",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.1961352604820878
+        },
+        {
+          "key": "RPEr_RMSE_deg",
+          "label": "RPEr histórico",
+          "unit": "°",
+          "higher": false,
+          "value": 1.7592197305566717
+        },
+        {
+          "key": "RPEt_RMSE_mm",
+          "label": "RPEt histórico",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.06642805265502523
+        },
+        {
+          "key": "focal_relative_error",
+          "label": "Error focal relativo",
+          "unit": "%",
+          "higher": false,
+          "value": 20.477107167243958
+        }
+      ],
+      "cloud_id": "c3vd-scared-vn18"
+    },
+    {
+      "id": "c3vd-scared-v9",
+      "label": "V9-SCARED · candidato diagnóstico · trans_t4_b",
+      "group": "C3VD · Geometría/pose sin ICP",
+      "dataset": "C3VD",
+      "case": "trans_t4_b",
+      "kind": "metrics",
+      "comparison_key": "C3VD|trans_t4_b|RGB50-336|GT16|shared-depth-scale|noICP|joint-v1",
+      "context": "Mismos50 RGB a336²; mismos16 objetivos GT y1.771.907 píxeles válidos. Una escala positiva GT de profundidad compartida; sin ICP. XYZ procede de la cabeza global de puntos. Caso de desarrollo, no test clínico ciego. Transferencia desde SCARED, sin entrenamiento adicional en C3VD; cámara congelada.",
+      "values": [
+        {
+          "key": "depth_absrel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.1779878175014045
+        },
+        {
+          "key": "depth_delta1",
+          "label": "δ <1,25",
+          "unit": "%",
+          "higher": true,
+          "value": 66.56088609616646
+        },
+        {
+          "key": "depth_rmse_mm",
+          "label": "RMSE profundidad",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.599889480107314
+        },
+        {
+          "key": "point_raw_mm",
+          "label": "XYZ medio",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.8639270393734186
+        },
+        {
+          "key": "point_p95_mm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 2.024793558603636
+        },
+        {
+          "key": "derived_point_mm",
+          "label": "D+K+pose",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.8377396439098809
+        },
+        {
+          "key": "cross_head_mm",
+          "label": "Coherencia entre cabezas",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.6998021777655961
+        },
+        {
+          "key": "rotation_deg",
+          "label": "Rotación media",
+          "unit": "°",
+          "higher": false,
+          "value": 10.796602387998519
+        },
+        {
+          "key": "translation_rmse_mm",
+          "label": "RMSE centros anclados",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.24851163595445863
+        },
+        {
+          "key": "RPEr_RMSE_deg",
+          "label": "RPEr histórico",
+          "unit": "°",
+          "higher": false,
+          "value": 1.7592197305566717
+        },
+        {
+          "key": "RPEt_RMSE_mm",
+          "label": "RPEt histórico",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.06867867080945032
+        },
+        {
+          "key": "focal_relative_error",
+          "label": "Error focal relativo",
+          "unit": "%",
+          "higher": false,
+          "value": 20.477107167243958
+        }
+      ],
+      "cloud_id": "c3vd-scared-v9"
+    },
+    {
+      "id": "c3vd-v9",
+      "label": "V9-C3VD · referencia · trans_t4_b",
+      "group": "C3VD · Geometría/pose sin ICP",
+      "dataset": "C3VD",
+      "case": "trans_t4_b",
+      "kind": "metrics",
+      "comparison_key": "C3VD|trans_t4_b|RGB50-336|GT16|shared-depth-scale|noICP|joint-v1",
+      "context": "Mismos50 RGB a336²; mismos16 objetivos GT y1.771.907 píxeles válidos. Una escala positiva GT de profundidad compartida; sin ICP. XYZ procede de la cabeza global de puntos. Caso de desarrollo, no test clínico ciego.",
+      "values": [
+        {
+          "key": "depth_absrel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.14860396987492175
+        },
+        {
+          "key": "depth_delta1",
+          "label": "δ <1,25",
+          "unit": "%",
+          "higher": true,
+          "value": 78.38487008629686
+        },
+        {
+          "key": "depth_rmse_mm",
+          "label": "RMSE profundidad",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.6977883501905466
+        },
+        {
+          "key": "point_raw_mm",
+          "label": "XYZ medio",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.4756255656305663
+        },
+        {
+          "key": "point_p95_mm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.3048150138320753
+        },
+        {
+          "key": "derived_point_mm",
+          "label": "D+K+pose",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.5999614637996475
+        },
+        {
+          "key": "cross_head_mm",
+          "label": "Coherencia entre cabezas",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.41602020801032813
+        },
+        {
+          "key": "rotation_deg",
+          "label": "Rotación media",
+          "unit": "°",
+          "higher": false,
+          "value": 6.90674271013931
+        },
+        {
+          "key": "translation_rmse_mm",
+          "label": "RMSE centros anclados",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.1806577795283023
+        },
+        {
+          "key": "RPEr_RMSE_deg",
+          "label": "RPEr histórico",
+          "unit": "°",
+          "higher": false,
+          "value": 1.4757387766084633
+        },
+        {
+          "key": "RPEt_RMSE_mm",
+          "label": "RPEt histórico",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.06500697010424338
+        },
+        {
+          "key": "focal_relative_error",
+          "label": "Error focal relativo",
+          "unit": "%",
+          "higher": false,
+          "value": 3.631230443716049
+        }
+      ],
+      "cloud_id": "c3vd-v9"
+    },
+    {
+      "id": "c3vd-vn19-a",
+      "label": "VN19-A-C3VD · final diagnóstico · trans_t4_b",
+      "group": "C3VD · Geometría/pose sin ICP",
+      "dataset": "C3VD",
+      "case": "trans_t4_b",
+      "kind": "metrics",
+      "comparison_key": "C3VD|trans_t4_b|RGB50-336|GT16|shared-depth-scale|noICP|joint-v1",
+      "context": "Mismos50 RGB a336²; mismos16 objetivos GT y1.771.907 píxeles válidos. Una escala positiva GT de profundidad compartida; sin ICP. XYZ procede de la cabeza global de puntos. Caso de desarrollo, no test clínico ciego.",
+      "values": [
+        {
+          "key": "depth_absrel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.17214230312758533
+        },
+        {
+          "key": "depth_delta1",
+          "label": "δ <1,25",
+          "unit": "%",
+          "higher": true,
+          "value": 74.8696743113493
+        },
+        {
+          "key": "depth_rmse_mm",
+          "label": "RMSE profundidad",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.5921618041078501
+        },
+        {
+          "key": "point_raw_mm",
+          "label": "XYZ medio",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.5682522698475888
+        },
+        {
+          "key": "point_p95_mm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.3013051755133849
+        },
+        {
+          "key": "derived_point_mm",
+          "label": "D+K+pose",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.5789098849519835
+        },
+        {
+          "key": "cross_head_mm",
+          "label": "Coherencia entre cabezas",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.5043788499977637
+        },
+        {
+          "key": "rotation_deg",
+          "label": "Rotación media",
+          "unit": "°",
+          "higher": false,
+          "value": 6.34010514091592
+        },
+        {
+          "key": "translation_rmse_mm",
+          "label": "RMSE centros anclados",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.19901699617295174
+        },
+        {
+          "key": "RPEr_RMSE_deg",
+          "label": "RPEr histórico",
+          "unit": "°",
+          "higher": false,
+          "value": 1.2606501137225345
+        },
+        {
+          "key": "RPEt_RMSE_mm",
+          "label": "RPEt histórico",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.062105036463154274
+        },
+        {
+          "key": "focal_relative_error",
+          "label": "Error focal relativo",
+          "unit": "%",
+          "higher": false,
+          "value": 1.2810646556317806
+        }
+      ],
+      "cloud_id": "c3vd-vn19-a"
+    },
+    {
+      "id": "c3vd-vn19-b",
+      "label": "VN19-B-C3VD · final diagnóstico · trans_t4_b",
+      "group": "C3VD · Geometría/pose sin ICP",
+      "dataset": "C3VD",
+      "case": "trans_t4_b",
+      "kind": "metrics",
+      "comparison_key": "C3VD|trans_t4_b|RGB50-336|GT16|shared-depth-scale|noICP|joint-v1",
+      "context": "Mismos50 RGB a336²; mismos16 objetivos GT y1.771.907 píxeles válidos. Una escala positiva GT de profundidad compartida; sin ICP. XYZ procede de la cabeza global de puntos. Caso de desarrollo, no test clínico ciego.",
+      "values": [
+        {
+          "key": "depth_absrel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.1721618939192637
+        },
+        {
+          "key": "depth_delta1",
+          "label": "δ <1,25",
+          "unit": "%",
+          "higher": true,
+          "value": 73.02578521333231
+        },
+        {
+          "key": "depth_rmse_mm",
+          "label": "RMSE profundidad",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.5922540253615252
+        },
+        {
+          "key": "point_raw_mm",
+          "label": "XYZ medio",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.5750570797484804
+        },
+        {
+          "key": "point_p95_mm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.3369971014096669
+        },
+        {
+          "key": "derived_point_mm",
+          "label": "D+K+pose",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.5730181351147418
+        },
+        {
+          "key": "cross_head_mm",
+          "label": "Coherencia entre cabezas",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.4947214400532521
+        },
+        {
+          "key": "rotation_deg",
+          "label": "Rotación media",
+          "unit": "°",
+          "higher": false,
+          "value": 6.169099397360916
+        },
+        {
+          "key": "translation_rmse_mm",
+          "label": "RMSE centros anclados",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.19944853111530972
+        },
+        {
+          "key": "RPEr_RMSE_deg",
+          "label": "RPEr histórico",
+          "unit": "°",
+          "higher": false,
+          "value": 1.2498012688619082
+        },
+        {
+          "key": "RPEt_RMSE_mm",
+          "label": "RPEt histórico",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.06219394311646679
+        },
+        {
+          "key": "focal_relative_error",
+          "label": "Error focal relativo",
+          "unit": "%",
+          "higher": false,
+          "value": 1.3149186968803406
+        }
+      ],
+      "cloud_id": "c3vd-vn19-b"
+    },
+    {
+      "id": "c3vd-vn18",
+      "label": "VN18-C3VD · seleccionado · trans_t4_b",
+      "group": "C3VD · Geometría/pose sin ICP",
+      "dataset": "C3VD",
+      "case": "trans_t4_b",
+      "kind": "metrics",
+      "comparison_key": "C3VD|trans_t4_b|RGB50-336|GT16|shared-depth-scale|noICP|joint-v1",
+      "context": "Mismos50 RGB a336²; mismos16 objetivos GT y1.771.907 píxeles válidos. Una escala positiva GT de profundidad compartida; sin ICP. XYZ procede de la cabeza global de puntos. Caso de desarrollo, no test clínico ciego.",
+      "values": [
+        {
+          "key": "depth_absrel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.13050364919310364
+        },
+        {
+          "key": "depth_delta1",
+          "label": "δ <1,25",
+          "unit": "%",
+          "higher": true,
+          "value": 82.87737448974465
+        },
+        {
+          "key": "depth_rmse_mm",
+          "label": "RMSE profundidad",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.47587876618899677
+        },
+        {
+          "key": "point_raw_mm",
+          "label": "XYZ medio",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.4655546345920401
+        },
+        {
+          "key": "point_p95_mm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.1262753280449205
+        },
+        {
+          "key": "derived_point_mm",
+          "label": "D+K+pose",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.6419674787856181
+        },
+        {
+          "key": "cross_head_mm",
+          "label": "Coherencia entre cabezas",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.5266103831269741
+        },
+        {
+          "key": "rotation_deg",
+          "label": "Rotación media",
+          "unit": "°",
+          "higher": false,
+          "value": 10.796602387998519
+        },
+        {
+          "key": "translation_rmse_mm",
+          "label": "RMSE centros anclados",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.20039220928129367
+        },
+        {
+          "key": "RPEr_RMSE_deg",
+          "label": "RPEr histórico",
+          "unit": "°",
+          "higher": false,
+          "value": 1.7592197305566717
+        },
+        {
+          "key": "RPEt_RMSE_mm",
+          "label": "RPEt histórico",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.06769438574881832
+        },
+        {
+          "key": "focal_relative_error",
+          "label": "Error focal relativo",
+          "unit": "%",
+          "higher": false,
+          "value": 20.477107167243958
+        }
+      ],
+      "cloud_id": "c3vd-vn18"
+    },
+    {
+      "id": "c3vd-zero-derived",
+      "label": "Zero-shot · VGG-T³ · ruta D+K+pose",
+      "group": "C3VD · Ruta derivada común · VGGT y VGG-T³",
+      "dataset": "C3VD",
+      "case": "trans_t4_b",
+      "kind": "metrics",
+      "comparison_key": "C3VD|trans_t4_b|RGB50-336|GT16|shared-depth-scale|noICP|derived-D-Kcal-pose-v1",
+      "context": "Mismos RGB uint8, K calibrada y16 GT. Profundidad y poses predichas; una escala GT global de profundidad. No es evaluación de cabeza global de puntos. VGGT histórico usa división float/255; la caché TTT multiplicación float32(1/255).",
+      "values": [
+        {
+          "key": "depth_absrel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.18235506093694215
+        },
+        {
+          "key": "depth_delta1",
+          "label": "δ <1,25",
+          "unit": "%",
+          "higher": true,
+          "value": 72.09577026333774
+        },
+        {
+          "key": "depth_rmse_mm",
+          "label": "RMSE profundidad",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.725236075859449
+        },
+        {
+          "key": "derived_point_mm",
+          "label": "XYZ de D+K+pose",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.7711213256517649
+        },
+        {
+          "key": "derived_point_p95_mm",
+          "label": "p95 de D+K+pose",
+          "unit": "cm",
+          "higher": false,
+          "value": 2.0430042868223155
+        },
+        {
+          "key": "rotation_deg",
+          "label": "Rotación media",
+          "unit": "°",
+          "higher": false,
+          "value": 10.796602387998519
+        },
+        {
+          "key": "focal_relative_error",
+          "label": "Error focal relativo",
+          "unit": "%",
+          "higher": false,
+          "value": 20.477107167243958
+        }
+      ],
+      "cloud_id": "c3vd-zero"
+    },
+    {
+      "id": "c3vd-scared-vn18-derived",
+      "label": "VN18-SCARED · final diagnóstico · ruta D+K+pose",
+      "group": "C3VD · Ruta derivada común · VGGT y VGG-T³",
+      "dataset": "C3VD",
+      "case": "trans_t4_b",
+      "kind": "metrics",
+      "comparison_key": "C3VD|trans_t4_b|RGB50-336|GT16|shared-depth-scale|noICP|derived-D-Kcal-pose-v1",
+      "context": "Mismos RGB uint8, K calibrada y16 GT. Profundidad y poses predichas; una escala GT global de profundidad. No es evaluación de cabeza global de puntos. VGGT histórico usa división float/255; la caché TTT multiplicación float32(1/255).",
+      "values": [
+        {
+          "key": "depth_absrel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.1942071363266836
+        },
+        {
+          "key": "depth_delta1",
+          "label": "δ <1,25",
+          "unit": "%",
+          "higher": true,
+          "value": 61.42918336007477
+        },
+        {
+          "key": "depth_rmse_mm",
+          "label": "RMSE profundidad",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.5725162855309525
+        },
+        {
+          "key": "derived_point_mm",
+          "label": "XYZ de D+K+pose",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.7705382078656354
+        },
+        {
+          "key": "derived_point_p95_mm",
+          "label": "p95 de D+K+pose",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.6293790994223212
+        },
+        {
+          "key": "rotation_deg",
+          "label": "Rotación media",
+          "unit": "°",
+          "higher": false,
+          "value": 10.796602387998519
+        },
+        {
+          "key": "focal_relative_error",
+          "label": "Error focal relativo",
+          "unit": "%",
+          "higher": false,
+          "value": 20.477107167243958
+        }
+      ],
+      "cloud_id": "c3vd-scared-vn18"
+    },
+    {
+      "id": "c3vd-scared-v9-derived",
+      "label": "V9-SCARED · candidato diagnóstico · ruta D+K+pose",
+      "group": "C3VD · Ruta derivada común · VGGT y VGG-T³",
+      "dataset": "C3VD",
+      "case": "trans_t4_b",
+      "kind": "metrics",
+      "comparison_key": "C3VD|trans_t4_b|RGB50-336|GT16|shared-depth-scale|noICP|derived-D-Kcal-pose-v1",
+      "context": "Mismos RGB uint8, K calibrada y16 GT. Profundidad y poses predichas; una escala GT global de profundidad. No es evaluación de cabeza global de puntos. VGGT histórico usa división float/255; la caché TTT multiplicación float32(1/255).",
+      "values": [
+        {
+          "key": "depth_absrel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.1779878175014045
+        },
+        {
+          "key": "depth_delta1",
+          "label": "δ <1,25",
+          "unit": "%",
+          "higher": true,
+          "value": 66.56088609616646
+        },
+        {
+          "key": "depth_rmse_mm",
+          "label": "RMSE profundidad",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.599889480107314
+        },
+        {
+          "key": "derived_point_mm",
+          "label": "XYZ de D+K+pose",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.8377396439098809
+        },
+        {
+          "key": "derived_point_p95_mm",
+          "label": "p95 de D+K+pose",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.9058630894370179
+        },
+        {
+          "key": "rotation_deg",
+          "label": "Rotación media",
+          "unit": "°",
+          "higher": false,
+          "value": 10.796602387998519
+        },
+        {
+          "key": "focal_relative_error",
+          "label": "Error focal relativo",
+          "unit": "%",
+          "higher": false,
+          "value": 20.477107167243958
+        }
+      ],
+      "cloud_id": "c3vd-scared-v9"
+    },
+    {
+      "id": "c3vd-v9-derived",
+      "label": "V9-C3VD · referencia · ruta D+K+pose",
+      "group": "C3VD · Ruta derivada común · VGGT y VGG-T³",
+      "dataset": "C3VD",
+      "case": "trans_t4_b",
+      "kind": "metrics",
+      "comparison_key": "C3VD|trans_t4_b|RGB50-336|GT16|shared-depth-scale|noICP|derived-D-Kcal-pose-v1",
+      "context": "Mismos RGB uint8, K calibrada y16 GT. Profundidad y poses predichas; una escala GT global de profundidad. No es evaluación de cabeza global de puntos. VGGT histórico usa división float/255; la caché TTT multiplicación float32(1/255).",
+      "values": [
+        {
+          "key": "depth_absrel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.14860396987492175
+        },
+        {
+          "key": "depth_delta1",
+          "label": "δ <1,25",
+          "unit": "%",
+          "higher": true,
+          "value": 78.38487008629686
+        },
+        {
+          "key": "depth_rmse_mm",
+          "label": "RMSE profundidad",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.6977883501905466
+        },
+        {
+          "key": "derived_point_mm",
+          "label": "XYZ de D+K+pose",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.5999614637996475
+        },
+        {
+          "key": "derived_point_p95_mm",
+          "label": "p95 de D+K+pose",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.929785934066464
+        },
+        {
+          "key": "rotation_deg",
+          "label": "Rotación media",
+          "unit": "°",
+          "higher": false,
+          "value": 6.90674271013931
+        },
+        {
+          "key": "focal_relative_error",
+          "label": "Error focal relativo",
+          "unit": "%",
+          "higher": false,
+          "value": 3.631230443716049
+        }
+      ],
+      "cloud_id": "c3vd-v9"
+    },
+    {
+      "id": "c3vd-vn19-a-derived",
+      "label": "VN19-A-C3VD · final diagnóstico · ruta D+K+pose",
+      "group": "C3VD · Ruta derivada común · VGGT y VGG-T³",
+      "dataset": "C3VD",
+      "case": "trans_t4_b",
+      "kind": "metrics",
+      "comparison_key": "C3VD|trans_t4_b|RGB50-336|GT16|shared-depth-scale|noICP|derived-D-Kcal-pose-v1",
+      "context": "Mismos RGB uint8, K calibrada y16 GT. Profundidad y poses predichas; una escala GT global de profundidad. No es evaluación de cabeza global de puntos. VGGT histórico usa división float/255; la caché TTT multiplicación float32(1/255).",
+      "values": [
+        {
+          "key": "depth_absrel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.17214230312758533
+        },
+        {
+          "key": "depth_delta1",
+          "label": "δ <1,25",
+          "unit": "%",
+          "higher": true,
+          "value": 74.8696743113493
+        },
+        {
+          "key": "depth_rmse_mm",
+          "label": "RMSE profundidad",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.5921618041078501
+        },
+        {
+          "key": "derived_point_mm",
+          "label": "XYZ de D+K+pose",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.5789098849519835
+        },
+        {
+          "key": "derived_point_p95_mm",
+          "label": "p95 de D+K+pose",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.5578551249785575
+        },
+        {
+          "key": "rotation_deg",
+          "label": "Rotación media",
+          "unit": "°",
+          "higher": false,
+          "value": 6.34010514091592
+        },
+        {
+          "key": "focal_relative_error",
+          "label": "Error focal relativo",
+          "unit": "%",
+          "higher": false,
+          "value": 1.2810646556317806
+        }
+      ],
+      "cloud_id": "c3vd-vn19-a"
+    },
+    {
+      "id": "c3vd-vn19-b-derived",
+      "label": "VN19-B-C3VD · final diagnóstico · ruta D+K+pose",
+      "group": "C3VD · Ruta derivada común · VGGT y VGG-T³",
+      "dataset": "C3VD",
+      "case": "trans_t4_b",
+      "kind": "metrics",
+      "comparison_key": "C3VD|trans_t4_b|RGB50-336|GT16|shared-depth-scale|noICP|derived-D-Kcal-pose-v1",
+      "context": "Mismos RGB uint8, K calibrada y16 GT. Profundidad y poses predichas; una escala GT global de profundidad. No es evaluación de cabeza global de puntos. VGGT histórico usa división float/255; la caché TTT multiplicación float32(1/255).",
+      "values": [
+        {
+          "key": "depth_absrel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.1721618939192637
+        },
+        {
+          "key": "depth_delta1",
+          "label": "δ <1,25",
+          "unit": "%",
+          "higher": true,
+          "value": 73.02578521333231
+        },
+        {
+          "key": "depth_rmse_mm",
+          "label": "RMSE profundidad",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.5922540253615252
+        },
+        {
+          "key": "derived_point_mm",
+          "label": "XYZ de D+K+pose",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.5730181351147418
+        },
+        {
+          "key": "derived_point_p95_mm",
+          "label": "p95 de D+K+pose",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.5336056892159393
+        },
+        {
+          "key": "rotation_deg",
+          "label": "Rotación media",
+          "unit": "°",
+          "higher": false,
+          "value": 6.169099397360916
+        },
+        {
+          "key": "focal_relative_error",
+          "label": "Error focal relativo",
+          "unit": "%",
+          "higher": false,
+          "value": 1.3149186968803406
+        }
+      ],
+      "cloud_id": "c3vd-vn19-b"
+    },
+    {
+      "id": "c3vd-vn18-derived",
+      "label": "VN18-C3VD · seleccionado · ruta D+K+pose",
+      "group": "C3VD · Ruta derivada común · VGGT y VGG-T³",
+      "dataset": "C3VD",
+      "case": "trans_t4_b",
+      "kind": "metrics",
+      "comparison_key": "C3VD|trans_t4_b|RGB50-336|GT16|shared-depth-scale|noICP|derived-D-Kcal-pose-v1",
+      "context": "Mismos RGB uint8, K calibrada y16 GT. Profundidad y poses predichas; una escala GT global de profundidad. No es evaluación de cabeza global de puntos. VGGT histórico usa división float/255; la caché TTT multiplicación float32(1/255).",
+      "values": [
+        {
+          "key": "depth_absrel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.13050364919310364
+        },
+        {
+          "key": "depth_delta1",
+          "label": "δ <1,25",
+          "unit": "%",
+          "higher": true,
+          "value": 82.87737448974465
+        },
+        {
+          "key": "depth_rmse_mm",
+          "label": "RMSE profundidad",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.47587876618899677
+        },
+        {
+          "key": "derived_point_mm",
+          "label": "XYZ de D+K+pose",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.6419674787856181
+        },
+        {
+          "key": "derived_point_p95_mm",
+          "label": "p95 de D+K+pose",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.6295144186636206
+        },
+        {
+          "key": "rotation_deg",
+          "label": "Rotación media",
+          "unit": "°",
+          "higher": false,
+          "value": 10.796602387998519
+        },
+        {
+          "key": "focal_relative_error",
+          "label": "Error focal relativo",
+          "unit": "%",
+          "higher": false,
+          "value": 20.477107167243958
+        }
+      ],
+      "cloud_id": "c3vd-vn18"
+    },
+    {
+      "id": "c3vd-vggt_zs-derived",
+      "label": "VGGT · zero-shot · ruta D+K+pose",
+      "group": "C3VD · Ruta derivada común · VGGT y VGG-T³",
+      "dataset": "C3VD",
+      "case": "trans_t4_b",
+      "kind": "metrics",
+      "comparison_key": "C3VD|trans_t4_b|RGB50-336|GT16|shared-depth-scale|noICP|derived-D-Kcal-pose-v1",
+      "context": "Mismos RGB uint8, K calibrada y16 GT. Profundidad y poses predichas; una escala GT global de profundidad. No es evaluación de cabeza global de puntos. VGGT histórico usa división float/255; la caché TTT multiplicación float32(1/255).",
+      "values": [
+        {
+          "key": "depth_absrel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.2423142172116044
+        },
+        {
+          "key": "depth_delta1",
+          "label": "δ <1,25",
+          "unit": "%",
+          "higher": true,
+          "value": 57.802807935179445
+        },
+        {
+          "key": "depth_rmse_mm",
+          "label": "RMSE profundidad",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.7181337912684346
+        },
+        {
+          "key": "derived_point_mm",
+          "label": "XYZ de D+K+pose",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.8265119925619859
+        },
+        {
+          "key": "derived_point_p95_mm",
+          "label": "p95 de D+K+pose",
+          "unit": "cm",
+          "higher": false,
+          "value": 2.0023570844711593
+        },
+        {
+          "key": "rotation_deg",
+          "label": "Rotación media",
+          "unit": "°",
+          "higher": false,
+          "value": 7.700408584722424
+        },
+        {
+          "key": "focal_relative_error",
+          "label": "Error focal relativo",
+          "unit": "%",
+          "higher": false,
+          "value": 26.442867517471313
+        }
+      ],
+      "cloud_id": null
+    },
+    {
+      "id": "c3vd-vggt_ft-derived",
+      "label": "VGGT · fine-tuning C3VD · ruta D+K+pose",
+      "group": "C3VD · Ruta derivada común · VGGT y VGG-T³",
+      "dataset": "C3VD",
+      "case": "trans_t4_b",
+      "kind": "metrics",
+      "comparison_key": "C3VD|trans_t4_b|RGB50-336|GT16|shared-depth-scale|noICP|derived-D-Kcal-pose-v1",
+      "context": "Mismos RGB uint8, K calibrada y16 GT. Profundidad y poses predichas; una escala GT global de profundidad. No es evaluación de cabeza global de puntos. VGGT histórico usa división float/255; la caché TTT multiplicación float32(1/255).",
+      "values": [
+        {
+          "key": "depth_absrel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.1408775343634298
+        },
+        {
+          "key": "depth_delta1",
+          "label": "δ <1,25",
+          "unit": "%",
+          "higher": true,
+          "value": 80.34208341634182
+        },
+        {
+          "key": "depth_rmse_mm",
+          "label": "RMSE profundidad",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.611152512780778
+        },
+        {
+          "key": "derived_point_mm",
+          "label": "XYZ de D+K+pose",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.763811877751128
+        },
+        {
+          "key": "derived_point_p95_mm",
+          "label": "p95 de D+K+pose",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.7177313447964229
+        },
+        {
+          "key": "rotation_deg",
+          "label": "Rotación media",
+          "unit": "°",
+          "higher": false,
+          "value": 5.5408565211822
+        },
+        {
+          "key": "focal_relative_error",
+          "label": "Error focal relativo",
+          "unit": "%",
+          "higher": false,
+          "value": 10.975794494152069
         }
       ],
       "cloud_id": null

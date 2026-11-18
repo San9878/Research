@@ -3,6 +3,7 @@ from pathlib import Path
 from html.parser import HTMLParser
 from urllib.parse import urlsplit,unquote
 import argparse,json,re,shutil
+from public_package import remove_verified_redundant_js
 
 class Doc(HTMLParser):
     def __init__(self):super().__init__();self.links=[];self.ids=set()
@@ -33,6 +34,8 @@ def verify(site):
     assert {r['id'] for r in registry}=={r['id'] for r in expected}
     assert all(r['available'] and r['all_source_pixels'] for r in registry)
     for r in registry:
+        if r.get('container')=='binary-chunks-v1':
+            remove_verified_redundant_js(app/'datos',r['pack_key'],r['source_js_package_sha256'])
         f=app/r['path'];assert f.is_file() and f.stat().st_size==r['package_bytes']
     size=sum(p.stat().st_size for p in site.rglob('*') if p.is_file())
     if size>=950_000_000:errors.append(['site',str(size),'exceeds safety budget below Pages 1 GB'])

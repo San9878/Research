@@ -1,8 +1,9 @@
 """Copy the public notebook edition. Original research files remain local."""
 from pathlib import Path
 import argparse,csv,hashlib,html,io,json,re,shutil
+from public_package import publish_binary,remove_verified_redundant_js,adapt_viewer
 
-IDS=['c3vd-v9','c3vd-vn19-a','c3vd-vn19-b','c3vd-vn18','c3vd-zero','scared8-vn18','scared8-v9','scared8-vn19-a','scared9-vn18','scared9-v9','scared9-vn19-a','c3vd-scared-vn18','scared8-scared-v9','scared9-scared-v9']
+IDS=['c3vd-v9','c3vd-vn19-a','c3vd-vn19-b','c3vd-vn18','c3vd-zero','scared8-vn18','scared8-v9','scared8-vn19-a','scared9-vn18','scared9-v9','scared9-vn19-a','c3vd-scared-vn18','scared8-scared-v9','scared9-scared-v9','c3vd-scared-v9']
 def read(p):return json.loads(p.read_text(encoding='utf-8-sig'))
 def dump(p,obj):p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(obj,ensure_ascii=False,indent=2),encoding='utf8')
 def sha(p):
@@ -56,7 +57,7 @@ def main():
             block=re.sub(r'<p class="book-cloud-note">.*?</p>','<p class="book-cloud-note">La edición web conserva las mediciones de esta ficha. Las exportaciones específicas del diagnóstico, cuando existen, permanecen en el archivo local.</p>',block)
         return block
     q=re.sub(r'<details class="experiment-card".*?</details>',note,q,flags=re.S)
-    q=q.replace('## Comparadores interactivos {#comparadores}','## Comparadores interactivos {#comparadores}\n\nEsta edición web ofrece **14 nubes principales completas** de C3VD y SCARED. Cada nube conserva el **100 % de sus puntos guardados**. Las demás exportaciones del archivo local no se incluyen en esta publicación.\n')
+    q=q.replace('## Comparadores interactivos {#comparadores}','## Comparadores interactivos {#comparadores}\n\nEsta edición web ofrece **15 nubes principales completas** de C3VD y SCARED. Cada nube conserva el **100 % de sus puntos guardados**. Las demás exportaciones del archivo local no se incluyen en esta publicación.\n')
     if not same_tables(original,q):raise RuntimeError('Public export changed a notebook data table')
     if q.count('class="experiment-card"')!=original.count('class="experiment-card"'):raise RuntimeError('An experiment card was lost')
     (dst/'Bitacora.qmd').write_text(q,encoding='utf8')
@@ -71,6 +72,7 @@ def main():
     viewer=viewer.replace('}},120000);','}},600000);').replace(')),120000);',')),600000);')
     viewer=viewer.replace("')),120000);","')),600000);")
     viewer=viewer.replace('el paquete local. Conserva la carpeta datos junto al visor.','el paquete de puntos. Comprueba la conexión y vuelve a cargarlo.')
+    viewer=adapt_viewer(viewer)
     (app/'viewer.js').write_text(viewer,encoding='utf8')
     manifest=read(src/'reconstrucciones/interactivo/clouds.json');byid={x['id']:x for x in manifest['clouds']}
     clouds=[];packages={}
@@ -80,9 +82,16 @@ def main():
         key=r['pack_key'];file=src/'reconstrucciones/interactivo'/r['path'];receipt=file.with_suffix('.json');info=read(receipt)
         if file.stat().st_size>=100*2**20:raise RuntimeError('Package exceeds GitHub file limit')
         if sha(file)!=info['package_sha256']:raise RuntimeError('Package checksum differs: '+id)
-        copy(file,app/r['path']);copy(receipt,app/'datos'/receipt.name)
+        if id in {'scared8-scared-v9','scared9-scared-v9','c3vd-scared-v9'}:
+            info=publish_binary(file,app/'datos',info)
+            remove_verified_redundant_js(app/'datos',key,info['source_js_package_sha256'])
+        else:
+            copy(file,app/r['path']);copy(receipt,app/'datos'/receipt.name)
         packages[key]=info
-        safe=clean(r);safe['source']='Exportación guardada · '+r['label'];clouds.append(safe)
+        safe=clean(r);safe['source']='Exportación guardada · '+r['label']
+        for field in ['path','package_bytes','container','source_js_package_sha256']:
+            if field in info:safe[field]=info[field]
+        clouds.append(safe)
     public={'version':manifest['version'],'clouds':clouds,'errors':[],'no_new_inference_or_training':manifest.get('no_new_inference_or_training', True),'point_sampling':False,'public_scope':str(len(IDS))+' main complete clouds; other historical exports remain local','unique_packages':len(packages),'physical_package_bytes':sum(x['package_bytes'] for x in packages.values())}
     dump(app/'clouds.json',public);(app/'clouds.js').write_text('window.CLOUD_REGISTRY='+json.dumps(public,ensure_ascii=False).replace('<','\\u003c')+';',encoding='utf8')
     met=clean(read(src/'reconstrucciones/interactivo/metrics.json'));dump(app/'metrics.json',met)
@@ -98,7 +107,7 @@ def main():
     with (dst/'tablas/experimentos_c3vd.csv').open('w',encoding='utf-8-sig',newline='') as f:
         w=csv.DictWriter(f,fieldnames=list(experiments[0]));w.writeheader()
         for r in experiments:w.writerow({k:json.dumps(v,ensure_ascii=False) if isinstance(v,(dict,list)) else v for k,v in r.items()})
-    for name in ['scared_v9_validation.csv','scared_v9_resultados.json']:
+    for name in ['scared_v9_validation.csv','scared_v9_resultados.json','c3vd_scared_transfer_v1.csv','c3vd_scared_transfer_v1.json']:
         if (src/'tablas'/name).exists():copy(src/'tablas'/name,dst/'tablas'/name)
     # Export report contains reproducible hashes, never machine paths or credentials.
     report={'project':'N3D-CE','source_qmd_sha256':sha(src/'Bitacora.qmd'),'public_qmd_sha256':sha(dst/'Bitacora.qmd'),'source_data_tables_preserved':len(re.findall(r'(?m)(?:^\|[^\n]*\n)+',q)),'experiment_cards':q.count('class="experiment-card"'),'public_clouds':[{'id':r['id'],'points':r['points'],'package_sha256':packages[r['pack_key']]['package_sha256']} for r in clouds],'cloud_bytes':public['physical_package_bytes'],'metric_entries':len(met['entries']),'historical_tables':len(tables),'all_saved_vertices_preserved':True,'new_training':False,'new_inference':False}
