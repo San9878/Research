@@ -53,7 +53,7 @@
       "title": "Consistencia de los mismos frames entre contextos",
       "status": "Completado",
       "hypothesis": "Añadir contexto puede cambiar imágenes que ya estaban presentes.",
-      "method": "Mismas tres imágenes por KF: ancla, vídeo0 yvídeo60; identidad RGB y GT verificada por hash enN4/8/16/50.63 lecturas de cabezas sobre features nativas existentes, necesarias también para confianza; sin encoder nuevo. TablaN4→50; CSV conserva las144 comparaciones.",
+      "method": "Mismas tres imágenes por KF: ancla, vídeo0 yvídeo60; identidad RGB y GT verificada por hash enN4/8/16/50.63 lecturas de cabezas sobre features nativas existentes, necesarias también para confianza; sin encoder nuevo. TablaN4→50; el registro técnico local conserva las144 comparaciones.",
       "conclusion": "Las predicciones cambian aun manteniendo primer frame y píxeles comunes. El cambio persiste tras un registro diagnóstico sin GT; V9 no es más estable en todas las salidas.",
       "limits": "Cambio no equivale a error en los RGB sin GT. La escala compartida principal usa solo el ancla medida; Sim3 contra la predicción anterior mide consistencia, no exactitud.",
       "table": [
@@ -457,7 +457,7 @@
       "title": "Error condicionado por profundidad",
       "status": "Completado",
       "hypothesis": "El promedio puede ocultar mejoras y regresiones a diferentes distancias.",
-      "method": "Reutilizados bins de cuatro anclasVAL,N50; añadidos bins de las anclas reservadas8/9. Rangos0-20/20-40/40-60/60-100/≥100mm, misma máscara. TablaVAL ponderada por píxeles; CSV conserva todos los soportes reservados.",
+      "method": "Reutilizados bins de cuatro anclasVAL,N50; añadidos bins de las anclas reservadas8/9. Rangos0-20/20-40/40-60/60-100/≥100mm, misma máscara. TablaVAL ponderada por píxeles; los soportes reservados quedan en el registro técnico local.",
       "conclusion": "En estas cuatro anclasN50, VN18 tiene menor AbsRel y XYZ en los cuatro bins por debajo de100mm. V9 gana ambos en≥100mm: XYZ1,926cm frente2,889cm. La ventaja agregada depende del rango de profundidad; no hay un ganador uniforme. Se conservan bins sin soporte comoN/D, nunca como error cero.",
       "limits": "Distancia está confundida con anatomía, textura y caso. Un bin con pocos píxeles no representa un nuevo sujeto independiente; no explica por sí mismo la causa.",
       "table": [

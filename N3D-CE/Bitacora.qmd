@@ -1846,7 +1846,7 @@ Los errores contra GT se distinguen de consistencia sin GT. Escalas/Sim3 que usa
 
 **Idea / hipótesis:** Añadir contexto puede cambiar imágenes que ya estaban presentes.
 
-**Experimento realizado:** Mismas tres imágenes por KF: ancla, vídeo0 yvídeo60; identidad RGB y GT verificada por hash enN4/8/16/50.63 lecturas de cabezas sobre features nativas existentes, necesarias también para confianza; sin encoder nuevo. TablaN4→50; CSV conserva las144 comparaciones.
+**Experimento realizado:** Mismas tres imágenes por KF: ancla, vídeo0 yvídeo60; identidad RGB y GT verificada por hash enN4/8/16/50.63 lecturas de cabezas sobre features nativas existentes, necesarias también para confianza; sin encoder nuevo. TablaN4→50; el registro técnico local conserva las144 comparaciones.
 
 **Resultados:**
 
@@ -2059,7 +2059,7 @@ Los errores contra GT se distinguen de consistencia sin GT. Escalas/Sim3 que usa
 
 **Idea / hipótesis:** El promedio puede ocultar mejoras y regresiones a diferentes distancias.
 
-**Experimento realizado:** Reutilizados bins de cuatro anclasVAL,N50; añadidos bins de las anclas reservadas8/9. Rangos0-20/20-40/40-60/60-100/≥100mm, misma máscara. TablaVAL ponderada por píxeles; CSV conserva todos los soportes reservados.
+**Experimento realizado:** Reutilizados bins de cuatro anclasVAL,N50; añadidos bins de las anclas reservadas8/9. Rangos0-20/20-40/40-60/60-100/≥100mm, misma máscara. TablaVAL ponderada por píxeles; los soportes reservados quedan en el registro técnico local.
 
 **Resultados:**
 
@@ -2141,7 +2141,9 @@ Los errores contra GT se distinguen de consistencia sin GT. Escalas/Sim3 que usa
 
 </details>
 
-[Lista de experimentos CSV](tablas/experimentos_scared_e01_e12.csv) · [Todas las tablas CSV](tablas/scared_e01_e12_datos.csv) · [Resultados JSON](tablas/experimentos_scared_e01_e12.json)
+[Lista de experimentos CSV](tablas/experimentos_scared_e01_e12.csv) · [Tablas resumidas CSV](tablas/scared_e01_e12_datos.csv) · [Resultados resumidos JSON](tablas/experimentos_scared_e01_e12.json)
+
+Los registros granulares se conservan en el expediente técnico local y no se incluyen en esta edición compartida.
 
 <!-- SCARED_E01_E12_END -->
 
