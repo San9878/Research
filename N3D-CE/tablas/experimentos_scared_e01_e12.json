@@ -1,0 +1,720 @@
+{
+  "complete": true,
+  "experiments": [
+    {
+      "id": "E01",
+      "title": "Sensibilidad al tamaño de contexto",
+      "status": "Completado",
+      "hypothesis": "VN18 y V9 responden de manera distinta al contexto.",
+      "method": "Reutilizados63 resultados de ancla. Para comparar N1/4/8/16/50 se mantienen exactamente KF1-4, GT y peso igual por ancla. N4-50 cubre vídeo0-60; N1 no cubre ese recorrido.",
+      "conclusion": "De N1 aN50, VN18 cambia XYZ-7.03% y AbsRel-20.85%; V9 cambia XYZ+8.87% y AbsRel+15.99%. No hay ruptura universal. V9 aún tiene menor XYZ medio enN50.",
+      "limits": "La ventaja agregada anterior de VN18 no significa superioridad universal en puntos: incluía KF5 soloN1. Cantidad, composición y espaciado del contexto no son una única variable.",
+      "table": [
+        {
+          "N": 1,
+          "AbsRel VN18": 0.1206698389723897,
+          "AbsRel V9": 0.10674203187227249,
+          "XYZ VN18 (cm)": 1.0579020122991853,
+          "XYZ V9 (cm)": 0.8479948107706378
+        },
+        {
+          "N": 4,
+          "AbsRel VN18": 0.10202169511467218,
+          "AbsRel V9": 0.11636326275765896,
+          "XYZ VN18 (cm)": 0.9838595723590183,
+          "XYZ V9 (cm)": 0.9202817314168769
+        },
+        {
+          "N": 8,
+          "AbsRel VN18": 0.09772491548210382,
+          "AbsRel V9": 0.12068229913711548,
+          "XYZ VN18 (cm)": 1.0068015496410765,
+          "XYZ V9 (cm)": 0.9249260749603219
+        },
+        {
+          "N": 16,
+          "AbsRel VN18": 0.09677040670067072,
+          "AbsRel V9": 0.12232476845383644,
+          "XYZ VN18 (cm)": 0.9910299430656027,
+          "XYZ V9 (cm)": 0.9180474351811874
+        },
+        {
+          "N": 50,
+          "AbsRel VN18": 0.0955086313188076,
+          "AbsRel V9": 0.12380610220134258,
+          "XYZ VN18 (cm)": 0.9835432607858869,
+          "XYZ V9 (cm)": 0.9232440911309594
+        }
+      ],
+      "extra": "![Mismas cuatro anclas en todos los tamaños; se conserva también el zero-shot.](imagenes/SCARED_E01_contexto.png){loading=\"lazy\"}"
+    },
+    {
+      "id": "E02",
+      "title": "Consistencia de los mismos frames entre contextos",
+      "status": "Completado",
+      "hypothesis": "Añadir contexto puede cambiar imágenes que ya estaban presentes.",
+      "method": "Mismas tres imágenes por KF: ancla, vídeo0 yvídeo60; identidad RGB y GT verificada por hash enN4/8/16/50.63 lecturas de cabezas sobre features nativas existentes, necesarias también para confianza; sin encoder nuevo. TablaN4→50; CSV conserva las144 comparaciones.",
+      "conclusion": "Las predicciones cambian aun manteniendo primer frame y píxeles comunes. El cambio persiste tras un registro diagnóstico sin GT; V9 no es más estable en todas las salidas.",
+      "limits": "Cambio no equivale a error en los RGB sin GT. La escala compartida principal usa solo el ancla medida; Sim3 contra la predicción anterior mide consistencia, no exactitud.",
+      "table": [
+        {
+          "Modelo": "Zero-shot",
+          "Frames comunes": "Ancla GT",
+          "Cambio D (%)": 2.110819099470973,
+          "Cambio XYZ (cm)": 0.1578456461429596,
+          "Cambio P tras Sim3 sin GT / mediana D (%)": 1.8233107644563973
+        },
+        {
+          "Modelo": "Zero-shot",
+          "Frames comunes": "Vídeo0/60 sin GT",
+          "Cambio D (%)": 5.978576838970184,
+          "Cambio XYZ (cm)": 0.2007935881614685,
+          "Cambio P tras Sim3 sin GT / mediana D (%)": 2.738822041066398
+        },
+        {
+          "Modelo": "VN18-SCARED",
+          "Frames comunes": "Ancla GT",
+          "Cambio D (%)": 2.2983269300311804,
+          "Cambio XYZ (cm)": 0.1568246990442276,
+          "Cambio P tras Sim3 sin GT / mediana D (%)": 2.0656904245768297
+        },
+        {
+          "Modelo": "VN18-SCARED",
+          "Frames comunes": "Vídeo0/60 sin GT",
+          "Cambio D (%)": 5.720733525231481,
+          "Cambio XYZ (cm)": 0.24352451860904695,
+          "Cambio P tras Sim3 sin GT / mediana D (%)": 3.6735851652564926
+        },
+        {
+          "Modelo": "V9-SCARED",
+          "Frames comunes": "Ancla GT",
+          "Cambio D (%)": 2.755357790738344,
+          "Cambio XYZ (cm)": 0.23419206738471984,
+          "Cambio P tras Sim3 sin GT / mediana D (%)": 3.1616594784493497
+        },
+        {
+          "Modelo": "V9-SCARED",
+          "Frames comunes": "Vídeo0/60 sin GT",
+          "Cambio D (%)": 6.623033247888088,
+          "Cambio XYZ (cm)": 0.31484041213989256,
+          "Cambio P tras Sim3 sin GT / mediana D (%)": 4.4228209160143885
+        }
+      ],
+      "extra": ""
+    },
+    {
+      "id": "E03",
+      "title": "Aislamiento del primer frame",
+      "status": "Completado",
+      "hypothesis": "Cambiar la vista inicial puede producir algo más que un cambio de coordenadas.",
+      "method": "Seis encoder forwards nuevos: KF2/4,N16; identidad, transposición de posiciones1/2 conservando la primera y transposición0/1. Mismos RGB. Tres modelos leen cada feature. La repetición identidad reproduce la caché con tolerancia máxima1e-4.",
+      "conclusion": "Cambiar la primera imagen altera profundidad y forma local, pero el signo depende del modelo y KF. El control de orden también produce cambios: no existe una primera vista universalmente mejor.",
+      "limits": "La transposición cambia orden y posición de la primera imagen. P se compara con Sim3 del ancla para no confundir marcos globales; solo dos casosN16, no una prueba de trayectoria completa.",
+      "table": [
+        {
+          "KF": 2,
+          "Modelo": "Zero-shot",
+          "AbsRel identidad": 0.1808827817440033,
+          "AbsRel swap otras": 0.17847572267055511,
+          "AbsRel swap primera": 0.18602091073989868,
+          "P Sim3 identidad (cm)": 0.6815620851191396,
+          "P Sim3 swap primera (cm)": 0.6957302732533586
+        },
+        {
+          "KF": 2,
+          "Modelo": "VN18-SCARED",
+          "AbsRel identidad": 0.10420067608356476,
+          "AbsRel swap otras": 0.1036326214671135,
+          "AbsRel swap primera": 0.10721227526664734,
+          "P Sim3 identidad (cm)": 0.7211426925598492,
+          "P Sim3 swap primera (cm)": 0.7371223784615195
+        },
+        {
+          "KF": 2,
+          "Modelo": "V9-SCARED",
+          "AbsRel identidad": 0.14240358769893646,
+          "AbsRel swap otras": 0.144372820854187,
+          "AbsRel swap primera": 0.13417431712150574,
+          "P Sim3 identidad (cm)": 0.7030287376117845,
+          "P Sim3 swap primera (cm)": 0.6756615862773245
+        },
+        {
+          "KF": 4,
+          "Modelo": "Zero-shot",
+          "AbsRel identidad": 0.06902964413166046,
+          "AbsRel swap otras": 0.06928382068872452,
+          "AbsRel swap primera": 0.06661581248044968,
+          "P Sim3 identidad (cm)": 0.5157647764219628,
+          "P Sim3 swap primera (cm)": 0.48165616187679056
+        },
+        {
+          "KF": 4,
+          "Modelo": "VN18-SCARED",
+          "AbsRel identidad": 0.058031532913446426,
+          "AbsRel swap otras": 0.057796187698841095,
+          "AbsRel swap primera": 0.05612881854176521,
+          "P Sim3 identidad (cm)": 0.50344797811274,
+          "P Sim3 swap primera (cm)": 0.4657126057370391
+        },
+        {
+          "KF": 4,
+          "Modelo": "V9-SCARED",
+          "AbsRel identidad": 0.09401889145374298,
+          "AbsRel swap otras": 0.09382994472980499,
+          "AbsRel swap primera": 0.09566698223352432,
+          "P Sim3 identidad (cm)": 0.5529616643251412,
+          "P Sim3 swap primera (cm)": 0.5736669292590615
+        }
+      ],
+      "extra": ""
+    },
+    {
+      "id": "E04",
+      "title": "Análisis profundo de KF4",
+      "status": "Completado",
+      "hypothesis": "Una incoherencia del target, la escala o una zona difícil podrían explicar su regresión.",
+      "method": "Reutilizada auditoría independiente del XYZ original. Comparados errores con escala compartida, escala propia P ySim3; normales con baselines1/2/4/8/16. Añadidas estratificaciones por textura, intensidad y proxy de brillo; sin optimización.",
+      "conclusion": "La diferencia media XYZ original→target es0.138mm. Escala propia no elimina la regresión. Sim3 aproxima VN18 al zero-shot, pero V9 mantiene más error local. V9 tiene más error de orientación también con baseline8/16.",
+      "limits": "No se identifica una causa única ni se atribuye causalidad a reflejos. Normales finas dependen del remuestreo/ruido GT. Los proxies de brillo no son segmentaciones GT de especularidad. No se certifica registro físico RGB/GT.",
+      "table": [
+        {
+          "Modelo": "Zero-shot",
+          "AbsRel": 0.0717853456735611,
+          "XYZ (cm)": 0.6962323188781738,
+          "P escala propia (cm)": 0.7487320899963379,
+          "P Sim3 (cm)": 0.5305434906253299,
+          "Normal paso8 (°)": 31.23422622680664
+        },
+        {
+          "Modelo": "VN18-SCARED",
+          "AbsRel": 0.056873999536037445,
+          "XYZ (cm)": 0.8277107238769531,
+          "P escala propia (cm)": 0.8215543746948242,
+          "P Sim3 (cm)": 0.5252122270966989,
+          "Normal paso8 (°)": 33.425445556640625
+        },
+        {
+          "Modelo": "V9-SCARED",
+          "AbsRel": 0.0901457741856575,
+          "XYZ (cm)": 0.8403550148010254,
+          "P escala propia (cm)": 0.8213263511657715,
+          "P Sim3 (cm)": 0.5699731680278244,
+          "Normal paso8 (°)": 45.62953567504883
+        }
+      ],
+      "extra": "![KF4: RGB, profundidad medida, máscara y error XYZ de cada modelo. Misma escala de color y todos los píxeles GT válidos.](imagenes/SCARED_E04_KF4.png){loading=\"lazy\"}"
+    },
+    {
+      "id": "E05",
+      "title": "Profundidad frente a puntos globales",
+      "status": "Completado",
+      "hypothesis": "Las dos rutas pueden mejorar de forma diferente.",
+      "method": "Mismas cuatro anclasVAL,N50, K calibrada. Comparados P directo, puntos derivados deD/K y discrepancia entre ambos. La cámara del ancla es identidad conocida; no se supone GT temporal.",
+      "conclusion": "VN18 conserva mejor profundidad y menor desacuerdo entre salidas; V9 conserva menor error medio P en estas cuatro anclas. El desacuerdo y el error contra GT no tienen el mismo orden.",
+      "limits": "Coherencia entre cabezas no es exactitud. Esta tabla no mide la reconstrucción temporal derivada completa. No hay una restricción que haga idénticas ambas salidas.",
+      "table": [
+        {
+          "Modelo": "Zero-shot",
+          "AbsRel": 0.15319186821579933,
+          "P global (cm)": 1.464050054550171,
+          "D+K en ancla (cm)": 1.1294720741554296,
+          "Desacuerdo P / D+K (cm)": 0.707018874415744
+        },
+        {
+          "Modelo": "VN18-SCARED",
+          "AbsRel": 0.0955086313188076,
+          "P global (cm)": 0.9835432410240174,
+          "D+K en ancla (cm)": 0.7644593323913174,
+          "Desacuerdo P / D+K (cm)": 0.5295858279558534
+        },
+        {
+          "Modelo": "V9-SCARED",
+          "AbsRel": 0.12380610220134258,
+          "P global (cm)": 0.9232440710067749,
+          "D+K en ancla (cm)": 0.860748146688158,
+          "Desacuerdo P / D+K (cm)": 0.6581378101393557
+        }
+      ],
+      "extra": ""
+    },
+    {
+      "id": "E06",
+      "title": "Diagnóstico de escala y alineación",
+      "status": "Completado",
+      "hypothesis": "Parte del error puede proceder de escala/registro y otra parte de forma.",
+      "method": "Reutilizadas las transformaciones de C3VDTrans4, mismos16 GT de un contexto50, y las del anclaSCARED. Comparación escalaD, escalaP, un Sim3 global y Sim3 independiente por frame.",
+      "conclusion": "El ranking V9/VN18-SCARED se invierte después de un Sim3 global enC3VD. La escala/colocación contribuye al error, pero el residuo de forma persiste.",
+      "limits": "Todos los ajustes usan GT y son diagnósticos. Sim3 por frame puede ocultar fallos de ensamblado; no es una reconstrucción corregida. El ajuste minimiza error cuadrático, no necesariamente la media de distancias.",
+      "table": [
+        {
+          "Modelo": "Zero-shot",
+          "Escala D compartida (cm)": 0.7241848298139012,
+          "Escala P propia (cm)": 0.6475071649522536,
+          "Sim3 global (cm)": 0.46891967319998606,
+          "Sim3 por frame (cm)": 0.4221194333307041
+        },
+        {
+          "Modelo": "VN18-SCARED",
+          "Escala D compartida (cm)": 0.7985833318809772,
+          "Escala P propia (cm)": 0.8014782289125778,
+          "Sim3 global (cm)": 0.7387671109132554,
+          "Sim3 por frame (cm)": 0.6513289298439764
+        },
+        {
+          "Modelo": "V9-SCARED",
+          "Escala D compartida (cm)": 0.8639270724263219,
+          "Escala P propia (cm)": 0.7491813205674942,
+          "Sim3 global (cm)": 0.6409050588748051,
+          "Sim3 por frame (cm)": 0.5752218353468236
+        },
+        {
+          "Modelo": "V9-C3VD",
+          "Escala D compartida (cm)": 0.4756255678606774,
+          "Escala P propia (cm)": 0.4522877026030091,
+          "Sim3 global (cm)": 0.444769698107934,
+          "Sim3 por frame (cm)": 0.4231090357994149
+        }
+      ],
+      "extra": ""
+    },
+    {
+      "id": "E07",
+      "title": "Auditoría diferencial de VN18/V9",
+      "status": "Completado",
+      "hypothesis": "Diferencias de receta podrían explicar el comportamiento sin cambiar la arquitectura.",
+      "method": "Auditados config, código de pérdida,1000 logs de gradienteV9, checkpoints y manifests; mismos pesos oficiales, split y caché del encoder. No se entrenó una ablación nueva.",
+      "conclusion": "Las diferencias entre los fine-tunings bajo features idénticos se localizan en las cabezasD/P. Hay múltiples factores confundidos. Clipping global activo en100% de actualizaciones; mediana normaP/D≈6,91, sin equivalencia con actualizaciónAdamW.",
+      "limits": "Una auditoría identifica diferencias, no cuál causó la ventaja. VN15 ya probó clipping enC3VD sin mejora material; no se repitió como entrenamiento ni se presenta como solución nueva.",
+      "table": [
+        {
+          "Elemento": "Origen",
+          "VN18-SCARED": "Oficial fresco",
+          "V9-SCARED": "Mismo oficial fresco"
+        },
+        {
+          "Elemento": "Módulos entrenados",
+          "VN18-SCARED": "Profundidad y puntos",
+          "V9-SCARED": "Profundidad y puntos"
+        },
+        {
+          "Elemento": "Encoder / cámara / TTT",
+          "VN18-SCARED": "Parámetros congelados; TTT interno2 activo",
+          "V9-SCARED": "Igual; mismos features oficiales"
+        },
+        {
+          "Elemento": "GT distinto / exposiciones",
+          "VN18-SCARED": "20 anclas /3240",
+          "V9-SCARED": "20 anclas /2000"
+        },
+        {
+          "Elemento": "Pasos",
+          "VN18-SCARED": 3240,
+          "V9-SCARED": 1000
+        },
+        {
+          "Elemento": "Normalización",
+          "VN18-SCARED": "Norma media GT del ancla",
+          "V9-SCARED": "Referencia fija0,03m"
+        },
+        {
+          "Elemento": "Pérdida",
+          "VN18-SCARED": "Regresión nativa con confianza + gradienteD + normalesP",
+          "V9-SCARED": "3XYZ + logD +0,2 gradienteXYZ"
+        },
+        {
+          "Elemento": "Clipping",
+          "VN18-SCARED": "Por cabeza, norma1",
+          "V9-SCARED": "Global, norma1"
+        },
+        {
+          "Elemento": "Contextos TRAIN",
+          "VN18-SCARED": "1/4/8/16",
+          "V9-SCARED": "1/3/6/12/50"
+        },
+        {
+          "Elemento": "Supervisión / actualización",
+          "VN18-SCARED": "Una ancla",
+          "V9-SCARED": "Dos anclas de contextos independientes"
+        },
+        {
+          "Elemento": "Confianza",
+          "VN18-SCARED": "Supervisión nativa de confianza",
+          "V9-SCARED": "Sin pérdida directa de confianza"
+        }
+      ],
+      "extra": ""
+    },
+    {
+      "id": "E08",
+      "title": "Consistencia entre vistas sin GT temporal",
+      "status": "Completado",
+      "hypothesis": "La geometría podría no concordar entre vistas de la misma superficie.",
+      "method": "Reutilizadas seis nubesN50 de SCARED8/9. Comparados puntos de matchesRGB con SIFT+RANSAC independientes del modelo; reproyecciónD bidireccional en98 pares por nube y89376 píxeles por dirección, con K conocida y también K predicha. Oclusión y soporte se registran aparte.",
+      "conclusion": "V9 tiene mayor desacuerdo entre puntos de correspondencias queVN18 en ambos casos. El zero-shot puede ser más consistente pese a tener peor XYZ: consistencia y exactitud no son intercambiables.",
+      "limits": "No hay GT temporal. Cámaras predichas sesgan reproyección y los matches pueden fallar. Un mapa de puntos constante produce acuerdo perfecto sin superficie: control negativo que impide usar esta prueba sola para seleccionar pesos.",
+      "table": [
+        {
+          "Caso": "SCARED8",
+          "Modelo": "Zero-shot",
+          "P entre matches / mediana D (%)": 0.28726751916110516,
+          "Desajuste D visible (%)": 0.37548981593032926,
+          "Soporte proyectado (%)": 99.00194637468304,
+          "Acuerdo D dentro5% (%)": 98.91031829943213
+        },
+        {
+          "Caso": "SCARED8",
+          "Modelo": "VN18-SCARED",
+          "P entre matches / mediana D (%)": 0.7790624164044857,
+          "Desajuste D visible (%)": 0.7561355202115884,
+          "Soporte proyectado (%)": 98.96570873247256,
+          "Acuerdo D dentro5% (%)": 97.95426031966305
+        },
+        {
+          "Caso": "SCARED8",
+          "Modelo": "V9-SCARED",
+          "P entre matches / mediana D (%)": 1.8463367596268654,
+          "Desajuste D visible (%)": 2.0054505835665886,
+          "Soporte proyectado (%)": 98.87496620560147,
+          "Acuerdo D dentro5% (%)": 80.78184721713279
+        },
+        {
+          "Caso": "SCARED9",
+          "Modelo": "Zero-shot",
+          "P entre matches / mediana D (%)": 0.251133693382144,
+          "Desajuste D visible (%)": 0.2432460409199441,
+          "Soporte proyectado (%)": 98.906671288279,
+          "Acuerdo D dentro5% (%)": 99.10720511176135
+        },
+        {
+          "Caso": "SCARED9",
+          "Modelo": "VN18-SCARED",
+          "P entre matches / mediana D (%)": 0.6517306435853243,
+          "Desajuste D visible (%)": 0.6463861065475892,
+          "Soporte proyectado (%)": 98.73776779777431,
+          "Acuerdo D dentro5% (%)": 98.34388089713838
+        },
+        {
+          "Caso": "SCARED9",
+          "Modelo": "V9-SCARED",
+          "P entre matches / mediana D (%)": 1.601484790444374,
+          "Desajuste D visible (%)": 1.6363512492431251,
+          "Soporte proyectado (%)": 99.22486381770754,
+          "Acuerdo D dentro5% (%)": 87.40349202269537
+        }
+      ],
+      "extra": ""
+    },
+    {
+      "id": "E09",
+      "title": "Dependencia del recorrido y solapamiento",
+      "status": "Completado",
+      "hypothesis": "Movimiento y pérdida de correspondencias podrían explicar errores mejor queN por sí solo.",
+      "method": "Analizadas16 ventanasVAL7, N4/8/16/50, mismo tramo vídeo0-60; matchesRGB y desplazamiento de imagen. En SCARED8/9 se relacionan con desacuerdoP. En C3VDTrans4 se reutilizan posesGT de16 vistas para asociaciones con error.",
+      "conclusion": "N50 aumenta la repetibilidad de matches adyacentes, pero V9 no obtiene una mejora conjunta automática. Hay asociaciones entre correspondencia/desplazamiento y consistencia, sin un umbral común ni causalidad establecida.",
+      "limits": "Matches/features no es porcentaje real de solapamiento; desplazamiento en píxeles no separa rotación, traslación y paralaje. Desplazamiento usa solo pares con≥8 inliers; se muestran los soportes para no ocultar fallos. C3VD es una sola trayectoria y los pares consecutivos están correlacionados.",
+      "table": [
+        {
+          "KF": 1,
+          "Matches/features N4 (%)": 52.24719101123596,
+          "Matches/features N50 (%)": 72.58566978193146,
+          "Pares útiles N4": "3/3",
+          "Pares útiles N50": "49/49",
+          "Desplazamiento N4 (px)": 15.701879501342773,
+          "Desplazamiento N50 (px)": 1.6424379348754883
+        },
+        {
+          "KF": 2,
+          "Matches/features N4 (%)": 15.902964959568733,
+          "Matches/features N50 (%)": 71.15384615384616,
+          "Pares útiles N4": "3/3",
+          "Pares útiles N50": "49/49",
+          "Desplazamiento N4 (px)": 41.130767822265625,
+          "Desplazamiento N50 (px)": 1.8852487802505493
+        },
+        {
+          "KF": 3,
+          "Matches/features N4 (%)": 0.0,
+          "Matches/features N50 (%)": 67.0,
+          "Pares útiles N4": "1/3",
+          "Pares útiles N50": "49/49",
+          "Desplazamiento N4 (px)": 2.3014445304870605,
+          "Desplazamiento N50 (px)": 2.487204074859619
+        },
+        {
+          "KF": 4,
+          "Matches/features N4 (%)": 35.9504132231405,
+          "Matches/features N50 (%)": 73.00215982721382,
+          "Pares útiles N4": "3/3",
+          "Pares útiles N50": "49/49",
+          "Desplazamiento N4 (px)": 23.487924575805664,
+          "Desplazamiento N50 (px)": 2.0337514877319336
+        }
+      ],
+      "extra": "**Asociaciones con poses GT C3VD:**\n\n| Modelo | Vistas | ρ giro / XYZ | ρ distancia / XYZ |\n| --- | --- | --- | --- |\n| official_reference | 16 | 0.4265 | 0.5118 |\n| SCARED_VN18_final | 16 | 0.9882 | 0.9353 |\n| SCARED_V9_candidate1000 | 16 | 0.8265 | 0.8147 |\n| C3VD_V9 | 16 | 0.9618 | 0.9059 |\n| C3VD_VN19_A | 16 | 0.8471 | 0.7324 |\n| C3VD_VN19_B | 16 | 0.9176 | 0.8382 |\n"
+    },
+    {
+      "id": "E10",
+      "title": "Error condicionado por profundidad",
+      "status": "Completado",
+      "hypothesis": "El promedio puede ocultar mejoras y regresiones a diferentes distancias.",
+      "method": "Reutilizados bins de cuatro anclasVAL,N50; añadidos bins de las anclas reservadas8/9. Rangos0-20/20-40/40-60/60-100/≥100mm, misma máscara. TablaVAL ponderada por píxeles; CSV conserva todos los soportes reservados.",
+      "conclusion": "En estas cuatro anclasN50, VN18 tiene menor AbsRel y XYZ en los cuatro bins por debajo de100mm. V9 gana ambos en≥100mm: XYZ1,926cm frente2,889cm. La ventaja agregada depende del rango de profundidad; no hay un ganador uniforme. Se conservan bins sin soporte comoN/D, nunca como error cero.",
+      "limits": "Distancia está confundida con anatomía, textura y caso. Un bin con pocos píxeles no representa un nuevo sujeto independiente; no explica por sí mismo la causa.",
+      "table": [
+        {
+          "Profundidad GT (mm)": "0–20",
+          "Píxeles": 1020,
+          "AbsRel VN18": 0.1741127371788025,
+          "AbsRel V9": 0.39008286595344543,
+          "XYZ VN18 (cm)": 0.5012137413024902,
+          "XYZ V9 (cm)": 0.5672439098358154
+        },
+        {
+          "Profundidad GT (mm)": "20–40",
+          "Píxeles": 25975,
+          "AbsRel VN18": 0.09676646798763054,
+          "AbsRel V9": 0.17177015675559884,
+          "XYZ VN18 (cm)": 0.5715612572659886,
+          "XYZ V9 (cm)": 0.5960143931400788
+        },
+        {
+          "Profundidad GT (mm)": "40–60",
+          "Píxeles": 122757,
+          "AbsRel VN18": 0.07353733503498511,
+          "AbsRel V9": 0.11454097101582476,
+          "XYZ VN18 (cm)": 0.7273830991700387,
+          "XYZ V9 (cm)": 0.7639119584596694
+        },
+        {
+          "Profundidad GT (mm)": "60–100",
+          "Píxeles": 64033,
+          "AbsRel VN18": 0.07804719926775877,
+          "AbsRel V9": 0.09979852828256712,
+          "XYZ VN18 (cm)": 0.8520258376720969,
+          "XYZ V9 (cm)": 0.9549567431059278
+        },
+        {
+          "Profundidad GT (mm)": "≥100",
+          "Píxeles": 28336,
+          "AbsRel VN18": 0.22553213598245553,
+          "AbsRel V9": 0.16323202481164156,
+          "XYZ VN18 (cm)": 2.8888079087186305,
+          "XYZ V9 (cm)": 1.9255395012074175
+        }
+      ],
+      "extra": ""
+    },
+    {
+      "id": "E11",
+      "title": "Análisis de confianza y cobertura",
+      "status": "Completado",
+      "hypothesis": "Los puntos de mayor confianza podrían ser más fiables.",
+      "method": "Extraída confianza nativa no guardada antes. Riesgo/cobertura10/25/50/75/100% sobre todos los píxeles GT válidos de21 contextos; tabla de cuatro anclasN50 con igual peso. No se recorta ninguna nube.",
+      "conclusion": "Retener el50% de mayor confianza reduce el error enVN18, pero lo aumenta enV9 en este macro. La confianzaV9 no es un filtro fiable por defecto, coherente con que no recibió supervisión directa de confianza.",
+      "limits": "No son probabilidades calibradas. Cobertura es soporteGT del ancla, no superficie completa ni órgano. Cambia la población evaluada al filtrar; no es una mejora del modelo.",
+      "table": [
+        {
+          "Modelo": "Zero-shot",
+          "Retenido (%)": 25.0,
+          "Error P (cm)": 0.9531450730485617,
+          "GT válido retenido y <2mm (%)": 0.13832674411647042
+        },
+        {
+          "Modelo": "Zero-shot",
+          "Retenido (%)": 50.0,
+          "Error P (cm)": 0.99776271182344,
+          "GT válido retenido y <2mm (%)": 0.2388288564567695
+        },
+        {
+          "Modelo": "Zero-shot",
+          "Retenido (%)": 100.0,
+          "Error P (cm)": 1.4640500792609443,
+          "GT válido retenido y <2mm (%)": 0.26541939109377144
+        },
+        {
+          "Modelo": "VN18-SCARED",
+          "Retenido (%)": 25.0,
+          "Error P (cm)": 0.7486701035596505,
+          "GT válido retenido y <2mm (%)": 1.2787153501040835
+        },
+        {
+          "Modelo": "VN18-SCARED",
+          "Retenido (%)": 50.0,
+          "Error P (cm)": 0.7918782370931687,
+          "GT válido retenido y <2mm (%)": 2.4277422215336597
+        },
+        {
+          "Modelo": "VN18-SCARED",
+          "Retenido (%)": 100.0,
+          "Error P (cm)": 0.9835432604646914,
+          "GT válido retenido y <2mm (%)": 3.353107323210814
+        },
+        {
+          "Modelo": "V9-SCARED",
+          "Retenido (%)": 25.0,
+          "Error P (cm)": 1.2094490937063722,
+          "GT válido retenido y <2mm (%)": 3.0585482491705256
+        },
+        {
+          "Modelo": "V9-SCARED",
+          "Retenido (%)": 50.0,
+          "Error P (cm)": 1.064980418164407,
+          "GT válido retenido y <2mm (%)": 3.545762188011491
+        },
+        {
+          "Modelo": "V9-SCARED",
+          "Retenido (%)": 100.0,
+          "Error P (cm)": 0.9232440910484107,
+          "GT válido retenido y <2mm (%)": 7.049347385980545
+        }
+      ],
+      "extra": "![Riesgo frente a fracción retenida, con igual peso por ancla. Los archivos mantienen todos sus puntos.](imagenes/SCARED_E11_confianza.png){loading=\"lazy\"}"
+    },
+    {
+      "id": "E12",
+      "title": "Generalización entre datasets",
+      "status": "Completado",
+      "hypothesis": "Una mejora deSCARED podría no transferirse aC3VD.",
+      "method": "Reutilizadas validación7, inferencias reservadas8/9 y transferenciaC3VDTrans4; pesos fijos antes de puntuarlas, mismos RGB y soporte entre variantes dentro de cada caso. Sin nuevas inferencias de esos recorridos.",
+      "conclusion": "Hay aprendizaje útil dentro deSCARED, más claro en9, pero las dos recetasSCARED no mejoran conjuntamente el zero-shot enTrans4. V9-C3VD conserva menor errorP en ese caso.",
+      "limits": "Uno/dos casos por dominio no demuestran una ley de transferencia. Datos, receta y supervisión de cámara difieren frente aV9-C3VD; no se atribuye causalmente todo al dominio. Reservas8/9 ya inspeccionadas.",
+      "table": [
+        {
+          "Evaluación": "SCARED VAL7 · macro5 (KF5 soloN1)",
+          "Modelo": "Zero-shot",
+          "AbsRel": 0.13913302160799504,
+          "XYZ (cm)": 1.5122073101997375,
+          "Mejora D / ZS (%)": 0.0,
+          "Mejora P / ZS (%)": 0.0
+        },
+        {
+          "Evaluación": "SCARED VAL7 · macro5 (KF5 soloN1)",
+          "Modelo": "VN18-SCARED",
+          "AbsRel": 0.0882300416007638,
+          "XYZ (cm)": 0.8764176630973817,
+          "Mejora D / ZS (%)": 36.585836646780756,
+          "Mejora P / ZS (%)": 42.04381521065248
+        },
+        {
+          "Evaluación": "SCARED VAL7 · macro5 (KF5 soloN1)",
+          "Modelo": "V9-SCARED",
+          "AbsRel": 0.10834706574678421,
+          "XYZ (cm)": 0.8809544444084167,
+          "Mejora D / ZS (%)": 22.12699437229916,
+          "Mejora P / ZS (%)": 41.743804671063444
+        },
+        {
+          "Evaluación": "SCARED8_N50",
+          "Modelo": "Zero-shot",
+          "AbsRel": 0.0388951301574707,
+          "XYZ (cm)": 1.872792625427246,
+          "Mejora D / ZS (%)": 0.0,
+          "Mejora P / ZS (%)": 0.0
+        },
+        {
+          "Evaluación": "SCARED8_N50",
+          "Modelo": "VN18-SCARED",
+          "AbsRel": 0.05377684906125069,
+          "XYZ (cm)": 0.9100577354431152,
+          "Mejora D / ZS (%)": -38.26113666037343,
+          "Mejora P / ZS (%)": 51.406379804838195
+        },
+        {
+          "Evaluación": "SCARED8_N50",
+          "Modelo": "V9-SCARED",
+          "AbsRel": 0.0829995796084404,
+          "XYZ (cm)": 0.9346431732177735,
+          "Mejora D / ZS (%)": -113.39324299059692,
+          "Mejora P / ZS (%)": 50.09361097817489
+        },
+        {
+          "Evaluación": "SCARED9_N50",
+          "Modelo": "Zero-shot",
+          "AbsRel": 0.13738377392292023,
+          "XYZ (cm)": 2.344852828979492,
+          "Mejora D / ZS (%)": 0.0,
+          "Mejora P / ZS (%)": 0.0
+        },
+        {
+          "Evaluación": "SCARED9_N50",
+          "Modelo": "VN18-SCARED",
+          "AbsRel": 0.061048831790685654,
+          "XYZ (cm)": 0.6516454696655274,
+          "Mejora D / ZS (%)": 55.56328811804415,
+          "Mejora P / ZS (%)": 72.20953649576673
+        },
+        {
+          "Evaluación": "SCARED9_N50",
+          "Modelo": "V9-SCARED",
+          "AbsRel": 0.07532912492752075,
+          "XYZ (cm)": 1.311964988708496,
+          "Mejora D / ZS (%)": 45.16883415228898,
+          "Mejora P / ZS (%)": 44.04915427978143
+        },
+        {
+          "Evaluación": "C3VD_Trans4_N50",
+          "Modelo": "Zero-shot",
+          "AbsRel": 0.18235506093694215,
+          "XYZ (cm)": 0.7241848446668149,
+          "Mejora D / ZS (%)": 0.0,
+          "Mejora P / ZS (%)": 0.0
+        },
+        {
+          "Evaluación": "C3VD_Trans4_N50",
+          "Modelo": "VN18-SCARED",
+          "AbsRel": 0.1942071363266836,
+          "XYZ (cm)": 0.7985833315789103,
+          "Mejora D / ZS (%)": -6.499449660922685,
+          "Mejora P / ZS (%)": -10.273411196049654
+        },
+        {
+          "Evaluación": "C3VD_Trans4_N50",
+          "Modelo": "V9-SCARED",
+          "AbsRel": 0.1779878175014045,
+          "XYZ (cm)": 0.8639270393734186,
+          "Mejora D / ZS (%)": 2.3949121088818193,
+          "Mejora P / ZS (%)": -19.296481517905395
+        },
+        {
+          "Evaluación": "C3VD_Trans4_N50",
+          "Modelo": "V9-C3VD",
+          "AbsRel": 0.14860396987492175,
+          "XYZ (cm)": 0.47562556563056624,
+          "Mejora D / ZS (%)": 18.508447689143892,
+          "Mejora P / ZS (%)": 34.32262921086211
+        }
+      ],
+      "extra": ""
+    }
+  ],
+  "new_encoder_forwards": 6,
+  "optimizer_updates": 0,
+  "cached_context_readouts": 63,
+  "dense_target_readouts_cached": 159,
+  "dense_target_readouts_new_order": 18,
+  "no_saved_point_cloud_modified": true,
+  "RGB_identity_checks": 12,
+  "GT_identity_checks": 4,
+  "existing_source_hashes": {
+    "VAL": "6520bf1ce8668b8b239655ffc383b3af4296653acb63558df10ee4f384ba0e7c",
+    "anchor_geometry": "8151e812c063f259122a6f81772b07576c3da0716db114598ff1135fe4a2fd86",
+    "original_XYZ": "431e51ba94face708ba69178735878eb23e9fdc363a2d6b1ba202ed3ca23182c",
+    "C3VD_geometry": "6a82e04d64d9ae6509fd4847246507d3104ce86f760d74ca09bda6d426cba71c",
+    "reserved": "55d95329689ff386cb7627f1b29ab7b8f057bdcc80373ce6a3f063518a843a8c",
+    "C3VD": "dbdb2d3aaf4fe03b2d8ac71bd66303764bb1c670a939d9a2ff0c25783ce25f3f"
+  },
+  "changes_N1_to_N50_percent": {
+    "zero_shot": {
+      "AbsRel": -10.302068104296803,
+      "XYZ_mm": -7.720936316785576
+    },
+    "VN18_SCARED": {
+      "AbsRel": -20.851281370599327,
+      "XYZ_mm": -7.028888370454189
+    },
+    "V9_SCARED": {
+      "AbsRel": 15.986270852974727,
+      "XYZ_mm": 8.873790193590558
+    }
+  }
+}

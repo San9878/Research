@@ -29,7 +29,7 @@ execute:
 
 **V9, VN19-A y VN19-B: qué entrenamos, qué cambió y qué aprendimos.** 
 
-[Resumen](#estado){.pill} [Entrenamientos](#entrenamientos){.pill} [Comparaciones](#comparaciones){.pill} [Vistas](#vistas){.pill} [Experimentos](#experimentos){.pill} [SCARED VN18](#scared-vn18){.pill} [SCARED V9](#scared-v9){.pill} [Comparadores](#comparadores){.pill} [Tablas históricas](tablas/index.html){.pill}
+[Resumen](#estado){.pill} [Entrenamientos](#entrenamientos){.pill} [Comparaciones](#comparaciones){.pill} [Vistas](#vistas){.pill} [Experimentos](#experimentos){.pill} [SCARED VN18](#scared-vn18){.pill} [SCARED V9](#scared-v9){.pill} [SCARED E01–E12](#scared-experimentos){.pill} [Comparadores](#comparadores){.pill} [Tablas históricas](tablas/index.html){.pill}
 :::
 
 ## Resumen de C3VD {#estado}
@@ -1790,6 +1790,360 @@ Para las variantes VGG-T³ de esta tabla, la secuencia quedó fuera de sus ajust
 [Descargar tabla de métricas](tablas/c3vd_scared_transfer_v1.csv) · [Datos de la comparación](tablas/c3vd_scared_transfer_v1.json)
 
 <!-- SCARED_C3VD_TRANSFER_V1_END -->
+
+<!-- SCARED_E01_E12_START -->
+
+## SCARED · experimentos E01–E12 {#scared-experimentos}
+
+Se separan tres preguntas: respuesta al contexto, relación entre salidas y transferencia de dominio. **Completados los doce diagnósticos solicitados; ningún entrenamiento nuevo.** Se reutilizaron resultados existentes y se hicieron solo seis nuevos forwards de encoder para cambiar el orden. Las63 lecturas de contexto extraen confianza no conservada antes y frames comunes. Todas las nubes mantienen el100 % de sus puntos.
+
+**Corrección de interpretación:** VN18 aprovecha mejor el contexto en profundidad y en su cambio relativo N1→N50; no domina todas las métricas. Con las mismas cuatro anclas, V9 aún tiene menor XYZ enN50. El antiguo macro de cinco anclas incluía KF5 únicamenteN1.
+
+Los errores contra GT se distinguen de consistencia sin GT. Escalas/Sim3 que usan GT son diagnósticos, no nuevas predicciones ni mejoras desplegables. Datasets8/9 ya fueron inspeccionados y no son ahora un test ciego nuevo.
+
+| ID | Experimento | Estado |
+| --- | --- | --- |
+| E01 | [Sensibilidad al tamaño de contexto](#scared-e01) | Completado |
+| E02 | [Consistencia de los mismos frames entre contextos](#scared-e02) | Completado |
+| E03 | [Aislamiento del primer frame](#scared-e03) | Completado |
+| E04 | [Análisis profundo de KF4](#scared-e04) | Completado |
+| E05 | [Profundidad frente a puntos globales](#scared-e05) | Completado |
+| E06 | [Diagnóstico de escala y alineación](#scared-e06) | Completado |
+| E07 | [Auditoría diferencial de VN18/V9](#scared-e07) | Completado |
+| E08 | [Consistencia entre vistas sin GT temporal](#scared-e08) | Completado |
+| E09 | [Dependencia del recorrido y solapamiento](#scared-e09) | Completado |
+| E10 | [Error condicionado por profundidad](#scared-e10) | Completado |
+| E11 | [Análisis de confianza y cobertura](#scared-e11) | Completado |
+| E12 | [Generalización entre datasets](#scared-e12) | Completado |
+
+<details class="scared-experiment-card" id="scared-e01">
+<summary>E01 · Sensibilidad al tamaño de contexto</summary>
+
+**Idea / hipótesis:** VN18 y V9 responden de manera distinta al contexto.
+
+**Experimento realizado:** Reutilizados63 resultados de ancla. Para comparar N1/4/8/16/50 se mantienen exactamente KF1-4, GT y peso igual por ancla. N4-50 cubre vídeo0-60; N1 no cubre ese recorrido.
+
+**Resultados:**
+
+| N | AbsRel VN18 | AbsRel V9 | XYZ VN18 (cm) | XYZ V9 (cm) |
+| --- | --- | --- | --- | --- |
+| 1 | 0.1207 | 0.1067 | 1.0579 | 0.8480 |
+| 4 | 0.1020 | 0.1164 | 0.9839 | 0.9203 |
+| 8 | 0.0977 | 0.1207 | 1.0068 | 0.9249 |
+| 16 | 0.0968 | 0.1223 | 0.9910 | 0.9180 |
+| 50 | 0.0955 | 0.1238 | 0.9835 | 0.9232 |
+
+**Interpretación y conclusión:** De N1 aN50, VN18 cambia XYZ-7.03% y AbsRel-20.85%; V9 cambia XYZ+8.87% y AbsRel+15.99%. No hay ruptura universal. V9 aún tiene menor XYZ medio enN50.
+
+**Límites:** La ventaja agregada anterior de VN18 no significa superioridad universal en puntos: incluía KF5 soloN1. Cantidad, composición y espaciado del contexto no son una única variable.
+
+![Mismas cuatro anclas en todos los tamaños; se conserva también el zero-shot.](imagenes/SCARED_E01_contexto.png){loading="lazy"}
+
+</details>
+
+<details class="scared-experiment-card" id="scared-e02">
+<summary>E02 · Consistencia de los mismos frames entre contextos</summary>
+
+**Idea / hipótesis:** Añadir contexto puede cambiar imágenes que ya estaban presentes.
+
+**Experimento realizado:** Mismas tres imágenes por KF: ancla, vídeo0 yvídeo60; identidad RGB y GT verificada por hash enN4/8/16/50.63 lecturas de cabezas sobre features nativas existentes, necesarias también para confianza; sin encoder nuevo. TablaN4→50; CSV conserva las144 comparaciones.
+
+**Resultados:**
+
+| Modelo | Frames comunes | Cambio D (%) | Cambio XYZ (cm) | Cambio P tras Sim3 sin GT / mediana D (%) |
+| --- | --- | --- | --- | --- |
+| Zero-shot | Ancla GT | 2.1108 | 0.1578 | 1.8233 |
+| Zero-shot | Vídeo0/60 sin GT | 5.9786 | 0.2008 | 2.7388 |
+| VN18-SCARED | Ancla GT | 2.2983 | 0.1568 | 2.0657 |
+| VN18-SCARED | Vídeo0/60 sin GT | 5.7207 | 0.2435 | 3.6736 |
+| V9-SCARED | Ancla GT | 2.7554 | 0.2342 | 3.1617 |
+| V9-SCARED | Vídeo0/60 sin GT | 6.6230 | 0.3148 | 4.4228 |
+
+**Interpretación y conclusión:** Las predicciones cambian aun manteniendo primer frame y píxeles comunes. El cambio persiste tras un registro diagnóstico sin GT; V9 no es más estable en todas las salidas.
+
+**Límites:** Cambio no equivale a error en los RGB sin GT. La escala compartida principal usa solo el ancla medida; Sim3 contra la predicción anterior mide consistencia, no exactitud.
+
+
+
+</details>
+
+<details class="scared-experiment-card" id="scared-e03">
+<summary>E03 · Aislamiento del primer frame</summary>
+
+**Idea / hipótesis:** Cambiar la vista inicial puede producir algo más que un cambio de coordenadas.
+
+**Experimento realizado:** Seis encoder forwards nuevos: KF2/4,N16; identidad, transposición de posiciones1/2 conservando la primera y transposición0/1. Mismos RGB. Tres modelos leen cada feature. La repetición identidad reproduce la caché con tolerancia máxima1e-4.
+
+**Resultados:**
+
+| KF | Modelo | AbsRel identidad | AbsRel swap otras | AbsRel swap primera | P Sim3 identidad (cm) | P Sim3 swap primera (cm) |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2 | Zero-shot | 0.1809 | 0.1785 | 0.1860 | 0.6816 | 0.6957 |
+| 2 | VN18-SCARED | 0.1042 | 0.1036 | 0.1072 | 0.7211 | 0.7371 |
+| 2 | V9-SCARED | 0.1424 | 0.1444 | 0.1342 | 0.7030 | 0.6757 |
+| 4 | Zero-shot | 0.0690 | 0.0693 | 0.0666 | 0.5158 | 0.4817 |
+| 4 | VN18-SCARED | 0.0580 | 0.0578 | 0.0561 | 0.5034 | 0.4657 |
+| 4 | V9-SCARED | 0.0940 | 0.0938 | 0.0957 | 0.5530 | 0.5737 |
+
+**Interpretación y conclusión:** Cambiar la primera imagen altera profundidad y forma local, pero el signo depende del modelo y KF. El control de orden también produce cambios: no existe una primera vista universalmente mejor.
+
+**Límites:** La transposición cambia orden y posición de la primera imagen. P se compara con Sim3 del ancla para no confundir marcos globales; solo dos casosN16, no una prueba de trayectoria completa.
+
+
+
+</details>
+
+<details class="scared-experiment-card" id="scared-e04">
+<summary>E04 · Análisis profundo de KF4</summary>
+
+**Idea / hipótesis:** Una incoherencia del target, la escala o una zona difícil podrían explicar su regresión.
+
+**Experimento realizado:** Reutilizada auditoría independiente del XYZ original. Comparados errores con escala compartida, escala propia P ySim3; normales con baselines1/2/4/8/16. Añadidas estratificaciones por textura, intensidad y proxy de brillo; sin optimización.
+
+**Resultados:**
+
+| Modelo | AbsRel | XYZ (cm) | P escala propia (cm) | P Sim3 (cm) | Normal paso8 (°) |
+| --- | --- | --- | --- | --- | --- |
+| Zero-shot | 0.0718 | 0.6962 | 0.7487 | 0.5305 | 31.2342 |
+| VN18-SCARED | 0.0569 | 0.8277 | 0.8216 | 0.5252 | 33.4254 |
+| V9-SCARED | 0.0901 | 0.8404 | 0.8213 | 0.5700 | 45.6295 |
+
+**Interpretación y conclusión:** La diferencia media XYZ original→target es0.138mm. Escala propia no elimina la regresión. Sim3 aproxima VN18 al zero-shot, pero V9 mantiene más error local. V9 tiene más error de orientación también con baseline8/16.
+
+**Límites:** No se identifica una causa única ni se atribuye causalidad a reflejos. Normales finas dependen del remuestreo/ruido GT. Los proxies de brillo no son segmentaciones GT de especularidad. No se certifica registro físico RGB/GT.
+
+![KF4: RGB, profundidad medida, máscara y error XYZ de cada modelo. Misma escala de color y todos los píxeles GT válidos.](imagenes/SCARED_E04_KF4.png){loading="lazy"}
+
+</details>
+
+<details class="scared-experiment-card" id="scared-e05">
+<summary>E05 · Profundidad frente a puntos globales</summary>
+
+**Idea / hipótesis:** Las dos rutas pueden mejorar de forma diferente.
+
+**Experimento realizado:** Mismas cuatro anclasVAL,N50, K calibrada. Comparados P directo, puntos derivados deD/K y discrepancia entre ambos. La cámara del ancla es identidad conocida; no se supone GT temporal.
+
+**Resultados:**
+
+| Modelo | AbsRel | P global (cm) | D+K en ancla (cm) | Desacuerdo P / D+K (cm) |
+| --- | --- | --- | --- | --- |
+| Zero-shot | 0.1532 | 1.4641 | 1.1295 | 0.7070 |
+| VN18-SCARED | 0.0955 | 0.9835 | 0.7645 | 0.5296 |
+| V9-SCARED | 0.1238 | 0.9232 | 0.8607 | 0.6581 |
+
+**Interpretación y conclusión:** VN18 conserva mejor profundidad y menor desacuerdo entre salidas; V9 conserva menor error medio P en estas cuatro anclas. El desacuerdo y el error contra GT no tienen el mismo orden.
+
+**Límites:** Coherencia entre cabezas no es exactitud. Esta tabla no mide la reconstrucción temporal derivada completa. No hay una restricción que haga idénticas ambas salidas.
+
+
+
+</details>
+
+<details class="scared-experiment-card" id="scared-e06">
+<summary>E06 · Diagnóstico de escala y alineación</summary>
+
+**Idea / hipótesis:** Parte del error puede proceder de escala/registro y otra parte de forma.
+
+**Experimento realizado:** Reutilizadas las transformaciones de C3VDTrans4, mismos16 GT de un contexto50, y las del anclaSCARED. Comparación escalaD, escalaP, un Sim3 global y Sim3 independiente por frame.
+
+**Resultados:**
+
+| Modelo | Escala D compartida (cm) | Escala P propia (cm) | Sim3 global (cm) | Sim3 por frame (cm) |
+| --- | --- | --- | --- | --- |
+| Zero-shot | 0.7242 | 0.6475 | 0.4689 | 0.4221 |
+| VN18-SCARED | 0.7986 | 0.8015 | 0.7388 | 0.6513 |
+| V9-SCARED | 0.8639 | 0.7492 | 0.6409 | 0.5752 |
+| V9-C3VD | 0.4756 | 0.4523 | 0.4448 | 0.4231 |
+
+**Interpretación y conclusión:** El ranking V9/VN18-SCARED se invierte después de un Sim3 global enC3VD. La escala/colocación contribuye al error, pero el residuo de forma persiste.
+
+**Límites:** Todos los ajustes usan GT y son diagnósticos. Sim3 por frame puede ocultar fallos de ensamblado; no es una reconstrucción corregida. El ajuste minimiza error cuadrático, no necesariamente la media de distancias.
+
+
+
+</details>
+
+<details class="scared-experiment-card" id="scared-e07">
+<summary>E07 · Auditoría diferencial de VN18/V9</summary>
+
+**Idea / hipótesis:** Diferencias de receta podrían explicar el comportamiento sin cambiar la arquitectura.
+
+**Experimento realizado:** Auditados config, código de pérdida,1000 logs de gradienteV9, checkpoints y manifests; mismos pesos oficiales, split y caché del encoder. No se entrenó una ablación nueva.
+
+**Resultados:**
+
+| Elemento | VN18-SCARED | V9-SCARED |
+| --- | --- | --- |
+| Origen | Oficial fresco | Mismo oficial fresco |
+| Módulos entrenados | Profundidad y puntos | Profundidad y puntos |
+| Encoder / cámara / TTT | Parámetros congelados; TTT interno2 activo | Igual; mismos features oficiales |
+| GT distinto / exposiciones | 20 anclas /3240 | 20 anclas /2000 |
+| Pasos | 3240 | 1000 |
+| Normalización | Norma media GT del ancla | Referencia fija0,03m |
+| Pérdida | Regresión nativa con confianza + gradienteD + normalesP | 3XYZ + logD +0,2 gradienteXYZ |
+| Clipping | Por cabeza, norma1 | Global, norma1 |
+| Contextos TRAIN | 1/4/8/16 | 1/3/6/12/50 |
+| Supervisión / actualización | Una ancla | Dos anclas de contextos independientes |
+| Confianza | Supervisión nativa de confianza | Sin pérdida directa de confianza |
+
+**Interpretación y conclusión:** Las diferencias entre los fine-tunings bajo features idénticos se localizan en las cabezasD/P. Hay múltiples factores confundidos. Clipping global activo en100% de actualizaciones; mediana normaP/D≈6,91, sin equivalencia con actualizaciónAdamW.
+
+**Límites:** Una auditoría identifica diferencias, no cuál causó la ventaja. VN15 ya probó clipping enC3VD sin mejora material; no se repitió como entrenamiento ni se presenta como solución nueva.
+
+
+
+</details>
+
+<details class="scared-experiment-card" id="scared-e08">
+<summary>E08 · Consistencia entre vistas sin GT temporal</summary>
+
+**Idea / hipótesis:** La geometría podría no concordar entre vistas de la misma superficie.
+
+**Experimento realizado:** Reutilizadas seis nubesN50 de SCARED8/9. Comparados puntos de matchesRGB con SIFT+RANSAC independientes del modelo; reproyecciónD bidireccional en98 pares por nube y89376 píxeles por dirección, con K conocida y también K predicha. Oclusión y soporte se registran aparte.
+
+**Resultados:**
+
+| Caso | Modelo | P entre matches / mediana D (%) | Desajuste D visible (%) | Soporte proyectado (%) | Acuerdo D dentro5% (%) |
+| --- | --- | --- | --- | --- | --- |
+| SCARED8 | Zero-shot | 0.2873 | 0.3755 | 99.0019 | 98.9103 |
+| SCARED8 | VN18-SCARED | 0.7791 | 0.7561 | 98.9657 | 97.9543 |
+| SCARED8 | V9-SCARED | 1.8463 | 2.0055 | 98.8750 | 80.7818 |
+| SCARED9 | Zero-shot | 0.2511 | 0.2432 | 98.9067 | 99.1072 |
+| SCARED9 | VN18-SCARED | 0.6517 | 0.6464 | 98.7378 | 98.3439 |
+| SCARED9 | V9-SCARED | 1.6015 | 1.6364 | 99.2249 | 87.4035 |
+
+**Interpretación y conclusión:** V9 tiene mayor desacuerdo entre puntos de correspondencias queVN18 en ambos casos. El zero-shot puede ser más consistente pese a tener peor XYZ: consistencia y exactitud no son intercambiables.
+
+**Límites:** No hay GT temporal. Cámaras predichas sesgan reproyección y los matches pueden fallar. Un mapa de puntos constante produce acuerdo perfecto sin superficie: control negativo que impide usar esta prueba sola para seleccionar pesos.
+
+
+
+</details>
+
+<details class="scared-experiment-card" id="scared-e09">
+<summary>E09 · Dependencia del recorrido y solapamiento</summary>
+
+**Idea / hipótesis:** Movimiento y pérdida de correspondencias podrían explicar errores mejor queN por sí solo.
+
+**Experimento realizado:** Analizadas16 ventanasVAL7, N4/8/16/50, mismo tramo vídeo0-60; matchesRGB y desplazamiento de imagen. En SCARED8/9 se relacionan con desacuerdoP. En C3VDTrans4 se reutilizan posesGT de16 vistas para asociaciones con error.
+
+**Resultados:**
+
+| KF | Matches/features N4 (%) | Matches/features N50 (%) | Pares útiles N4 | Pares útiles N50 | Desplazamiento N4 (px) | Desplazamiento N50 (px) |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | 52.2472 | 72.5857 | 3/3 | 49/49 | 15.7019 | 1.6424 |
+| 2 | 15.9030 | 71.1538 | 3/3 | 49/49 | 41.1308 | 1.8852 |
+| 3 | 0.0000 | 67.0000 | 1/3 | 49/49 | 2.3014 | 2.4872 |
+| 4 | 35.9504 | 73.0022 | 3/3 | 49/49 | 23.4879 | 2.0338 |
+
+**Interpretación y conclusión:** N50 aumenta la repetibilidad de matches adyacentes, pero V9 no obtiene una mejora conjunta automática. Hay asociaciones entre correspondencia/desplazamiento y consistencia, sin un umbral común ni causalidad establecida.
+
+**Límites:** Matches/features no es porcentaje real de solapamiento; desplazamiento en píxeles no separa rotación, traslación y paralaje. Desplazamiento usa solo pares con≥8 inliers; se muestran los soportes para no ocultar fallos. C3VD es una sola trayectoria y los pares consecutivos están correlacionados.
+
+**Asociaciones con poses GT C3VD:**
+
+| Modelo | Vistas | ρ giro / XYZ | ρ distancia / XYZ |
+| --- | --- | --- | --- |
+| official_reference | 16 | 0.4265 | 0.5118 |
+| SCARED_VN18_final | 16 | 0.9882 | 0.9353 |
+| SCARED_V9_candidate1000 | 16 | 0.8265 | 0.8147 |
+| C3VD_V9 | 16 | 0.9618 | 0.9059 |
+| C3VD_VN19_A | 16 | 0.8471 | 0.7324 |
+| C3VD_VN19_B | 16 | 0.9176 | 0.8382 |
+
+
+</details>
+
+<details class="scared-experiment-card" id="scared-e10">
+<summary>E10 · Error condicionado por profundidad</summary>
+
+**Idea / hipótesis:** El promedio puede ocultar mejoras y regresiones a diferentes distancias.
+
+**Experimento realizado:** Reutilizados bins de cuatro anclasVAL,N50; añadidos bins de las anclas reservadas8/9. Rangos0-20/20-40/40-60/60-100/≥100mm, misma máscara. TablaVAL ponderada por píxeles; CSV conserva todos los soportes reservados.
+
+**Resultados:**
+
+| Profundidad GT (mm) | Píxeles | AbsRel VN18 | AbsRel V9 | XYZ VN18 (cm) | XYZ V9 (cm) |
+| --- | --- | --- | --- | --- | --- |
+| 0–20 | 1020 | 0.1741 | 0.3901 | 0.5012 | 0.5672 |
+| 20–40 | 25975 | 0.0968 | 0.1718 | 0.5716 | 0.5960 |
+| 40–60 | 122757 | 0.0735 | 0.1145 | 0.7274 | 0.7639 |
+| 60–100 | 64033 | 0.0780 | 0.0998 | 0.8520 | 0.9550 |
+| ≥100 | 28336 | 0.2255 | 0.1632 | 2.8888 | 1.9255 |
+
+**Interpretación y conclusión:** En estas cuatro anclasN50, VN18 tiene menor AbsRel y XYZ en los cuatro bins por debajo de100mm. V9 gana ambos en≥100mm: XYZ1,926cm frente2,889cm. La ventaja agregada depende del rango de profundidad; no hay un ganador uniforme. Se conservan bins sin soporte comoN/D, nunca como error cero.
+
+**Límites:** Distancia está confundida con anatomía, textura y caso. Un bin con pocos píxeles no representa un nuevo sujeto independiente; no explica por sí mismo la causa.
+
+
+
+</details>
+
+<details class="scared-experiment-card" id="scared-e11">
+<summary>E11 · Análisis de confianza y cobertura</summary>
+
+**Idea / hipótesis:** Los puntos de mayor confianza podrían ser más fiables.
+
+**Experimento realizado:** Extraída confianza nativa no guardada antes. Riesgo/cobertura10/25/50/75/100% sobre todos los píxeles GT válidos de21 contextos; tabla de cuatro anclasN50 con igual peso. No se recorta ninguna nube.
+
+**Resultados:**
+
+| Modelo | Retenido (%) | Error P (cm) | GT válido retenido y <2mm (%) |
+| --- | --- | --- | --- |
+| Zero-shot | 25.0000 | 0.9531 | 0.1383 |
+| Zero-shot | 50.0000 | 0.9978 | 0.2388 |
+| Zero-shot | 100.0000 | 1.4641 | 0.2654 |
+| VN18-SCARED | 25.0000 | 0.7487 | 1.2787 |
+| VN18-SCARED | 50.0000 | 0.7919 | 2.4277 |
+| VN18-SCARED | 100.0000 | 0.9835 | 3.3531 |
+| V9-SCARED | 25.0000 | 1.2094 | 3.0585 |
+| V9-SCARED | 50.0000 | 1.0650 | 3.5458 |
+| V9-SCARED | 100.0000 | 0.9232 | 7.0493 |
+
+**Interpretación y conclusión:** Retener el50% de mayor confianza reduce el error enVN18, pero lo aumenta enV9 en este macro. La confianzaV9 no es un filtro fiable por defecto, coherente con que no recibió supervisión directa de confianza.
+
+**Límites:** No son probabilidades calibradas. Cobertura es soporteGT del ancla, no superficie completa ni órgano. Cambia la población evaluada al filtrar; no es una mejora del modelo.
+
+![Riesgo frente a fracción retenida, con igual peso por ancla. Los archivos mantienen todos sus puntos.](imagenes/SCARED_E11_confianza.png){loading="lazy"}
+
+</details>
+
+<details class="scared-experiment-card" id="scared-e12">
+<summary>E12 · Generalización entre datasets</summary>
+
+**Idea / hipótesis:** Una mejora deSCARED podría no transferirse aC3VD.
+
+**Experimento realizado:** Reutilizadas validación7, inferencias reservadas8/9 y transferenciaC3VDTrans4; pesos fijos antes de puntuarlas, mismos RGB y soporte entre variantes dentro de cada caso. Sin nuevas inferencias de esos recorridos.
+
+**Resultados:**
+
+| Evaluación | Modelo | AbsRel | XYZ (cm) | Mejora D / ZS (%) | Mejora P / ZS (%) |
+| --- | --- | --- | --- | --- | --- |
+| SCARED VAL7 · macro5 (KF5 soloN1) | Zero-shot | 0.1391 | 1.5122 | 0.0000 | 0.0000 |
+| SCARED VAL7 · macro5 (KF5 soloN1) | VN18-SCARED | 0.0882 | 0.8764 | 36.5858 | 42.0438 |
+| SCARED VAL7 · macro5 (KF5 soloN1) | V9-SCARED | 0.1083 | 0.8810 | 22.1270 | 41.7438 |
+| SCARED8_N50 | Zero-shot | 0.0389 | 1.8728 | 0.0000 | 0.0000 |
+| SCARED8_N50 | VN18-SCARED | 0.0538 | 0.9101 | -38.2611 | 51.4064 |
+| SCARED8_N50 | V9-SCARED | 0.0830 | 0.9346 | -113.3932 | 50.0936 |
+| SCARED9_N50 | Zero-shot | 0.1374 | 2.3449 | 0.0000 | 0.0000 |
+| SCARED9_N50 | VN18-SCARED | 0.0610 | 0.6516 | 55.5633 | 72.2095 |
+| SCARED9_N50 | V9-SCARED | 0.0753 | 1.3120 | 45.1688 | 44.0492 |
+| C3VD_Trans4_N50 | Zero-shot | 0.1824 | 0.7242 | 0.0000 | 0.0000 |
+| C3VD_Trans4_N50 | VN18-SCARED | 0.1942 | 0.7986 | -6.4994 | -10.2734 |
+| C3VD_Trans4_N50 | V9-SCARED | 0.1780 | 0.8639 | 2.3949 | -19.2965 |
+| C3VD_Trans4_N50 | V9-C3VD | 0.1486 | 0.4756 | 18.5084 | 34.3226 |
+
+**Interpretación y conclusión:** Hay aprendizaje útil dentro deSCARED, más claro en9, pero las dos recetasSCARED no mejoran conjuntamente el zero-shot enTrans4. V9-C3VD conserva menor errorP en ese caso.
+
+**Límites:** Uno/dos casos por dominio no demuestran una ley de transferencia. Datos, receta y supervisión de cámara difieren frente aV9-C3VD; no se atribuye causalmente todo al dominio. Reservas8/9 ya inspeccionadas.
+
+
+
+</details>
+
+[Lista de experimentos CSV](tablas/experimentos_scared_e01_e12.csv) · [Todas las tablas CSV](tablas/scared_e01_e12_datos.csv) · [Resultados JSON](tablas/experimentos_scared_e01_e12.json)
+
+<!-- SCARED_E01_E12_END -->
 
 ## Comparadores interactivos {#comparadores}
 

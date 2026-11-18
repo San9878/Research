@@ -107,10 +107,10 @@ def main():
     with (dst/'tablas/experimentos_c3vd.csv').open('w',encoding='utf-8-sig',newline='') as f:
         w=csv.DictWriter(f,fieldnames=list(experiments[0]));w.writeheader()
         for r in experiments:w.writerow({k:json.dumps(v,ensure_ascii=False) if isinstance(v,(dict,list)) else v for k,v in r.items()})
-    for name in ['scared_v9_validation.csv','scared_v9_resultados.json','c3vd_scared_transfer_v1.csv','c3vd_scared_transfer_v1.json']:
+    for name in ['scared_v9_validation.csv','scared_v9_resultados.json','c3vd_scared_transfer_v1.csv','c3vd_scared_transfer_v1.json','experimentos_scared_e01_e12.json','experimentos_scared_e01_e12.csv','scared_e01_e12_datos.csv']:
         if (src/'tablas'/name).exists():copy(src/'tablas'/name,dst/'tablas'/name)
     # Export report contains reproducible hashes, never machine paths or credentials.
-    report={'project':'N3D-CE','source_qmd_sha256':sha(src/'Bitacora.qmd'),'public_qmd_sha256':sha(dst/'Bitacora.qmd'),'source_data_tables_preserved':len(re.findall(r'(?m)(?:^\|[^\n]*\n)+',q)),'experiment_cards':q.count('class="experiment-card"'),'public_clouds':[{'id':r['id'],'points':r['points'],'package_sha256':packages[r['pack_key']]['package_sha256']} for r in clouds],'cloud_bytes':public['physical_package_bytes'],'metric_entries':len(met['entries']),'historical_tables':len(tables),'all_saved_vertices_preserved':True,'new_training':False,'new_inference':False}
+    report={'project':'N3D-CE','source_qmd_sha256':sha(src/'Bitacora.qmd'),'public_qmd_sha256':sha(dst/'Bitacora.qmd'),'source_data_tables_preserved':len(re.findall(r'(?m)(?:^\|[^\n]*\n)+',q)),'experiment_cards':q.count('class="experiment-card"'),'scared_experiment_cards':q.count('class="scared-experiment-card"'),'public_clouds':[{'id':r['id'],'points':r['points'],'package_sha256':packages[r['pack_key']]['package_sha256']} for r in clouds],'cloud_bytes':public['physical_package_bytes'],'metric_entries':len(met['entries']),'historical_tables':len(tables),'all_saved_vertices_preserved':True,'new_training':False,'new_inference':False}
     dump(dst/'publication_manifest.json',report)
     print(json.dumps({k:v for k,v in report.items() if k!='public_clouds'},ensure_ascii=True))
 if __name__=='__main__':main()
