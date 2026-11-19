@@ -70,9 +70,9 @@ execute:
 
 ```
 
-<nav class="reading-map model-map" aria-label="Elegir modelo"><a href="#vgg-t3"><strong>VGG-T³</strong><small>C3VD, SCARED y las 63 fichas actuales.</small></a><a href="#vggt"><strong>VGGT</strong><small>C3VD recuperado · SCARED y C01–C10 preparados.</small></a><a href="#vggt-vs-vgg-t3"><strong>VGGT vs VGG-T³</strong><small>Espacio para las comparaciones entre modelos.</small></a></nav>
+<nav class="reading-map model-map" aria-label="Elegir modelo"><a href="#vgg-t3"><strong>VGG-T³</strong><small>C3VD, SCARED y las 63 fichas actuales.</small></a><a href="#vggt"><strong>VGGT</strong><small>C3VD auditado · fase1 SCARED completada.</small></a><a href="#vggt-vs-vgg-t3"><strong>VGGT vs VGG-T³</strong><small>Espacio para las comparaciones entre modelos.</small></a></nav>
 
-<p class="scope-note">Esta edición reorganiza resultados existentes. No cambia entrenamientos, métricas ni geometría. Las nubes se cargan bajo demanda con el 100 % de sus puntos guardados.</p>
+<p class="scope-note">Los resultados históricos se conservan; cada nueva prueba identifica su protocolo, estado y alcance. Las nubes se cargan bajo demanda con el 100 % de sus puntos guardados.</p>
 
 ## VGG-T³ {#vgg-t3 .model-workspace}
 
@@ -2683,11 +2683,11 @@ No todos los ensayos generaron nubes exportadas. Sus fichas indican la disponibi
 
 ## VGGT {#vggt .model-workspace}
 
-<p class="model-state">C3VD · métricas recuperadas | SCARED y C01–C10 · preparados</p>
+<p class="model-state">C3VD auditado | SCARED · baselines N=1 evaluados</p>
 
 <nav class="model-section-nav" aria-label="Apartados VGGT"><a href="#vggt-c3vd">C3VD</a><a href="#vggt-scared">SCARED</a><a href="#vggt-pipeline">Pipeline</a><a href="#vggt-experimentos">Experimentos</a><a href="#vggt-comparadores">Comparadores</a></nav>
 
-Esta revisión recupera resultados guardados. No ejecuta inferencias, entrenamiento ni la nueva serie C01–C10. El último fine-tuning C3VD localizado es **c3vd_baseline_heads_30ep.pt**, final de 30 épocas.
+Se recuperaron los resultados históricos y se completó la fase1 P01–P04: auditoría y baselines SCARED N=1. No se lanzó entrenamiento ni las fases2–4. El último fine-tuning C3VD localizado es **c3vd_baseline_heads_30ep.pt**, final de 30 épocas.
 
 ### C3VD · referencias y resultados {#vggt-c3vd}
 
@@ -2832,6 +2832,158 @@ Las tablas originales del paper usan otros datasets y hardware. Se recuperan sus
 </details>
 
 ### SCARED · adaptación y transferencia {#vggt-scared}
+#### Fase 1 · verificación y baselines {#vggt-fase1}
+
+**35 anclas medidas × 2 checkpoints = 70 inferencias terminadas**, sin actualización de pesos. Se usaron los datasets 1, 2, 3, 6, 7, 8 y 9 y se mantuvieron excluidos 4/5 por calibración. Dataset6/KF1 participa como imagen medida; su cuarentena afecta al vídeo, que aquí no se utiliza.
+
+| Paso | Resultado comprobado | Alcance |
+| --- | --- | --- |
+| P01 · Auditoría | Checkpoint30ep con firma histórica idéntica; 131 estados de optimizador a paso3.000 | Cabezas cámara/profundidad; limitaciones de semilla, procedencia histórica y39 valores del encoder. |
+| P02 · Equivalencia | 35 anclas y7 ZIP certificados; 5 fixtures VGG-T³ idénticos; 6 pruebas matemáticas aprobadas | Equivalencia del protocolo común nuevo; no convierte todas las tablas históricas en un único protocolo. |
+| P03 · VGGT oficial | 35 casos completados; pesos oficiales congelados | N=1 y geometría derivada de profundidad con K calibrada. |
+| P04 · C3VD → SCARED | 35 casos completados; mismo RGB, GT, máscaras y protocolo | No hay fine-tuning SCARED ni evaluación de trayectoria temporal. |
+
+
+Los rótulos TRAIN/VAL/reservados describen el **split previsto de SCARED**, no datos usados para ajustar estos checkpoints: ninguno recibió fine-tuning local con SCARED. El posible solapamiento con el preentrenamiento público no está certificado.
+
+<div class="protocol-strip"><strong>Protocolo</strong> · SCARED · ancla izquierda medida · N=1 · lado largo336, cuadrícula266×336 · RGBfloat32 canónico común · Z en metros · todos los píxeles GT válidos · K rectificada calibrada · una escala mediana GT/pred por ancla · XYZ usa esa misma escala · sin registro/ICP en resultados principales</div>
+
+| Split | Anclas | AbsRel oficial ↓ | AbsRel C3VD-FT ↓ | Cambio favorable | XYZ oficial cm ↓ | XYZ C3VD-FT cm ↓ |
+| --- | --- | --- | --- | --- | --- | --- |
+| TRAIN previsto SCARED · datasets1/2/3/6 | 20 | 0.10903 | 0.12744 | -16.88 % | 0.7878 | 0.9749 |
+| VAL · dataset7 | 5 | 0.18597 | 0.15946 | +14.26 % | 1.3161 | 1.2364 |
+| Reservados · datasets8/9 | 10 | 0.09109 | 0.10457 | -14.81 % | 0.5719 | 0.7414 |
+
+
+**Hallazgo:** en reservados, AbsRel empeora un **14,81 %** y XYZ medio un **29,63 %**. En VAL7, AbsRel mejora un **14,26 %**, pero p95 XYZ empeora un **8,66 %** y NC un **4,97 %**. No hay mejora conjunta uniforme. El checkpoint C3VD mejora AbsRel en 7/20 anclas TRAIN, 4/5 VAL y 4/10 reservadas.
+
+Este deterioro ya existe en la ruta de profundidad de una sola imagen, con K conocida y escala ajustada. Por tanto, las trayectorias largas o una única escala global no bastan para explicar todos los errores. Esta prueba no identifica por sí sola una causa en iluminación, pérdidas, encoder o entrenamiento.
+
+![Resultados descriptivos por dataset. TRAIN/VAL/reservados corresponden al split previsto SCARED; los pesos están congelados.](imagenes/VGGT_SCARED_fase1_resumen.png)
+
+<details><summary>TRAIN previsto SCARED · datasets1/2/3/6 · métricas principales y diagnóstico de registro</summary>
+
+
+<div class="protocol-strip"><strong>Protocolo</strong> · Media de anclas dentro de cada dataset, luego igual peso por dataset dentro del split. p95 es la media de los p95 por ancla; no es el percentil de una nube fusionada. δ1 se expresa como fracción0–1. No hay filtrado por confianza ni submuestreo.</div>
+
+**Resultado principal · escala de profundidad compartida, sin Sim(3)/ICP**
+
+| Métrica | VGGT oficial | VGGT-C3VD | Cambio favorable |
+| --- | --- | --- | --- |
+| AbsRel | 0.10903 | 0.12744 | -16.88 % |
+| δ1 | 0.88075 | 0.82673 | -6.13 % |
+| RMSE de profundidad (cm) | 1.05284 | 1.24297 | -18.06 % |
+| XYZ medio · escala de profundidad (cm) | 0.78782 | 0.97491 | -23.75 % |
+| p95 XYZ medio por ancla (cm) | 2.45777 | 2.84532 | -15.77 % |
+| CD · sin registro (cm) | 0.51215 | 0.56096 | -9.53 % |
+| NC · sin registro | 0.77949 | 0.68965 | -11.53 % |
+
+
+**Diagnóstico secundario · registro ajustado con GT**
+
+| Métrica | VGGT oficial | VGGT-C3VD | Cambio favorable |
+| --- | --- | --- | --- |
+| XYZ · Sim(3), sin ICP (cm) | 0.64047 | 0.81879 | -27.84 % |
+| p95 XYZ · Sim(3), sin ICP (cm) | 1.61597 | 1.77365 | -9.76 % |
+| CD · Sim(3)+ICP (cm) | 0.29636 | 0.36854 | -24.35 % |
+| NC · Sim(3)+ICP | 0.78730 | 0.68360 | -13.17 % |
+
+
+XYZ secundario usa solo Sim(3); CD/NC secundarios añaden ICP punto a punto con umbral 0,1 m y normales KNN30, igual a la fórmula nativa histórica. Son diagnósticos distintos del resultado principal y pueden absorber parte del error de registro.
+
+</details>
+
+<details><summary>VAL · dataset7 · métricas principales y diagnóstico de registro</summary>
+
+
+<div class="protocol-strip"><strong>Protocolo</strong> · Media de anclas dentro de cada dataset, luego igual peso por dataset dentro del split. p95 es la media de los p95 por ancla; no es el percentil de una nube fusionada. δ1 se expresa como fracción0–1. No hay filtrado por confianza ni submuestreo.</div>
+
+**Resultado principal · escala de profundidad compartida, sin Sim(3)/ICP**
+
+| Métrica | VGGT oficial | VGGT-C3VD | Cambio favorable |
+| --- | --- | --- | --- |
+| AbsRel | 0.18597 | 0.15946 | +14.26 % |
+| δ1 | 0.69717 | 0.71367 | +2.37 % |
+| RMSE de profundidad (cm) | 1.69629 | 1.71020 | -0.82 % |
+| XYZ medio · escala de profundidad (cm) | 1.31609 | 1.23638 | +6.06 % |
+| p95 XYZ medio por ancla (cm) | 3.03406 | 3.29671 | -8.66 % |
+| CD · sin registro (cm) | 0.82514 | 0.68476 | +17.01 % |
+| NC · sin registro | 0.69509 | 0.66054 | -4.97 % |
+
+
+**Diagnóstico secundario · registro ajustado con GT**
+
+| Métrica | VGGT oficial | VGGT-C3VD | Cambio favorable |
+| --- | --- | --- | --- |
+| XYZ · Sim(3), sin ICP (cm) | 0.92379 | 0.94812 | -2.63 % |
+| p95 XYZ · Sim(3), sin ICP (cm) | 1.98475 | 2.02677 | -2.12 % |
+| CD · Sim(3)+ICP (cm) | 0.33239 | 0.34241 | -3.01 % |
+| NC · Sim(3)+ICP | 0.73885 | 0.67128 | -9.14 % |
+
+
+XYZ secundario usa solo Sim(3); CD/NC secundarios añaden ICP punto a punto con umbral 0,1 m y normales KNN30, igual a la fórmula nativa histórica. Son diagnósticos distintos del resultado principal y pueden absorber parte del error de registro.
+
+</details>
+
+<details><summary>Reservados · datasets8/9 · métricas principales y diagnóstico de registro</summary>
+
+
+<div class="protocol-strip"><strong>Protocolo</strong> · Media de anclas dentro de cada dataset, luego igual peso por dataset dentro del split. p95 es la media de los p95 por ancla; no es el percentil de una nube fusionada. δ1 se expresa como fracción0–1. No hay filtrado por confianza ni submuestreo.</div>
+
+**Resultado principal · escala de profundidad compartida, sin Sim(3)/ICP**
+
+| Métrica | VGGT oficial | VGGT-C3VD | Cambio favorable |
+| --- | --- | --- | --- |
+| AbsRel | 0.09109 | 0.10457 | -14.81 % |
+| δ1 | 0.93162 | 0.89703 | -3.71 % |
+| RMSE de profundidad (cm) | 0.67862 | 0.90690 | -33.64 % |
+| XYZ medio · escala de profundidad (cm) | 0.57189 | 0.74137 | -29.63 % |
+| p95 XYZ medio por ancla (cm) | 1.48227 | 2.14567 | -44.76 % |
+| CD · sin registro (cm) | 0.38011 | 0.44510 | -17.10 % |
+| NC · sin registro | 0.77714 | 0.68451 | -11.92 % |
+
+
+**Diagnóstico secundario · registro ajustado con GT**
+
+| Métrica | VGGT oficial | VGGT-C3VD | Cambio favorable |
+| --- | --- | --- | --- |
+| XYZ · Sim(3), sin ICP (cm) | 0.46962 | 0.63158 | -34.49 % |
+| p95 XYZ · Sim(3), sin ICP (cm) | 1.08061 | 1.36564 | -26.38 % |
+| CD · Sim(3)+ICP (cm) | 0.24137 | 0.29089 | -20.51 % |
+| NC · Sim(3)+ICP | 0.78591 | 0.67558 | -14.04 % |
+
+
+XYZ secundario usa solo Sim(3); CD/NC secundarios añaden ICP punto a punto con umbral 0,1 m y normales KNN30, igual a la fórmula nativa histórica. Son diagnósticos distintos del resultado principal y pueden absorber parte del error de registro.
+
+</details>
+
+<details><summary>Desglose por dataset · variación que ocultan los promedios</summary>
+
+
+| Dataset | Rol SCARED | AbsRel oficial | AbsRel C3VD-FT | Cambio favorable | XYZ oficial cm | XYZ C3VD-FT cm |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | train | 0.07920 | 0.09824 | -24.04 % | 0.5658 | 0.7285 |
+| 2 | train | 0.10124 | 0.12520 | -23.67 % | 0.6252 | 0.7479 |
+| 3 | train | 0.19103 | 0.18992 | +0.58 % | 1.3965 | 1.5018 |
+| 6 | train | 0.06466 | 0.09639 | -49.06 % | 0.5638 | 0.9214 |
+| 7 | validation | 0.18597 | 0.15946 | +14.26 % | 1.3161 | 1.2364 |
+| 8 | reserved | 0.06125 | 0.09904 | -61.71 % | 0.4518 | 0.7594 |
+| 9 | reserved | 0.12093 | 0.11010 | +8.95 % | 0.6920 | 0.7233 |
+
+
+El CSV local conserva los70 registros por ancla/pesos: `G:/Kaust/VGGT/repo/artifacts/experiments/vggt_phase1_v1/cases.csv`. No se eligieron pesos ni hiperparámetros usando estos resultados.
+
+</details>
+
+**Límites:** XYZ procede de D+K y está relacionado con el error de profundidad; no es la point head directa. N=1 no evalúa coherencia multivista ni trayectorias. La escala se ajusta con GT para puntuar y no demuestra recuperación métrica autónoma. Las fases 2–4 siguen pendientes.
+
+<div class="book-actions"><button class="book-open-metrics" data-metrics="vggt-p1-reserved-VGGT_ZS,vggt-p1-reserved-VGGT_FT">Comparar baselines SCARED · reservadas</button><button class="book-open-metrics" data-metrics="vggt-p1-validation-VGGT_ZS,vggt-p1-validation-VGGT_FT">Comparar baselines SCARED · VAL7</button></div>
+
+<details><summary>Resumen y verificaciones de fase 1</summary><p><a href="tablas/vggt_fase1.json">Descargar resultados agregados y protocolo</a>. Los ZIP GT, las cachés por píxel y las predicciones completas permanecen locales. La página comparte resúmenes y gráficos.</p></details>
+
+
+#### Entrenamiento SCARED preparado · todavía sin lanzar
+
 
 **Preparado, sin entrenar.** Esta es una adaptación explícita del último VGGT C3VD; no se presenta como réplica exacta ni como VN19 de VGG-T³. Se parte otra vez de pesos oficiales.
 
@@ -2878,31 +3030,79 @@ RGB rectificados → ventanas identificadas → encoder/aggregator VGGT → prof
 Para el entrenamiento SCARED preparado: RGB de todo el contexto → encoder oficial congelado → depth head entrenable en posición 0 → pérdida contra profundidad medida y normalizada del ancla. Las poses del vídeo no se usan como objetivos.
 
 ### Experimentos: hipótesis, método, resultados y conclusión {#vggt-experimentos}
+#### Fase 1 · auditorías y baselines completados
 
-La serie se conserva como **plan**, con un inventario explícito de qué evidencia histórica puede reutilizarse. Preparar una ficha no equivale a ejecutar el diseño completo.
+<details class="vggt-experiment-card" id="vggt-p01" data-vggt-phase1-card><summary><span class="card-status">Fase 1 completada</span><span class="card-id">P01</span>Auditoría del VGGT-C3VD de 30 épocas</summary><div class="card-content">
+<dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>¿El checkpoint y su entrenamiento documentado corresponden al baseline histórico que estamos comparando?</dd></dl>
+<dl class="card-fields"><dt>Intervención</dt><dd>Se recalcularon firmas de ambos archivos de pesos, se verificaron cabezas/argumentos y se leyó el estado del optimizador. Se reutilizó la auditoría verificable de tensores y fuentes históricas.</dd></dl>
+<dl class="card-fields"><dt>Controles</dt><dd>Firma oficial y firma del checkpoint histórico congelado; ninguna escritura de pesos ni nuevo entrenamiento.</dd></dl>
+<dl class="card-fields"><dt>Métricas</dt><dd>Firmas SHA256, grupos de tensores, pasos del optimizador y correspondencia de particiones.</dd></dl>
+<dl class="card-fields"><dt>Resultados</dt><dd>Coinciden las firmas históricas. Los 131 estados del optimizador marcan 3.000 actualizaciones; AdamW LR 1e-5 / WD 0,05. Entrenaron cámara y profundidad; las cabezas de puntos y seguimiento están ausentes.</dd></dl>
+<dl class="card-fields"><dt>Conclusión</dt><dd>Baseline identificado y conservado, con limitaciones de reproducibilidad.</dd></dl>
+<dl class="card-fields"><dt>Limitaciones</dt><dd>No se registró semilla ni hash de los datos originales. Hay 39 valores del encoder diferentes de la versión oficial retenida y su origen no quedó establecido. El loader histórico elige4 imágenes aleatorias de una secuencia completa, sin garantizar continuidad u orden; no confundirlo con4 frames consecutivos. El preprocesado histórico no certifica el contrato geometry_v2 posterior.</dd></dl>
+<dl class="card-fields"><dt>Siguiente decisión</dt><dd>Conservar el checkpoint y separar estos límites de los resultados de transferencia. No corregir ni reentrenar los pesos de forma silenciosa.</dd></dl>
+<details class="trace-details"><summary>Trazabilidad y protocolo</summary><p><a href="tablas/vggt_fase1.json">Resumen reproducible de fase 1</a> · <a href="#vggt-fase1">Tablas de resultados</a>. Checkpoints y datos identificados por firma; archivos granulares y predicciones se conservan localmente.</p></details></div></details>
+
+<details class="vggt-experiment-card" id="vggt-p02" data-vggt-phase1-card><summary><span class="card-status">Fase 1 completada</span><span class="card-id">P02</span>Equivalencia de datos y métricas</summary><div class="card-content">
+<dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>¿Se comparan el mismo RGB, Z-depth, K, máscara, coordenadas y reglas de alineamiento?</dd></dl>
+<dl class="card-fields"><dt>Intervención</dt><dd>Se verificaron 7 ZIP certificados y 35 anclas, se contrastaron 5 fixtures N1 previos de VGG-T³ y se ejecutaron 6 pruebas matemáticas sintéticas.</dd></dl>
+<dl class="card-fields"><dt>Controles</dt><dd>Sin clipping de profundidad, sin confianza como máscara y sin submuestreo. El redondeo float32 se acota explícitamente, sin modificar el GT.</dd></dl>
+<dl class="card-fields"><dt>Métricas</dt><dd>Igualdad de tensores y GT, reproyección, ida/vuelta C2W/W2C, escala compartida, Sim(3) y fórmulas nativas CD/NC.</dd></dl>
+<dl class="card-fields"><dt>Resultados</dt><dd>Cinco fixtures son idénticos bit a bit en RGB normalizado, profundidad, máscara, K y XYZ. Las 6 pruebas matemáticas pasan. La máxima diferencia al redondear K en la reproyección GT es0.0002384mm, dentro de la cota float32.</dd></dl>
+<dl class="card-fields"><dt>Conclusión</dt><dd>El protocolo nuevo es común y verificable. La equivalencia no implica que todas las tablas históricas midieran lo mismo.</dd></dl>
+<dl class="card-fields"><dt>Limitaciones</dt><dd>Las rutas P directo y D+K+pose son distintas. Las tablas con Sim(3)+ICP se separan de las de escala compartida sin registro. En C3VD histórico hubo además distinta aritmética float/255 frente a float32*(1/255). N1 no valida GT temporal.</dd></dl>
+<dl class="card-fields"><dt>Siguiente decisión</dt><dd>Mantener firmas de protocolo y parejas de casos; no combinar porcentajes de soporte, contexto o alineamiento diferentes.</dd></dl>
+<details class="trace-details"><summary>Trazabilidad y protocolo</summary><p><a href="tablas/vggt_fase1.json">Resumen reproducible de fase 1</a> · <a href="#vggt-fase1">Tablas de resultados</a>. Checkpoints y datos identificados por firma; archivos granulares y predicciones se conservan localmente.</p></details></div></details>
+
+<details class="vggt-experiment-card" id="vggt-p03" data-vggt-phase1-card><summary><span class="card-status">Fase 1 completada</span><span class="card-id">P03</span>VGGT oficial zero-shot en SCARED</summary><div class="card-content">
+<dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>¿Cuál es la calidad de referencia sin fine-tuning local SCARED, en las anclas medidas?</dd></dl>
+<dl class="card-fields"><dt>Intervención</dt><dd>Se ejecutó el VGGT oficial sobre 35 anclas con una imagen por entrada; se guardaron profundidad, confianza, poses e intrínsecas predichas.</dd></dl>
+<dl class="card-fields"><dt>Controles</dt><dd>Mismos35 RGB medidos, protocoloN1 firmado, pesos congelados y GT separado del modelo. Sin ajustes de pesos, sin selección por resultados SCARED.</dd></dl>
+<dl class="card-fields"><dt>Métricas</dt><dd>Profundidad y D+K con una escala común por ancla; CD/NC sin registro como principales. Sim(3)+ICP queda en una tabla secundaria.</dd></dl>
+<dl class="card-fields"><dt>Resultados</dt><dd>35/35 casos completados, con controles de pesos intactos. Las tablas muestran20 anclas TRAIN previstas,5 VAL y10 reservadas por separado.</dd></dl>
+<dl class="card-fields"><dt>Conclusión</dt><dd>Existe una referencia oficial emparejada para la fase2 y el futuro ajuste SCARED.</dd></dl>
+<dl class="card-fields"><dt>Limitaciones</dt><dd>GT ajusta la escala solo al evaluar. La geometría usa K calibrada; no se evaluó la point head directa ni una trayectoria.</dd></dl>
+<dl class="card-fields"><dt>Siguiente decisión</dt><dd>Reutilizar estos N1 verificados; ampliar contextos únicamente dentro de la fase2 autorizada después.</dd></dl>
+<details class="trace-details"><summary>Trazabilidad y protocolo</summary><p><a href="tablas/vggt_fase1.json">Resumen reproducible de fase 1</a> · <a href="#vggt-fase1">Tablas de resultados</a>. Checkpoints y datos identificados por firma; archivos granulares y predicciones se conservan localmente.</p></details></div></details>
+
+<details class="vggt-experiment-card" id="vggt-p04" data-vggt-phase1-card><summary><span class="card-status">Fase 1 completada</span><span class="card-id">P04</span>Transferencia VGGT-C3VD → SCARED</summary><div class="card-content">
+<dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>¿El ajuste C3VD mejora también el dominio SCARED sin cambiar pesos ni protocolo?</dd></dl>
+<dl class="card-fields"><dt>Intervención</dt><dd>Se infirieron las mismas35 anclas con el checkpoint30ep; no se entrenó ni recalibró el modelo con SCARED.</dd></dl>
+<dl class="card-fields"><dt>Controles</dt><dd>Mismos35 RGB medidos, protocoloN1 firmado, pesos congelados y GT separado del modelo. Sin ajustes de pesos, sin selección por resultados SCARED.</dd></dl>
+<dl class="card-fields"><dt>Métricas</dt><dd>Profundidad y D+K con una escala común por ancla; CD/NC sin registro como principales. Sim(3)+ICP queda en una tabla secundaria.</dd></dl>
+<dl class="card-fields"><dt>Resultados</dt><dd>En reservados empeoran AbsRel 14,81% y XYZ 29,63%; en VAL7 mejora AbsRel 14,26%, pero empeoran p95 y NC. Solo4/10 anclas reservadas mejoran AbsRel.</dd></dl>
+<dl class="card-fields"><dt>Conclusión</dt><dd>La transferencia es heterogénea y no mejora conjuntamente las métricas. El deterioro de la ruta de profundidad ya aparece sin trayectoria temporal y tras ajustar escala.</dd></dl>
+<dl class="card-fields"><dt>Limitaciones</dt><dd>No identifica por sí solo el efecto causal de módulos, iluminación, pérdidas o los39 valores distintos del encoder. No se generaliza a ventanas largas o rendimiento clínico.</dd></dl>
+<dl class="card-fields"><dt>Siguiente decisión</dt><dd>Mantener ambas referencias y estudiar contexto/cámara en fase2; no sustituir el baseline ni iniciar entrenamiento adicional aquí.</dd></dl>
+<details class="trace-details"><summary>Trazabilidad y protocolo</summary><p><a href="tablas/vggt_fase1.json">Resumen reproducible de fase 1</a> · <a href="#vggt-fase1">Tablas de resultados</a>. Checkpoints y datos identificados por firma; archivos granulares y predicciones se conservan localmente.</p></details></div></details>
+
+#### Serie C01–C10 · estado y pruebas pendientes
+
+
+La **fase1 P01–P04 está completada** con los límites indicados. El resto de la serie permanece preparado. C01 y la dirección C3VD→SCARED de C07 se ejecutaron aquí con N=1; no se han ejecutado las fases2–4.
 
 | ID | Experimento | Evidencia disponible / pendiente |
 | --- | --- | --- |
-| C01 | Zero-shot en los mismos datasets | C3VD: disponible en 4 secuencias emparejadas. SCARED: pendiente para VGGT. |
+| C01 | Zero-shot en los mismos datasets | C3VD histórico recuperado y35 anclas oficiales SCARED N1 evaluadas en P03. |
 | C02 | Sensibilidad al tamaño del contexto | Hay barridos históricos C3VD; falta completar este diseño exacto. |
 | C03 | Comparación de rutas geométricas | Histórico VGGT_FT no contiene point_head. No hay P fine-tuned que recuperar. |
 | C04 | Cámara: rotación, traslación e intrínsecas | C3VD: métricas completas guardadas. SCARED: sin GT temporal certificado. |
 | C05 | Orden, primer frame y solapamiento | Controles históricos C3VD disponibles; protocolo uniforme adicional preparado. |
 | C06 | Fine-tuning comparable | C3VD 30ep final recuperado. SCARED depth-only preparado, no ejecutado. |
-| C07 | Transferencia entre datasets | VGGT: pendiente. No reutilizar transferencia de VGG-T³ como si fuera VGGT. |
+| C07 | Transferencia entre datasets | C3VD→SCARED completado en35 anclas N1; SCARED→C3VD pendiente de un checkpoint VGGT-SCARED. |
 | C08 | Escalabilidad y rendimiento | Tiempos históricos disponibles; repetición controlada pendiente. |
 | C09 | Sensibilidad específica de TTT | No aplicable a VGGT. Reservado para VGG-T³. |
 | C10 | Consistencia y cobertura multivista | Superficie y solapamiento GT C3VD guardados; proxy multivista uniforme pendiente. |
 
 
-<details class="vggt-experiment-card" id="vggt-c01" data-vggt-card><summary><span class="card-status pending">Plan preparado</span><span class="card-id">C01</span>Zero-shot en los mismos datasets</summary><div class="card-content">
+<details class="vggt-experiment-card" id="vggt-c01" data-vggt-card><summary><span class="card-status pending">Completado en fase1 · N=1</span><span class="card-id">C01</span>Zero-shot en los mismos datasets</summary><div class="card-content">
 <dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>¿Qué calidad ofrecen los pesos oficiales en el mismo caso endoscópico antes de cualquier ajuste de dominio?</dd></dl>
 <dl class="card-fields"><dt>Intervención prevista</dt><dd>Usar exactamente los mismos RGB rectificados, resolución y soporte GT.</dd></dl>
 <dl class="card-fields"><dt>Controles</dt><dd>Pesos identificados por firma; mismo RGB, frames, GT y protocolo por comparación; selección solo en VAL.</dd></dl>
 <dl class="card-fields"><dt>Métricas</dt><dd>AbsRel, δ1, XYZ/p95, CD/NC</dd></dl>
-<dl class="card-fields"><dt>Resultados históricos disponibles</dt><dd>C3VD: disponible en 4 secuencias emparejadas. SCARED: pendiente para VGGT.</dd></dl>
-<dl class="card-fields"><dt>Estado de esta nueva serie</dt><dd>Solo se recuperan los resultados históricos que se indican; no se ejecutó esta nueva serie.</dd></dl>
-<dl class="card-fields"><dt>Conclusión</dt><dd>Pendiente de la prueba uniforme; no convertir evidencia parcial en aceptación del protocolo completo.</dd></dl>
+<dl class="card-fields"><dt>Resultados históricos disponibles</dt><dd>C3VD histórico recuperado y35 anclas oficiales SCARED N1 evaluadas en P03.</dd></dl>
+<dl class="card-fields"><dt>Estado de esta nueva serie</dt><dd>P03 completado 35/35, sin fine-tuning SCARED; las ventanas mayores pertenecen a C02.</dd></dl>
+<dl class="card-fields"><dt>Conclusión</dt><dd>AlcanceN1 cerrado en fase1; los diseños adicionales conservan sus pendientes explícitos.</dd></dl>
 <dl class="card-fields"><dt>Limitaciones</dt><dd>SCARED no tiene GT temporal certificado; el VGGT histórico carece de point_head afinada.</dd></dl>
 <dl class="card-fields"><dt>Siguiente decisión</dt><dd>Revisar plan y preflight antes de autorizar ejecución; mantener entrenamiento SCARED sin lanzar.</dd></dl>
 <details class="trace-details"><summary>Protocolo y trazabilidad</summary><p>Registro: <a href="tablas/vggt_C01_C10.json">C01–C10</a> · <a href="tablas/vggt_resultados_recuperados.json">Métricas recuperadas</a>. Pesos, caso, GT, escala y alineamiento se conservan por tabla. Las pruebas pendientes no tienen mediciones nuevas.</p></details></div></details>
@@ -2967,14 +3167,14 @@ La serie se conserva como **plan**, con un inventario explícito de qué evidenc
 <dl class="card-fields"><dt>Siguiente decisión</dt><dd>Revisar plan y preflight antes de autorizar ejecución; mantener entrenamiento SCARED sin lanzar.</dd></dl>
 <details class="trace-details"><summary>Protocolo y trazabilidad</summary><p>Registro: <a href="tablas/vggt_C01_C10.json">C01–C10</a> · <a href="tablas/vggt_resultados_recuperados.json">Métricas recuperadas</a>. Pesos, caso, GT, escala y alineamiento se conservan por tabla. Las pruebas pendientes no tienen mediciones nuevas.</p></details></div></details>
 
-<details class="vggt-experiment-card" id="vggt-c07" data-vggt-card><summary><span class="card-status pending">Plan preparado</span><span class="card-id">C07</span>Transferencia entre datasets</summary><div class="card-content">
+<details class="vggt-experiment-card" id="vggt-c07" data-vggt-card><summary><span class="card-status pending">Transferencia parcial · N=1</span><span class="card-id">C07</span>Transferencia entre datasets</summary><div class="card-content">
 <dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>La mejora dentro del dataset de entrenamiento no garantiza transferencia, ni simetría entre dominios.</dd></dl>
 <dl class="card-fields"><dt>Intervención prevista</dt><dd>Mismo caso destino y RGB para pesos oficiales, C3VD-FT y futuro SCARED-FT. Sin recalibrar con TEST.</dd></dl>
 <dl class="card-fields"><dt>Controles</dt><dd>Pesos identificados por firma; mismo RGB, frames, GT y protocolo por comparación; selección solo en VAL.</dd></dl>
 <dl class="card-fields"><dt>Métricas</dt><dd>Degradación respecto a zero-shot del dataset destino</dd></dl>
-<dl class="card-fields"><dt>Resultados históricos disponibles</dt><dd>VGGT: pendiente. No reutilizar transferencia de VGG-T³ como si fuera VGGT.</dd></dl>
-<dl class="card-fields"><dt>Estado de esta nueva serie</dt><dd>Solo se recuperan los resultados históricos que se indican; no se ejecutó esta nueva serie.</dd></dl>
-<dl class="card-fields"><dt>Conclusión</dt><dd>Pendiente de la prueba uniforme; no convertir evidencia parcial en aceptación del protocolo completo.</dd></dl>
+<dl class="card-fields"><dt>Resultados históricos disponibles</dt><dd>C3VD→SCARED completado en35 anclas N1; SCARED→C3VD pendiente de un checkpoint VGGT-SCARED.</dd></dl>
+<dl class="card-fields"><dt>Estado de esta nueva serie</dt><dd>P04 completado 35/35; transferencia heterogénea. No se lanzó la dirección inversa ni entrenamiento.</dd></dl>
+<dl class="card-fields"><dt>Conclusión</dt><dd>AlcanceN1 cerrado en fase1; los diseños adicionales conservan sus pendientes explícitos.</dd></dl>
 <dl class="card-fields"><dt>Limitaciones</dt><dd>SCARED no tiene GT temporal certificado; el VGGT histórico carece de point_head afinada.</dd></dl>
 <dl class="card-fields"><dt>Siguiente decisión</dt><dd>Revisar plan y preflight antes de autorizar ejecución; mantener entrenamiento SCARED sin lanzar.</dd></dl>
 <details class="trace-details"><summary>Protocolo y trazabilidad</summary><p>Registro: <a href="tablas/vggt_C01_C10.json">C01–C10</a> · <a href="tablas/vggt_resultados_recuperados.json">Métricas recuperadas</a>. Pesos, caso, GT, escala y alineamiento se conservan por tabla. Las pruebas pendientes no tienen mediciones nuevas.</p></details></div></details>
@@ -3019,7 +3219,7 @@ Se prepararon **52 selecciones de entrada** para C02/C05, aplicables a dos varia
 
 ### Comparadores interactivos {#vggt-comparadores}
 
-Las métricas recuperadas se incorporaron al comparador. La galería histórica y las tablas originales siguen accesibles; no se generaron nuevas nubes ni se publicaron paquetes adicionales en esta revisión.
+Las métricas históricas y las nuevas de fase1 están en el comparador, con claves de protocolo distintas. La galería histórica y las tablas originales siguen accesibles; no se generaron nuevas nubes ni se publicaron paquetes adicionales en esta revisión.
 
 <div class="book-actions"><button class="book-open-metrics" data-metrics="vggt-review-heldout_sequence_same_phantom-VGGT_ZS,vggt-review-heldout_sequence_same_phantom-VGGT_FT">Comparar VGGT · reservadas</button><button class="book-open-metrics" data-metrics="vggt-review-validation_selection-VGGT_ZS,vggt-review-validation_selection-VGGT_FT">Comparar VGGT · validación</button><a href="#vistas">Galería histórica de vistas</a></div>
 

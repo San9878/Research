@@ -1,0 +1,635 @@
+{
+  "complete": true,
+  "phase": 1,
+  "P01": {
+    "status": "audited_with_limitations",
+    "checkpoint_hashes_match": true,
+    "heads": [
+      "camera",
+      "depth"
+    ],
+    "optimizer_states_with_step": 131,
+    "optimizer_step": 3000,
+    "encoder_changed_scalars": 39,
+    "limitations": [
+      "Original training sampling seed was not retained.",
+      "Checkpoint did not contain a hash of its training manifest, loader or original input archives.",
+      "Historical serialized encoder differs from retained official weights at 39 scalar values in 3 tensors; the origin is unresolved.",
+      "Legacy preprocessor did not implement the subsequently validated geometry_v2 contract. Current geometry_v2 evaluation does not retroactively certify historical training targets.",
+      "Historical script evaluated validation record0 per epoch and saved final weights; not a modern joint-metric checkpoint selection."
+    ]
+  },
+  "P02": {
+    "passed": true,
+    "certified_anchors": 35,
+    "certified_ZIPs": 7,
+    "VGG_T3_bitwise_equal_N1_fixtures": 5,
+    "math_tests": 6,
+    "point_roundtrip_max_mm": 0.0002384185791015625,
+    "all_valid_GT_points": true,
+    "confidence_filter": false,
+    "subsampling": false
+  },
+  "P03_completed": 35,
+  "P04_completed": 35,
+  "N": 1,
+  "image_long_side": 336,
+  "dataset_macros": [
+    {
+      "dataset": 1,
+      "split": "train",
+      "variant": "VGGT_ZS",
+      "anchors": 5,
+      "AbsRel": 0.07919762645703805,
+      "delta1": 0.9246158551755133,
+      "RMSE_cm": 0.7646783850275062,
+      "XYZ_cm": 0.5657885091110838,
+      "p95_cm": 1.8180597164491885,
+      "CD_cm": 0.37800566157888227,
+      "NC": 0.7958393916737959,
+      "precision_2mm": 0.5711002471996207,
+      "coverage_2mm": 0.37222239219813585,
+      "Sim3_XYZ_cm": 0.44910160554178796,
+      "Sim3_p95_cm": 1.0048880665563042,
+      "CD_Sim3_ICP_cm": 0.20219143206108758,
+      "NC_Sim3_ICP": 0.8103708658079728
+    },
+    {
+      "dataset": 1,
+      "split": "train",
+      "variant": "VGGT_FT",
+      "anchors": 5,
+      "AbsRel": 0.09824014539498058,
+      "delta1": 0.9092572303575969,
+      "RMSE_cm": 0.8883512461824293,
+      "XYZ_cm": 0.7284823921755094,
+      "p95_cm": 1.8717347357156275,
+      "CD_cm": 0.45975459799818125,
+      "NC": 0.6981457234522604,
+      "precision_2mm": 0.42538637581751126,
+      "coverage_2mm": 0.314060021596811,
+      "Sim3_XYZ_cm": 0.6350147920312114,
+      "Sim3_p95_cm": 1.2574833300895987,
+      "CD_Sim3_ICP_cm": 0.34317895250854324,
+      "NC_Sim3_ICP": 0.6909237854549207
+    },
+    {
+      "dataset": 2,
+      "split": "train",
+      "variant": "VGGT_ZS",
+      "anchors": 5,
+      "AbsRel": 0.1012369838595381,
+      "delta1": 0.9268519292480347,
+      "RMSE_cm": 0.7631508349033878,
+      "XYZ_cm": 0.625166321811715,
+      "p95_cm": 1.7133438083935753,
+      "CD_cm": 0.41054952194081457,
+      "NC": 0.7985366954094689,
+      "precision_2mm": 0.5444543238536671,
+      "coverage_2mm": 0.37454065511295964,
+      "Sim3_XYZ_cm": 0.5315648351851199,
+      "Sim3_p95_cm": 1.163136968389153,
+      "CD_Sim3_ICP_cm": 0.2750650831486862,
+      "NC_Sim3_ICP": 0.8018184045202637
+    },
+    {
+      "dataset": 2,
+      "split": "train",
+      "variant": "VGGT_FT",
+      "anchors": 5,
+      "AbsRel": 0.12519655371114677,
+      "delta1": 0.8650943996157727,
+      "RMSE_cm": 0.8871240724130297,
+      "XYZ_cm": 0.7479028095976715,
+      "p95_cm": 1.94897544072898,
+      "CD_cm": 0.4421211800158257,
+      "NC": 0.7046650866526997,
+      "precision_2mm": 0.44008868948357693,
+      "coverage_2mm": 0.32188773846552093,
+      "Sim3_XYZ_cm": 0.560117481474144,
+      "Sim3_p95_cm": 1.2313302634283898,
+      "CD_Sim3_ICP_cm": 0.2685232038455863,
+      "NC_Sim3_ICP": 0.7153001818424535
+    },
+    {
+      "dataset": 3,
+      "split": "train",
+      "variant": "VGGT_ZS",
+      "anchors": 5,
+      "AbsRel": 0.19102663041834614,
+      "delta1": 0.7059440933163328,
+      "RMSE_cm": 1.8422675301148583,
+      "XYZ_cm": 1.3964971690702077,
+      "p95_cm": 4.539610662874597,
+      "CD_cm": 0.8693371358378585,
+      "NC": 0.7191008317468357,
+      "precision_2mm": 0.3033943167087224,
+      "coverage_2mm": 0.16393254199874002,
+      "Sim3_XYZ_cm": 1.0809116720925884,
+      "Sim3_p95_cm": 2.969849029555916,
+      "CD_Sim3_ICP_cm": 0.40074881896140846,
+      "NC_Sim3_ICP": 0.7420301607888925
+    },
+    {
+      "dataset": 3,
+      "split": "train",
+      "variant": "VGGT_FT",
+      "anchors": 5,
+      "AbsRel": 0.1899232377819286,
+      "delta1": 0.6479082952686949,
+      "RMSE_cm": 1.9375862822121541,
+      "XYZ_cm": 1.501814246246493,
+      "p95_cm": 4.636761435857637,
+      "CD_cm": 0.7601576844846463,
+      "NC": 0.6900510576822307,
+      "precision_2mm": 0.35342531979384373,
+      "coverage_2mm": 0.2738013128183068,
+      "Sim3_XYZ_cm": 1.2415535107064835,
+      "Sim3_p95_cm": 2.6828524451702798,
+      "CD_Sim3_ICP_cm": 0.4083977995094081,
+      "NC_Sim3_ICP": 0.6614534003909167
+    },
+    {
+      "dataset": 6,
+      "split": "train",
+      "variant": "VGGT_ZS",
+      "anchors": 5,
+      "AbsRel": 0.06466244888033143,
+      "delta1": 0.9655771527401178,
+      "RMSE_cm": 0.8412793894686692,
+      "XYZ_cm": 0.5638430345916738,
+      "p95_cm": 1.7600617283861337,
+      "CD_cm": 0.3907047092247529,
+      "NC": 0.8044888852789914,
+      "precision_2mm": 0.5787132888117663,
+      "coverage_2mm": 0.31901425191883603,
+      "Sim3_XYZ_cm": 0.5002824809687142,
+      "Sim3_p95_cm": 1.3259913888759896,
+      "CD_Sim3_ICP_cm": 0.3074539565274581,
+      "NC_Sim3_ICP": 0.7949719334847345
+    },
+    {
+      "dataset": 6,
+      "split": "train",
+      "variant": "VGGT_FT",
+      "anchors": 5,
+      "AbsRel": 0.0963870344724694,
+      "delta1": 0.8846720432002173,
+      "RMSE_cm": 1.2588365158243313,
+      "XYZ_cm": 0.9214207984277676,
+      "p95_cm": 2.9238279490721526,
+      "CD_cm": 0.581818177245194,
+      "NC": 0.665748380099985,
+      "precision_2mm": 0.4097664578903715,
+      "coverage_2mm": 0.24689447851893587,
+      "Sim3_XYZ_cm": 0.8384643069833855,
+      "Sim3_p95_cm": 1.9229443427175268,
+      "CD_Sim3_ICP_cm": 0.4540485511571809,
+      "NC_Sim3_ICP": 0.6667127093295764
+    },
+    {
+      "dataset": 7,
+      "split": "validation",
+      "variant": "VGGT_ZS",
+      "anchors": 5,
+      "AbsRel": 0.18597138662265528,
+      "delta1": 0.6971712992146704,
+      "RMSE_cm": 1.69629331194904,
+      "XYZ_cm": 1.3160903863461135,
+      "p95_cm": 3.034058557136357,
+      "CD_cm": 0.8251426542461028,
+      "NC": 0.6950906077246756,
+      "precision_2mm": 0.3613889131966497,
+      "coverage_2mm": 0.22507353623140006,
+      "Sim3_XYZ_cm": 0.9237888824438008,
+      "Sim3_p95_cm": 1.984750034287572,
+      "CD_Sim3_ICP_cm": 0.33239318961066455,
+      "NC_Sim3_ICP": 0.7388456624859744
+    },
+    {
+      "dataset": 7,
+      "split": "validation",
+      "variant": "VGGT_FT",
+      "anchors": 5,
+      "AbsRel": 0.15945769958505007,
+      "delta1": 0.713665424981607,
+      "RMSE_cm": 1.710200889696283,
+      "XYZ_cm": 1.2363827773307994,
+      "p95_cm": 3.296714101203382,
+      "CD_cm": 0.6847638048831356,
+      "NC": 0.660544033699348,
+      "precision_2mm": 0.3893876865263502,
+      "coverage_2mm": 0.2746010879899655,
+      "Sim3_XYZ_cm": 0.9481233087132278,
+      "Sim3_p95_cm": 2.026773247867822,
+      "CD_Sim3_ICP_cm": 0.34240694556110784,
+      "NC_Sim3_ICP": 0.6712790814404067
+    },
+    {
+      "dataset": 8,
+      "split": "reserved",
+      "variant": "VGGT_ZS",
+      "anchors": 5,
+      "AbsRel": 0.06124665266651882,
+      "delta1": 0.9818109853536449,
+      "RMSE_cm": 0.5236959520236673,
+      "XYZ_cm": 0.45176073514810405,
+      "p95_cm": 1.1427112328578766,
+      "CD_cm": 0.3064345414277462,
+      "NC": 0.7655993556883057,
+      "precision_2mm": 0.6013912046994324,
+      "coverage_2mm": 0.35778317942453947,
+      "Sim3_XYZ_cm": 0.4038686575801134,
+      "Sim3_p95_cm": 0.9150908784940833,
+      "CD_Sim3_ICP_cm": 0.236536380994802,
+      "NC_Sim3_ICP": 0.7780779023757335
+    },
+    {
+      "dataset": 8,
+      "split": "reserved",
+      "variant": "VGGT_FT",
+      "anchors": 5,
+      "AbsRel": 0.09904417315779841,
+      "delta1": 0.9160133145424015,
+      "RMSE_cm": 0.8680337158855148,
+      "XYZ_cm": 0.7594234824333447,
+      "p95_cm": 1.9548527420940984,
+      "CD_cm": 0.46032653806641366,
+      "NC": 0.6375548182777612,
+      "precision_2mm": 0.38299844162438335,
+      "coverage_2mm": 0.2752988269455505,
+      "Sim3_XYZ_cm": 0.6185704976599403,
+      "Sim3_p95_cm": 1.3275899365544315,
+      "CD_Sim3_ICP_cm": 0.2856488616243442,
+      "NC_Sim3_ICP": 0.6433047189723311
+    },
+    {
+      "dataset": 9,
+      "split": "reserved",
+      "variant": "VGGT_ZS",
+      "anchors": 5,
+      "AbsRel": 0.12092511886567345,
+      "delta1": 0.8814250183690665,
+      "RMSE_cm": 0.8335494194232698,
+      "XYZ_cm": 0.692017864770296,
+      "p95_cm": 1.821828822286256,
+      "CD_cm": 0.4537785150307336,
+      "NC": 0.7886720736798516,
+      "precision_2mm": 0.4718966595176412,
+      "coverage_2mm": 0.29430791880066975,
+      "Sim3_XYZ_cm": 0.5353794799128511,
+      "Sim3_p95_cm": 1.246122184675186,
+      "CD_Sim3_ICP_cm": 0.2462095300266922,
+      "NC_Sim3_ICP": 0.7937360680622969
+    },
+    {
+      "dataset": 9,
+      "split": "reserved",
+      "variant": "VGGT_FT",
+      "anchors": 5,
+      "AbsRel": 0.11010470597311388,
+      "delta1": 0.8780410721611677,
+      "RMSE_cm": 0.9457704826663039,
+      "XYZ_cm": 0.7233098525770884,
+      "p95_cm": 2.336494146905516,
+      "CD_cm": 0.42986632805205494,
+      "NC": 0.7314579587062577,
+      "precision_2mm": 0.4962258305871842,
+      "coverage_2mm": 0.3953353275786382,
+      "Sim3_XYZ_cm": 0.6445847728268337,
+      "Sim3_p95_cm": 1.4036976173520088,
+      "CD_Sim3_ICP_cm": 0.2961306155433928,
+      "NC_Sim3_ICP": 0.7078532308184853
+    }
+  ],
+  "split_macros": [
+    {
+      "split": "train",
+      "variant": "VGGT_ZS",
+      "datasets": [
+        1,
+        2,
+        3,
+        6
+      ],
+      "anchors": 20,
+      "AbsRel": 0.10903092240381343,
+      "delta1": 0.8807472576199996,
+      "RMSE_cm": 1.0528440348786055,
+      "XYZ_cm": 0.78782375864617,
+      "p95_cm": 2.4577689790258734,
+      "CD_cm": 0.512149257145577,
+      "NC": 0.779491451027273,
+      "precision_2mm": 0.49941554414344413,
+      "coverage_2mm": 0.3074274603071679,
+      "Sim3_XYZ_cm": 0.6404651484470526,
+      "Sim3_p95_cm": 1.6159663633443406,
+      "CD_Sim3_ICP_cm": 0.2963648226746601,
+      "NC_Sim3_ICP": 0.7872978411504659
+    },
+    {
+      "split": "train",
+      "variant": "VGGT_FT",
+      "datasets": [
+        1,
+        2,
+        3,
+        6
+      ],
+      "anchors": 20,
+      "AbsRel": 0.12743674284013135,
+      "delta1": 0.8267329921105704,
+      "RMSE_cm": 1.2429745291579861,
+      "XYZ_cm": 0.9749050616118604,
+      "p95_cm": 2.8453248903435995,
+      "CD_cm": 0.5609629099359618,
+      "NC": 0.6896525619717939,
+      "precision_2mm": 0.4071667107463259,
+      "coverage_2mm": 0.28916088784989363,
+      "Sim3_XYZ_cm": 0.8187875227988061,
+      "Sim3_p95_cm": 1.7736525953514488,
+      "CD_Sim3_ICP_cm": 0.36853712675517963,
+      "NC_Sim3_ICP": 0.6835975192544668
+    },
+    {
+      "split": "validation",
+      "variant": "VGGT_ZS",
+      "datasets": [
+        7
+      ],
+      "anchors": 5,
+      "AbsRel": 0.18597138662265528,
+      "delta1": 0.6971712992146704,
+      "RMSE_cm": 1.69629331194904,
+      "XYZ_cm": 1.3160903863461135,
+      "p95_cm": 3.034058557136357,
+      "CD_cm": 0.8251426542461028,
+      "NC": 0.6950906077246756,
+      "precision_2mm": 0.3613889131966497,
+      "coverage_2mm": 0.22507353623140006,
+      "Sim3_XYZ_cm": 0.9237888824438008,
+      "Sim3_p95_cm": 1.984750034287572,
+      "CD_Sim3_ICP_cm": 0.33239318961066455,
+      "NC_Sim3_ICP": 0.7388456624859744
+    },
+    {
+      "split": "validation",
+      "variant": "VGGT_FT",
+      "datasets": [
+        7
+      ],
+      "anchors": 5,
+      "AbsRel": 0.15945769958505007,
+      "delta1": 0.713665424981607,
+      "RMSE_cm": 1.710200889696283,
+      "XYZ_cm": 1.2363827773307994,
+      "p95_cm": 3.296714101203382,
+      "CD_cm": 0.6847638048831356,
+      "NC": 0.660544033699348,
+      "precision_2mm": 0.3893876865263502,
+      "coverage_2mm": 0.2746010879899655,
+      "Sim3_XYZ_cm": 0.9481233087132278,
+      "Sim3_p95_cm": 2.026773247867822,
+      "CD_Sim3_ICP_cm": 0.34240694556110784,
+      "NC_Sim3_ICP": 0.6712790814404067
+    },
+    {
+      "split": "reserved",
+      "variant": "VGGT_ZS",
+      "datasets": [
+        8,
+        9
+      ],
+      "anchors": 10,
+      "AbsRel": 0.09108588576609614,
+      "delta1": 0.9316180018613557,
+      "RMSE_cm": 0.6786226857234685,
+      "XYZ_cm": 0.5718892999592,
+      "p95_cm": 1.4822700275720662,
+      "CD_cm": 0.38010652822923985,
+      "NC": 0.7771357146840787,
+      "precision_2mm": 0.5366439321085368,
+      "coverage_2mm": 0.32604554911260464,
+      "Sim3_XYZ_cm": 0.4696240687464822,
+      "Sim3_p95_cm": 1.0806065315846347,
+      "CD_Sim3_ICP_cm": 0.2413729555107471,
+      "NC_Sim3_ICP": 0.7859069852190153
+    },
+    {
+      "split": "reserved",
+      "variant": "VGGT_FT",
+      "datasets": [
+        8,
+        9
+      ],
+      "anchors": 10,
+      "AbsRel": 0.10457443956545615,
+      "delta1": 0.8970271933517846,
+      "RMSE_cm": 0.9069020992759094,
+      "XYZ_cm": 0.7413666675052165,
+      "p95_cm": 2.145673444499807,
+      "CD_cm": 0.4450964330592343,
+      "NC": 0.6845063884920095,
+      "precision_2mm": 0.43961213610578376,
+      "coverage_2mm": 0.33531707726209437,
+      "Sim3_XYZ_cm": 0.6315776352433871,
+      "Sim3_p95_cm": 1.3656437769532201,
+      "CD_Sim3_ICP_cm": 0.2908897385838685,
+      "NC_Sim3_ICP": 0.6755789748954082
+    }
+  ],
+  "paired_changes": [
+    {
+      "split": "train",
+      "favorable_percent": {
+        "AbsRel": -16.88128471311012,
+        "delta1": -6.132777030199258,
+        "RMSE_cm": -18.058752101996095,
+        "XYZ_cm": -23.74659318312244,
+        "p95_cm": -15.768606188175271,
+        "CD_cm": -9.531138063626948,
+        "NC": -11.525320635278629,
+        "precision_2mm": -18.47135806622434,
+        "coverage_2mm": -5.9417504340773935,
+        "Sim3_XYZ_cm": -27.842635119824234,
+        "Sim3_p95_cm": -9.758014497329446,
+        "CD_Sim3_ICP_cm": -24.352520460820017,
+        "NC_Sim3_ICP": -13.171676140310947
+      },
+      "anchors_better_AbsRel": 7,
+      "anchors_total": 20
+    },
+    {
+      "split": "validation",
+      "favorable_percent": {
+        "AbsRel": 14.256863660108493,
+        "delta1": 2.365864140637528,
+        "RMSE_cm": -0.819880479942661,
+        "XYZ_cm": 6.056393226654279,
+        "p95_cm": -8.656904246268986,
+        "CD_cm": 17.01267637063621,
+        "NC": -4.970082121870854,
+        "precision_2mm": 7.747546288024889,
+        "coverage_2mm": 22.005053365156957,
+        "Sim3_XYZ_cm": -2.6341977839192556,
+        "Sim3_p95_cm": -2.117305094056067,
+        "CD_Sim3_ICP_cm": -3.012623682865616,
+        "NC_Sim3_ICP": -9.144884307532942
+      },
+      "anchors_better_AbsRel": 4,
+      "anchors_total": 5
+    },
+    {
+      "split": "reserved",
+      "favorable_percent": {
+        "AbsRel": -14.808610231883696,
+        "delta1": -3.712981977640973,
+        "RMSE_cm": -33.63863577726936,
+        "XYZ_cm": -29.634645648748354,
+        "p95_cm": -44.75590847737675,
+        "CD_cm": -17.09781337688561,
+        "NC": -11.919324313865165,
+        "precision_2mm": -18.0812248489429,
+        "coverage_2mm": 2.843629724351081,
+        "Sim3_XYZ_cm": -34.485789224813445,
+        "Sim3_p95_cm": -26.377523829196,
+        "CD_Sim3_ICP_cm": -20.51463593688178,
+        "NC_Sim3_ICP": -14.038303819485842
+      },
+      "anchors_better_AbsRel": 4,
+      "anchors_total": 10
+    }
+  ],
+  "fields": [
+    {
+      "key": "AbsRel",
+      "name": "AbsRel",
+      "unit": "",
+      "higher_is_better": false
+    },
+    {
+      "key": "delta1",
+      "name": "δ1",
+      "unit": "fraction",
+      "higher_is_better": true
+    },
+    {
+      "key": "RMSE_cm",
+      "name": "RMSE de profundidad",
+      "unit": "cm",
+      "higher_is_better": false
+    },
+    {
+      "key": "XYZ_cm",
+      "name": "XYZ medio · escala de profundidad",
+      "unit": "cm",
+      "higher_is_better": false
+    },
+    {
+      "key": "p95_cm",
+      "name": "p95 XYZ medio por ancla",
+      "unit": "cm",
+      "higher_is_better": false
+    },
+    {
+      "key": "CD_cm",
+      "name": "CD · sin registro",
+      "unit": "cm",
+      "higher_is_better": false
+    },
+    {
+      "key": "NC",
+      "name": "NC · sin registro",
+      "unit": "",
+      "higher_is_better": true
+    },
+    {
+      "key": "precision_2mm",
+      "name": "Exactitud @2mm",
+      "unit": "fraction",
+      "higher_is_better": true
+    },
+    {
+      "key": "coverage_2mm",
+      "name": "Cobertura @2mm",
+      "unit": "fraction",
+      "higher_is_better": true
+    },
+    {
+      "key": "Sim3_XYZ_cm",
+      "name": "XYZ · Sim(3), sin ICP",
+      "unit": "cm",
+      "higher_is_better": false
+    },
+    {
+      "key": "Sim3_p95_cm",
+      "name": "p95 XYZ · Sim(3), sin ICP",
+      "unit": "cm",
+      "higher_is_better": false
+    },
+    {
+      "key": "CD_Sim3_ICP_cm",
+      "name": "CD · Sim(3)+ICP",
+      "unit": "cm",
+      "higher_is_better": false
+    },
+    {
+      "key": "NC_Sim3_ICP",
+      "name": "NC · Sim(3)+ICP",
+      "unit": "",
+      "higher_is_better": true
+    }
+  ],
+  "protocol_SHA256": "cd93dc0de4f73ed7252cdc67a99aa8015e42b26cebbb01d9e0a6870011789179",
+  "aggregation": "equal anchors within dataset, then equal datasets within split; never mix splits for the primary result",
+  "GT_trajectory_metrics_available": false,
+  "historical_optimizer_audit": {
+    "states_with_step": 131,
+    "step_values": [
+      3000.0
+    ],
+    "param_groups": [
+      {
+        "lr": 1e-05,
+        "betas": [
+          0.9,
+          0.999
+        ],
+        "eps": 1e-08,
+        "weight_decay": 0.05,
+        "amsgrad": false,
+        "maximize": false,
+        "foreach": null,
+        "capturable": false,
+        "differentiable": false,
+        "fused": null,
+        "decoupled_weight_decay": true
+      }
+    ]
+  },
+  "model_parameters_unchanged": true,
+  "optimizer_updates": 0,
+  "training_launched": false,
+  "phase2_to_4_launched": false,
+  "data_overlap_with_foundation_pretraining": "unknown",
+  "role_labels_refer_to": "prospective SCARED train/validation/reserved split; both VGGT weights have no local SCARED fine-tuning",
+  "limitations": [
+    "N1 only; no conclusion about long trajectories, multiview consistency or temporal camera accuracy.",
+    "Depth scale uses GT per anchor. No metric scale recovery claimed.",
+    "Primary XYZ is derived from depth with calibrated K, not an independently learned global point head.",
+    "Secondary Sim3+ICP can absorb scale/registration errors; keep separate from primary quality.",
+    "Training/validation/reserved macros are separate; no checkpoint selection or adaptation used these SCARED results.",
+    "Historical timing per case is operational telemetry, not the repeated P10 efficiency benchmark."
+  ],
+  "weights": [
+    {
+      "variant": "VGGT_ZS",
+      "SHA256": "f164acf60724910d8fe1578bb499d800850c7bb0948db7555c413f9fbe60467e"
+    },
+    {
+      "variant": "VGGT_FT",
+      "SHA256": "47676104810d39316e3b5f661a7e8e6796080cde5afba0d162d6ede3697f0bf7"
+    }
+  ],
+  "public_export": "aggregate summaries only; no GT/pixel maps, checkpoint or granular case exports"
+}

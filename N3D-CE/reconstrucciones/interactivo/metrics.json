@@ -10409,6 +10409,630 @@
         }
       ],
       "cloud_id": null
+    },
+    {
+      "id": "vggt-p1-train-VGGT_ZS",
+      "label": "VGGT oficial · SCARED N1 · train",
+      "group": "VGGT · SCARED · Fase1 N1",
+      "dataset": "SCARED",
+      "case": "train",
+      "kind": "metrics",
+      "comparison_key": "SCARED|train|N1|measured-left-anchor|336|D-Kcal|depth-scale|phase1-v1",
+      "context": "Mismas anclas y GT; media por dataset dentro del split. Escala mediana por ancla. XYZ/CD/NC principales sin registro adicional; secundarios rotulados Sim3/ICP. No son poses temporales ni point head directa.",
+      "values": [
+        {
+          "key": "AbsRel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.10903092240381343
+        },
+        {
+          "key": "delta1",
+          "label": "δ1",
+          "unit": "",
+          "higher": true,
+          "value": 0.8807472576199996
+        },
+        {
+          "key": "RMSE_cm",
+          "label": "RMSE de profundidad",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.0528440348786055
+        },
+        {
+          "key": "XYZ_cm",
+          "label": "XYZ medio · escala de profundidad",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.78782375864617
+        },
+        {
+          "key": "p95_cm",
+          "label": "p95 XYZ medio por ancla",
+          "unit": "cm",
+          "higher": false,
+          "value": 2.4577689790258734
+        },
+        {
+          "key": "CD_cm",
+          "label": "CD · sin registro",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.512149257145577
+        },
+        {
+          "key": "NC",
+          "label": "NC · sin registro",
+          "unit": "",
+          "higher": true,
+          "value": 0.779491451027273
+        },
+        {
+          "key": "precision_2mm",
+          "label": "Exactitud @2mm",
+          "unit": "",
+          "higher": true,
+          "value": 0.49941554414344413
+        },
+        {
+          "key": "coverage_2mm",
+          "label": "Cobertura @2mm",
+          "unit": "",
+          "higher": true,
+          "value": 0.3074274603071679
+        },
+        {
+          "key": "Sim3_XYZ_cm",
+          "label": "XYZ · Sim(3), sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.6404651484470526
+        },
+        {
+          "key": "Sim3_p95_cm",
+          "label": "p95 XYZ · Sim(3), sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.6159663633443406
+        },
+        {
+          "key": "CD_Sim3_ICP_cm",
+          "label": "CD · Sim(3)+ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.2963648226746601
+        },
+        {
+          "key": "NC_Sim3_ICP",
+          "label": "NC · Sim(3)+ICP",
+          "unit": "",
+          "higher": true,
+          "value": 0.7872978411504659
+        }
+      ],
+      "cloud_id": null
+    },
+    {
+      "id": "vggt-p1-train-VGGT_FT",
+      "label": "VGGT C3VD-FT · SCARED N1 · train",
+      "group": "VGGT · SCARED · Fase1 N1",
+      "dataset": "SCARED",
+      "case": "train",
+      "kind": "metrics",
+      "comparison_key": "SCARED|train|N1|measured-left-anchor|336|D-Kcal|depth-scale|phase1-v1",
+      "context": "Mismas anclas y GT; media por dataset dentro del split. Escala mediana por ancla. XYZ/CD/NC principales sin registro adicional; secundarios rotulados Sim3/ICP. No son poses temporales ni point head directa.",
+      "values": [
+        {
+          "key": "AbsRel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.12743674284013135
+        },
+        {
+          "key": "delta1",
+          "label": "δ1",
+          "unit": "",
+          "higher": true,
+          "value": 0.8267329921105704
+        },
+        {
+          "key": "RMSE_cm",
+          "label": "RMSE de profundidad",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.2429745291579861
+        },
+        {
+          "key": "XYZ_cm",
+          "label": "XYZ medio · escala de profundidad",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.9749050616118604
+        },
+        {
+          "key": "p95_cm",
+          "label": "p95 XYZ medio por ancla",
+          "unit": "cm",
+          "higher": false,
+          "value": 2.8453248903435995
+        },
+        {
+          "key": "CD_cm",
+          "label": "CD · sin registro",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.5609629099359618
+        },
+        {
+          "key": "NC",
+          "label": "NC · sin registro",
+          "unit": "",
+          "higher": true,
+          "value": 0.6896525619717939
+        },
+        {
+          "key": "precision_2mm",
+          "label": "Exactitud @2mm",
+          "unit": "",
+          "higher": true,
+          "value": 0.4071667107463259
+        },
+        {
+          "key": "coverage_2mm",
+          "label": "Cobertura @2mm",
+          "unit": "",
+          "higher": true,
+          "value": 0.28916088784989363
+        },
+        {
+          "key": "Sim3_XYZ_cm",
+          "label": "XYZ · Sim(3), sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.8187875227988061
+        },
+        {
+          "key": "Sim3_p95_cm",
+          "label": "p95 XYZ · Sim(3), sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.7736525953514488
+        },
+        {
+          "key": "CD_Sim3_ICP_cm",
+          "label": "CD · Sim(3)+ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.36853712675517963
+        },
+        {
+          "key": "NC_Sim3_ICP",
+          "label": "NC · Sim(3)+ICP",
+          "unit": "",
+          "higher": true,
+          "value": 0.6835975192544668
+        }
+      ],
+      "cloud_id": null
+    },
+    {
+      "id": "vggt-p1-validation-VGGT_ZS",
+      "label": "VGGT oficial · SCARED N1 · validation",
+      "group": "VGGT · SCARED · Fase1 N1",
+      "dataset": "SCARED",
+      "case": "validation",
+      "kind": "metrics",
+      "comparison_key": "SCARED|validation|N1|measured-left-anchor|336|D-Kcal|depth-scale|phase1-v1",
+      "context": "Mismas anclas y GT; media por dataset dentro del split. Escala mediana por ancla. XYZ/CD/NC principales sin registro adicional; secundarios rotulados Sim3/ICP. No son poses temporales ni point head directa.",
+      "values": [
+        {
+          "key": "AbsRel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.18597138662265528
+        },
+        {
+          "key": "delta1",
+          "label": "δ1",
+          "unit": "",
+          "higher": true,
+          "value": 0.6971712992146704
+        },
+        {
+          "key": "RMSE_cm",
+          "label": "RMSE de profundidad",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.69629331194904
+        },
+        {
+          "key": "XYZ_cm",
+          "label": "XYZ medio · escala de profundidad",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.3160903863461135
+        },
+        {
+          "key": "p95_cm",
+          "label": "p95 XYZ medio por ancla",
+          "unit": "cm",
+          "higher": false,
+          "value": 3.034058557136357
+        },
+        {
+          "key": "CD_cm",
+          "label": "CD · sin registro",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.8251426542461028
+        },
+        {
+          "key": "NC",
+          "label": "NC · sin registro",
+          "unit": "",
+          "higher": true,
+          "value": 0.6950906077246756
+        },
+        {
+          "key": "precision_2mm",
+          "label": "Exactitud @2mm",
+          "unit": "",
+          "higher": true,
+          "value": 0.3613889131966497
+        },
+        {
+          "key": "coverage_2mm",
+          "label": "Cobertura @2mm",
+          "unit": "",
+          "higher": true,
+          "value": 0.22507353623140006
+        },
+        {
+          "key": "Sim3_XYZ_cm",
+          "label": "XYZ · Sim(3), sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.9237888824438008
+        },
+        {
+          "key": "Sim3_p95_cm",
+          "label": "p95 XYZ · Sim(3), sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.984750034287572
+        },
+        {
+          "key": "CD_Sim3_ICP_cm",
+          "label": "CD · Sim(3)+ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.33239318961066455
+        },
+        {
+          "key": "NC_Sim3_ICP",
+          "label": "NC · Sim(3)+ICP",
+          "unit": "",
+          "higher": true,
+          "value": 0.7388456624859744
+        }
+      ],
+      "cloud_id": null
+    },
+    {
+      "id": "vggt-p1-validation-VGGT_FT",
+      "label": "VGGT C3VD-FT · SCARED N1 · validation",
+      "group": "VGGT · SCARED · Fase1 N1",
+      "dataset": "SCARED",
+      "case": "validation",
+      "kind": "metrics",
+      "comparison_key": "SCARED|validation|N1|measured-left-anchor|336|D-Kcal|depth-scale|phase1-v1",
+      "context": "Mismas anclas y GT; media por dataset dentro del split. Escala mediana por ancla. XYZ/CD/NC principales sin registro adicional; secundarios rotulados Sim3/ICP. No son poses temporales ni point head directa.",
+      "values": [
+        {
+          "key": "AbsRel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.15945769958505007
+        },
+        {
+          "key": "delta1",
+          "label": "δ1",
+          "unit": "",
+          "higher": true,
+          "value": 0.713665424981607
+        },
+        {
+          "key": "RMSE_cm",
+          "label": "RMSE de profundidad",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.710200889696283
+        },
+        {
+          "key": "XYZ_cm",
+          "label": "XYZ medio · escala de profundidad",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.2363827773307994
+        },
+        {
+          "key": "p95_cm",
+          "label": "p95 XYZ medio por ancla",
+          "unit": "cm",
+          "higher": false,
+          "value": 3.296714101203382
+        },
+        {
+          "key": "CD_cm",
+          "label": "CD · sin registro",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.6847638048831356
+        },
+        {
+          "key": "NC",
+          "label": "NC · sin registro",
+          "unit": "",
+          "higher": true,
+          "value": 0.660544033699348
+        },
+        {
+          "key": "precision_2mm",
+          "label": "Exactitud @2mm",
+          "unit": "",
+          "higher": true,
+          "value": 0.3893876865263502
+        },
+        {
+          "key": "coverage_2mm",
+          "label": "Cobertura @2mm",
+          "unit": "",
+          "higher": true,
+          "value": 0.2746010879899655
+        },
+        {
+          "key": "Sim3_XYZ_cm",
+          "label": "XYZ · Sim(3), sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.9481233087132278
+        },
+        {
+          "key": "Sim3_p95_cm",
+          "label": "p95 XYZ · Sim(3), sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 2.026773247867822
+        },
+        {
+          "key": "CD_Sim3_ICP_cm",
+          "label": "CD · Sim(3)+ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.34240694556110784
+        },
+        {
+          "key": "NC_Sim3_ICP",
+          "label": "NC · Sim(3)+ICP",
+          "unit": "",
+          "higher": true,
+          "value": 0.6712790814404067
+        }
+      ],
+      "cloud_id": null
+    },
+    {
+      "id": "vggt-p1-reserved-VGGT_ZS",
+      "label": "VGGT oficial · SCARED N1 · reserved",
+      "group": "VGGT · SCARED · Fase1 N1",
+      "dataset": "SCARED",
+      "case": "reserved",
+      "kind": "metrics",
+      "comparison_key": "SCARED|reserved|N1|measured-left-anchor|336|D-Kcal|depth-scale|phase1-v1",
+      "context": "Mismas anclas y GT; media por dataset dentro del split. Escala mediana por ancla. XYZ/CD/NC principales sin registro adicional; secundarios rotulados Sim3/ICP. No son poses temporales ni point head directa.",
+      "values": [
+        {
+          "key": "AbsRel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.09108588576609614
+        },
+        {
+          "key": "delta1",
+          "label": "δ1",
+          "unit": "",
+          "higher": true,
+          "value": 0.9316180018613557
+        },
+        {
+          "key": "RMSE_cm",
+          "label": "RMSE de profundidad",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.6786226857234685
+        },
+        {
+          "key": "XYZ_cm",
+          "label": "XYZ medio · escala de profundidad",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.5718892999592
+        },
+        {
+          "key": "p95_cm",
+          "label": "p95 XYZ medio por ancla",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.4822700275720662
+        },
+        {
+          "key": "CD_cm",
+          "label": "CD · sin registro",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.38010652822923985
+        },
+        {
+          "key": "NC",
+          "label": "NC · sin registro",
+          "unit": "",
+          "higher": true,
+          "value": 0.7771357146840787
+        },
+        {
+          "key": "precision_2mm",
+          "label": "Exactitud @2mm",
+          "unit": "",
+          "higher": true,
+          "value": 0.5366439321085368
+        },
+        {
+          "key": "coverage_2mm",
+          "label": "Cobertura @2mm",
+          "unit": "",
+          "higher": true,
+          "value": 0.32604554911260464
+        },
+        {
+          "key": "Sim3_XYZ_cm",
+          "label": "XYZ · Sim(3), sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.4696240687464822
+        },
+        {
+          "key": "Sim3_p95_cm",
+          "label": "p95 XYZ · Sim(3), sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.0806065315846347
+        },
+        {
+          "key": "CD_Sim3_ICP_cm",
+          "label": "CD · Sim(3)+ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.2413729555107471
+        },
+        {
+          "key": "NC_Sim3_ICP",
+          "label": "NC · Sim(3)+ICP",
+          "unit": "",
+          "higher": true,
+          "value": 0.7859069852190153
+        }
+      ],
+      "cloud_id": null
+    },
+    {
+      "id": "vggt-p1-reserved-VGGT_FT",
+      "label": "VGGT C3VD-FT · SCARED N1 · reserved",
+      "group": "VGGT · SCARED · Fase1 N1",
+      "dataset": "SCARED",
+      "case": "reserved",
+      "kind": "metrics",
+      "comparison_key": "SCARED|reserved|N1|measured-left-anchor|336|D-Kcal|depth-scale|phase1-v1",
+      "context": "Mismas anclas y GT; media por dataset dentro del split. Escala mediana por ancla. XYZ/CD/NC principales sin registro adicional; secundarios rotulados Sim3/ICP. No son poses temporales ni point head directa.",
+      "values": [
+        {
+          "key": "AbsRel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.10457443956545615
+        },
+        {
+          "key": "delta1",
+          "label": "δ1",
+          "unit": "",
+          "higher": true,
+          "value": 0.8970271933517846
+        },
+        {
+          "key": "RMSE_cm",
+          "label": "RMSE de profundidad",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.9069020992759094
+        },
+        {
+          "key": "XYZ_cm",
+          "label": "XYZ medio · escala de profundidad",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.7413666675052165
+        },
+        {
+          "key": "p95_cm",
+          "label": "p95 XYZ medio por ancla",
+          "unit": "cm",
+          "higher": false,
+          "value": 2.145673444499807
+        },
+        {
+          "key": "CD_cm",
+          "label": "CD · sin registro",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.4450964330592343
+        },
+        {
+          "key": "NC",
+          "label": "NC · sin registro",
+          "unit": "",
+          "higher": true,
+          "value": 0.6845063884920095
+        },
+        {
+          "key": "precision_2mm",
+          "label": "Exactitud @2mm",
+          "unit": "",
+          "higher": true,
+          "value": 0.43961213610578376
+        },
+        {
+          "key": "coverage_2mm",
+          "label": "Cobertura @2mm",
+          "unit": "",
+          "higher": true,
+          "value": 0.33531707726209437
+        },
+        {
+          "key": "Sim3_XYZ_cm",
+          "label": "XYZ · Sim(3), sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.6315776352433871
+        },
+        {
+          "key": "Sim3_p95_cm",
+          "label": "p95 XYZ · Sim(3), sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.3656437769532201
+        },
+        {
+          "key": "CD_Sim3_ICP_cm",
+          "label": "CD · Sim(3)+ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.2908897385838685
+        },
+        {
+          "key": "NC_Sim3_ICP",
+          "label": "NC · Sim(3)+ICP",
+          "unit": "",
+          "higher": true,
+          "value": 0.6755789748954082
+        }
+      ],
+      "cloud_id": null
     }
   ],
   "no_metric_recalculation": true,

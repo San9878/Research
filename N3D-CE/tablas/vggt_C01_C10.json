@@ -1,19 +1,19 @@
 {
   "schema": "vggt_C01_C10_plan_v1",
-  "status": "prepared_not_run",
+  "status": "phase1_baselines_completed_other_protocols_prepared",
   "experiments": [
     {
       "id": "C01",
       "title": "Zero-shot en los mismos datasets",
       "dataset": "C3VD y SCARED",
       "metrics": "AbsRel, δ1, XYZ/p95, CD/NC",
-      "status": "prepared_with_existing_evidence",
-      "existing_evidence": "C3VD: disponible en 4 secuencias emparejadas. SCARED: pendiente para VGGT.",
+      "status": "completed_N1",
+      "existing_evidence": "C3VD histórico recuperado y35 anclas oficiales SCARED N1 evaluadas en P03.",
       "hypothesis": "¿Qué calidad ofrecen los pesos oficiales en el mismo caso endoscópico antes de cualquier ajuste de dominio?",
       "method": "Usar exactamente los mismos RGB rectificados, resolución y soporte GT.",
       "controls": "Pesos identificados por firma; mismo RGB, frames, GT y protocolo por comparación; selección solo en VAL.",
-      "results": "Solo se recuperan los resultados históricos que se indican; no se ejecutó esta nueva serie.",
-      "conclusion": "Pendiente de la prueba uniforme; no convertir evidencia parcial en aceptación del protocolo completo.",
+      "results": "P03 completado 35/35, sin fine-tuning SCARED; las ventanas mayores pertenecen a C02.",
+      "conclusion": "Ver resultados de fase1; contextos y transferencia inversa permanecen pendientes.",
       "limitations": "SCARED no tiene GT temporal certificado; el VGGT histórico carece de point_head afinada.",
       "next_decision": "Revisar plan y preflight antes de autorizar ejecución; mantener entrenamiento SCARED sin lanzar."
     },
@@ -97,13 +97,13 @@
       "title": "Transferencia entre datasets",
       "dataset": "C3VD ↔ SCARED",
       "metrics": "Degradación respecto a zero-shot del dataset destino",
-      "status": "prepared_with_existing_evidence",
-      "existing_evidence": "VGGT: pendiente. No reutilizar transferencia de VGG-T³ como si fuera VGGT.",
+      "status": "partially_completed_forward_N1",
+      "existing_evidence": "C3VD→SCARED completado en35 anclas N1; SCARED→C3VD pendiente de un checkpoint VGGT-SCARED.",
       "hypothesis": "La mejora dentro del dataset de entrenamiento no garantiza transferencia, ni simetría entre dominios.",
       "method": "Mismo caso destino y RGB para pesos oficiales, C3VD-FT y futuro SCARED-FT. Sin recalibrar con TEST.",
       "controls": "Pesos identificados por firma; mismo RGB, frames, GT y protocolo por comparación; selección solo en VAL.",
-      "results": "Solo se recuperan los resultados históricos que se indican; no se ejecutó esta nueva serie.",
-      "conclusion": "Pendiente de la prueba uniforme; no convertir evidencia parcial en aceptación del protocolo completo.",
+      "results": "P04 completado 35/35; transferencia heterogénea. No se lanzó la dirección inversa ni entrenamiento.",
+      "conclusion": "Ver resultados de fase1; contextos y transferencia inversa permanecen pendientes.",
       "limitations": "SCARED no tiene GT temporal certificado; el VGGT histórico carece de point_head afinada.",
       "next_decision": "Revisar plan y preflight antes de autorizar ejecución; mantener entrenamiento SCARED sin lanzar."
     },
@@ -161,5 +161,6 @@
     50
   ],
   "new_training": false,
-  "new_inference": false
+  "new_inference": false,
+  "phase1_result": "vggt_fase1.json"
 }
