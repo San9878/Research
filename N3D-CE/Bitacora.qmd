@@ -1,6 +1,6 @@
 ---
 title: "Bitácora"
-subtitle: "C3VD · V9, VN19-A/B | SCARED · VN18 y V9 adaptado"
+subtitle: "VGG-T³ · VGGT · Comparaciones entre modelos"
 author: "Santiago Hernández Chávez"
 date: 2026-11-19
 date-format: "DD/MM/YYYY"
@@ -10,7 +10,7 @@ format:
     theme: [cosmo, recursos/offline.scss]
     toc: true
     toc-title: "Recorrido"
-    toc-depth: 2
+    toc-depth: 3
     toc-location: left
     number-sections: false
     css: [recursos/bitacora.css, recursos/editorial.css]
@@ -70,13 +70,21 @@ execute:
 
 ```
 
-<div class="reading-map"><a href="#c3vd"><strong>1 · Resultados C3VD</strong><small>Referencia V9 y controles VN19-A/B.</small></a><a href="#scared"><strong>2 · Resultados SCARED</strong><small>VN18, V9 adaptado y transferencia.</small></a><a href="#experimentos"><strong>3 · Preguntas y evidencia</strong><small>Buscar por problema, dataset y estado.</small></a></div>
+<nav class="reading-map model-map" aria-label="Elegir modelo"><a href="#vgg-t3"><strong>VGG-T³</strong><small>C3VD, SCARED y las 63 fichas actuales.</small></a><a href="#vggt"><strong>VGGT</strong><small>La misma estructura, lista para completar.</small></a><a href="#vggt-vs-vgg-t3"><strong>VGGT vs VGG-T³</strong><small>Espacio para las comparaciones entre modelos.</small></a></nav>
 
 <p class="scope-note">Esta edición reorganiza resultados existentes. No cambia entrenamientos, métricas ni geometría. Las nubes se cargan bajo demanda con el 100 % de sus puntos guardados.</p>
 
-## C3VD · referencias y resultados {#c3vd}
+## VGG-T³ {#vgg-t3 .model-workspace}
 
-### Resumen de C3VD {#estado}
+<p class="model-state">Registro actual · C3VD y SCARED</p>
+
+<nav class="model-section-nav" aria-label="Apartados del modelo"><a href="#c3vd">C3VD</a><a href="#scared">SCARED</a><a href="#pipeline">Pipeline</a><a href="#experimentos">Experimentos</a><a href="#comparadores">Comparadores</a></nav>
+
+Los resultados y las 63 fichas actuales se reúnen aquí. Las pruebas históricas que incluyeron VGGT como control conservan su ámbito original; la nueva organización no cambia el modelo al que corresponde cada medición.
+
+### C3VD · referencias y resultados {#c3vd}
+
+#### Resumen de C3VD {#estado}
 
 <div class="protocol-strip" id="tabla-protocolo-01"><strong>Documentación</strong> · C3VD · Según versión y filas</div>
 
@@ -92,7 +100,7 @@ execute:
 
 
 
-### Datos y protocolo de comparación {#datos}
+#### Datos y protocolo de comparación {#datos}
 
 Las tablas y vistas principales usan **trans_t4_b**, los mismos **50 RGB a 336×336**, seleccionados entre IDs **0–596**. Las métricas puntúan los mismos **16 frames GT**, con **1.771.907 píxeles válidos**. Para esta comparación se utiliza una escala de profundidad compartida por contexto, **sin ICP**.
 
@@ -173,7 +181,7 @@ Por eso las diferencias V9/VN19 no aíslan solo el muestreo. Entre A/B sí se ma
 </details>
 
 
-### Cómo se entrenaron V9, VN19-A y VN19-B {#entrenamientos}
+#### Cómo se entrenaron V9, VN19-A y VN19-B {#entrenamientos}
 
 Son **fine-tunings desde pesos oficiales preentrenados**, no entrenamientos desde cero. Ejecutar primero zero-shot es una evaluación; no cambia esos pesos iniciales.
 
@@ -254,11 +262,11 @@ Los pasos de V9 son los1.000 registrados; se muestra su checkpoint850. Las cifra
 </details>
 
 
-### Comparaciones cuantitativas {#comparaciones}
+#### Comparaciones cuantitativas {#comparaciones}
 
 **Mismos RGB y GT dentro de cada tabla.** Δ favorable>0 significa mejora; Δ<0, deterioro. Los porcentajes de A/B se calculan respecto a **V9**, mientras la tabla de zero-shot indica explícitamente esa otra referencia. Las distancias se muestran en **cm**, las rotaciones en **grados**.
 
-#### Profundidad y geometría
+##### Profundidad y geometría
 
 
 <div class="protocol-strip" id="tabla-protocolo-08"><strong>Evaluación local</strong> · C3VD trans_t4_b · Validación de los modelos C3VD; lectura de transferencia para pesos SCARED</div>
@@ -274,7 +282,7 @@ Los pasos de V9 son los1.000 registrados; se muestra su checkpoint850. Las cifra
 | XYZ p95 (cm) ↓ | 2,131 | 1,305 | 1,301 | 1,337 | +0,27 % | -2,47 % |
 | D + K calibrada + pose (cm) ↓ | 0,771 | 0,600 | 0,579 | 0,573 | +3,51 % | +4,49 % |
 
-#### Cámara y movimiento
+##### Cámara y movimiento
 
 
 <div class="protocol-strip" id="tabla-protocolo-09"><strong>Evaluación local</strong> · C3VD trans_t4_b · Validación de los modelos C3VD; lectura de transferencia para pesos SCARED</div>
@@ -370,7 +378,7 @@ Las guardas son criterios locales, no criterios del paper. V9 utilizó otra sele
 </details>
 
 
-### Vistas de las reconstrucciones {#vistas}
+#### Vistas de las reconstrucciones {#vistas}
 
 **Trans4 · 50 imágenes · 336² · 5.644.800 puntos por modelo.** La figura fuente procesó todos los puntos finitos; no se elimina geometría para esta presentación. Se mantienen centro y extensión comunes de visualización, con la escala GT compartida declarada, sin ICP ni ajuste rígido.
 
@@ -415,7 +423,7 @@ La referencia VGGT es útil para examinar forma y apariencia, pero su entrenamie
 <div class="book-actions"><button type="button" class="book-open-clouds" data-clouds="c3vd-v9,c3vd-vn19-a,c3vd-vn19-b">Comparar estas tres nubes en 3D</button><button type="button" class="book-open-metrics" data-metrics="c3vd-v9,c3vd-vn19-a,c3vd-vn19-b">Comparar tablas V9/A/B</button></div>
 
 
-### Interpretación y límites {#interpretacion}
+#### Interpretación y límites {#interpretacion}
 
 <div class="protocol-strip" id="tabla-protocolo-13"><strong>Documentación</strong> · C3VD · Según versión y filas</div>
 
@@ -631,7 +639,7 @@ Se conservan también los resultados de validación, las cifras publicadas Re10K
 
 </details>
 
-### Continuidad y consulta del archivo {#archivo}
+#### Continuidad y consulta del archivo {#archivo}
 
 La lectura principal está dedicada a C3VD. Los originales y ediciones anteriores se conservan en el archivo local. Esta edición web comparte la documentación, las tablas y una selección de reconstrucciones completas.
 
@@ -639,13 +647,13 @@ La lectura principal está dedicada a C3VD. Los originales y ediciones anteriore
 
 
 
-## SCARED · adaptación y transferencia {#scared}
+### SCARED · adaptación y transferencia {#scared}
 
-### SCARED · entrenamiento VN18 {#scared-vn18}
+#### SCARED · entrenamiento VN18 {#scared-vn18}
 
 Este bloque documenta **VN18 entrenado con SCARED**, separado de VN18-C3VD y de VN19-A/B. Partió de pesos oficiales frescos; no heredó el fine-tuning C3VD. Terminó **3.240 actualizaciones**. El final se conserva como **candidato diagnóstico**: mejoró medias, pero no pasó todas las guardas de validación.
 
-#### Cómo se entrenó
+##### Cómo se entrenó
 
 
 <div class="protocol-strip" id="tabla-protocolo-24"><strong>Documentación</strong> · SCARED · TRAIN1/2/3/6; VAL7; reservas8/9, según bloque</div>
@@ -698,7 +706,7 @@ La escala de salida es normalizada por escena. Un único factor positivo GT usad
 
 </details>
 
-#### Validación: la media y cada keyframe
+##### Validación: la media y cada keyframe
 
 
 <div class="protocol-strip" id="tabla-protocolo-26"><strong>Validación local</strong> · SCARED dataset7 · Validación; no test8/9</div>
@@ -719,7 +727,7 @@ Dataset7. Primero se promedian los contextos de cada keyframe; después los cinc
 
 La mejora media no anula la regresión XYZ de KF4. Por eso no se presenta `last.pt` como un checkpoint aceptado, aunque se utilice para estudiar sus reconstrucciones.
 
-#### SCARED8 y SCARED9: vistas y métricas reservadas
+##### SCARED8 y SCARED9: vistas y métricas reservadas
 
 Cada caso utiliza el keyframe medido y 49 RGB de vídeo, 50 imágenes en total, 336×266. La reconstrucción guarda **4.468.800 puntos**. Las métricas describen **solo el ancla con GT**, no toda la superficie temporal ni la trayectoria. Se comparan los mismos RGB/GT entre pesos.
 
@@ -774,7 +782,7 @@ La transferencia VN18-SCARED → C3VD está integrada en la [comparación amplia
 <!-- SCARED_V9_RESULTS_START -->
 
 
-### SCARED · V9 adaptado {#scared-v9}
+#### SCARED · V9 adaptado {#scared-v9}
 
 Entrenamiento completado: **1.000 actualizaciones**, 2.000 exposiciones densas de 20 anclas medidas distintas. Reconstrucciones mostradas: **paso 1000**, V9-SCARED · candidato diagnóstico. **Ningún checkpoint afinado pasó todas las guardas**: se muestra un candidato diagnóstico elegido por VAL; el selector conserva los pesos oficiales de paso0.
 
@@ -916,7 +924,7 @@ Mismos 50 RGB y soporte GT histórico. El keyframe original0 es el único medido
 
 <!-- SCARED_C3VD_TRANSFER_V1_START -->
 
-#### Transferencia SCARED → C3VD · trans_t4_b {#scared-c3vd-trans4}
+##### Transferencia SCARED → C3VD · trans_t4_b {#scared-c3vd-trans4}
 
 Se aplicaron **V9-SCARED (paso1000)** y **VN18-SCARED (paso3240)** al mismo recorrido C3VD: **50 RGB a336×336, IDs0–596**. VN18-SCARED ya estaba inferido y se verificó/reutilizó; se generó únicamente la nueva inferencia V9-SCARED. Se conservan **5.644.800 puntos por nube**, sin filtro de confianza, máscara GT ni submuestreo de la exportación.
 
@@ -1013,7 +1021,7 @@ Para las variantes VGG-T³ de esta tabla, la secuencia quedó fuera de sus ajust
 <!-- SCARED_E01_E12_START -->
 
 
-## Pipeline y puntos de control {#pipeline}
+### Pipeline y puntos de control {#pipeline}
 
 El GT sirve para preparar objetivos y evaluar; durante la inferencia entran RGB. La ruta de puntos globales y la ruta D+K+pose se miden por separado. Los módulos entrenables dependen de la receta.
 
@@ -1023,7 +1031,7 @@ El GT sirve para preparar objetivos y evaluar; durante la inferencia entran RGB.
 
 <p class="pipeline-key">Contrato de datos: <a href="#exp-d01">D01</a> · Contexto/ancla: <a href="#exp-d07">D07</a>, <a href="#scared-e02">E02</a> · Coherencia D/P: <a href="#scared-e05-b">E05-B</a> · Recetas: <a href="#scared-e07-b">E07-B</a> · <a href="#ref-vggttt">Arquitectura original VGG-T³</a> · <a href="#ref-vggt">VGGT</a></p>
 
-## Experimentos: hipótesis, método, resultados y conclusión {#experimentos}
+### Experimentos: hipótesis, método, resultados y conclusión {#experimentos}
 
 Un solo catálogo de **63 fichas**: 44 de C3VD y 19 seguimientos/protocolos de SCARED y controles C3VD. **Ejecutado no significa hipótesis confirmada**. E13–E15 están preparados y todavía no tienen resultados GPU. Las preguntas históricas son una reformulación para lectura, no un prerregistro.
 
@@ -2654,7 +2662,7 @@ Un solo catálogo de **63 fichas**: 44 de C3VD y 19 seguimientos/protocolos de S
 
 </div>
 
-## Comparadores interactivos {#comparadores}
+### Comparadores interactivos {#comparadores}
 
 Esta edición web ofrece **15 nubes principales completas** de C3VD y SCARED. Cada nube conserva el **100 % de sus puntos guardados**. Las demás exportaciones del archivo local no se incluyen en esta publicación.
 
@@ -2671,6 +2679,63 @@ Las tablas solo muestran porcentajes cuando coinciden caso, soporte GT y protoco
 <dialog id="book-comparison-dialog"><div class="book-dialog-header"><strong id="book-dialog-title">Comparación de reconstrucciones y métricas</strong><a id="book-dialog-external" href="reconstrucciones/interactivo/comparador.html" target="_blank" rel="noopener">Abrir en otra pestaña</a><button type="button" id="maximize-book-dialog">Ampliar</button><button type="button" id="close-book-dialog">Cerrar y liberar 3D</button></div><div id="book-dialog-mount"></div></dialog>
 
 No todos los ensayos generaron nubes exportadas. Sus fichas indican la disponibilidad y permiten comparar sus registros; no se ejecutaron nuevos entrenamientos ni inferencias para rellenar ausencias.
+
+
+## VGGT {#vggt .model-workspace}
+
+<p class="model-state pending">Preparado para completar</p>
+
+<nav class="model-section-nav" aria-label="Apartados del modelo"><a href="#vggt-c3vd">C3VD</a><a href="#vggt-scared">SCARED</a><a href="#vggt-pipeline">Pipeline</a><a href="#vggt-experimentos">Experimentos</a><a href="#vggt-comparadores">Comparadores</a></nav>
+
+Espacio reservado para organizar los registros de VGGT con el mismo recorrido que VGG-T³. Este apartado se completará después.
+
+### C3VD · referencias y resultados {#vggt-c3vd}
+
+<div class="model-placeholder"><span class="placeholder-label">Pendiente de incorporar</span><p>Datos y particiones, entrenamiento, métricas, vistas e interpretación.</p></div>
+
+### SCARED · adaptación y transferencia {#vggt-scared}
+
+<div class="model-placeholder"><span class="placeholder-label">Pendiente de incorporar</span><p>Compatibilidad, entrenamiento, evaluación reservada y transferencia entre datasets.</p></div>
+
+### Pipeline y puntos de control {#vggt-pipeline}
+
+<div class="model-placeholder"><span class="placeholder-label">Pendiente de incorporar</span><p>Preparación de datos, ventanas, modelo, supervisión y evaluación.</p></div>
+
+### Experimentos: hipótesis, método, resultados y conclusión {#vggt-experimentos}
+
+<div class="model-placeholder"><span class="placeholder-label">Pendiente de incorporar</span><p>Las fichas seguirán el mismo formato: hipótesis, intervención, controles, métricas, resultados, conclusión, limitaciones, siguiente decisión y trazabilidad.</p></div>
+
+### Comparadores interactivos {#vggt-comparadores}
+
+<div class="model-placeholder"><span class="placeholder-label">Pendiente de incorporar</span><p>Reconstrucciones y tablas con protocolo visible; se incorporarán los enlaces verificados correspondientes.</p></div>
+
+## VGGT vs VGG-T³ {#vggt-vs-vgg-t3 .model-workspace}
+
+<p class="model-state pending">Preparado para completar</p>
+
+<nav class="model-section-nav" aria-label="Apartados del modelo"><a href="#vggt-vs-vgg-t3-c3vd">C3VD</a><a href="#vggt-vs-vgg-t3-scared">SCARED</a><a href="#vggt-vs-vgg-t3-pipeline">Pipeline</a><a href="#vggt-vs-vgg-t3-experimentos">Experimentos</a><a href="#vggt-vs-vgg-t3-comparadores">Comparadores</a></nav>
+
+Espacio reservado para reunir comparaciones entre ambos modelos. Las comparaciones históricas que ya aparecen como controles conservan su ubicación y sus condiciones en las fichas de VGG-T³.
+
+### C3VD · referencias y resultados {#vggt-vs-vgg-t3-c3vd}
+
+<div class="model-placeholder"><span class="placeholder-label">Pendiente de incorporar</span><p>Datos y particiones, entrenamiento, métricas, vistas e interpretación.</p></div>
+
+### SCARED · adaptación y transferencia {#vggt-vs-vgg-t3-scared}
+
+<div class="model-placeholder"><span class="placeholder-label">Pendiente de incorporar</span><p>Compatibilidad, entrenamiento, evaluación reservada y transferencia entre datasets.</p></div>
+
+### Pipeline y puntos de control {#vggt-vs-vgg-t3-pipeline}
+
+<div class="model-placeholder"><span class="placeholder-label">Pendiente de incorporar</span><p>Preparación de datos, ventanas, modelo, supervisión y evaluación.</p></div>
+
+### Experimentos: hipótesis, método, resultados y conclusión {#vggt-vs-vgg-t3-experimentos}
+
+<div class="model-placeholder"><span class="placeholder-label">Pendiente de incorporar</span><p>Las fichas seguirán el mismo formato: hipótesis, intervención, controles, métricas, resultados, conclusión, limitaciones, siguiente decisión y trazabilidad.</p></div>
+
+### Comparadores interactivos {#vggt-vs-vgg-t3-comparadores}
+
+<div class="model-placeholder"><span class="placeholder-label">Pendiente de incorporar</span><p>Reconstrucciones y tablas con protocolo visible; se incorporarán los enlaces verificados correspondientes.</p></div>
 
 ## Papers y enlaces de consulta {#bibliografia}
 

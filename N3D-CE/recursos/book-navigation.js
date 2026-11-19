@@ -6,7 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
     wrap.tabIndex=0;wrap.setAttribute('role','region');wrap.setAttribute('aria-label','Tabla: desplazamiento horizontal');
     table.before(wrap);wrap.append(table);
   });
-  const cards=[...document.querySelectorAll('[data-research-card]')], search=$('experiment-search');
+  const experimentRoot=$('experimentos');
+  const cards=[...(experimentRoot?.querySelectorAll('[data-research-card]')||[])], search=$('experiment-search');
   const controls=['experiment-problem','experiment-dataset','experiment-status','experiment-result','experiment-order'];
   const normalize=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
   const entries=cards.map(card=>({card,text:normalize(card.textContent)}));

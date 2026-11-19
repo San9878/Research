@@ -57,7 +57,7 @@ def main():
             block=re.sub(r'<p class="book-cloud-note">.*?</p>','<p class="book-cloud-note">La edición web conserva las mediciones de esta ficha. Las exportaciones específicas del diagnóstico, cuando existen, permanecen en el archivo local.</p>',block)
         return block
     q=re.sub(r'<details class="experiment-card".*?</details>',note,q,flags=re.S)
-    q=q.replace('## Comparadores interactivos {#comparadores}','## Comparadores interactivos {#comparadores}\n\nEsta edición web ofrece **15 nubes principales completas** de C3VD y SCARED. Cada nube conserva el **100 % de sus puntos guardados**. Las demás exportaciones del archivo local no se incluyen en esta publicación.\n')
+    q=re.sub(r'(?m)^(#{2,3}) Comparadores interactivos \{#comparadores\}$', lambda m: m[0]+'\n\nEsta edición web ofrece **15 nubes principales completas** de C3VD y SCARED. Cada nube conserva el **100 % de sus puntos guardados**. Las demás exportaciones del archivo local no se incluyen en esta publicación.\n',q,count=1)
     if not same_tables(original,q):raise RuntimeError('Public export changed a notebook data table')
     if q.count('class="experiment-card"')!=original.count('class="experiment-card"'):raise RuntimeError('An experiment card was lost')
     (dst/'Bitacora.qmd').write_text(q,encoding='utf8')
