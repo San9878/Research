@@ -91,6 +91,6 @@
   "metric_entries": 180,
   "historical_tables": 496,
   "all_saved_vertices_preserved": true,
-  "new_training": false,
-  "new_inference": false
+  "export_ran_training": false,
+  "export_ran_inference": false
 }
