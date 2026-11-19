@@ -9741,6 +9741,674 @@
         }
       ],
       "cloud_id": null
+    },
+    {
+      "id": "vggt-review-heldout_sequence_same_phantom-VGGT_ZS",
+      "label": "VGGT zero-shot · reservadas C3VD",
+      "group": "VGGT · C3VD recuperado · 50 vistas",
+      "dataset": "C3VD",
+      "case": "heldout_sequence_same_phantom",
+      "kind": "metrics",
+      "comparison_key": "C3VD|heldout_sequence_same_phantom|50-336|vggt-recovered-v1",
+      "context": "Dos secuencias con igual peso; D+pose predicha+K calibrada. Profundidad: escala por secuencia. XYZ: Sim3 sin ICP. CD/NC: Sim3+ICP. ATE/RPE: evo Sim3. Tiempos históricos.",
+      "values": [
+        {
+          "key": "AbsRel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.20697157742637728
+        },
+        {
+          "key": "delta1",
+          "label": "δ1",
+          "unit": "",
+          "higher": true,
+          "value": 0.6469259643253105
+        },
+        {
+          "key": "delta2",
+          "label": "δ2",
+          "unit": "",
+          "higher": true,
+          "value": 0.9052586580371159
+        },
+        {
+          "key": "delta3",
+          "label": "δ3",
+          "unit": "",
+          "higher": true,
+          "value": 0.9835413448011865
+        },
+        {
+          "key": "depth_RMSE_cm",
+          "label": "RMSE profundidad alineada",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.8112922488130515
+        },
+        {
+          "key": "XYZ_Sim3_cm",
+          "label": "XYZ medio · Sim(3), sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.9533496684632166
+        },
+        {
+          "key": "XYZ_p95_Sim3_cm",
+          "label": "XYZ p95 · Sim(3), sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.9982509082183242
+        },
+        {
+          "key": "CD_cm",
+          "label": "CD · Sim(3)+ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.3067843865271934
+        },
+        {
+          "key": "NC",
+          "label": "NC · Sim(3)+ICP",
+          "unit": "",
+          "higher": true,
+          "value": 0.6655526404212416
+        },
+        {
+          "key": "ATE_cm",
+          "label": "ATE RMSE · Sim(3)",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.36569915132470526
+        },
+        {
+          "key": "RPEr_deg",
+          "label": "RPEr RMSE",
+          "unit": "°",
+          "higher": false,
+          "value": 0.6793046190571554
+        },
+        {
+          "key": "RPEt_cm",
+          "label": "RPEt RMSE",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.17077149769874544
+        },
+        {
+          "key": "focal_error_percent",
+          "label": "Error focal relativo",
+          "unit": "%",
+          "higher": false,
+          "value": 100.23969675796201
+        },
+        {
+          "key": "pose_AUC@5",
+          "label": "Pose AUC@5",
+          "unit": "%",
+          "higher": true,
+          "value": 3.4204081632653067
+        },
+        {
+          "key": "pose_AUC@10",
+          "label": "Pose AUC@10",
+          "unit": "%",
+          "higher": true,
+          "value": 20.404081632653057
+        },
+        {
+          "key": "pose_AUC@20",
+          "label": "Pose AUC@20",
+          "unit": "%",
+          "higher": true,
+          "value": 35.35306122448979
+        },
+        {
+          "key": "pose_AUC@30",
+          "label": "Pose AUC@30",
+          "unit": "%",
+          "higher": true,
+          "value": 42.96190476190477
+        },
+        {
+          "key": "Acc_cm",
+          "label": "Accuracy · sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.4210947753485811
+        },
+        {
+          "key": "Comp_cm",
+          "label": "Completeness · sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.2547985514927736
+        },
+        {
+          "key": "Overall_cm",
+          "label": "Overall · sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.33794666342067736
+        },
+        {
+          "key": "inference_s",
+          "label": "Inferencia histórica",
+          "unit": "s",
+          "higher": false,
+          "value": 11.600406399998974
+        },
+        {
+          "key": "maximum_allocated_GiB",
+          "label": "Pico CUDA asignado",
+          "unit": "GiB",
+          "higher": false,
+          "value": 5.619760036468506
+        }
+      ],
+      "cloud_id": null
+    },
+    {
+      "id": "vggt-review-heldout_sequence_same_phantom-VGGT_FT",
+      "label": "VGGT FT 30ep · reservadas C3VD",
+      "group": "VGGT · C3VD recuperado · 50 vistas",
+      "dataset": "C3VD",
+      "case": "heldout_sequence_same_phantom",
+      "kind": "metrics",
+      "comparison_key": "C3VD|heldout_sequence_same_phantom|50-336|vggt-recovered-v1",
+      "context": "Dos secuencias con igual peso; D+pose predicha+K calibrada. Profundidad: escala por secuencia. XYZ: Sim3 sin ICP. CD/NC: Sim3+ICP. ATE/RPE: evo Sim3. Tiempos históricos.",
+      "values": [
+        {
+          "key": "AbsRel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.11601872683134395
+        },
+        {
+          "key": "delta1",
+          "label": "δ1",
+          "unit": "",
+          "higher": true,
+          "value": 0.8585345560679435
+        },
+        {
+          "key": "delta2",
+          "label": "δ2",
+          "unit": "",
+          "higher": true,
+          "value": 0.9938668279710758
+        },
+        {
+          "key": "delta3",
+          "label": "δ3",
+          "unit": "",
+          "higher": true,
+          "value": 0.9998897516418324
+        },
+        {
+          "key": "depth_RMSE_cm",
+          "label": "RMSE profundidad alineada",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.5485620507850526
+        },
+        {
+          "key": "XYZ_Sim3_cm",
+          "label": "XYZ medio · Sim(3), sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.5912120625365584
+        },
+        {
+          "key": "XYZ_p95_Sim3_cm",
+          "label": "XYZ p95 · Sim(3), sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.2101399176754057
+        },
+        {
+          "key": "CD_cm",
+          "label": "CD · Sim(3)+ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.16513138324214666
+        },
+        {
+          "key": "NC",
+          "label": "NC · Sim(3)+ICP",
+          "unit": "",
+          "higher": true,
+          "value": 0.744613426779453
+        },
+        {
+          "key": "ATE_cm",
+          "label": "ATE RMSE · Sim(3)",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.3080428189783324
+        },
+        {
+          "key": "RPEr_deg",
+          "label": "RPEr RMSE",
+          "unit": "°",
+          "higher": false,
+          "value": 0.5528619129146374
+        },
+        {
+          "key": "RPEt_cm",
+          "label": "RPEt RMSE",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.11927524365153491
+        },
+        {
+          "key": "focal_error_percent",
+          "label": "Error focal relativo",
+          "unit": "%",
+          "higher": false,
+          "value": 14.307054213321571
+        },
+        {
+          "key": "pose_AUC@5",
+          "label": "Pose AUC@5",
+          "unit": "%",
+          "higher": true,
+          "value": 2.106122448979592
+        },
+        {
+          "key": "pose_AUC@10",
+          "label": "Pose AUC@10",
+          "unit": "%",
+          "higher": true,
+          "value": 15.4
+        },
+        {
+          "key": "pose_AUC@20",
+          "label": "Pose AUC@20",
+          "unit": "%",
+          "higher": true,
+          "value": 35.66734693877551
+        },
+        {
+          "key": "pose_AUC@30",
+          "label": "Pose AUC@30",
+          "unit": "%",
+          "higher": true,
+          "value": 46.010884353741496
+        },
+        {
+          "key": "Acc_cm",
+          "label": "Accuracy · sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.25879197321152003
+        },
+        {
+          "key": "Comp_cm",
+          "label": "Completeness · sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.0850577942737847
+        },
+        {
+          "key": "Overall_cm",
+          "label": "Overall · sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.17192488374265236
+        },
+        {
+          "key": "inference_s",
+          "label": "Inferencia histórica",
+          "unit": "s",
+          "higher": false,
+          "value": 11.74694515000192
+        },
+        {
+          "key": "maximum_allocated_GiB",
+          "label": "Pico CUDA asignado",
+          "unit": "GiB",
+          "higher": false,
+          "value": 5.619760036468506
+        }
+      ],
+      "cloud_id": null
+    },
+    {
+      "id": "vggt-review-validation_selection-VGGT_ZS",
+      "label": "VGGT zero-shot · validación C3VD",
+      "group": "VGGT · C3VD recuperado · 50 vistas",
+      "dataset": "C3VD",
+      "case": "validation_selection",
+      "kind": "metrics",
+      "comparison_key": "C3VD|validation_selection|50-336|vggt-recovered-v1",
+      "context": "Dos secuencias con igual peso; D+pose predicha+K calibrada. Profundidad: escala por secuencia. XYZ: Sim3 sin ICP. CD/NC: Sim3+ICP. ATE/RPE: evo Sim3. Tiempos históricos.",
+      "values": [
+        {
+          "key": "AbsRel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.23787164998514326
+        },
+        {
+          "key": "delta1",
+          "label": "δ1",
+          "unit": "",
+          "higher": true,
+          "value": 0.5659793189250488
+        },
+        {
+          "key": "delta2",
+          "label": "δ2",
+          "unit": "",
+          "higher": true,
+          "value": 0.8722228111485686
+        },
+        {
+          "key": "delta3",
+          "label": "δ3",
+          "unit": "",
+          "higher": true,
+          "value": 0.96920815738001
+        },
+        {
+          "key": "depth_RMSE_cm",
+          "label": "RMSE profundidad alineada",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.6776013315603917
+        },
+        {
+          "key": "XYZ_Sim3_cm",
+          "label": "XYZ medio · Sim(3), sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.6020503090925542
+        },
+        {
+          "key": "XYZ_p95_Sim3_cm",
+          "label": "XYZ p95 · Sim(3), sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.3235571654513478
+        },
+        {
+          "key": "CD_cm",
+          "label": "CD · Sim(3)+ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.15563879433859965
+        },
+        {
+          "key": "NC",
+          "label": "NC · Sim(3)+ICP",
+          "unit": "",
+          "higher": true,
+          "value": 0.6609951812302296
+        },
+        {
+          "key": "ATE_cm",
+          "label": "ATE RMSE · Sim(3)",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.10831352898106814
+        },
+        {
+          "key": "RPEr_deg",
+          "label": "RPEr RMSE",
+          "unit": "°",
+          "higher": false,
+          "value": 0.5314999587779098
+        },
+        {
+          "key": "RPEt_cm",
+          "label": "RPEt RMSE",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.050609339184519965
+        },
+        {
+          "key": "focal_error_percent",
+          "label": "Error focal relativo",
+          "unit": "%",
+          "higher": false,
+          "value": 50.13562222586738
+        },
+        {
+          "key": "pose_AUC@5",
+          "label": "Pose AUC@5",
+          "unit": "%",
+          "higher": true,
+          "value": 0.6530612244897959
+        },
+        {
+          "key": "pose_AUC@10",
+          "label": "Pose AUC@10",
+          "unit": "%",
+          "higher": true,
+          "value": 8.70204081632653
+        },
+        {
+          "key": "pose_AUC@20",
+          "label": "Pose AUC@20",
+          "unit": "%",
+          "higher": true,
+          "value": 20.02857142857143
+        },
+        {
+          "key": "pose_AUC@30",
+          "label": "Pose AUC@30",
+          "unit": "%",
+          "higher": true,
+          "value": 30.253061224489795
+        },
+        {
+          "key": "Acc_cm",
+          "label": "Accuracy · sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.27956092460762716
+        },
+        {
+          "key": "Comp_cm",
+          "label": "Completeness · sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.0606393537346896
+        },
+        {
+          "key": "Overall_cm",
+          "label": "Overall · sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.17010013917115835
+        },
+        {
+          "key": "inference_s",
+          "label": "Inferencia histórica",
+          "unit": "s",
+          "higher": false,
+          "value": 11.86992365000151
+        },
+        {
+          "key": "maximum_allocated_GiB",
+          "label": "Pico CUDA asignado",
+          "unit": "GiB",
+          "higher": false,
+          "value": 5.623108863830566
+        }
+      ],
+      "cloud_id": null
+    },
+    {
+      "id": "vggt-review-validation_selection-VGGT_FT",
+      "label": "VGGT FT 30ep · validación C3VD",
+      "group": "VGGT · C3VD recuperado · 50 vistas",
+      "dataset": "C3VD",
+      "case": "validation_selection",
+      "kind": "metrics",
+      "comparison_key": "C3VD|validation_selection|50-336|vggt-recovered-v1",
+      "context": "Dos secuencias con igual peso; D+pose predicha+K calibrada. Profundidad: escala por secuencia. XYZ: Sim3 sin ICP. CD/NC: Sim3+ICP. ATE/RPE: evo Sim3. Tiempos históricos.",
+      "values": [
+        {
+          "key": "AbsRel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.15659023794638818
+        },
+        {
+          "key": "delta1",
+          "label": "δ1",
+          "unit": "",
+          "higher": true,
+          "value": 0.7627619989583738
+        },
+        {
+          "key": "delta2",
+          "label": "δ2",
+          "unit": "",
+          "higher": true,
+          "value": 0.9797317105617673
+        },
+        {
+          "key": "delta3",
+          "label": "δ3",
+          "unit": "",
+          "higher": true,
+          "value": 0.9996860383073554
+        },
+        {
+          "key": "depth_RMSE_cm",
+          "label": "RMSE profundidad alineada",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.5518627171815649
+        },
+        {
+          "key": "XYZ_Sim3_cm",
+          "label": "XYZ medio · Sim(3), sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.546740208065371
+        },
+        {
+          "key": "XYZ_p95_Sim3_cm",
+          "label": "XYZ p95 · Sim(3), sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.0841411957517266
+        },
+        {
+          "key": "CD_cm",
+          "label": "CD · Sim(3)+ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.1594832004045872
+        },
+        {
+          "key": "NC",
+          "label": "NC · Sim(3)+ICP",
+          "unit": "",
+          "higher": true,
+          "value": 0.7110692413004687
+        },
+        {
+          "key": "ATE_cm",
+          "label": "ATE RMSE · Sim(3)",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.0859832269813878
+        },
+        {
+          "key": "RPEr_deg",
+          "label": "RPEr RMSE",
+          "unit": "°",
+          "higher": false,
+          "value": 0.4920020824764051
+        },
+        {
+          "key": "RPEt_cm",
+          "label": "RPEt RMSE",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.042504536088575504
+        },
+        {
+          "key": "focal_error_percent",
+          "label": "Error focal relativo",
+          "unit": "%",
+          "higher": false,
+          "value": 12.505838571413598
+        },
+        {
+          "key": "pose_AUC@5",
+          "label": "Pose AUC@5",
+          "unit": "%",
+          "higher": true,
+          "value": 0.38367346938775515
+        },
+        {
+          "key": "pose_AUC@10",
+          "label": "Pose AUC@10",
+          "unit": "%",
+          "higher": true,
+          "value": 8.155102040816326
+        },
+        {
+          "key": "pose_AUC@20",
+          "label": "Pose AUC@20",
+          "unit": "%",
+          "higher": true,
+          "value": 20.179591836734694
+        },
+        {
+          "key": "pose_AUC@30",
+          "label": "Pose AUC@30",
+          "unit": "%",
+          "higher": true,
+          "value": 27.048979591836734
+        },
+        {
+          "key": "Acc_cm",
+          "label": "Accuracy · sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.2660923075778492
+        },
+        {
+          "key": "Comp_cm",
+          "label": "Completeness · sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.11185484569033297
+        },
+        {
+          "key": "Overall_cm",
+          "label": "Overall · sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.1889735766340911
+        },
+        {
+          "key": "inference_s",
+          "label": "Inferencia histórica",
+          "unit": "s",
+          "higher": false,
+          "value": 11.872013599999264
+        },
+        {
+          "key": "maximum_allocated_GiB",
+          "label": "Pico CUDA asignado",
+          "unit": "GiB",
+          "higher": false,
+          "value": 5.623108863830566
+        }
+      ],
+      "cloud_id": null
     }
   ],
   "no_metric_recalculation": true,

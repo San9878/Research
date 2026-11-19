@@ -1,0 +1,50 @@
+{
+  "schema": "vggt_scared_historical_depth_v1",
+  "status": "prepared_not_run",
+  "trainable": [
+    "depth_head"
+  ],
+  "epochs": 30,
+  "steps_per_epoch": 100,
+  "updates": 3000,
+  "image_size": 336,
+  "dense_supervised_views": 1,
+  "train_datasets": [
+    1,
+    2,
+    3,
+    6
+  ],
+  "validation_datasets": [
+    7
+  ],
+  "reserved_datasets": [
+    8,
+    9
+  ],
+  "geometry_quarantine": [
+    4,
+    5
+  ],
+  "temporal_quarantine": [
+    "dataset6/keyframe1"
+  ],
+  "departures_from_historical": [
+    "Camera loss disabled: no validated temporal GT; camera not instantiated during training.",
+    "Image long side 336 instead of 518: planned 8GB resource adaptation, GPU preflight still pending.",
+    "Only anchor position 0 supervised: 3000 dense exposures rather than historical 12000.",
+    "New seed is pinned; historical sampling seed was not recorded.",
+    "All five validation anchors evaluated; retain best plus final and resumable last checkpoint."
+  ],
+  "CPU_preparation_checks": {
+    "CPU_contracts_passed": true,
+    "model_constructed": false,
+    "optimizer_steps": 0,
+    "inference_launched": false,
+    "GPU_forward_backward": "pending_not_run",
+    "test_GT_read": false
+  },
+  "CPU_windows_checked": 25,
+  "GPU_forward_backward": "pending_not_run",
+  "new_training": false
+}

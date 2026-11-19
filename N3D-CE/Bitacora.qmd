@@ -70,7 +70,7 @@ execute:
 
 ```
 
-<nav class="reading-map model-map" aria-label="Elegir modelo"><a href="#vgg-t3"><strong>VGG-T³</strong><small>C3VD, SCARED y las 63 fichas actuales.</small></a><a href="#vggt"><strong>VGGT</strong><small>La misma estructura, lista para completar.</small></a><a href="#vggt-vs-vgg-t3"><strong>VGGT vs VGG-T³</strong><small>Espacio para las comparaciones entre modelos.</small></a></nav>
+<nav class="reading-map model-map" aria-label="Elegir modelo"><a href="#vgg-t3"><strong>VGG-T³</strong><small>C3VD, SCARED y las 63 fichas actuales.</small></a><a href="#vggt"><strong>VGGT</strong><small>C3VD recuperado · SCARED y C01–C10 preparados.</small></a><a href="#vggt-vs-vgg-t3"><strong>VGGT vs VGG-T³</strong><small>Espacio para las comparaciones entre modelos.</small></a></nav>
 
 <p class="scope-note">Esta edición reorganiza resultados existentes. No cambia entrenamientos, métricas ni geometría. Las nubes se cargan bajo demanda con el 100 % de sus puntos guardados.</p>
 
@@ -2683,31 +2683,347 @@ No todos los ensayos generaron nubes exportadas. Sus fichas indican la disponibi
 
 ## VGGT {#vggt .model-workspace}
 
-<p class="model-state pending">Preparado para completar</p>
+<p class="model-state">C3VD · métricas recuperadas | SCARED y C01–C10 · preparados</p>
 
-<nav class="model-section-nav" aria-label="Apartados del modelo"><a href="#vggt-c3vd">C3VD</a><a href="#vggt-scared">SCARED</a><a href="#vggt-pipeline">Pipeline</a><a href="#vggt-experimentos">Experimentos</a><a href="#vggt-comparadores">Comparadores</a></nav>
+<nav class="model-section-nav" aria-label="Apartados VGGT"><a href="#vggt-c3vd">C3VD</a><a href="#vggt-scared">SCARED</a><a href="#vggt-pipeline">Pipeline</a><a href="#vggt-experimentos">Experimentos</a><a href="#vggt-comparadores">Comparadores</a></nav>
 
-Espacio reservado para organizar los registros de VGGT con el mismo recorrido que VGG-T³. Este apartado se completará después.
+Esta revisión recupera resultados guardados. No ejecuta inferencias, entrenamiento ni la nueva serie C01–C10. El último fine-tuning C3VD localizado es **c3vd_baseline_heads_30ep.pt**, final de 30 épocas.
 
 ### C3VD · referencias y resultados {#vggt-c3vd}
 
-<div class="model-placeholder"><span class="placeholder-label">Pendiente de incorporar</span><p>Datos y particiones, entrenamiento, métricas, vistas e interpretación.</p></div>
+#### Entrenamiento histórico identificado
+
+| Aspecto | Registro recuperado |
+| --- | --- |
+| Inicialización | Pesos oficiales facebook/VGGT-1B; ajuste supervisado, no entrenamiento desde cero. |
+| Módulos entrenables | Camera head y depth head. Point head y track head retiradas. |
+| Encoder | Congelado en el script. La auditoría histórica encontró 39 valores escalares cambiados en 3 tensores; no afirmar identidad binaria del encoder. |
+| Presupuesto | 30 épocas × 100 pasos = 3.000 actualizaciones; 4 vistas por paso, 12.000 supervisiones densas programadas. |
+| Resolución / optimizador | 518 × 518; AdamW, LR 1e-5, weight decay 0,05; sin scheduler ni clipping en el script auditado. |
+| Pérdidas | Cámara L1 × 5; profundidad nativa × 1 con confianza, gradiente y valid_range 0,98. |
+| Normalización | Referencia en la primera cámara y escala media de puntos válidos; las salidas no deben suponerse metros brutos. |
+| Selección / semilla | Checkpoint final. La validación del código antiguo tomaba el registro 0 al final de cada época; la semilla de muestreo no quedó fijada/documentada. |
+| Alcance de reproducibilidad | Se conservan argumentos y auditoría. El checkpoint antiguo no incorporó el hash del manifiesto; evaluar hoy con geometry_v2 no corrige retroactivamente los datos de aquel entrenamiento. |
+
+
+#### Partición C3VD
+
+Las ocho secuencias del manifiesto histórico se reparten en **6 de entrenamiento y 2 de validación**; no son ocho de entrenamiento. Se evaluaron además dos secuencias reservadas del mismo phantom, ya inspeccionadas en el proyecto. No equivalen a pacientes nuevos ni a un test todavía ciego.
+
+| Uso | Secuencia | Frames disponibles |
+| --- | --- | --- |
+| Entrenamiento | cecum_t1_b | 765 |
+| Entrenamiento | cecum_t2_b | 1142 |
+| Entrenamiento | cecum_t3_a | 730 |
+| Entrenamiento | desc_t4_a | 148 |
+| Entrenamiento | sigmoid_t1_a | 700 |
+| Entrenamiento | sigmoid_t3_a | 613 |
+| Validación | trans_t1_b | 700 |
+| Validación | trans_t4_b | 597 |
+| Reservada | cecum_t2_a | 370 |
+| Reservada | trans_t1_a | 61 |
+
+
+#### Zero-shot frente al último fine-tuning
+
+Los porcentajes son cambios relativos favorables: reducción para errores e incremento para métricas de acierto. Un signo negativo indica deterioro. Las métricas proceden de protocolos distintos que se identifican en cada fila.
+
+<details open><summary>Reservadas · cecum_t2_a + trans_t1_a</summary>
+
+
+<div class="protocol-strip"><strong>Protocolo</strong> · C3VD · Reservadas · cecum_t2_a + trans_t1_a · 50 RGB por secuencia · 336×336 · mismos frames y GT para ZS/FT · media de dos secuencias con igual peso · ruta VGGT D+pose predicha+K calibrada · sin BA</div>
+
+| Métrica | Zero-shot | Fine-tuning 30ep | Cambio favorable |
+| --- | --- | --- | --- |
+| AbsRel ↓ | 0.20697 | 0.11602 | +43.94 % |
+| δ1 ↑ | 0.64693 | 0.85853 | +32.71 % |
+| δ2 ↑ | 0.90526 | 0.99387 | +9.79 % |
+| δ3 ↑ | 0.98354 | 0.99989 | +1.66 % |
+| RMSE profundidad alineada ↓ (cm) | 0.81129 | 0.54856 | +32.38 % |
+| XYZ medio · Sim(3), sin ICP ↓ (cm) | 0.95335 | 0.59121 | +37.99 % |
+| XYZ p95 · Sim(3), sin ICP ↓ (cm) | 1.99825 | 1.21014 | +39.44 % |
+| CD · Sim(3)+ICP ↓ (cm) | 0.30678 | 0.16513 | +46.17 % |
+| NC · Sim(3)+ICP ↑ | 0.66555 | 0.74461 | +11.88 % |
+| ATE RMSE · Sim(3) ↓ (cm) | 0.36570 | 0.30804 | +15.77 % |
+| RPEr RMSE ↓ (°) | 0.67930 | 0.55286 | +18.61 % |
+| RPEt RMSE ↓ (cm) | 0.17077 | 0.11928 | +30.16 % |
+| Error focal relativo ↓ (%) | 100.23970 | 14.30705 | +85.73 % |
+| Pose AUC@5 ↑ (%) | 3.42041 | 2.10612 | -38.42 % |
+| Pose AUC@10 ↑ (%) | 20.40408 | 15.40000 | -24.52 % |
+| Pose AUC@20 ↑ (%) | 35.35306 | 35.66735 | +0.89 % |
+| Pose AUC@30 ↑ (%) | 42.96190 | 46.01088 | +7.10 % |
+| Accuracy · sin ICP ↓ (cm) | 0.42109 | 0.25879 | +38.54 % |
+| Completeness · sin ICP ↓ (cm) | 0.25480 | 0.08506 | +66.62 % |
+| Overall · sin ICP ↓ (cm) | 0.33795 | 0.17192 | +49.13 % |
+| Inferencia histórica ↓ (s) | 11.60041 | 11.74695 | -1.26 % |
+| Pico CUDA asignado ↓ (GiB) | 5.61976 | 5.61976 | -0.00 % |
+
+
+</details>
+
+<details ><summary>Validación · trans_t1_b + trans_t4_b</summary>
+
+
+<div class="protocol-strip"><strong>Protocolo</strong> · C3VD · Validación · trans_t1_b + trans_t4_b · 50 RGB por secuencia · 336×336 · mismos frames y GT para ZS/FT · media de dos secuencias con igual peso · ruta VGGT D+pose predicha+K calibrada · sin BA</div>
+
+| Métrica | Zero-shot | Fine-tuning 30ep | Cambio favorable |
+| --- | --- | --- | --- |
+| AbsRel ↓ | 0.23787 | 0.15659 | +34.17 % |
+| δ1 ↑ | 0.56598 | 0.76276 | +34.77 % |
+| δ2 ↑ | 0.87222 | 0.97973 | +12.33 % |
+| δ3 ↑ | 0.96921 | 0.99969 | +3.14 % |
+| RMSE profundidad alineada ↓ (cm) | 0.67760 | 0.55186 | +18.56 % |
+| XYZ medio · Sim(3), sin ICP ↓ (cm) | 0.60205 | 0.54674 | +9.19 % |
+| XYZ p95 · Sim(3), sin ICP ↓ (cm) | 1.32356 | 1.08414 | +18.09 % |
+| CD · Sim(3)+ICP ↓ (cm) | 0.15564 | 0.15948 | -2.47 % |
+| NC · Sim(3)+ICP ↑ | 0.66100 | 0.71107 | +7.58 % |
+| ATE RMSE · Sim(3) ↓ (cm) | 0.10831 | 0.08598 | +20.62 % |
+| RPEr RMSE ↓ (°) | 0.53150 | 0.49200 | +7.43 % |
+| RPEt RMSE ↓ (cm) | 0.05061 | 0.04250 | +16.01 % |
+| Error focal relativo ↓ (%) | 50.13562 | 12.50584 | +75.06 % |
+| Pose AUC@5 ↑ (%) | 0.65306 | 0.38367 | -41.25 % |
+| Pose AUC@10 ↑ (%) | 8.70204 | 8.15510 | -6.29 % |
+| Pose AUC@20 ↑ (%) | 20.02857 | 20.17959 | +0.75 % |
+| Pose AUC@30 ↑ (%) | 30.25306 | 27.04898 | -10.59 % |
+| Accuracy · sin ICP ↓ (cm) | 0.27956 | 0.26609 | +4.82 % |
+| Completeness · sin ICP ↓ (cm) | 0.06064 | 0.11185 | -84.46 % |
+| Overall · sin ICP ↓ (cm) | 0.17010 | 0.18897 | -11.10 % |
+| Inferencia histórica ↓ (s) | 11.86992 | 11.87201 | -0.02 % |
+| Pico CUDA asignado ↓ (GiB) | 5.62311 | 5.62311 | -0.00 % |
+
+
+</details>
+
+**Lectura:** las reservadas mejoran en profundidad y en varias medidas de superficie/pose. La validación contiene regresiones en CD, completitud y AUC@30; por tanto no hay una mejora uniforme de la reconstrucción. Los tiempos son históricos, sin repeticiones controladas: diferencias pequeñas no prueban aceleración.
+
+<details><summary>Resultados por secuencia · evita que la media esconda regresiones</summary>
+
+
+<div class="protocol-strip"><strong>Protocolo</strong> · C3VD · 50 vistas a 336×336 · XYZ por correspondencia después de Sim(3), sin ICP; CD/NC con Sim(3)+ICP; error focal sobre K predicha, no K calibrada.</div>
+
+| Secuencia | Pesos | XYZ cm ↓ | p95 cm ↓ | CD cm ↓ | NC ↑ | Focal % ↓ |
+| --- | --- | --- | --- | --- | --- | --- |
+| cecum_t2_a | VGGT_ZS | 1.0718 | 1.9588 | 0.2810 | 0.7236 | 102.927 |
+| cecum_t2_a | VGGT_FT | 0.6571 | 1.2677 | 0.1498 | 0.7481 | 13.021 |
+| trans_t1_a | VGGT_ZS | 0.8349 | 2.0377 | 0.3326 | 0.6075 | 97.553 |
+| trans_t1_a | VGGT_FT | 0.5253 | 1.1526 | 0.1805 | 0.7411 | 15.593 |
+| trans_t1_b | VGGT_ZS | 0.5586 | 1.0494 | 0.1429 | 0.6700 | 73.802 |
+| trans_t1_b | VGGT_FT | 0.5219 | 1.0164 | 0.1214 | 0.7055 | 14.091 |
+| trans_t4_b | VGGT_ZS | 0.6455 | 1.5977 | 0.1684 | 0.6519 | 26.470 |
+| trans_t4_b | VGGT_FT | 0.5715 | 1.1519 | 0.1976 | 0.7166 | 10.920 |
+
+
+</details>
+
+<details><summary>Qué mide cada bloque y cuáles comparaciones son válidas</summary>
+
+- **Profundidad:** AbsRel y δ1 usan una sola escala mediana por secuencia. No demuestran recuperación de escala métrica sin GT.
+- **XYZ/p95:** error entre puntos correspondientes después de un Sim(3) global; sin ICP.
+- **CD/NC:** distancias vecinas y normales después de Sim(3)+ICP. El registro puede absorber errores globales; CD no sustituye XYZ ni las poses.
+- **Accuracy/Completeness/Overall:** protocolo sin ICP; por eso Overall y CD no tienen que coincidir.
+- **ATE/RPE:** trayectoria alineada Sim(3), RPE entre vistas seleccionadas consecutivas; no necesariamente frames originales consecutivos.
+- **Pose AUC:** métrica angular de pares del repo; no confundir con mAA ni con ATE.
+- **Eficiencia:** tiempos del wrapper y memoria asignada; no son el benchmark de backbone/H100 del paper ni FPS de streaming.
+
+Las tablas originales del paper usan otros datasets y hardware. Se recuperan sus definiciones, pero sus cifras no se usan para afirmar que C3VD supera ese benchmark.
+
+<div class="book-actions"><button class="book-open-metrics" data-metrics="paper-vggt-1,paper-vggt-2,paper-vggt-3,paper-vggt-9">Consultar tablas originales de VGGT</button></div>
+
+</details>
 
 ### SCARED · adaptación y transferencia {#vggt-scared}
 
-<div class="model-placeholder"><span class="placeholder-label">Pendiente de incorporar</span><p>Compatibilidad, entrenamiento, evaluación reservada y transferencia entre datasets.</p></div>
+**Preparado, sin entrenar.** Esta es una adaptación explícita del último VGGT C3VD; no se presenta como réplica exacta ni como VN19 de VGG-T³. Se parte otra vez de pesos oficiales.
+
+| Aspecto | VGGT C3VD histórico | VGGT SCARED preparado |
+| --- | --- | --- |
+| Cabezas | Cámara + profundidad; sin point head | Solo profundidad; sin cámara, puntos ni tracking durante entrenamiento. Al inferir después, la cámara oficial debe restaurarse y permanecer identificada como no afinada. |
+| GT | Profundidad y cámaras de las ventanas históricas | Solo profundidad medida del ancla; sin supervisión temporal de cámara ni pseudo-GT propagada. |
+| Contexto | 4 vistas | 4 donde existe vídeo apto; 1 para anclas sin contexto validado. |
+| Vistas supervisadas | 4 por paso | 1 por paso, siempre posición 0. Las otras imágenes solo aportan contexto. |
+| Resolución | 518×518 | Lado largo 336; ejemplo real 266×336. Conserva aspecto y transforma K con el remuestreo. |
+| Pasos y exposiciones | 3.000 pasos; 12.000 supervisiones densas | 3.000 pasos; 3.000 supervisiones densas. Igual cantidad de pasos no implica igual exposición ni coste. |
+| Pérdida / optimizador | Cámara×5 + profundidad×1; AdamW 1e-5, WD 0,05 | Misma pérdida nativa de profundidad y AdamW; pérdida de cámara omitida. Sin clipping/scheduler. |
+| Validación / pesos | Registro 0 por época; guarda final | Las 5 anclas de VAL; guarda last reanudable, best por AbsRel y final. No equivale a selección por geometría conjunta. |
+| Semilla | No registrada | 1234 guardada, RNG y firma para reanudar. |
+
+
+| Uso SCARED | Datasets | Anclas medidas | Contextos preparados |
+| --- | --- | --- | --- |
+| Entrenamiento | 1, 2, 3 y 6 | 20 | 14 con 4 RGB; 6 con 1 RGB |
+| Validación | 7 | 5 | 4 con 4 RGB; 1 con 1 RGB |
+| Reservados | 8 y 9 | 10 | Planificados; no se leyó GT de test para esta preparación. |
+| Cuarentena geométrica | 4 y 5 | 10 | No participan en este entrenamiento. |
+| Cuarentena temporal | dataset6/keyframe1 | 1 | Solo el ancla medida; excluye su contexto temporal. |
+
+
+Los IDs de keyframe **original** y **processed** se relacionan mediante el crosswalk verificado, sin suponer que sus índices coinciden. La profundidad viene del canal Z del XYZ medido, mm→m; no es una imagen escalar C3VD. Cada ancla conserva su propio sistema de referencia.
+
+<details><summary>Preparación y verificaciones realizadas</summary>
+
+Se comprobó separación de datasets, firmas de módulos/manifiestos, máscara solo en el ancla y normalización nativa en las 25 ventanas de TRAIN/VAL. Además se comprobó el gradiente de la pérdida en CPU con una ventana de cuatro vistas de TRAIN y el ancla en cuarentena temporal. **No se construyó el modelo, no hubo pasos de optimizador y no se inició CUDA.**
+
+El forward/backward del modelo real y su presupuesto de VRAM siguen **pendientes**. La reducción de resolución es una adaptación de recursos preparada, no una mejora demostrada.
+
+Configuración local: `G:/Kaust/VGGT/repo/artifacts/experiments/vggt_scared_depth_v1/config.json`. Lanzador: `G:/Kaust/VGGT/repo/launchers/vggt_scared_depth_v1.ps1`; su modo predeterminado `check` no entrena.
+
+</details>
+
+**Transferencia:** todavía no se obtuvieron métricas de un VGGT entrenado con SCARED. Las reconstrucciones VN18/V9-SCARED que ya existen en la bitácora pertenecen a VGG-T³.
 
 ### Pipeline y puntos de control {#vggt-pipeline}
 
-<div class="model-placeholder"><span class="placeholder-label">Pendiente de incorporar</span><p>Preparación de datos, ventanas, modelo, supervisión y evaluación.</p></div>
+RGB rectificados → ventanas identificadas → encoder/aggregator VGGT → profundidad y cámara predichas → D+K+pose → evaluación contra GT. En el checkpoint histórico, la point head está ausente. VGGT no tiene pasos internos TTT.
+
+Para el entrenamiento SCARED preparado: RGB de todo el contexto → encoder oficial congelado → depth head entrenable en posición 0 → pérdida contra profundidad medida y normalizada del ancla. Las poses del vídeo no se usan como objetivos.
 
 ### Experimentos: hipótesis, método, resultados y conclusión {#vggt-experimentos}
 
-<div class="model-placeholder"><span class="placeholder-label">Pendiente de incorporar</span><p>Las fichas seguirán el mismo formato: hipótesis, intervención, controles, métricas, resultados, conclusión, limitaciones, siguiente decisión y trazabilidad.</p></div>
+La serie se conserva como **plan**, con un inventario explícito de qué evidencia histórica puede reutilizarse. Preparar una ficha no equivale a ejecutar el diseño completo.
+
+| ID | Experimento | Evidencia disponible / pendiente |
+| --- | --- | --- |
+| C01 | Zero-shot en los mismos datasets | C3VD: disponible en 4 secuencias emparejadas. SCARED: pendiente para VGGT. |
+| C02 | Sensibilidad al tamaño del contexto | Hay barridos históricos C3VD; falta completar este diseño exacto. |
+| C03 | Comparación de rutas geométricas | Histórico VGGT_FT no contiene point_head. No hay P fine-tuned que recuperar. |
+| C04 | Cámara: rotación, traslación e intrínsecas | C3VD: métricas completas guardadas. SCARED: sin GT temporal certificado. |
+| C05 | Orden, primer frame y solapamiento | Controles históricos C3VD disponibles; protocolo uniforme adicional preparado. |
+| C06 | Fine-tuning comparable | C3VD 30ep final recuperado. SCARED depth-only preparado, no ejecutado. |
+| C07 | Transferencia entre datasets | VGGT: pendiente. No reutilizar transferencia de VGG-T³ como si fuera VGGT. |
+| C08 | Escalabilidad y rendimiento | Tiempos históricos disponibles; repetición controlada pendiente. |
+| C09 | Sensibilidad específica de TTT | No aplicable a VGGT. Reservado para VGG-T³. |
+| C10 | Consistencia y cobertura multivista | Superficie y solapamiento GT C3VD guardados; proxy multivista uniforme pendiente. |
+
+
+<details class="vggt-experiment-card" id="vggt-c01" data-vggt-card><summary><span class="card-status pending">Plan preparado</span><span class="card-id">C01</span>Zero-shot en los mismos datasets</summary><div class="card-content">
+<dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>¿Qué calidad ofrecen los pesos oficiales en el mismo caso endoscópico antes de cualquier ajuste de dominio?</dd></dl>
+<dl class="card-fields"><dt>Intervención prevista</dt><dd>Usar exactamente los mismos RGB rectificados, resolución y soporte GT.</dd></dl>
+<dl class="card-fields"><dt>Controles</dt><dd>Pesos identificados por firma; mismo RGB, frames, GT y protocolo por comparación; selección solo en VAL.</dd></dl>
+<dl class="card-fields"><dt>Métricas</dt><dd>AbsRel, δ1, XYZ/p95, CD/NC</dd></dl>
+<dl class="card-fields"><dt>Resultados históricos disponibles</dt><dd>C3VD: disponible en 4 secuencias emparejadas. SCARED: pendiente para VGGT.</dd></dl>
+<dl class="card-fields"><dt>Estado de esta nueva serie</dt><dd>Solo se recuperan los resultados históricos que se indican; no se ejecutó esta nueva serie.</dd></dl>
+<dl class="card-fields"><dt>Conclusión</dt><dd>Pendiente de la prueba uniforme; no convertir evidencia parcial en aceptación del protocolo completo.</dd></dl>
+<dl class="card-fields"><dt>Limitaciones</dt><dd>SCARED no tiene GT temporal certificado; el VGGT histórico carece de point_head afinada.</dd></dl>
+<dl class="card-fields"><dt>Siguiente decisión</dt><dd>Revisar plan y preflight antes de autorizar ejecución; mantener entrenamiento SCARED sin lanzar.</dd></dl>
+<details class="trace-details"><summary>Protocolo y trazabilidad</summary><p>Registro: <a href="tablas/vggt_C01_C10.json">C01–C10</a> · <a href="tablas/vggt_resultados_recuperados.json">Métricas recuperadas</a>. Pesos, caso, GT, escala y alineamiento se conservan por tabla. Las pruebas pendientes no tienen mediciones nuevas.</p></details></div></details>
+
+<details class="vggt-experiment-card" id="vggt-c02" data-vggt-card><summary><span class="card-status pending">Plan preparado</span><span class="card-id">C02</span>Sensibilidad al tamaño del contexto</summary><div class="card-content">
+<dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>Añadir vistas puede mejorar profundidad y deteriorar geometría global; distinguir cantidad de vistas, extensión y densidad.</dd></dl>
+<dl class="card-fields"><dt>Intervención prevista</dt><dd>Separar N con extensión fija de extensión con densidad fija; mismos frames comunes y ancla fija.</dd></dl>
+<dl class="card-fields"><dt>Controles</dt><dd>Pesos identificados por firma; mismo RGB, frames, GT y protocolo por comparación; selección solo en VAL.</dd></dl>
+<dl class="card-fields"><dt>Métricas</dt><dd>Geometría por N=1/4/8/16/50</dd></dl>
+<dl class="card-fields"><dt>Resultados históricos disponibles</dt><dd>Hay barridos históricos C3VD; falta completar este diseño exacto.</dd></dl>
+<dl class="card-fields"><dt>Estado de esta nueva serie</dt><dd>Solo se recuperan los resultados históricos que se indican; no se ejecutó esta nueva serie.</dd></dl>
+<dl class="card-fields"><dt>Conclusión</dt><dd>Pendiente de la prueba uniforme; no convertir evidencia parcial en aceptación del protocolo completo.</dd></dl>
+<dl class="card-fields"><dt>Limitaciones</dt><dd>SCARED no tiene GT temporal certificado; el VGGT histórico carece de point_head afinada.</dd></dl>
+<dl class="card-fields"><dt>Siguiente decisión</dt><dd>Revisar plan y preflight antes de autorizar ejecución; mantener entrenamiento SCARED sin lanzar.</dd></dl>
+<details class="trace-details"><summary>Protocolo y trazabilidad</summary><p>Registro: <a href="tablas/vggt_C01_C10.json">C01–C10</a> · <a href="tablas/vggt_resultados_recuperados.json">Métricas recuperadas</a>. Pesos, caso, GT, escala y alineamiento se conservan por tabla. Las pruebas pendientes no tienen mediciones nuevas.</p></details></div></details>
+
+<details class="vggt-experiment-card" id="vggt-c03" data-vggt-card><summary><span class="card-status pending">Plan preparado</span><span class="card-id">C03</span>Comparación de rutas geométricas</summary><div class="card-content">
+<dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>Las predicciones de P directo y de D+K+pose pueden divergir aunque procedan del mismo contexto.</dd></dl>
+<dl class="card-fields"><dt>Intervención prevista</dt><dd>Auditar P oficial separado; cualquier reinstalación oficial se etiquetará diagnóstico híbrido, nunca P afinado.</dd></dl>
+<dl class="card-fields"><dt>Controles</dt><dd>Pesos identificados por firma; mismo RGB, frames, GT y protocolo por comparación; selección solo en VAL.</dd></dl>
+<dl class="card-fields"><dt>Métricas</dt><dd>XYZ P directo, D+K+pose, coherencia D/P</dd></dl>
+<dl class="card-fields"><dt>Resultados históricos disponibles</dt><dd>Histórico VGGT_FT no contiene point_head. No hay P fine-tuned que recuperar.</dd></dl>
+<dl class="card-fields"><dt>Estado de esta nueva serie</dt><dd>Solo se recuperan los resultados históricos que se indican; no se ejecutó esta nueva serie.</dd></dl>
+<dl class="card-fields"><dt>Conclusión</dt><dd>Pendiente de la prueba uniforme; no convertir evidencia parcial en aceptación del protocolo completo.</dd></dl>
+<dl class="card-fields"><dt>Limitaciones</dt><dd>SCARED no tiene GT temporal certificado; el VGGT histórico carece de point_head afinada.</dd></dl>
+<dl class="card-fields"><dt>Siguiente decisión</dt><dd>Revisar plan y preflight antes de autorizar ejecución; mantener entrenamiento SCARED sin lanzar.</dd></dl>
+<details class="trace-details"><summary>Protocolo y trazabilidad</summary><p>Registro: <a href="tablas/vggt_C01_C10.json">C01–C10</a> · <a href="tablas/vggt_resultados_recuperados.json">Métricas recuperadas</a>. Pesos, caso, GT, escala y alineamiento se conservan por tabla. Las pruebas pendientes no tienen mediciones nuevas.</p></details></div></details>
+
+<details class="vggt-experiment-card" id="vggt-c04" data-vggt-card><summary><span class="card-status pending">Plan preparado</span><span class="card-id">C04</span>Cámara: rotación, traslación e intrínsecas</summary><div class="card-content">
+<dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>Una mejora de profundidad puede quedar limitada por errores de rotación, traslación o focal.</dd></dl>
+<dl class="card-fields"><dt>Intervención prevista</dt><dd>No puntuar K calibrada como predicción; ATE/RPE indefinidos en N=1 y no certificados en SCARED.</dd></dl>
+<dl class="card-fields"><dt>Controles</dt><dd>Pesos identificados por firma; mismo RGB, frames, GT y protocolo por comparación; selección solo en VAL.</dd></dl>
+<dl class="card-fields"><dt>Métricas</dt><dd>AUC, ATE, RPEr, RPEt, error focal</dd></dl>
+<dl class="card-fields"><dt>Resultados históricos disponibles</dt><dd>C3VD: métricas completas guardadas. SCARED: sin GT temporal certificado.</dd></dl>
+<dl class="card-fields"><dt>Estado de esta nueva serie</dt><dd>Solo se recuperan los resultados históricos que se indican; no se ejecutó esta nueva serie.</dd></dl>
+<dl class="card-fields"><dt>Conclusión</dt><dd>Pendiente de la prueba uniforme; no convertir evidencia parcial en aceptación del protocolo completo.</dd></dl>
+<dl class="card-fields"><dt>Limitaciones</dt><dd>SCARED no tiene GT temporal certificado; el VGGT histórico carece de point_head afinada.</dd></dl>
+<dl class="card-fields"><dt>Siguiente decisión</dt><dd>Revisar plan y preflight antes de autorizar ejecución; mantener entrenamiento SCARED sin lanzar.</dd></dl>
+<details class="trace-details"><summary>Protocolo y trazabilidad</summary><p>Registro: <a href="tablas/vggt_C01_C10.json">C01–C10</a> · <a href="tablas/vggt_resultados_recuperados.json">Métricas recuperadas</a>. Pesos, caso, GT, escala y alineamiento se conservan por tabla. Las pruebas pendientes no tienen mediciones nuevas.</p></details></div></details>
+
+<details class="vggt-experiment-card" id="vggt-c05" data-vggt-card><summary><span class="card-status pending">Plan preparado</span><span class="card-id">C05</span>Orden, primer frame y solapamiento</summary><div class="card-content">
+<dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>Parte del deterioro puede depender de la vista de referencia y del solapamiento, además de la longitud.</dd></dl>
+<dl class="card-fields"><dt>Intervención prevista</dt><dd>Identidad, reverso, primer frame alternativo y permutación fija. Restaurar correspondencias y gauge antes de comparar.</dd></dl>
+<dl class="card-fields"><dt>Controles</dt><dd>Pesos identificados por firma; mismo RGB, frames, GT y protocolo por comparación; selección solo en VAL.</dd></dl>
+<dl class="card-fields"><dt>Métricas</dt><dd>Cambio de predicción y error GT</dd></dl>
+<dl class="card-fields"><dt>Resultados históricos disponibles</dt><dd>Controles históricos C3VD disponibles; protocolo uniforme adicional preparado.</dd></dl>
+<dl class="card-fields"><dt>Estado de esta nueva serie</dt><dd>Solo se recuperan los resultados históricos que se indican; no se ejecutó esta nueva serie.</dd></dl>
+<dl class="card-fields"><dt>Conclusión</dt><dd>Pendiente de la prueba uniforme; no convertir evidencia parcial en aceptación del protocolo completo.</dd></dl>
+<dl class="card-fields"><dt>Limitaciones</dt><dd>SCARED no tiene GT temporal certificado; el VGGT histórico carece de point_head afinada.</dd></dl>
+<dl class="card-fields"><dt>Siguiente decisión</dt><dd>Revisar plan y preflight antes de autorizar ejecución; mantener entrenamiento SCARED sin lanzar.</dd></dl>
+<details class="trace-details"><summary>Protocolo y trazabilidad</summary><p>Registro: <a href="tablas/vggt_C01_C10.json">C01–C10</a> · <a href="tablas/vggt_resultados_recuperados.json">Métricas recuperadas</a>. Pesos, caso, GT, escala y alineamiento se conservan por tabla. Las pruebas pendientes no tienen mediciones nuevas.</p></details></div></details>
+
+<details class="vggt-experiment-card" id="vggt-c06" data-vggt-card><summary><span class="card-status pending">Plan preparado</span><span class="card-id">C06</span>Fine-tuning comparable</summary><div class="card-content">
+<dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>La adaptación puede mejorar dentro del dominio sin mejorar todos los componentes o secuencias.</dd></dl>
+<dl class="card-fields"><dt>Intervención prevista</dt><dd>Misma evaluación no implica mismo entrenamiento. Reportar cambios de módulos, resolución y supervisiones.</dd></dl>
+<dl class="card-fields"><dt>Controles</dt><dd>Pesos identificados por firma; mismo RGB, frames, GT y protocolo por comparación; selección solo en VAL.</dd></dl>
+<dl class="card-fields"><dt>Métricas</dt><dd>Antes/después, módulos, pérdidas, presupuesto</dd></dl>
+<dl class="card-fields"><dt>Resultados históricos disponibles</dt><dd>C3VD 30ep final recuperado. SCARED depth-only preparado, no ejecutado.</dd></dl>
+<dl class="card-fields"><dt>Estado de esta nueva serie</dt><dd>Solo se recuperan los resultados históricos que se indican; no se ejecutó esta nueva serie.</dd></dl>
+<dl class="card-fields"><dt>Conclusión</dt><dd>Pendiente de la prueba uniforme; no convertir evidencia parcial en aceptación del protocolo completo.</dd></dl>
+<dl class="card-fields"><dt>Limitaciones</dt><dd>SCARED no tiene GT temporal certificado; el VGGT histórico carece de point_head afinada.</dd></dl>
+<dl class="card-fields"><dt>Siguiente decisión</dt><dd>Revisar plan y preflight antes de autorizar ejecución; mantener entrenamiento SCARED sin lanzar.</dd></dl>
+<details class="trace-details"><summary>Protocolo y trazabilidad</summary><p>Registro: <a href="tablas/vggt_C01_C10.json">C01–C10</a> · <a href="tablas/vggt_resultados_recuperados.json">Métricas recuperadas</a>. Pesos, caso, GT, escala y alineamiento se conservan por tabla. Las pruebas pendientes no tienen mediciones nuevas.</p></details></div></details>
+
+<details class="vggt-experiment-card" id="vggt-c07" data-vggt-card><summary><span class="card-status pending">Plan preparado</span><span class="card-id">C07</span>Transferencia entre datasets</summary><div class="card-content">
+<dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>La mejora dentro del dataset de entrenamiento no garantiza transferencia, ni simetría entre dominios.</dd></dl>
+<dl class="card-fields"><dt>Intervención prevista</dt><dd>Mismo caso destino y RGB para pesos oficiales, C3VD-FT y futuro SCARED-FT. Sin recalibrar con TEST.</dd></dl>
+<dl class="card-fields"><dt>Controles</dt><dd>Pesos identificados por firma; mismo RGB, frames, GT y protocolo por comparación; selección solo en VAL.</dd></dl>
+<dl class="card-fields"><dt>Métricas</dt><dd>Degradación respecto a zero-shot del dataset destino</dd></dl>
+<dl class="card-fields"><dt>Resultados históricos disponibles</dt><dd>VGGT: pendiente. No reutilizar transferencia de VGG-T³ como si fuera VGGT.</dd></dl>
+<dl class="card-fields"><dt>Estado de esta nueva serie</dt><dd>Solo se recuperan los resultados históricos que se indican; no se ejecutó esta nueva serie.</dd></dl>
+<dl class="card-fields"><dt>Conclusión</dt><dd>Pendiente de la prueba uniforme; no convertir evidencia parcial en aceptación del protocolo completo.</dd></dl>
+<dl class="card-fields"><dt>Limitaciones</dt><dd>SCARED no tiene GT temporal certificado; el VGGT histórico carece de point_head afinada.</dd></dl>
+<dl class="card-fields"><dt>Siguiente decisión</dt><dd>Revisar plan y preflight antes de autorizar ejecución; mantener entrenamiento SCARED sin lanzar.</dd></dl>
+<details class="trace-details"><summary>Protocolo y trazabilidad</summary><p>Registro: <a href="tablas/vggt_C01_C10.json">C01–C10</a> · <a href="tablas/vggt_resultados_recuperados.json">Métricas recuperadas</a>. Pesos, caso, GT, escala y alineamiento se conservan por tabla. Las pruebas pendientes no tienen mediciones nuevas.</p></details></div></details>
+
+<details class="vggt-experiment-card" id="vggt-c08" data-vggt-card><summary><span class="card-status pending">Plan preparado</span><span class="card-id">C08</span>Escalabilidad y rendimiento</summary><div class="card-content">
+<dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>El coste y la calidad varían con N; una ventaja de velocidad en un contexto no establece rendimiento en tiempo real.</dd></dl>
+<dl class="card-fields"><dt>Intervención prevista</dt><dd>Warm-up 3, mediciones 5, sincronización CUDA; separar carga, RGB/H2D, forward y escritura. No llamar streaming al FPS por lote.</dd></dl>
+<dl class="card-fields"><dt>Controles</dt><dd>Pesos identificados por firma; mismo RGB, frames, GT y protocolo por comparación; selección solo en VAL.</dd></dl>
+<dl class="card-fields"><dt>Métricas</dt><dd>Latencia CUDA, memoria, throughput y calidad</dd></dl>
+<dl class="card-fields"><dt>Resultados históricos disponibles</dt><dd>Tiempos históricos disponibles; repetición controlada pendiente.</dd></dl>
+<dl class="card-fields"><dt>Estado de esta nueva serie</dt><dd>Solo se recuperan los resultados históricos que se indican; no se ejecutó esta nueva serie.</dd></dl>
+<dl class="card-fields"><dt>Conclusión</dt><dd>Pendiente de la prueba uniforme; no convertir evidencia parcial en aceptación del protocolo completo.</dd></dl>
+<dl class="card-fields"><dt>Limitaciones</dt><dd>SCARED no tiene GT temporal certificado; el VGGT histórico carece de point_head afinada.</dd></dl>
+<dl class="card-fields"><dt>Siguiente decisión</dt><dd>Revisar plan y preflight antes de autorizar ejecución; mantener entrenamiento SCARED sin lanzar.</dd></dl>
+<details class="trace-details"><summary>Protocolo y trazabilidad</summary><p>Registro: <a href="tablas/vggt_C01_C10.json">C01–C10</a> · <a href="tablas/vggt_resultados_recuperados.json">Métricas recuperadas</a>. Pesos, caso, GT, escala y alineamiento se conservan por tabla. Las pruebas pendientes no tienen mediciones nuevas.</p></details></div></details>
+
+<details class="vggt-experiment-card" id="vggt-c09" data-vggt-card><summary><span class="card-status pending">No aplica a VGGT</span><span class="card-id">C09</span>Sensibilidad específica de TTT</summary><div class="card-content">
+<dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>En VGG-T³, variar pasos TTT puede cambiar calidad y coste; este mecanismo no existe en VGGT.</dd></dl>
+<dl class="card-fields"><dt>Intervención prevista</dt><dd>Mismos pesos, entrada y política de memoria; reset entre casos; evitar usar GT en adaptación.</dd></dl>
+<dl class="card-fields"><dt>Controles</dt><dd>Pesos identificados por firma; mismo RGB, frames, GT y protocolo por comparación; selección solo en VAL.</dd></dl>
+<dl class="card-fields"><dt>Métricas</dt><dd>Calidad por pasos internos y N</dd></dl>
+<dl class="card-fields"><dt>Resultados históricos disponibles</dt><dd>No aplicable a VGGT. Reservado para VGG-T³.</dd></dl>
+<dl class="card-fields"><dt>Estado de esta nueva serie</dt><dd>Solo se recuperan los resultados históricos que se indican; no se ejecutó esta nueva serie.</dd></dl>
+<dl class="card-fields"><dt>Conclusión</dt><dd>Pendiente de la prueba uniforme; no convertir evidencia parcial en aceptación del protocolo completo.</dd></dl>
+<dl class="card-fields"><dt>Limitaciones</dt><dd>SCARED no tiene GT temporal certificado; el VGGT histórico carece de point_head afinada.</dd></dl>
+<dl class="card-fields"><dt>Siguiente decisión</dt><dd>Revisar plan y preflight antes de autorizar ejecución; mantener entrenamiento SCARED sin lanzar.</dd></dl>
+<details class="trace-details"><summary>Protocolo y trazabilidad</summary><p>Registro: <a href="tablas/vggt_C01_C10.json">C01–C10</a> · <a href="tablas/vggt_resultados_recuperados.json">Métricas recuperadas</a>. Pesos, caso, GT, escala y alineamiento se conservan por tabla. Las pruebas pendientes no tienen mediciones nuevas.</p></details></div></details>
+
+<details class="vggt-experiment-card" id="vggt-c10" data-vggt-card><summary><span class="card-status pending">Plan preparado</span><span class="card-id">C10</span>Consistencia y cobertura multivista</summary><div class="card-content">
+<dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>Una profundidad local precisa o una nube densa no garantizan coherencia multivista ni completitud fiable.</dd></dl>
+<dl class="card-fields"><dt>Intervención prevista</dt><dd>Comparar regiones visibles válidas con oclusión y z-buffer; sin GT temporal, consistencia propia no demuestra exactitud.</dd></dl>
+<dl class="card-fields"><dt>Controles</dt><dd>Pesos identificados por firma; mismo RGB, frames, GT y protocolo por comparación; selección solo en VAL.</dd></dl>
+<dl class="card-fields"><dt>Métricas</dt><dd>Reproyección, consistencia, Acc/Comp/F1</dd></dl>
+<dl class="card-fields"><dt>Resultados históricos disponibles</dt><dd>Superficie y solapamiento GT C3VD guardados; proxy multivista uniforme pendiente.</dd></dl>
+<dl class="card-fields"><dt>Estado de esta nueva serie</dt><dd>Solo se recuperan los resultados históricos que se indican; no se ejecutó esta nueva serie.</dd></dl>
+<dl class="card-fields"><dt>Conclusión</dt><dd>Pendiente de la prueba uniforme; no convertir evidencia parcial en aceptación del protocolo completo.</dd></dl>
+<dl class="card-fields"><dt>Limitaciones</dt><dd>SCARED no tiene GT temporal certificado; el VGGT histórico carece de point_head afinada.</dd></dl>
+<dl class="card-fields"><dt>Siguiente decisión</dt><dd>Revisar plan y preflight antes de autorizar ejecución; mantener entrenamiento SCARED sin lanzar.</dd></dl>
+<details class="trace-details"><summary>Protocolo y trazabilidad</summary><p>Registro: <a href="tablas/vggt_C01_C10.json">C01–C10</a> · <a href="tablas/vggt_resultados_recuperados.json">Métricas recuperadas</a>. Pesos, caso, GT, escala y alineamiento se conservan por tabla. Las pruebas pendientes no tienen mediciones nuevas.</p></details></div></details>
+
+Se prepararon **52 selecciones de entrada** para C02/C05, aplicables a dos variantes VGGT: extensión fija frente a prefijos con densidad fija, y orden original/inverso/permutado con ancla fija. No se ejecutaron. N=1 no define ATE/RPE multivista ni conserva una extensión temporal. C08 requiere warm-up y repeticiones antes de extraer conclusiones de velocidad.
 
 ### Comparadores interactivos {#vggt-comparadores}
 
-<div class="model-placeholder"><span class="placeholder-label">Pendiente de incorporar</span><p>Reconstrucciones y tablas con protocolo visible; se incorporarán los enlaces verificados correspondientes.</p></div>
+Las métricas recuperadas se incorporaron al comparador. La galería histórica y las tablas originales siguen accesibles; no se generaron nuevas nubes ni se publicaron paquetes adicionales en esta revisión.
+
+<div class="book-actions"><button class="book-open-metrics" data-metrics="vggt-review-heldout_sequence_same_phantom-VGGT_ZS,vggt-review-heldout_sequence_same_phantom-VGGT_FT">Comparar VGGT · reservadas</button><button class="book-open-metrics" data-metrics="vggt-review-validation_selection-VGGT_ZS,vggt-review-validation_selection-VGGT_FT">Comparar VGGT · validación</button><a href="#vistas">Galería histórica de vistas</a></div>
+
+<details><summary>Descargas de resumen y límites de esta entrega</summary><p><a href="tablas/vggt_resultados_recuperados.json">Resumen VGGT</a> · <a href="tablas/vggt_C01_C10.json">Plan experimental</a> · <a href="tablas/vggt_scared_preparado.json">Receta SCARED y verificaciones CPU</a>. Son resúmenes; no incluyen imágenes GT, mapas por píxel ni checkpoints.</p></details>
 
 ## VGGT vs VGG-T³ {#vggt-vs-vgg-t3 .model-workspace}
 
@@ -2719,7 +3035,21 @@ Espacio reservado para reunir comparaciones entre ambos modelos. Las comparacion
 
 ### C3VD · referencias y resultados {#vggt-vs-vgg-t3-c3vd}
 
-<div class="model-placeholder"><span class="placeholder-label">Pendiente de incorporar</span><p>Datos y particiones, entrenamiento, métricas, vistas e interpretación.</p></div>
+Comparación **ya guardada de la misma ruta D+K+pose**, distinta del promedio de reservadas mostrado en VGGT.
+
+<div class="protocol-strip"><strong>Protocolo</strong> · trans_t4_b · validación · 50 RGB a 336×336 · 16 objetivos GT comunes · misma K calibrada · una escala de profundidad por ventana · sin ICP · D y poses predichas; no point head directa</div>
+
+| Modelo / pesos | AbsRel ↓ | δ1 % ↑ | XYZ D+K+pose cm ↓ | p95 cm ↓ | Rotación ° ↓ |
+| --- | --- | --- | --- | --- | --- |
+| VGGT zero-shot | 0.24231 | 57.80 | 0.8265 | 2.0024 | 7.700 |
+| VGGT C3VD 30ep | 0.14088 | 80.34 | 0.7638 | 1.7177 | 5.541 |
+| VGG-T³ zero-shot | 0.18236 | 72.10 | 0.7711 | 2.0430 | 10.797 |
+| VGG-T³ V9-C3VD | 0.14860 | 78.38 | 0.6000 | 1.9298 | 6.907 |
+
+
+La normalización RGB histórica VGGT usa float/255 y la caché TTT usa float32(1/255); esta diferencia está registrada. La comparación no demuestra causalidad del TTT: también cambian arquitectura y entrenamiento.
+
+<div class="book-actions"><button class="book-open-metrics" data-metrics="c3vd-vggt_zs-derived,c3vd-vggt_ft-derived,c3vd-zero-derived,c3vd-v9-derived">Abrir comparación de ruta común</button></div>
 
 ### SCARED · adaptación y transferencia {#vggt-vs-vgg-t3-scared}
 

@@ -1,13 +1,14 @@
 {
   "project": "N3D-CE",
-  "source_qmd_sha256": "0c76cdd082a3896ed8bc24e6892c1218cb34990a7fc3a7e2dd700c0d9010fd5d",
-  "public_qmd_sha256": "92721d0ac116438a5582175e5b0a9f57f8400bf6f53376106bb8df30d0c3d66e",
-  "source_data_tables_preserved": 59,
+  "source_qmd_sha256": "e3e5d1509cb3c2bbdf7712f5cff59b977339e44e97ceb9adf91a891f6118fe8f",
+  "public_qmd_sha256": "4851b5c140a379724c7cffe4914102a8d528d18ac2a4c77c37af5a5f82d5764f",
+  "source_data_tables_preserved": 68,
   "experiment_cards": 44,
   "scared_experiment_cards": 12,
   "scared_followup_cards": 4,
   "prepared_protocol_cards": 3,
   "unified_experiment_cards": 63,
+  "VGGT_protocol_cards": 10,
   "public_clouds": [
     {
       "id": "c3vd-v9",
@@ -86,7 +87,7 @@
     }
   ],
   "cloud_bytes": 921624289,
-  "metric_entries": 170,
+  "metric_entries": 174,
   "historical_tables": 496,
   "all_saved_vertices_preserved": true,
   "new_training": false,
