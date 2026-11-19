@@ -1,0 +1,1565 @@
+{
+  "version": "presentation-20261119",
+  "experiments": [
+    {
+      "id": "D01",
+      "anchor": "exp-d01",
+      "title": "Verificar que el GT y las imágenes describen la misma cámara.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Geometría, cámara y datos"
+      ],
+      "negative": false,
+      "order": 0,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Variantes indicadas en la intervención; no hay un único checkpoint",
+        "Frames y resolución": "Variables según ensayo; ver intervención",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "Ambos loaders / C3VD"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "D01",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "D02",
+      "anchor": "exp-d02",
+      "title": "Evitar atribuir al modelo diferencias creadas por resolución, frames o representación.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Geometría, cámara y datos"
+      ],
+      "negative": true,
+      "order": 1,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Variantes indicadas en la intervención; no hay un único checkpoint",
+        "Frames y resolución": "Variables según ensayo; ver intervención",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "VGGT ZS/FT y TTT ZS/V9"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "D02",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "D03",
+      "anchor": "exp-d03",
+      "title": "Separar cantidad de imágenes, recorrido y densidad de muestreo.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Eficiencia y secuencias largas"
+      ],
+      "negative": false,
+      "order": 2,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Variantes indicadas en la intervención; no hay un único checkpoint",
+        "Frames y resolución": "Variables según ensayo; ver intervención",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "Cuatro variantes; Trans1b y Trans4b"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "D03",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "D04",
+      "anchor": "exp-d04",
+      "title": "Comprobar si eliminar los saltos procesando toda Trans4 mejora la nube.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Eficiencia y secuencias largas"
+      ],
+      "negative": true,
+      "order": 3,
+      "protocol": {
+        "Dataset": "C3VD trans_t4_b",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Variantes indicadas en la intervención; no hay un único checkpoint",
+        "Frames y resolución": "597 RGB; stride1; 336²",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "No se produjo reconstrucción completa; calidad no evaluada",
+        "Modelos / ámbito": "TTT V9 / Trans4"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "D04",
+      "decision": "No usar esta condición para concluir calidad geométrica: falló por recursos antes de reconstruir."
+    },
+    {
+      "id": "D05",
+      "anchor": "exp-d05",
+      "title": "Estudiar recorridos largos con prefijos y diferentes densidades.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Eficiencia y secuencias largas"
+      ],
+      "negative": false,
+      "order": 4,
+      "protocol": {
+        "Dataset": "C3VD screening",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Variantes indicadas en la intervención; no hay un único checkpoint",
+        "Frames y resolución": "Variables según ensayo; ver intervención",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "Sin profundidad GT local y sin certificación temporal completa; no puntuar exactitud como si existiera",
+        "Modelos / ámbito": "Cuatro variantes"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "D05",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "D06",
+      "anchor": "exp-d06",
+      "title": "Cambiar las vistas acompañantes sin cambiar los frames que se puntúan.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Eficiencia y secuencias largas"
+      ],
+      "negative": false,
+      "order": 5,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Variantes indicadas en la intervención; no hay un único checkpoint",
+        "Frames y resolución": "Variables según ensayo; ver intervención",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "Cuatro variantes / screening"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "D06",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "D07",
+      "anchor": "exp-d07",
+      "title": "Separar el efecto del primer frame y de ampliar el contexto.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Eficiencia y secuencias largas"
+      ],
+      "negative": false,
+      "order": 6,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Variantes indicadas en la intervención; no hay un único checkpoint",
+        "Frames y resolución": "Variables según ensayo; ver intervención",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "Cuatro variantes / screening"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "D07",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "D08",
+      "anchor": "exp-d08",
+      "title": "Comprobar si el comportamiento desaparece con el forward original.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Geometría, cámara y datos"
+      ],
+      "negative": true,
+      "order": 7,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Variantes indicadas en la intervención; no hay un único checkpoint",
+        "Frames y resolución": "Variables según ensayo; ver intervención",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "TTT ZS/V9"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "D08",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "D09",
+      "anchor": "exp-d09",
+      "title": "Localizar si los cambios se producen solamente dentro de la cabeza de cámara.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Geometría, cámara y datos"
+      ],
+      "negative": true,
+      "order": 8,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Variantes indicadas en la intervención; no hay un único checkpoint",
+        "Frames y resolución": "Variables según ensayo; ver intervención",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "TTT ZS/V9"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "D09",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "D10",
+      "anchor": "exp-d10",
+      "title": "Localizar capas o tipos de estado sensibles antes del decoder.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Geometría, cámara y datos"
+      ],
+      "negative": false,
+      "order": 9,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Variantes indicadas en la intervención; no hay un único checkpoint",
+        "Frames y resolución": "Variables según ensayo; ver intervención",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "TTT ZS/V9"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "D10",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "D11",
+      "anchor": "exp-d11",
+      "title": "Separar discrepancia entre cabezas, escala y error contra GT.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Geometría, cámara y datos"
+      ],
+      "negative": true,
+      "order": 10,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Variantes indicadas en la intervención; no hay un único checkpoint",
+        "Frames y resolución": "Variables según ensayo; ver intervención",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "TTT V9 / VN2 / VN3"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "D11",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "D12",
+      "anchor": "exp-d12",
+      "title": "Comprobar si el deterioro de VN6 era solamente escala.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Geometría, cámara y datos"
+      ],
+      "negative": true,
+      "order": 11,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Variantes indicadas en la intervención; no hay un único checkpoint",
+        "Frames y resolución": "Variables según ensayo; ver intervención",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "TTT VN3/VN5/VN6"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "D12",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "D13",
+      "anchor": "exp-d13",
+      "title": "Verificar si train y validación pueden favorecer direcciones diferentes y si las ramas son separables.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Entrenamiento y generalización"
+      ],
+      "negative": true,
+      "order": 12,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Variantes indicadas en la intervención; no hay un único checkpoint",
+        "Frames y resolución": "Variables según ensayo; ver intervención",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "TTT VN7"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "D13",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "D14",
+      "anchor": "exp-d14",
+      "title": "Revisar cache, luz, profundidad y paralaje sin adjudicar una causa de antemano.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Iluminación y reflejos",
+        "Geometría, cámara y datos"
+      ],
+      "negative": false,
+      "order": 13,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Variantes indicadas en la intervención; no hay un único checkpoint",
+        "Frames y resolución": "Variables según ensayo; ver intervención",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "TTT VN12"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "D14",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "D15",
+      "anchor": "exp-d15",
+      "title": "Puntuar los mismos 16 objetivos al pasar de contexto16 a50.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Eficiencia y secuencias largas"
+      ],
+      "negative": true,
+      "order": 14,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Variantes indicadas en la intervención; no hay un único checkpoint",
+        "Frames y resolución": "Variables según ensayo; ver intervención",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "TTT ZS/V9/VN16 y VGGT ZS/VN16"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "D15",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "D17",
+      "anchor": "exp-d17",
+      "title": "Comprobar aprendizaje e integración antes de un entrenamiento largo.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Entrenamiento y generalización"
+      ],
+      "negative": true,
+      "order": 15,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Variantes indicadas en la intervención; no hay un único checkpoint",
+        "Frames y resolución": "Variables según ensayo; ver intervención",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "TTT C3VD, cámara/profundidad"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "D17",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "D18",
+      "anchor": "exp-d18",
+      "title": "Comprobar una adaptación con más exposición y encoder fijo.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Entrenamiento y generalización"
+      ],
+      "negative": false,
+      "order": 16,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Variantes indicadas en la intervención; no hay un único checkpoint",
+        "Frames y resolución": "Variables según ensayo; ver intervención",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "TTT C3VD; no es VN11"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "D18",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "D19",
+      "anchor": "exp-d19",
+      "title": "Evaluar si más pasos internos TTT mejoran siempre la calidad.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Eficiencia y secuencias largas"
+      ],
+      "negative": true,
+      "order": 17,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Variantes indicadas en la intervención; no hay un único checkpoint",
+        "Frames y resolución": "Variables según ensayo; ver intervención",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "TTT ZS/V9, Trans1b/Trans4b"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "D19",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "D20",
+      "anchor": "exp-d20",
+      "title": "Comprobar si mejores poses reparan automáticamente la geometría D+cámara.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Geometría, cámara y datos"
+      ],
+      "negative": true,
+      "order": 18,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Variantes indicadas en la intervención; no hay un único checkpoint",
+        "Frames y resolución": "Variables según ensayo; ver intervención",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "VGGT ZS/FT y TTT ZS/V9"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "D20",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "D21",
+      "anchor": "exp-d21",
+      "title": "Determinar si el filtrado o la confianza explican los huecos.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Geometría, cámara y datos"
+      ],
+      "negative": true,
+      "order": 19,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Variantes indicadas en la intervención; no hay un único checkpoint",
+        "Frames y resolución": "Variables según ensayo; ver intervención",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "TTT V9; ambos modelos como referencia"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "D21",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "D22",
+      "anchor": "exp-d22",
+      "title": "Verificar que la caché conserva las mismas características que la ruta nativa.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Geometría, cámara y datos"
+      ],
+      "negative": true,
+      "order": 20,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Variantes indicadas en la intervención; no hay un único checkpoint",
+        "Frames y resolución": "Variables según ensayo; ver intervención",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "TTT V9; referencia GT C3VD"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "D22",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "VN1",
+      "anchor": "exp-vn1",
+      "title": "Ampliar el muestreo con receta V9.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Entrenamiento y generalización"
+      ],
+      "negative": false,
+      "order": 21,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Variantes indicadas en la intervención; no hay un único checkpoint",
+        "Frames y resolución": "Variables según ensayo; ver intervención",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "TTT C3VD"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "VN1",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "VN2",
+      "anchor": "exp-vn2",
+      "title": "Añadir supervisión de movimiento relativo.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Entrenamiento y generalización"
+      ],
+      "negative": false,
+      "order": 22,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Variantes indicadas en la intervención; no hay un único checkpoint",
+        "Frames y resolución": "Variables según ensayo; ver intervención",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "TTT C3VD"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "VN2",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "VN3",
+      "anchor": "exp-vn3",
+      "title": "Descongelar el último bloque global TTT.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Entrenamiento y generalización"
+      ],
+      "negative": false,
+      "order": 23,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Variantes indicadas en la intervención; no hay un único checkpoint",
+        "Frames y resolución": "Variables según ensayo; ver intervención",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "TTT C3VD"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "VN3",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "VN4",
+      "anchor": "exp-vn4",
+      "title": "Comparar cámara global, coherencia y su combinación.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Entrenamiento y generalización"
+      ],
+      "negative": true,
+      "order": 24,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Variantes indicadas en la intervención; no hay un único checkpoint",
+        "Frames y resolución": "Variables según ensayo; ver intervención",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "TTT C3VD"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "VN4",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "VN5",
+      "anchor": "exp-vn5",
+      "title": "Reducir LR y aislar el ajuste de cámara.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Entrenamiento y generalización"
+      ],
+      "negative": true,
+      "order": 25,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Variantes indicadas en la intervención; no hay un único checkpoint",
+        "Frames y resolución": "Variables según ensayo; ver intervención",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "TTT C3VD"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "VN5",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "VN6",
+      "anchor": "exp-vn6",
+      "title": "Entrenar tres cabezas con lecturas y targets fijos.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Entrenamiento y generalización"
+      ],
+      "negative": true,
+      "order": 26,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Variantes indicadas en la intervención; no hay un único checkpoint",
+        "Frames y resolución": "Variables según ensayo; ver intervención",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "TTT C3VD"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "VN6",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "VN7",
+      "anchor": "exp-vn7",
+      "title": "Estratificar el muestreo usando solo TRAIN.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Entrenamiento y generalización"
+      ],
+      "negative": true,
+      "order": 27,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Variantes indicadas en la intervención; no hay un único checkpoint",
+        "Frames y resolución": "Variables según ensayo; ver intervención",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "TTT C3VD"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "VN7",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "VN8",
+      "anchor": "exp-vn8",
+      "title": "Congelar profundidad y ajustar cámara/puntos.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Entrenamiento y generalización"
+      ],
+      "negative": true,
+      "order": 28,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Variantes indicadas en la intervención; no hay un único checkpoint",
+        "Frames y resolución": "Variables según ensayo; ver intervención",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "TTT C3VD"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "VN8",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "VN9",
+      "anchor": "exp-vn9",
+      "title": "Repetir las mismas exposiciones en otros órdenes.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Entrenamiento y generalización"
+      ],
+      "negative": true,
+      "order": 29,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Variantes indicadas en la intervención; no hay un único checkpoint",
+        "Frames y resolución": "Variables según ensayo; ver intervención",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "TTT C3VD"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "VN9",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "VN10",
+      "anchor": "exp-vn10",
+      "title": "Factorizar la pérdida de puntos en forma y radio.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Entrenamiento y generalización"
+      ],
+      "negative": true,
+      "order": 30,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Variantes indicadas en la intervención; no hay un único checkpoint",
+        "Frames y resolución": "Variables según ensayo; ver intervención",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "TTT C3VD"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "VN10",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "VN11",
+      "anchor": "exp-vn11",
+      "title": "Cambiar la representación anatómica de TRAIN.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Entrenamiento y generalización"
+      ],
+      "negative": true,
+      "order": 31,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Variantes indicadas en la intervención; no hay un único checkpoint",
+        "Frames y resolución": "Variables según ensayo; ver intervención",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "TTT C3VD"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "VN11",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "VN13",
+      "anchor": "exp-vn13",
+      "title": "Repetir el control anatómico en tres órdenes.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Entrenamiento y generalización"
+      ],
+      "negative": true,
+      "order": 32,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Variantes indicadas en la intervención; no hay un único checkpoint",
+        "Frames y resolución": "Variables según ensayo; ver intervención",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "TTT C3VD"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "VN13",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "VN14",
+      "anchor": "exp-vn14",
+      "title": "Aislar el ajuste de cámara, D y ambos.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Entrenamiento y generalización"
+      ],
+      "negative": true,
+      "order": 33,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Variantes indicadas en la intervención; no hay un único checkpoint",
+        "Frames y resolución": "Variables según ensayo; ver intervención",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "TTT C3VD"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "VN14",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "VN15",
+      "anchor": "exp-vn15",
+      "title": "Separar clipping por cabeza y gradiente espacial D.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Entrenamiento y generalización"
+      ],
+      "negative": true,
+      "order": 34,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Variantes indicadas en la intervención; no hay un único checkpoint",
+        "Frames y resolución": "Variables según ensayo; ver intervención",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "TTT C3VD"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "VN15",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "VN16",
+      "anchor": "exp-vn16",
+      "title": "Probar la adaptación nativa de D/P en ambos modelos.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Entrenamiento y generalización"
+      ],
+      "negative": false,
+      "order": 35,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Variantes indicadas en la intervención; no hay un único checkpoint",
+        "Frames y resolución": "Variables según ensayo; ver intervención",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "TTT yVGGT C3VD"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "VN16",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "VN18-C3VD",
+      "anchor": "exp-vn18-c3vd",
+      "title": "Extender cobertura D/P y validar también con contexto largo.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Entrenamiento y generalización"
+      ],
+      "negative": false,
+      "order": 36,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Variantes indicadas en la intervención; no hay un único checkpoint",
+        "Frames y resolución": "Variables según ensayo; ver intervención",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "TTT"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "VN18-C3VD",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "VN19-AB",
+      "anchor": "exp-vn19-ab",
+      "title": "Volver a una receta V9 contrastada y comparar la distribución de supervisión.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Entrenamiento y generalización"
+      ],
+      "negative": true,
+      "order": 37,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "V9 de referencia; VN19-A/B y sus intermedios conservados, según fila",
+        "Frames y resolución": "Ventanas del calendario VN19; lectura larga con 50 RGB y 16 objetivos GT comunes",
+        "Escala / alineamiento": "Comparaciones raw y diagnósticas declaradas; no equiparar Sim(3) con escala métrica",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "VGG-T³ · C3VD"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "VN19-AB",
+      "decision": "Conservar V9 como referencia; no promover estos candidatos por una mejora aislada. Cualquier intervención siguiente requiere un protocolo comparado."
+    },
+    {
+      "id": "VN19-CKPT",
+      "anchor": "exp-vn19-ckpt",
+      "title": "Comprobar si el checkpoint final ocultó un mejor intermedio.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Entrenamiento y generalización"
+      ],
+      "negative": true,
+      "order": 38,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "V9 de referencia; VN19-A/B y sus intermedios conservados, según fila",
+        "Frames y resolución": "Ventanas del calendario VN19; lectura larga con 50 RGB y 16 objetivos GT comunes",
+        "Escala / alineamiento": "Comparaciones raw y diagnósticas declaradas; no equiparar Sim(3) con escala métrica",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "VGG-T³ · C3VD"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "VN19-CKPT",
+      "decision": "Conservar V9 como referencia; no promover estos candidatos por una mejora aislada. Cualquier intervención siguiente requiere un protocolo comparado."
+    },
+    {
+      "id": "VN19-CLIP",
+      "anchor": "exp-vn19-clip",
+      "title": "Identificar una interacción técnica entre gradientes densos y cámara.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Entrenamiento y generalización"
+      ],
+      "negative": false,
+      "order": 39,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "V9 de referencia; VN19-A/B y sus intermedios conservados, según fila",
+        "Frames y resolución": "Ventanas del calendario VN19; lectura larga con 50 RGB y 16 objetivos GT comunes",
+        "Escala / alineamiento": "Comparaciones raw y diagnósticas declaradas; no equiparar Sim(3) con escala métrica",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "VGG-T³ · C3VD"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "VN19-CLIP",
+      "decision": "Conservar V9 como referencia; no promover estos candidatos por una mejora aislada. Cualquier intervención siguiente requiere un protocolo comparado."
+    },
+    {
+      "id": "VN19-COB",
+      "anchor": "exp-vn19-cob",
+      "title": "Auditar lo que realmente recibió pérdida densa en cada variante.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Entrenamiento y generalización"
+      ],
+      "negative": false,
+      "order": 40,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "V9 de referencia; VN19-A/B y sus intermedios conservados, según fila",
+        "Frames y resolución": "Ventanas del calendario VN19; lectura larga con 50 RGB y 16 objetivos GT comunes",
+        "Escala / alineamiento": "Comparaciones raw y diagnósticas declaradas; no equiparar Sim(3) con escala métrica",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "VGG-T³ · C3VD"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "VN19-COB",
+      "decision": "Conservar V9 como referencia; no promover estos candidatos por una mejora aislada. Cualquier intervención siguiente requiere un protocolo comparado."
+    },
+    {
+      "id": "VN19-REG",
+      "anchor": "exp-vn19-reg",
+      "title": "Revisar si B mejoró específicamente la profundidad que priorizó.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Entrenamiento y generalización"
+      ],
+      "negative": true,
+      "order": 41,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "V9 de referencia; VN19-A/B y sus intermedios conservados, según fila",
+        "Frames y resolución": "Ventanas del calendario VN19; lectura larga con 50 RGB y 16 objetivos GT comunes",
+        "Escala / alineamiento": "Comparaciones raw y diagnósticas declaradas; no equiparar Sim(3) con escala métrica",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "VGG-T³ · C3VD"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "VN19-REG",
+      "decision": "Conservar V9 como referencia; no promover estos candidatos por una mejora aislada. Cualquier intervención siguiente requiere un protocolo comparado."
+    },
+    {
+      "id": "K-LEARN",
+      "anchor": "exp-k-learn",
+      "title": "Probar si más targets densos mejoran conjuntamente validación.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Entrenamiento y generalización"
+      ],
+      "negative": true,
+      "order": 42,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Controles/pilotos; no promovidos como sustitutos de V9",
+        "Frames y resolución": "N y K se separan explícitamente en el método",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "VGG-T³ · C3VD"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "K-LEARN",
+      "decision": "Conservar V9 como referencia; no promover estos candidatos por una mejora aislada. Cualquier intervención siguiente requiere un protocolo comparado."
+    },
+    {
+      "id": "K-MEM",
+      "anchor": "exp-k-mem",
+      "title": "Verificar si dos targets densos son una obligación de arquitectura o recursos.",
+      "dataset": "C3VD",
+      "status": "executed",
+      "problems": [
+        "Eficiencia y secuencias largas"
+      ],
+      "negative": true,
+      "order": 43,
+      "protocol": {
+        "Dataset": "C3VD",
+        "Partición": "Según condiciones del registro",
+        "Checkpoint": "Controles/pilotos; no promovidos como sustitutos de V9",
+        "Frames y resolución": "N y K se separan explícitamente en el método",
+        "Escala / alineamiento": "Según condición; no asumir un registro común",
+        "Unidades": "Las consignadas en resultados y tablas",
+        "GT disponible": "El soporte indicado en el registro; no inferir GT donde falta",
+        "Modelos / ámbito": "VGG-T³ · C3VD"
+      },
+      "source_file": "experimentos_c3vd.json",
+      "evidence_record": "K-MEM",
+      "decision": "Conservar V9 como referencia; no promover estos candidatos por una mejora aislada. Cualquier intervención siguiente requiere un protocolo comparado."
+    },
+    {
+      "id": "E01",
+      "anchor": "scared-e01",
+      "title": "Sensibilidad al tamaño de contexto",
+      "dataset": "SCARED",
+      "status": "executed",
+      "problems": [
+        "Eficiencia y secuencias largas"
+      ],
+      "negative": false,
+      "order": 44,
+      "protocol": {
+        "Dataset": "SCARED · dataset7",
+        "Partición": "Validación; secundarios identificados en el método",
+        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
+        "Frames y resolución": "N=1/4/8/16/50; RGB 336×266; consultar condiciones de esta ficha",
+        "Escala / alineamiento": "Escala GT de profundidad por ancla; registros secundarios se identifican aparte",
+        "Unidades": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
+        "GT disponible": "XYZ/profundidad medidos en el keyframe; sin trayectoria GT temporal validada"
+      },
+      "source_file": "experimentos_scared_e01_e12.json",
+      "evidence_record": "E01",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "E02",
+      "anchor": "scared-e02",
+      "title": "Consistencia de los mismos frames entre contextos",
+      "dataset": "SCARED",
+      "status": "executed",
+      "problems": [
+        "Eficiencia y secuencias largas"
+      ],
+      "negative": false,
+      "order": 45,
+      "protocol": {
+        "Dataset": "SCARED · dataset7",
+        "Partición": "Validación; secundarios identificados en el método",
+        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
+        "Frames y resolución": "N=1/4/8/16/50; RGB 336×266; consultar condiciones de esta ficha",
+        "Escala / alineamiento": "Escala GT de profundidad por ancla; registros secundarios se identifican aparte",
+        "Unidades": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
+        "GT disponible": "XYZ/profundidad medidos en el keyframe; sin trayectoria GT temporal validada"
+      },
+      "source_file": "experimentos_scared_e01_e12.json",
+      "evidence_record": "E02",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "E03",
+      "anchor": "scared-e03",
+      "title": "Aislamiento del primer frame",
+      "dataset": "SCARED",
+      "status": "executed",
+      "problems": [
+        "Eficiencia y secuencias largas"
+      ],
+      "negative": false,
+      "order": 46,
+      "protocol": {
+        "Dataset": "SCARED · dataset7",
+        "Partición": "Validación; secundarios identificados en el método",
+        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
+        "Frames y resolución": "N=1/4/8/16/50; RGB 336×266; consultar condiciones de esta ficha",
+        "Escala / alineamiento": "Escala GT de profundidad por ancla; registros secundarios se identifican aparte",
+        "Unidades": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
+        "GT disponible": "XYZ/profundidad medidos en el keyframe; sin trayectoria GT temporal validada"
+      },
+      "source_file": "experimentos_scared_e01_e12.json",
+      "evidence_record": "E03",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "E04",
+      "anchor": "scared-e04",
+      "title": "Análisis profundo de KF4",
+      "dataset": "SCARED",
+      "status": "executed",
+      "problems": [
+        "Geometría, cámara y datos"
+      ],
+      "negative": true,
+      "order": 47,
+      "protocol": {
+        "Dataset": "SCARED · dataset7",
+        "Partición": "Validación; secundarios identificados en el método",
+        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
+        "Frames y resolución": "N=1/4/8/16/50; RGB 336×266; consultar condiciones de esta ficha",
+        "Escala / alineamiento": "Escala GT de profundidad por ancla; registros secundarios se identifican aparte",
+        "Unidades": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
+        "GT disponible": "XYZ/profundidad medidos en el keyframe; sin trayectoria GT temporal validada"
+      },
+      "source_file": "experimentos_scared_e01_e12.json",
+      "evidence_record": "E04",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "E05",
+      "anchor": "scared-e05",
+      "title": "Profundidad frente a puntos globales",
+      "dataset": "SCARED",
+      "status": "executed",
+      "problems": [
+        "Geometría, cámara y datos"
+      ],
+      "negative": false,
+      "order": 48,
+      "protocol": {
+        "Dataset": "SCARED · dataset7",
+        "Partición": "Validación; secundarios identificados en el método",
+        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
+        "Frames y resolución": "N=1/4/8/16/50; RGB 336×266; consultar condiciones de esta ficha",
+        "Escala / alineamiento": "Escala GT de profundidad por ancla; registros secundarios se identifican aparte",
+        "Unidades": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
+        "GT disponible": "XYZ/profundidad medidos en el keyframe; sin trayectoria GT temporal validada"
+      },
+      "source_file": "experimentos_scared_e01_e12.json",
+      "evidence_record": "E05",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "E05-B",
+      "anchor": "scared-e05-b",
+      "title": "Coherencia D/P frente a GT",
+      "dataset": "SCARED",
+      "status": "executed",
+      "problems": [
+        "Geometría, cámara y datos"
+      ],
+      "negative": false,
+      "order": 49,
+      "protocol": {
+        "Dataset": "SCARED · dataset7",
+        "Partición": "Validación; secundarios identificados en el método",
+        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
+        "Frames y resolución": "Principal: KF1–4 con N=50; secundarios identificados; RGB 336×266",
+        "Escala / alineamiento": "Escala GT de profundidad por ancla; registros secundarios se identifican aparte",
+        "Unidades": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
+        "GT disponible": "XYZ/profundidad medidos en el keyframe; sin trayectoria GT temporal validada"
+      },
+      "source_file": "scared_followups_b_resumen.json",
+      "evidence_record": "E05-B",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "E06",
+      "anchor": "scared-e06",
+      "title": "Diagnóstico de escala y alineación",
+      "dataset": "SCARED|C3VD",
+      "status": "executed",
+      "problems": [
+        "Geometría, cámara y datos"
+      ],
+      "negative": false,
+      "order": 50,
+      "protocol": {
+        "Dataset": "SCARED y C3VD trans_t4_b",
+        "Partición": "Validación; secundarios identificados en el método",
+        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
+        "Frames y resolución": "Ancla SCARED y 16 objetivos GT de un contexto C3VD50, según fila",
+        "Escala / alineamiento": "Raw, escala, Sim(3) e ICP se desglosan por diagnóstico; no son resultados intercambiables",
+        "Unidades": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
+        "GT disponible": "XYZ/profundidad medidos en el keyframe; sin trayectoria GT temporal validada"
+      },
+      "source_file": "experimentos_scared_e01_e12.json",
+      "evidence_record": "E06",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "E07",
+      "anchor": "scared-e07",
+      "title": "Auditoría diferencial de VN18/V9",
+      "dataset": "SCARED",
+      "status": "executed",
+      "problems": [
+        "Entrenamiento y generalización"
+      ],
+      "negative": false,
+      "order": 51,
+      "protocol": {
+        "Dataset": "SCARED · TRAIN1/2/3/6 y VAL7",
+        "Partición": "Auditoría de TRAIN y fuentes; validación contextual citada aparte",
+        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
+        "Frames y resolución": "Calendarios reales de ambas recetas; no un único contexto",
+        "Escala / alineamiento": "Normalización de cada pérdida; no es una nueva evaluación de reconstrucción",
+        "Unidades": "Parámetros y normas consignadas; no equivalen a calidad geométrica",
+        "GT disponible": "XYZ/profundidad medidos en el keyframe; sin trayectoria GT temporal validada"
+      },
+      "source_file": "experimentos_scared_e01_e12.json",
+      "evidence_record": "E07",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "E07-B",
+      "anchor": "scared-e07-b",
+      "title": "Comparación separada de recetas",
+      "dataset": "SCARED",
+      "status": "executed",
+      "problems": [
+        "Entrenamiento y generalización"
+      ],
+      "negative": false,
+      "order": 52,
+      "protocol": {
+        "Dataset": "SCARED · TRAIN1/2/3/6 y VAL7",
+        "Partición": "Auditoría de TRAIN y fuentes; validación contextual citada aparte",
+        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
+        "Frames y resolución": "Calendarios reales de ambas recetas; no un único contexto",
+        "Escala / alineamiento": "Normalización de cada pérdida; no es una nueva evaluación de reconstrucción",
+        "Unidades": "Parámetros y normas consignadas; no equivalen a calidad geométrica",
+        "GT disponible": "XYZ/profundidad medidos en el keyframe; sin trayectoria GT temporal validada"
+      },
+      "source_file": "scared_followups_b_resumen.json",
+      "evidence_record": "E07-B",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "E08",
+      "anchor": "scared-e08",
+      "title": "Consistencia entre vistas sin GT temporal",
+      "dataset": "SCARED",
+      "status": "executed",
+      "problems": [
+        "Eficiencia y secuencias largas"
+      ],
+      "negative": false,
+      "order": 53,
+      "protocol": {
+        "Dataset": "SCARED datasets8/9",
+        "Partición": "Recorridos reservados; pesos fijos",
+        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
+        "Frames y resolución": "N=50; mismo recorrido entre variantes",
+        "Escala / alineamiento": "Escala GT de profundidad por ancla; registros secundarios se identifican aparte",
+        "Unidades": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
+        "GT disponible": "Sin GT temporal validada: consistencia/reproyección son proxies, no exactitud temporal"
+      },
+      "source_file": "experimentos_scared_e01_e12.json",
+      "evidence_record": "E08",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "E09",
+      "anchor": "scared-e09",
+      "title": "Dependencia del recorrido y solapamiento",
+      "dataset": "SCARED|C3VD",
+      "status": "executed",
+      "problems": [
+        "Eficiencia y secuencias largas"
+      ],
+      "negative": false,
+      "order": 54,
+      "protocol": {
+        "Dataset": "SCARED7/8/9 y control C3VD trans_t4_b",
+        "Partición": "Asociaciones separadas por caso; no agregado entre dominios",
+        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
+        "Frames y resolución": "N=1/4/8/16/50; RGB 336×266; consultar condiciones de esta ficha",
+        "Escala / alineamiento": "Escala GT de profundidad por ancla; registros secundarios se identifican aparte",
+        "Unidades": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
+        "GT disponible": "SCARED: proxies RGB/consistencia; C3VD: poses GT de 16 vistas"
+      },
+      "source_file": "experimentos_scared_e01_e12.json",
+      "evidence_record": "E09",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "E10",
+      "anchor": "scared-e10",
+      "title": "Error condicionado por profundidad",
+      "dataset": "SCARED",
+      "status": "executed",
+      "problems": [
+        "Geometría, cámara y datos"
+      ],
+      "negative": true,
+      "order": 55,
+      "protocol": {
+        "Dataset": "SCARED7 principal; anclas reservadas8/9 como secundarios identificados",
+        "Partición": "Validación; secundarios identificados en el método",
+        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
+        "Frames y resolución": "N=1/4/8/16/50; RGB 336×266; consultar condiciones de esta ficha",
+        "Escala / alineamiento": "Escala GT de profundidad por ancla; registros secundarios se identifican aparte",
+        "Unidades": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
+        "GT disponible": "XYZ/profundidad medidos en el keyframe; sin trayectoria GT temporal validada"
+      },
+      "source_file": "experimentos_scared_e01_e12.json",
+      "evidence_record": "E10",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "E10-B",
+      "anchor": "scared-e10-b",
+      "title": "Profundidad por ancla",
+      "dataset": "SCARED",
+      "status": "executed",
+      "problems": [
+        "Geometría, cámara y datos"
+      ],
+      "negative": false,
+      "order": 56,
+      "protocol": {
+        "Dataset": "SCARED · dataset7",
+        "Partición": "Validación; secundarios identificados en el método",
+        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
+        "Frames y resolución": "Principal: KF1–4 con N=50; secundarios identificados; RGB 336×266",
+        "Escala / alineamiento": "Escala GT de profundidad por ancla; registros secundarios se identifican aparte",
+        "Unidades": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
+        "GT disponible": "XYZ/profundidad medidos en el keyframe; sin trayectoria GT temporal validada"
+      },
+      "source_file": "scared_followups_b_resumen.json",
+      "evidence_record": "E10-B",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "E11",
+      "anchor": "scared-e11",
+      "title": "Análisis de confianza y cobertura",
+      "dataset": "SCARED",
+      "status": "executed",
+      "problems": [
+        "Geometría, cámara y datos"
+      ],
+      "negative": false,
+      "order": 57,
+      "protocol": {
+        "Dataset": "SCARED · dataset7",
+        "Partición": "Validación; secundarios identificados en el método",
+        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
+        "Frames y resolución": "N=1/4/8/16/50; RGB 336×266; consultar condiciones de esta ficha",
+        "Escala / alineamiento": "Escala GT de profundidad por ancla; registros secundarios se identifican aparte",
+        "Unidades": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
+        "GT disponible": "XYZ/profundidad medidos en el keyframe; sin trayectoria GT temporal validada"
+      },
+      "source_file": "experimentos_scared_e01_e12.json",
+      "evidence_record": "E11",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "E11-B",
+      "anchor": "scared-e11-b",
+      "title": "Error–cobertura y controles",
+      "dataset": "SCARED",
+      "status": "executed",
+      "problems": [
+        "Geometría, cámara y datos"
+      ],
+      "negative": true,
+      "order": 58,
+      "protocol": {
+        "Dataset": "SCARED · dataset7",
+        "Partición": "Validación; secundarios identificados en el método",
+        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
+        "Frames y resolución": "Principal: KF1–4 con N=50; secundarios identificados; RGB 336×266",
+        "Escala / alineamiento": "Escala GT de profundidad por ancla; registros secundarios se identifican aparte",
+        "Unidades": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
+        "GT disponible": "XYZ/profundidad medidos en el keyframe; sin trayectoria GT temporal validada"
+      },
+      "source_file": "scared_followups_b_resumen.json",
+      "evidence_record": "E11-B",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "E12",
+      "anchor": "scared-e12",
+      "title": "Generalización entre datasets",
+      "dataset": "SCARED|C3VD",
+      "status": "executed",
+      "problems": [
+        "Entrenamiento y generalización"
+      ],
+      "negative": false,
+      "order": 59,
+      "protocol": {
+        "Dataset": "SCARED y C3VD",
+        "Partición": "Validación SCARED y lectura de transferencia C3VD; roles declarados en el registro",
+        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
+        "Frames y resolución": "Según cada fila; no mezclar dominios ni poblaciones GT",
+        "Escala / alineamiento": "Escala GT de profundidad por ancla; registros secundarios se identifican aparte",
+        "Unidades": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
+        "GT disponible": "XYZ/profundidad medidos en el keyframe; sin trayectoria GT temporal validada"
+      },
+      "source_file": "experimentos_scared_e01_e12.json",
+      "evidence_record": "E12",
+      "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
+    },
+    {
+      "id": "E13",
+      "anchor": "scared-e13",
+      "title": "Robustez fotométrica",
+      "dataset": "SCARED",
+      "status": "prepared",
+      "problems": [
+        "Iluminación y reflejos"
+      ],
+      "negative": false,
+      "order": 60,
+      "protocol": {
+        "Dataset": "SCARED dataset7",
+        "Partición": "Desarrollo/validación; no se usan test8/9 para seleccionar",
+        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
+        "Frames y resolución": "Previsto: piloto N=16 (E13/E14); N=4/16/50 (E15). SCARED 336×266, C3VD 336²",
+        "Escala / alineamiento": "Prevista: escala de la referencia limpia fija; reajuste solo diagnóstico secundario",
+        "Unidades": "Medidas previstas, todavía sin resultados GPU",
+        "GT disponible": "Ancla medida por contexto; sin GT temporal validada"
+      },
+      "source_file": "scared_protocolos_preparados.json",
+      "evidence_record": "E13",
+      "decision": "Propuesta: completar el preflight y el piloto descritos antes de interpretar robustez o eficiencia. No lanzar otro entrenamiento por esta ficha."
+    },
+    {
+      "id": "E14",
+      "anchor": "scared-e14",
+      "title": "Oclusiones y recuperación offline",
+      "dataset": "SCARED|C3VD",
+      "status": "prepared",
+      "problems": [
+        "Oclusiones"
+      ],
+      "negative": false,
+      "order": 61,
+      "protocol": {
+        "Dataset": "SCARED7; control C3VD trans_t4_b según protocolo",
+        "Partición": "Desarrollo/validación; no se usan test8/9 para seleccionar",
+        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
+        "Frames y resolución": "Previsto: piloto N=16 (E13/E14); N=4/16/50 (E15). SCARED 336×266, C3VD 336²",
+        "Escala / alineamiento": "Prevista: escala de la referencia limpia fija; reajuste solo diagnóstico secundario",
+        "Unidades": "Medidas previstas, todavía sin resultados GPU",
+        "GT disponible": "SCARED: ancla medida; C3VD: 16 referencias del control"
+      },
+      "source_file": "scared_protocolos_preparados.json",
+      "evidence_record": "E14",
+      "decision": "Propuesta: completar el preflight y el piloto descritos antes de interpretar robustez o eficiencia. No lanzar otro entrenamiento por esta ficha."
+    },
+    {
+      "id": "E15",
+      "anchor": "scared-e15",
+      "title": "Eficiencia, memoria y calidad",
+      "dataset": "SCARED|C3VD",
+      "status": "prepared",
+      "problems": [
+        "Eficiencia y secuencias largas"
+      ],
+      "negative": false,
+      "order": 62,
+      "protocol": {
+        "Dataset": "SCARED7; control C3VD trans_t4_b según protocolo",
+        "Partición": "Desarrollo/validación; no se usan test8/9 para seleccionar",
+        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
+        "Frames y resolución": "Previsto: piloto N=16 (E13/E14); N=4/16/50 (E15). SCARED 336×266, C3VD 336²",
+        "Escala / alineamiento": "Prevista: escala de la referencia limpia fija; reajuste solo diagnóstico secundario",
+        "Unidades": "Medidas previstas, todavía sin resultados GPU",
+        "GT disponible": "SCARED: ancla medida; C3VD: 16 referencias del control"
+      },
+      "source_file": "scared_protocolos_preparados.json",
+      "evidence_record": "E15",
+      "decision": "Propuesta: completar el preflight y el piloto descritos antes de interpretar robustez o eficiencia. No lanzar otro entrenamiento por esta ficha."
+    }
+  ],
+  "record_count": 63,
+  "results_recomputed": false,
+  "technical_records_exported": false
+}

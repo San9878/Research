@@ -1,0 +1,342 @@
+{
+  "checked": "2026-11-19",
+  "references": [
+    {
+      "id": "vggttt",
+      "group": "Modelos y comparaciones",
+      "title": "VGG-T³ · Offline Feed-Forward 3D Reconstruction at Scale",
+      "links": [
+        [
+          "Proyecto",
+          "https://research.nvidia.com/labs/dvl/projects/vgg-ttt/"
+        ],
+        [
+          "Paper v1",
+          "https://arxiv.org/html/2602.23361v1"
+        ],
+        [
+          "PDF",
+          "https://arxiv.org/pdf/2602.23361v1"
+        ],
+        [
+          "Código",
+          "https://github.com/nv-dvl/vgg-ttt"
+        ]
+      ],
+      "where": [
+        [
+          "§3.2 · representación y TTT",
+          "https://arxiv.org/html/2602.23361v1#S3.SS2"
+        ],
+        [
+          "§3.3 · secuencias grandes",
+          "https://arxiv.org/html/2602.23361v1#S3.SS3"
+        ],
+        [
+          "§4.1 · métricas",
+          "https://arxiv.org/html/2602.23361v1#S4.SS1"
+        ],
+        [
+          "§4.4 · ablaciones",
+          "https://arxiv.org/html/2602.23361v1#S4.SS4"
+        ],
+        [
+          "Apéndice A · implementación",
+          "https://arxiv.org/html/2602.23361v1#S1a"
+        ]
+      ],
+      "use": "Arquitectura, TTT, contexto y familias de métricas. Sus benchmarks y hardware son distintos de C3VD/SCARED; los números publicados se conservan como referencia, sin ranking directo."
+    },
+    {
+      "id": "vggt",
+      "group": "Modelos y comparaciones",
+      "title": "VGGT · Visual Geometry Grounded Transformer",
+      "links": [
+        [
+          "Proyecto",
+          "https://vgg-t.github.io/"
+        ],
+        [
+          "Paper v1",
+          "https://arxiv.org/html/2503.11651v1"
+        ],
+        [
+          "PDF",
+          "https://arxiv.org/pdf/2503.11651v1"
+        ],
+        [
+          "Código",
+          "https://github.com/facebookresearch/vggt"
+        ]
+      ],
+      "where": [
+        [
+          "§3.3 · cabezas",
+          "https://arxiv.org/html/2503.11651v1#S3.SS3"
+        ],
+        [
+          "§3.4 · entrenamiento",
+          "https://arxiv.org/html/2503.11651v1#S3.SS4"
+        ],
+        [
+          "Normalización GT",
+          "https://arxiv.org/html/2503.11651v1#S3.SS4.SSS0.Px2"
+        ],
+        [
+          "Tiempo y memoria",
+          "https://arxiv.org/html/2503.11651v1#S5.SS0.SSS0.Px2"
+        ]
+      ],
+      "use": "Salidas de cámara, profundidad y puntos; normalización, pérdidas y tablas del modelo original."
+    },
+    {
+      "id": "endosurf",
+      "group": "Modelos y comparaciones",
+      "title": "EndoSurf · Neural Surface Reconstruction of Deformable Tissues with Stereo Endoscope Videos",
+      "links": [
+        [
+          "Paper",
+          "https://arxiv.org/abs/2307.11307"
+        ],
+        [
+          "PDF v2",
+          "https://arxiv.org/pdf/2307.11307v2"
+        ],
+        [
+          "Código",
+          "https://github.com/Ruyi-Zha/endosurf"
+        ]
+      ],
+      "where": [],
+      "use": "Reconstrucción mediante campos neuronales y optimización de la escena. Referencia para distinguir ese régimen del feed-forward."
+    },
+    {
+      "id": "endo4dgs",
+      "group": "Modelos y comparaciones",
+      "title": "Endo-4DGS · Endoscopic Monocular Scene Reconstruction with 4D Gaussian Splatting",
+      "links": [
+        [
+          "Paper",
+          "https://arxiv.org/abs/2401.16416"
+        ],
+        [
+          "PDF v4",
+          "https://arxiv.org/pdf/2401.16416v4"
+        ]
+      ],
+      "where": [],
+      "use": "Representación con Gaussian Splatting y deformación. El rendimiento de renderizado no equivale a latencia de reconstrucción desde RGB."
+    },
+    {
+      "id": "endovggt",
+      "group": "Modelos y comparaciones",
+      "title": "EndoVGGT · GNN-Enhanced Depth Estimation for Surgical 3D Reconstruction",
+      "links": [
+        [
+          "Versión v1 consultada",
+          "https://arxiv.org/html/2603.24577v1"
+        ],
+        [
+          "Estado de la publicación",
+          "https://arxiv.org/abs/2603.24577"
+        ]
+      ],
+      "where": [],
+      "use": "Antecedente histórico de las comparaciones. arXiv indica retirada por los autores: sus cifras no se presentan como un benchmark validado.",
+      "status": "Retirado · conservar contexto de v1"
+    },
+    {
+      "id": "endodac",
+      "group": "Modelos y comparaciones",
+      "title": "EndoDAC · Efficient Adapting Foundation Model for Self-Supervised Depth Estimation from Any Endoscopic Camera",
+      "links": [
+        [
+          "Paper",
+          "https://arxiv.org/abs/2405.08672"
+        ],
+        [
+          "PDF",
+          "https://arxiv.org/pdf/2405.08672"
+        ]
+      ],
+      "where": [],
+      "use": "Enlace incluido en el documento de investigación; referencia sobre adaptación de profundidad endoscópica, sin atribuir sus resultados a nuestros entrenamientos."
+    },
+    {
+      "id": "c3vd",
+      "group": "Datasets y geometría GT",
+      "title": "C3VD · Colonoscopy 3D Video Dataset with Paired Depth from 2D–3D Registration",
+      "links": [
+        [
+          "Dataset original",
+          "https://durrlab.github.io/C3VD/"
+        ],
+        [
+          "Artículo",
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC10591895/"
+        ],
+        [
+          "Paper arXiv",
+          "https://arxiv.org/abs/2206.08903"
+        ],
+        [
+          "Código y formato",
+          "https://github.com/DurrLab/C3VD"
+        ]
+      ],
+      "where": [
+        [
+          "Modalidades y codificación",
+          "https://durrlab.github.io/C3VD/#dataset"
+        ]
+      ],
+      "use": "Contrato de adquisición, cámara omnidireccional y modalidades GT del C3VD original. No confundir nuestros archivos geometry_v2 con el dataset externo C3VDv2."
+    },
+    {
+      "id": "scared",
+      "group": "Datasets y geometría GT",
+      "title": "SCARED · Stereo Correspondence and Reconstruction of Endoscopic Data Challenge",
+      "links": [
+        [
+          "Paper",
+          "https://arxiv.org/html/2101.01133v1"
+        ],
+        [
+          "PDF",
+          "https://arxiv.org/pdf/2101.01133v1"
+        ],
+        [
+          "Challenge",
+          "https://endovissub2019-scared.grand-challenge.org/"
+        ]
+      ],
+      "where": [
+        [
+          "§II · adquisición de datos",
+          "https://arxiv.org/html/2101.01133v1#S2"
+        ],
+        [
+          "§VI-B1 · errores de calibración",
+          "https://arxiv.org/html/2101.01133v1#S6.SS2.SSS1"
+        ],
+        [
+          "§VI-B2 · offsets vídeo/cinemática",
+          "https://arxiv.org/html/2101.01133v1#S6.SS2.SSS2"
+        ],
+        [
+          "§VI-B3 · alineación GT/RGB",
+          "https://arxiv.org/html/2101.01133v1#S6.SS2.SSS3"
+        ]
+      ],
+      "use": "Luz estructurada y limitaciones de la referencia; suplemento de inexactitudes. La revisión del challenge devolvió HTTP403: el artículo sí fue accesible."
+    },
+    {
+      "id": "endonerf",
+      "group": "Otros antecedentes del documento",
+      "title": "EndoNeRF · repositorio original",
+      "links": [
+        [
+          "Código y proyecto",
+          "https://github.com/med-air/EndoNeRF"
+        ]
+      ],
+      "where": [],
+      "use": "Enlace conservado del Research document. No se añaden experimentos ni resultados locales de este método."
+    },
+    {
+      "id": "robustpose",
+      "group": "Otros antecedentes del documento",
+      "title": "Robust pose estimator · repositorio citado en el documento",
+      "links": [
+        [
+          "Código",
+          "https://github.com/aimi-lab/robust-pose-estimator"
+        ]
+      ],
+      "where": [],
+      "use": "Referencia de consulta del documento aportado; no se confunde con un modelo evaluado en esta bitácora."
+    },
+    {
+      "id": "hamlyn",
+      "group": "Otros antecedentes del documento",
+      "title": "Hamlyn · enlace de datos del documento",
+      "links": [
+        [
+          "Ficha enlazada",
+          "https://github.com/openmedlab/Awesome-Medical-Dataset/blob/main/resources/Hamlyn.md"
+        ]
+      ],
+      "where": [],
+      "use": "Catálogo enlazado por el Research document; no forma parte de los splits C3VD/SCARED registrados aquí."
+    },
+    {
+      "id": "nerf",
+      "group": "Representaciones y adaptación",
+      "title": "NeRF · Representing Scenes as Neural Radiance Fields for View Synthesis",
+      "links": [
+        [
+          "Proyecto",
+          "https://www.matthewtancik.com/nerf"
+        ],
+        [
+          "Paper",
+          "https://arxiv.org/abs/2003.08934"
+        ]
+      ],
+      "where": [],
+      "use": "Referencia de representación neuronal y optimización por escena citada en el borrador."
+    },
+    {
+      "id": "3dgs",
+      "group": "Representaciones y adaptación",
+      "title": "3D Gaussian Splatting for Real-Time Radiance Field Rendering",
+      "links": [
+        [
+          "Proyecto y paper",
+          "https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/"
+        ]
+      ],
+      "where": [],
+      "use": "Referencia de representación y renderizado; distinguir renderizar una escena ya ajustada de reconstruirla."
+    },
+    {
+      "id": "ttt",
+      "group": "Representaciones y adaptación",
+      "title": "Learning to (Learn at Test Time): RNNs with Expressive Hidden States",
+      "links": [
+        [
+          "Paper",
+          "https://arxiv.org/abs/2407.04620"
+        ]
+      ],
+      "where": [],
+      "use": "Antecedente de TTT citado en el proyecto oficial de VGG-T³."
+    },
+    {
+      "id": "tttright",
+      "group": "Representaciones y adaptación",
+      "title": "Test-Time Training Done Right",
+      "links": [
+        [
+          "Paper",
+          "https://arxiv.org/abs/2505.23884"
+        ]
+      ],
+      "where": [],
+      "use": "Antecedente de implementación citado en el proyecto oficial de VGG-T³."
+    },
+    {
+      "id": "lora",
+      "group": "Representaciones y adaptación",
+      "title": "LoRA · Low-Rank Adaptation of Large Language Models",
+      "links": [
+        [
+          "Paper",
+          "https://arxiv.org/abs/2106.09685"
+        ]
+      ],
+      "where": [],
+      "use": "Referencia terminológica de adaptación; nuestros ajustes de cabezas no se etiquetan como LoRA."
+    }
+  ]
+}

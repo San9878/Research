@@ -1,0 +1,234 @@
+{
+  "recipes": [
+    {
+      "id": "c3vd-v9",
+      "title": "V9 · C3VD",
+      "code_file": "train_c3vd_point_v9.py",
+      "code_SHA256": "63335cf2a7600dd27692b1f07d38216b94b7d3db8ef5349839d02dd75e8a2f6e",
+      "configuration_file": "Hiperparámetros y CLI definidos en el script histórico",
+      "configuration_SHA256": null,
+      "source_matches_stored_signature": null,
+      "configuration_summary": {},
+      "metadata_only": true,
+      "weights_or_GT_published": false
+    },
+    {
+      "id": "c3vd-vn19",
+      "title": "VN19-A/B · C3VD",
+      "code_file": "engine19.py",
+      "code_SHA256": "81f6b640dfbb8a4df23a2a97fbb851d2e8874fc48f5a2904d47b80f99404e73d",
+      "configuration_file": "protocol.json",
+      "configuration_SHA256": "c47946aaab3e1f6f64072338a87acbee56572e0ef7611848a301db959da55b52",
+      "source_matches_stored_signature": true,
+      "configuration_summary": {
+        "version": "VN19",
+        "trainable": [
+          "camera_head",
+          "depth_head",
+          "point_head"
+        ],
+        "optimizer": {
+          "name": "AdamW",
+          "lr": 1e-05,
+          "betas": [
+            0.9,
+            0.95
+          ],
+          "eps": 1e-06,
+          "weight_decay": 0.01,
+          "clip": "global_norm_1",
+          "warmup_steps": 25
+        },
+        "loss": "Exact V9 dense loss 3*XYZ_L1 + logD_L1 +0.2*point_gradient_L1 +0.2*V9_camera_objective; both arms",
+        "full_steps_each_arm": 3240,
+        "pilot_steps": 108
+      },
+      "metadata_only": true,
+      "weights_or_GT_published": false
+    },
+    {
+      "id": "c3vd-vn18",
+      "title": "VN18 · C3VD",
+      "code_file": "engine_vn18.py",
+      "code_SHA256": "e6128f88bbd376de7e16683b9f2ab9f5a5ce5e8f4d6a8c6adcb800f24b4aa366",
+      "configuration_file": "config.json",
+      "configuration_SHA256": "2114830abe7b62f5376141b329f922e553a5ba08194ca2d2f4c5b0aa1f8bc132",
+      "source_matches_stored_signature": true,
+      "configuration_summary": {
+        "version": "VN18",
+        "trainable": [
+          "depth_head",
+          "point_head"
+        ],
+        "optimizer": {
+          "name": "AdamW",
+          "lr": 1e-05,
+          "betas": [
+            0.9,
+            0.95
+          ],
+          "eps": 1e-06,
+          "weight_decay": 0.01,
+          "clip": "per_head",
+          "clip_max_norm": 1.0,
+          "warmup_fraction": 0.05,
+          "final_lr_ratio": 0.1
+        },
+        "loss": {
+          "kind": "common_normalized_native_regression_and_confidence",
+          "quality_auxiliary": true,
+          "primary_dense_GT": "measured anchor only; no propagated temporal labels",
+          "depth_weight": 1.0,
+          "point_weight": 1.0,
+          "quality_auxiliary_is_candidate_not_proven_improvement": true
+        },
+        "budget": {
+          "max_steps": 3240,
+          "checkpoint_every": 54,
+          "short_every": 108,
+          "long_every": 324
+        },
+        "selection": {
+          "required_joint_improvement_percent": 1.0,
+          "max_regression_percent": 2.0,
+          "keys": [
+            "short_depth",
+            "short_point",
+            "long_depth",
+            "long_point",
+            "long_derived"
+          ],
+          "far_depth_guard": true,
+          "consistency_used_as_accuracy_proxy": false
+        },
+        "memory": {
+          "min_free_VRAM_GiB": 5.5,
+          "min_free_commit_GiB": 5,
+          "cache_cap_GiB": 65,
+          "min_C_remaining_GiB": 12
+        }
+      },
+      "metadata_only": true,
+      "weights_or_GT_published": false
+    },
+    {
+      "id": "scared-vn18",
+      "title": "VN18 · SCARED",
+      "code_file": "engine_vn18.py",
+      "code_SHA256": "e6128f88bbd376de7e16683b9f2ab9f5a5ce5e8f4d6a8c6adcb800f24b4aa366",
+      "configuration_file": "config.json",
+      "configuration_SHA256": "c5c0dec97ba6cc80850dc5a7c46890a47a5c3807751d0251d7bfb0618fc2421b",
+      "source_matches_stored_signature": true,
+      "configuration_summary": {
+        "version": "VN18",
+        "trainable": [
+          "depth_head",
+          "point_head"
+        ],
+        "optimizer": {
+          "name": "AdamW",
+          "lr": 1e-05,
+          "betas": [
+            0.9,
+            0.95
+          ],
+          "eps": 1e-06,
+          "weight_decay": 0.01,
+          "clip": "per_head",
+          "clip_max_norm": 1.0,
+          "warmup_fraction": 0.05,
+          "final_lr_ratio": 0.1
+        },
+        "loss": {
+          "kind": "common_normalized_native_regression_and_confidence",
+          "quality_auxiliary": true,
+          "primary_dense_GT": "measured anchor only; no propagated temporal labels",
+          "depth_weight": 1.0,
+          "point_weight": 1.0,
+          "quality_auxiliary_is_candidate_not_proven_improvement": true
+        },
+        "budget": {
+          "max_steps": 3240,
+          "checkpoint_every": 54,
+          "short_every": 108,
+          "long_every": 324
+        },
+        "selection": {
+          "required_joint_improvement_percent": 1.0,
+          "max_regression_percent": 2.0,
+          "consistency_used_as_accuracy_proxy": false
+        },
+        "memory": {
+          "min_free_VRAM_GiB": 5.5,
+          "min_free_commit_GiB": 5,
+          "min_C_remaining_GiB": 12,
+          "min_other_cache_remaining_GiB": 1.5
+        }
+      },
+      "metadata_only": true,
+      "weights_or_GT_published": false
+    },
+    {
+      "id": "scared-v9",
+      "title": "V9 adaptado · SCARED",
+      "code_file": "engine.py",
+      "code_SHA256": "2f3d8105b9bf059559657c7928e295d5a4a14b14a440721f2b5ad5ef86895c89",
+      "configuration_file": "config.json",
+      "configuration_SHA256": "f5117026a9edb1ea7eca8087046bfd78bfcc10c9418e4ba2cd5a5350769d04ca",
+      "source_matches_stored_signature": true,
+      "configuration_summary": {
+        "version": "SCARED-V9-adapt-v1",
+        "seed": 1234,
+        "trainable": [
+          "depth_head",
+          "point_head"
+        ],
+        "optimizer": {
+          "name": "AdamW",
+          "lr": 1e-05,
+          "betas": [
+            0.9,
+            0.95
+          ],
+          "eps": 1e-06,
+          "weight_decay": 0.01,
+          "clip": "global",
+          "clip_max_norm": 1.0,
+          "warmup_updates": 25,
+          "cosine_floor": 0.1
+        },
+        "loss": {
+          "point_xyz_l1": 3.0,
+          "depth_log_l1": 1.0,
+          "point_gradient_l1": 0.2,
+          "camera": 0.0,
+          "confidence_loss": false,
+          "quality_auxiliary": false,
+          "normalization": "fixed 0.03 m, as V9; no per-anchor fitted scale in training"
+        },
+        "budget": {
+          "max_steps": 1000,
+          "microbatches_per_update": 2,
+          "measured_targets_per_context": 1,
+          "validation_every": 50,
+          "checkpoint_every": 50
+        },
+        "selection": {
+          "primary": "V9 score without unavailable camera terms: raw_XYZ_mm/5 + raw_AbsRel",
+          "validation_macro": "mean within keyframe, then equal mean of all five VAL keyframes",
+          "additional_guard": "same shared depth-scale aligned metrics as VN18; >=1% mean gain, no >2% per-keyframe regression",
+          "baseline_preserved_when_guard_fails": true
+        },
+        "memory": {
+          "min_free_VRAM_GiB": 5.5,
+          "min_free_commit_GiB": 5.0,
+          "disk_reserve_GiB": 8.0
+        }
+      },
+      "metadata_only": true,
+      "weights_or_GT_published": false
+    }
+  ],
+  "metadata_only": true,
+  "technical_records_exported": false
+}

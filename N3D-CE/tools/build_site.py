@@ -51,7 +51,7 @@ def main():
     site.mkdir(exist_ok=True);public=site/'N3D-CE';public.mkdir(exist_ok=True)
     for name in ['index.html','Bitacora.html','publication_manifest.json']:
         shutil.copyfile(source/name,public/name)
-    for folder in ['Bitacora_files','imagenes','recursos','tablas','catalogo','reconstrucciones']:
+    for folder in ['Bitacora_files','imagenes','recursos','tablas','catalogo','reconstrucciones','contenido']:
         src=source/folder;dest=public/folder
         if src.exists():shutil.copytree(src,dest,dirs_exist_ok=True,ignore=shutil.ignore_patterns('navegacion.html') if folder=='recursos' else None)
     shutil.copyfile(root/'index.html',site/'index.html')

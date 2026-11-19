@@ -61,12 +61,12 @@ def main():
     if not same_tables(original,q):raise RuntimeError('Public export changed a notebook data table')
     if q.count('class="experiment-card"')!=original.count('class="experiment-card"'):raise RuntimeError('An experiment card was lost')
     (dst/'Bitacora.qmd').write_text(q,encoding='utf8')
-    for rel in ['recursos/bitacora.css','recursos/offline.scss','recursos/navegacion.html','recursos/comparadores_integracion.js']:
+    for rel in ['recursos/bitacora.css','recursos/offline.scss','recursos/navegacion.html','recursos/comparadores_integracion.js','recursos/editorial.css','recursos/book-navigation.js']:
         copy(src/rel,dst/rel)
     for img in (src/'imagenes').glob('*'):
         if img.is_file():copy(img,dst/'imagenes'/img.name)
     app=dst/'reconstrucciones/interactivo';app.mkdir(parents=True,exist_ok=True)
-    for name in ['comparador.html','app.css','viewer.js','metric-viewer.js']:copy(src/'reconstrucciones/interactivo'/name,app/name)
+    for name in ['comparador.html','app.css','viewer.js','metric-viewer.js','cloud-loader.js']:copy(src/'reconstrucciones/interactivo'/name,app/name)
     # A network download of a full cloud may take longer than a local disk read.
     viewer=(app/'viewer.js').read_text(encoding='utf8')
     viewer=viewer.replace('}},120000);','}},600000);').replace(')),120000);',')),600000);')
@@ -107,7 +107,7 @@ def main():
     with (dst/'tablas/experimentos_c3vd.csv').open('w',encoding='utf-8-sig',newline='') as f:
         w=csv.DictWriter(f,fieldnames=list(experiments[0]));w.writeheader()
         for r in experiments:w.writerow({k:json.dumps(v,ensure_ascii=False) if isinstance(v,(dict,list)) else v for k,v in r.items()})
-    for name in ['scared_v9_validation.csv','scared_v9_resultados.json','c3vd_scared_transfer_v1.csv','c3vd_scared_transfer_v1.json','experimentos_scared_e01_e12.json','experimentos_scared_e01_e12.csv','scared_e01_e12_datos.csv','scared_followups_b_resumen.json','scared_followups_b_tablas.csv','scared_protocolos_preparados.json','menu_experimentos_scared.json']:
+    for name in ['scared_v9_validation.csv','scared_v9_resultados.json','c3vd_scared_transfer_v1.csv','c3vd_scared_transfer_v1.json','experimentos_scared_e01_e12.json','experimentos_scared_e01_e12.csv','scared_e01_e12_datos.csv','scared_followups_b_resumen.json','scared_followups_b_tablas.csv','scared_protocolos_preparados.json','menu_experimentos_scared.json','menu_experimentos_unificado.json','referencias_consulta.json','protocolos_tablas.json','recetas_reproducibles.json']:
         # Granular SCARED records remain local; only the authorized summary is public.
         if name=='experimentos_scared_e01_e12.json' and (src/'tablas'/name).exists():
             if 'detailed_results' in read(src/'tablas'/name):raise RuntimeError('Granular SCARED records are not approved for public export')
@@ -122,8 +122,10 @@ def main():
             with (src/'tablas'/name).open(encoding='utf-8-sig',newline='') as f:
                 if any(r['experimento'] not in {'E10-B','E11-B','E07-B','E05-B'} for r in csv.DictReader(f)):raise RuntimeError('Only four summary tables are approved')
         if (src/'tablas'/name).exists():copy(src/'tablas'/name,dst/'tablas'/name)
+    copy(src/'contenido/Research_document.pdf',dst/'contenido/Research_document.pdf')
+    for name in ['c3vd-v9','c3vd-vn19','c3vd-vn18','scared-vn18','scared-v9']:copy(src/'recursos/recetas'/(name+'.html'),dst/'recursos/recetas'/(name+'.html'))
     # Export report contains reproducible hashes, never machine paths or credentials.
-    report={'project':'N3D-CE','source_qmd_sha256':sha(src/'Bitacora.qmd'),'public_qmd_sha256':sha(dst/'Bitacora.qmd'),'source_data_tables_preserved':len(re.findall(r'(?m)(?:^\|[^\n]*\n)+',q)),'experiment_cards':q.count('class="experiment-card"'),'scared_experiment_cards':q.count('class="scared-experiment-card"'),'scared_followup_cards':q.count('class="scared-followup-card"'),'prepared_protocol_cards':q.count('class="prepared-experiment-card"'),'public_clouds':[{'id':r['id'],'points':r['points'],'package_sha256':packages[r['pack_key']]['package_sha256']} for r in clouds],'cloud_bytes':public['physical_package_bytes'],'metric_entries':len(met['entries']),'historical_tables':len(tables),'all_saved_vertices_preserved':True,'new_training':False,'new_inference':False}
+    report={'project':'N3D-CE','source_qmd_sha256':sha(src/'Bitacora.qmd'),'public_qmd_sha256':sha(dst/'Bitacora.qmd'),'source_data_tables_preserved':len(re.findall(r'(?m)(?:^\|[^\n]*\n)+',q)),'experiment_cards':q.count('class="experiment-card"'),'scared_experiment_cards':q.count('class="scared-experiment-card"'),'scared_followup_cards':q.count('class="scared-followup-card"'),'prepared_protocol_cards':q.count('class="prepared-experiment-card"'),'unified_experiment_cards':q.count('data-research-card'),'public_clouds':[{'id':r['id'],'points':r['points'],'package_sha256':packages[r['pack_key']]['package_sha256']} for r in clouds],'cloud_bytes':public['physical_package_bytes'],'metric_entries':len(met['entries']),'historical_tables':len(tables),'all_saved_vertices_preserved':True,'new_training':False,'new_inference':False}
     dump(dst/'publication_manifest.json',report)
     print(json.dumps({k:v for k,v in report.items() if k!='public_clouds'},ensure_ascii=True))
 if __name__=='__main__':main()

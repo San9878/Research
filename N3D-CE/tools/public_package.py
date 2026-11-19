@@ -72,6 +72,7 @@ DECODE_OLD=" const str=atob(chunk.data),compressed=new Uint8Array(str.length);fo
 DECODE_NEW=" let compressed;if(chunk.binary){compressed=chunk.binary;chunk.binary=null}else{const str=atob(chunk.data);compressed=new Uint8Array(str.length);for(let i=0;i<str.length;i++)compressed[i]=str.charCodeAt(i)};"
 
 def adapt_viewer(viewer):
+    if "BookCloudTransport.load" in viewer:return viewer  # Transport already supports both lossless containers.
     if "if(meta.container==='binary-chunks-v1')" in viewer:return viewer
     if 'async function pack(meta){\n' not in viewer or DECODE_OLD not in viewer:raise ValueError('Viewer interface changed; inspect before modifying')
     return viewer.replace('async function pack(meta){\n','async function pack(meta){\n'+PACK_BRANCH,1).replace(DECODE_OLD,DECODE_NEW,1)

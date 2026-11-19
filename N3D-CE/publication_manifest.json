@@ -1,12 +1,13 @@
 {
   "project": "N3D-CE",
-  "source_qmd_sha256": "16675dbab3b22e8906b225fc607f7787c6d7c04bc1d33d6d895d4b6a790186ce",
-  "public_qmd_sha256": "ec5d9992066811f91a4e99224f3b56ff0e8d2646fe60537271cd7722445147ad",
-  "source_data_tables_preserved": 105,
+  "source_qmd_sha256": "6c23acc1c038f4d2fa64caf92bd2092004a52709892a2c215885faae079f0a52",
+  "public_qmd_sha256": "1cc0df13f141ccbbc78eb14d843669d20c42595905127314a5ee095de2932fb4",
+  "source_data_tables_preserved": 59,
   "experiment_cards": 44,
   "scared_experiment_cards": 12,
   "scared_followup_cards": 4,
   "prepared_protocol_cards": 3,
+  "unified_experiment_cards": 63,
   "public_clouds": [
     {
       "id": "c3vd-v9",
