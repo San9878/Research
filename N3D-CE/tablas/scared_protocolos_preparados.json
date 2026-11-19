@@ -1,0 +1,50 @@
+{
+  "version": "Endoscopy-robustness-prepared-v1",
+  "status": "prepared_not_model_executed",
+  "experiments": [
+    {
+      "id": "E13",
+      "title": "Robustez fotométrica",
+      "status": "Preparado · GPU pendiente",
+      "objective": "Separar sensibilidad de D/P a exposición, luz espacial y proxies de highlights, manteniendo geometría y RGB de referencia.",
+      "method": "Exposición 0,5/0,75/1,25/1,5 en luz lineal; iluminación radial; highlights móviles 1/3/5% y un combinado. Mismos IDs, orden, resolución, K y GT. Encoder nuevo para cada RGB alterado.",
+      "controls": "Identidad bit-exacta; mismo campo de perturbación para el mismo frame al cambiar N. Escala principal de la referencia limpia, constante; re-fit solo secundario. Correspondencias del RGB limpio fijas.",
+      "metrics": "AbsRel, XYZ, variación de predicciónD/P, consistencia entre vistas; saturación y dentro/fuera de la huella de highlight con igual soporte.",
+      "limits": "Highlights aditivos son una aproximación visual controlada, no reflejos físicos de mucosa. No hay aún métricas del modelo para estas condiciones.",
+      "pilot": "2 anclas SCARED 7, N=16, tres pesos; 24 forwards de encoder incluyendo referencias limpias."
+    },
+    {
+      "id": "E14",
+      "title": "Oclusiones y recuperación offline",
+      "status": "Preparado · GPU pendiente",
+      "objective": "Medir el daño sobre anatomía todavía visible y distinguir efectos del contexto, vuelta a entrada limpia y recuperación online.",
+      "method": "Oclusores opacos estáticos/móviles 5/15/30%, ráfaga intermedia y retorno limpio. Prefijos 8/16/32/50 opcionales: cada uno se infiere desde cero con su control limpio de igual tamaño.",
+      "controls": "GT válido fuera del oclusor y exactamente esa misma máscara en el control limpio. No puntuar profundidad de tejido oculto como GT del objeto añadido. Comprobar reinicio al retornar a RGB idéntico.",
+      "metrics": "Error en GT visible, desviación de los mismos frames limpios y consistencia; C3VD aporta 16 referencias para analizar antes/durante/después.",
+      "limits": "SCARED solo aporta GT en el ancla: no se inventa precisión temporal. El modelo es offline; retorno limpio y prefijos independientes no demuestran seguimiento ni recuperación clínica en tiempo real.",
+      "pilot": "SCARED 7/KF4 y C3VD trans_t4_b, N16, tres pesos; 30 forwards incluyendo referencias."
+    },
+    {
+      "id": "E15",
+      "title": "Eficiencia, memoria y calidad",
+      "status": "Preparado · GPU pendiente",
+      "objective": "Relacionar tamaño del contexto con latencia, memoria y calidad sin confundir throughput offline con tiempo real online.",
+      "method": "N=1/4/8/16/32/50; desde RGB sin caché de características; misma precisión, TTT=2 y offloading. Piloto: 1 warmup+3 repeticiones; completo: 2+5. La referencia limpia cuenta como primer warmup.",
+      "controls": "Sincronización CUDA; warmups excluidos; mediana/IQR, OOM registrados y ningún recorte automático. Calidad principal de la misma ancla. Presupuesto GPU y memoria comprometible Windows comprobados por condición.",
+      "metrics": "RGB→predicciones, encoder/transferencias, cabezas/D2H, eventos CUDA y primera salida por separado; picos CUDA asignado/reservado y memoria disponible.",
+      "limits": "Todavía no hay medidas de latencia ni VRAM de esta rejilla. El coste real con offloading se mantiene visible. FPS medio de un lote no certifica una cámara procesada online.",
+      "pilot": "SCARED 7/KF2 y C3VD trans_t4_b, N4/16/50, tres pesos; 72 forwards incluyendo warmups."
+    }
+  ],
+  "executed_model_forwards": 0,
+  "executed_training_updates": 0,
+  "technical_records_exported": false,
+  "CPU_cases_verified": 5,
+  "CPU_test_count": 15,
+  "GPU_preflight": "pending",
+  "models": [
+    "VGG-T³ zero-shot",
+    "VN18-SCARED (3240 pasos)",
+    "V9-SCARED (1000 pasos)"
+  ]
+}

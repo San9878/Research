@@ -2,7 +2,7 @@
 title: "Bitácora"
 subtitle: "C3VD · V9, VN19-A/B | SCARED · VN18 y V9 adaptado"
 author: "Santiago Hernández Chávez"
-date: 2026-11-17
+date: 2026-11-18
 date-format: "DD/MM/YYYY"
 lang: es
 format:
@@ -29,7 +29,7 @@ execute:
 
 **V9, VN19-A y VN19-B: qué entrenamos, qué cambió y qué aprendimos.** 
 
-[Resumen](#estado){.pill} [Entrenamientos](#entrenamientos){.pill} [Comparaciones](#comparaciones){.pill} [Vistas](#vistas){.pill} [Experimentos](#experimentos){.pill} [SCARED VN18](#scared-vn18){.pill} [SCARED V9](#scared-v9){.pill} [SCARED E01–E12](#scared-experimentos){.pill} [Comparadores](#comparadores){.pill} [Tablas históricas](tablas/index.html){.pill}
+[Resumen](#estado){.pill} [Entrenamientos](#entrenamientos){.pill} [Comparaciones](#comparaciones){.pill} [Vistas](#vistas){.pill} [Experimentos](#experimentos){.pill} [SCARED VN18](#scared-vn18){.pill} [SCARED V9](#scared-v9){.pill} [Experimentos SCARED](#scared-experimentos){.pill} [Comparadores](#comparadores){.pill} [Tablas históricas](tablas/index.html){.pill}
 :::
 
 ## Resumen de C3VD {#estado}
@@ -1793,13 +1793,17 @@ Para las variantes VGG-T³ de esta tabla, la secuencia quedó fuera de sus ajust
 
 <!-- SCARED_E01_E12_START -->
 
-## SCARED · experimentos E01–E12 {#scared-experimentos}
+## SCARED · experimentos y seguimiento {#scared-experimentos}
 
 Se separan tres preguntas: respuesta al contexto, relación entre salidas y transferencia de dominio. **Completados los doce diagnósticos solicitados; ningún entrenamiento nuevo.** Se reutilizaron resultados existentes y se hicieron solo seis nuevos forwards de encoder para cambiar el orden. Las63 lecturas de contexto extraen confianza no conservada antes y frames comunes. Todas las nubes mantienen el100 % de sus puntos.
 
 **Corrección de interpretación:** VN18 aprovecha mejor el contexto en profundidad y en su cambio relativo N1→N50; no domina todas las métricas. Con las mismas cuatro anclas, V9 aún tiene menor XYZ enN50. El antiguo macro de cinco anclas incluía KF5 únicamenteN1.
 
 Los errores contra GT se distinguen de consistencia sin GT. Escalas/Sim3 que usan GT son diagnósticos, no nuevas predicciones ni mejoras desplegables. Datasets8/9 ya fueron inspeccionados y no son ahora un test ciego nuevo.
+
+<label for="scared-menu-filter">Mostrar experimentos: </label><select id="scared-menu-filter"><option value="all">Todos</option><option value="done">Completados</option><option value="prepared">Preparados</option></select>
+
+<div id="scared-experiment-menu">
 
 | ID | Experimento | Estado |
 | --- | --- | --- |
@@ -1808,13 +1812,27 @@ Los errores contra GT se distinguen de consistencia sin GT. Escalas/Sim3 que usa
 | E03 | [Aislamiento del primer frame](#scared-e03) | Completado |
 | E04 | [Análisis profundo de KF4](#scared-e04) | Completado |
 | E05 | [Profundidad frente a puntos globales](#scared-e05) | Completado |
+| E05-B | [Coherencia D/P frente a GT](#scared-e05-b) | Completado |
 | E06 | [Diagnóstico de escala y alineación](#scared-e06) | Completado |
 | E07 | [Auditoría diferencial de VN18/V9](#scared-e07) | Completado |
+| E07-B | [Comparación separada de recetas](#scared-e07-b) | Completado |
 | E08 | [Consistencia entre vistas sin GT temporal](#scared-e08) | Completado |
 | E09 | [Dependencia del recorrido y solapamiento](#scared-e09) | Completado |
 | E10 | [Error condicionado por profundidad](#scared-e10) | Completado |
+| E10-B | [Profundidad por ancla](#scared-e10-b) | Completado |
 | E11 | [Análisis de confianza y cobertura](#scared-e11) | Completado |
+| E11-B | [Error–cobertura y controles](#scared-e11-b) | Completado |
 | E12 | [Generalización entre datasets](#scared-e12) | Completado |
+| E13 | [Robustez fotométrica](#scared-e13) | Preparado · sin resultados |
+| E14 | [Oclusiones y recuperación offline](#scared-e14) | Preparado · sin resultados |
+| E15 | [Eficiencia, memoria y calidad](#scared-e15) | Preparado · sin resultados |
+
+</div>
+
+Completado significa que el procedimiento se ejecutó, no que la hipótesis quedó demostrada. Preparado significa que hay protocolo y controles CPU, con ejecución GPU pendiente.
+
+<script>document.addEventListener("DOMContentLoaded",()=>{const f=document.getElementById("scared-menu-filter");f.addEventListener("change",()=>{for(const r of document.querySelectorAll("#scared-experiment-menu tbody tr")){const ready=r.textContent.includes("Preparado");r.hidden=f.value!=="all"&&(f.value==="prepared"?!ready:ready)}});const open=()=>{const id=decodeURIComponent(location.hash.slice(1)),e=document.getElementById(id);if(e&&e.tagName==="DETAILS")e.open=true};window.addEventListener("hashchange",open);open()});</script>
+
 
 <details class="scared-experiment-card" id="scared-e01">
 <summary>E01 · Sensibilidad al tamaño de contexto</summary>
@@ -2146,6 +2164,187 @@ Los errores contra GT se distinguen de consistencia sin GT. Escalas/Sim3 que usa
 Los registros granulares se conservan en el expediente técnico local y no se incluyen en esta edición compartida.
 
 <!-- SCARED_E01_E12_END -->
+
+<!-- SCARED_FOLLOWUPS_B_START -->
+
+### Seguimiento por ancla, confianza y coherencia {#scared-seguimiento-b}
+
+Los cuatro seguimientos están **completados**, sin entrenar ni recalcular encoders. Se reutilizaron P/D y se conservaron 63 mapas de confianza de ancla para evitar extraerlos otra vez. Las diferencias por ancla se separan de agregados; el acuerdo entre rutas se contrasta conGT.
+
+<details class="scared-followup-card" id="scared-e10-b">
+<summary>E10-B · Profundidad por ancla · Completado</summary>
+
+**Cómo se hizo:** Reutilizadas 63 predicciones. Principal: KF1–4 N50, mismos bins y GT. Se muestran soporte por ancla, agregado por píxeles, macro igual por ancla y retirada de una ancla. Mínimo 1000 píxeles para interpretar un bin, como la guarda histórica de VN18; bins menores quedan registrados localmente.
+
+**Resultados:**
+
+| KF | Píxeles ≥100 mm | Peso del bin (%) | XYZ VN18 (cm) | XYZ V9 (cm) | AbsRel VN18 | AbsRel V9 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | 23771 | 83.8898 | 2.9333 | 1.8334 | 0.2352 | 0.1554 |
+| 2 | 2987 | 10.5414 | 1.7579 | 1.6085 | 0.1271 | 0.1346 |
+| 3 | 2 | 0.0071 | N/D | N/D | N/D | N/D |
+| 4 | 1576 | 5.5618 | 4.3471 | 3.9010 | 0.2652 | 0.3343 |
+
+**Conclusión:** KF1 aporta 83,89% de los píxeles ≥100 mm. V9 gana XYZ en KF1/2/4, por lo que esa ventaja no se limita a KF4 ni desaparece al retirar KF1: baja de 33,34% a 9,48%. En profundidad, en cambio, V9 solo gana en KF1: al retirarlo, la ventaja AbsRel cambia de +27,62% a −16,41%. El agregado profundo no describe uniformemente las anclas.
+
+**Límites:** 100 mm es un corte de análisis, no un umbral físico universal. Solo tres anclas tienen soporte profundo suficiente; KF3 tiene dos píxeles. Píxeles y ventanas no son sujetos independientes.
+
+**Retirada de una ancla · ≥100 mm:**
+
+| Ancla retirada | Ventaja XYZ V9/VN18 (%) | Ventaja AbsRel V9/VN18 (%) |
+| --- | --- | --- |
+| Ninguna | 33.3448 | 27.6236 |
+| KF1 | 9.4823 | -16.4127 |
+| KF2 | 35.0479 | 29.7398 |
+| KF3 | 33.3554 | 27.6289 |
+| KF4 | 35.4532 | 31.3791 |
+
+![XYZ profundo por ancla; KF3 excluido de interpretación por soporte.](imagenes/SCARED_E10B_anclas.png){loading="lazy"}
+
+</details>
+
+<details class="scared-followup-card" id="scared-e11-b">
+<summary>E11-B · Error–cobertura y controles · Completado</summary>
+
+**Cómo se hizo:** Confianza nativa extraída en 63 anclas sobre features guardadas: cero nuevos encoders. Principal N=50 y secundario N=1. Escala GT fijada antes de filtrar. Comparación con riesgo aleatorio esperado a igual cantidad, composición de profundidad igualada, ranking por profundidad, confianza inversa y oráculo GT. 256 remuestreos de bloques 32×32 por ancla.
+
+**Resultados:**
+
+| KF | Todos XYZ (cm) | Top50% XYZ (cm) | Mejora vs aleatorio (%) | Mejora vs aleatorio misma profundidad (%) | V9: mejora top50% vs aleatorio (%) | Intervalo espacial 95% (%) |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | 1.6287 | 1.2500 | 23.2501 | 11.4809 | -12.5364 | 7.42 a 36.64 |
+| 2 | 0.8785 | 0.7645 | 12.9803 | 9.1306 | -19.4349 | 2.97 a 23.32 |
+| 3 | 0.5993 | 0.5142 | 14.2024 | 8.7365 | -21.2632 | 7.56 a 20.90 |
+| 4 | 0.8277 | 0.6389 | 22.8156 | 9.2587 | -11.4101 | 12.82 a 30.61 |
+
+**Conclusión:** VN18 reduce el error al retener 50% en las cuatro anclas N=50:12,98–23,25%; la ventaja permanece 8,74–11,48% frente al aleatorio con la misma composición de profundidad. Los cuatro intervalos espaciales quedan por encima de 0. En N=1 la mejora aparece en 5/5 anclas. V9 empeora con top50% en las cuatro N=50:11,41–21,26%.
+
+**Límites:** Confianza útil para ordenar en estos casos no equivale a probabilidad calibrada. Los intervalos describen variación espacial condicionada a estas imágenes, no generalización a pacientes. La cobertura es del GT del ancla; no se filtraron archivos de nubes ni se refitió escala por cobertura. El oráculo usa GT y no es desplegable.
+
+![Mejora sobre el error aleatorio esperado; intervalos espaciales condicionados a cada ancla.](imagenes/SCARED_E11B_controles.png){loading="lazy"}
+
+</details>
+
+<details class="scared-followup-card" id="scared-e07-b">
+<summary>E07-B · Comparación separada de recetas · Completado</summary>
+
+**Cómo se hizo:** Auditados código, configuraciones y todos los pasos ejecutados, no solo calendarios propuestos. Verificados 3240/1000 registros. Controles CPU con 20 anclas TRAIN: misma perturbación física suave 0,5–1,5 mm en tensores P/D, confianza 1 y auxiliar nativo apagado para separar la parte primaria; sin optimizador.
+
+**Resultados:**
+
+| Factor | VN18-SCARED | V9-SCARED |
+| --- | --- | --- |
+| Regresión | Euclídea sin cuadrado, término libre + término ponderado por confianza | L1 por coordenada XYZ; L1 del log de profundidad |
+| Espacial | Gradiente D y normales P multiescala | Gradiente XYZ |
+| Filtro de pérdidas | Percentil 0,98, desigualdad estricta; clamp 100 | Sin filtro por percentil en la pérdida densa |
+| Normalización | Norma GT del ancla; 1.38–3.68 veces 0,03 m en TRAIN | Referencia fija 0,03 m |
+| Clipping | Por cabeza, norma 1 | Global, norma 1 |
+| Norma mediana D/P después de clipping | 1.000 / 1.000 | 0.143 / 0.990 |
+| Warmup / primer LR real | 162 pasos / 6.173e-08 | 25 pasos / 1.360e-06 |
+| Actualizaciones / exposiciones | 3240 / 3240 | 1000 / 2000 |
+| Contextos: exposiciones reales | {'1': 990, '4': 750, '8': 750, '16': 750} | {'1': 598, '3': 326, '6': 367, '12': 367, '50': 342} |
+| Repeticiones profundas explícitas | 240 | 0 |
+
+**Conclusión:** No cambió únicamente el tamaño de ventana: cambian el tipo y peso de pérdidas, filtrado, unidades de optimización, clipping, warmup, mezcla de contextos y presupuesto. El código nativo usa norma euclídea sin cuadrado aunque un docstring menciona cuadrado. El encoder y la cámara continúan congelados. Las sondas confirman distinto acondicionamiento para el mismo error físico.
+
+**Límites:** No es una ablación causal de entrenamiento: no identifica cuál modificación causó el resultado. Normas de gradiente no equivalen a actualización AdamW ni a cuánto aprendió cada cabeza. Percentil 0,98 no garantiza retirar exactamente 2% si hay empates. Las pérdidas de familias distintas no se comparan como puntuaciones de calidad.
+
+
+
+</details>
+
+<details class="scared-followup-card" id="scared-e05-b">
+<summary>E05-B · Coherencia D/P frente a GT · Completado</summary>
+
+**Cómo se hizo:** Mismos 63 resultados, misma escala GT compartida. P directo frente a Q=unproject(D,K) en ancla de pose identidad. Errores de ambas rutas contra GT, Spearman por ancla/contexto/bin y descomposición axial/lateral. Verificadas desigualdades triangulares en todos los píxeles válidos.
+
+**Resultados:**
+
+| Modelo | P error (cm) | D+K error (cm) | Desacuerdo (cm) | ρ desacuerdo / mayor error | P peor en desacuerdo >5 mm (%) |
+| --- | --- | --- | --- | --- | --- |
+| Zero-shot | 0.6962 | 0.5468 | 0.3264 | 0.4190 | 99.2116 |
+| VN18-SCARED | 0.8277 | 0.4096 | 0.6635 | 0.8587 | 96.1863 |
+| V9-SCARED | 0.8404 | 0.6169 | 0.7692 | 0.7513 | 70.4260 |
+
+**Conclusión:** En KF4,N50, el desacuerdo se asocia al mayor error: ρ=0,859 en VN18 y 0,751 en V9. En las regiones con desacuerdo >5 mm, P es peor que D/K en 96,19% y 70,43% respectivamente. Pero hay acuerdos falsos: en V9-KF1,84,27% de los píxeles con acuerdo <2 mm aún tienen alguna ruta con error >5 mm.
+
+**Límites:** Correlaciones descriptivas con píxeles espacialmente dependientes; no causalidad. El acuerdo entre dos rutas no demuestra exactitud. Solo se puntúa el ancla GT: no se valida así la trayectoria completa, y los umbrales 2/5 mm son diagnósticos de investigación, no criterios clínicos.
+
+**Acuerdo bajo que todavía puede ser incorrecto:**
+
+| Modelo | KF | Píxeles con acuerdo <2 mm (%) | Entre ellos, alguna ruta con error >5 mm (%) |
+| --- | --- | --- | --- |
+| VN18-SCARED | 1 | 4.5717 | 38.4615 |
+| VN18-SCARED | 2 | 9.0787 | 29.7612 |
+| V9-SCARED | 1 | 9.6797 | 84.2676 |
+| V9-SCARED | 2 | 2.9791 | 83.7975 |
+
+![KF4: errores contra GT y desacuerdo entre rutas.](imagenes/SCARED_E05B_KF4.png){loading="lazy"}
+
+</details>
+
+[Tablas resumidas CSV](tablas/scared_followups_b_tablas.csv) · [Fichas resumidas JSON](tablas/scared_followups_b_resumen.json)
+
+Los mapas de confianza, registros por contexto y demás datos granulares permanecen solo en el expediente técnico local.
+
+<!-- SCARED_FOLLOWUPS_B_END -->
+
+<!-- SCARED_PREPARED_START -->
+
+### Protocolos preparados · todavía sin resultados de modelo {#scared-protocolos-preparados}
+
+**Preparación terminada en CPU; no se ejecutaron estas pruebas en GPU.** Se verificaron cinco adaptadores de datos y 15 controles CPU de transformaciones/lanzamiento. Los pesos son zero-shot VGG-T³, VN18-SCARED (3240 pasos) y V9-SCARED (1000 pasos). El primer lanzamiento verificará paridad nativa y reinicio de estado antes de la rejilla.
+
+<details class="prepared-experiment-card" id="scared-e13">
+<summary>E13 · Robustez fotométrica · Preparado, no ejecutado</summary>
+
+| Elemento | Protocolo |
+| --- | --- |
+| Objetivo | Separar sensibilidad de D/P a exposición, luz espacial y proxies de highlights, manteniendo geometría y RGB de referencia. |
+| Cómo | Exposición 0,5/0,75/1,25/1,5 en luz lineal; iluminación radial; highlights móviles 1/3/5% y un combinado. Mismos IDs, orden, resolución, K y GT. Encoder nuevo para cada RGB alterado. |
+| Controles | Identidad bit-exacta; mismo campo de perturbación para el mismo frame al cambiar N. Escala principal de la referencia limpia, constante; re-fit solo secundario. Correspondencias del RGB limpio fijas. |
+| Medidas previstas | AbsRel, XYZ, variación de predicciónD/P, consistencia entre vistas; saturación y dentro/fuera de la huella de highlight con igual soporte. |
+| Piloto | 2 anclas SCARED 7, N=16, tres pesos; 24 forwards de encoder incluyendo referencias limpias. |
+| Límites | Highlights aditivos son una aproximación visual controlada, no reflejos físicos de mucosa. No hay aún métricas del modelo para estas condiciones. |
+| Estado de resultados | Pendiente: no hay valores medidos ni mejora demostrada. |
+
+</details>
+
+<details class="prepared-experiment-card" id="scared-e14">
+<summary>E14 · Oclusiones y recuperación offline · Preparado, no ejecutado</summary>
+
+| Elemento | Protocolo |
+| --- | --- |
+| Objetivo | Medir el daño sobre anatomía todavía visible y distinguir efectos del contexto, vuelta a entrada limpia y recuperación online. |
+| Cómo | Oclusores opacos estáticos/móviles 5/15/30%, ráfaga intermedia y retorno limpio. Prefijos 8/16/32/50 opcionales: cada uno se infiere desde cero con su control limpio de igual tamaño. |
+| Controles | GT válido fuera del oclusor y exactamente esa misma máscara en el control limpio. No puntuar profundidad de tejido oculto como GT del objeto añadido. Comprobar reinicio al retornar a RGB idéntico. |
+| Medidas previstas | Error en GT visible, desviación de los mismos frames limpios y consistencia; C3VD aporta 16 referencias para analizar antes/durante/después. |
+| Piloto | SCARED 7/KF4 y C3VD trans_t4_b, N16, tres pesos; 30 forwards incluyendo referencias. |
+| Límites | SCARED solo aporta GT en el ancla: no se inventa precisión temporal. El modelo es offline; retorno limpio y prefijos independientes no demuestran seguimiento ni recuperación clínica en tiempo real. |
+| Estado de resultados | Pendiente: no hay valores medidos ni mejora demostrada. |
+
+</details>
+
+<details class="prepared-experiment-card" id="scared-e15">
+<summary>E15 · Eficiencia, memoria y calidad · Preparado, no ejecutado</summary>
+
+| Elemento | Protocolo |
+| --- | --- |
+| Objetivo | Relacionar tamaño del contexto con latencia, memoria y calidad sin confundir throughput offline con tiempo real online. |
+| Cómo | N=1/4/8/16/32/50; desde RGB sin caché de características; misma precisión, TTT=2 y offloading. Piloto: 1 warmup+3 repeticiones; completo: 2+5. La referencia limpia cuenta como primer warmup. |
+| Controles | Sincronización CUDA; warmups excluidos; mediana/IQR, OOM registrados y ningún recorte automático. Calidad principal de la misma ancla. Presupuesto GPU y memoria comprometible Windows comprobados por condición. |
+| Medidas previstas | RGB→predicciones, encoder/transferencias, cabezas/D2H, eventos CUDA y primera salida por separado; picos CUDA asignado/reservado y memoria disponible. |
+| Piloto | SCARED 7/KF2 y C3VD trans_t4_b, N4/16/50, tres pesos; 72 forwards incluyendo warmups. |
+| Límites | Todavía no hay medidas de latencia ni VRAM de esta rejilla. El coste real con offloading se mantiene visible. FPS medio de un lote no certifica una cámara procesada online. |
+| Estado de resultados | Pendiente: no hay valores medidos ni mejora demostrada. |
+
+</details>
+
+Los pilotos son etapas acotadas; el barrido completo requiere elegirlo explícitamente. Se conservarán métricas y hashes sin duplicar cientos de nubes. No se reducirá el número de puntos al puntuar.
+
+[Protocolos resumidosJSON](tablas/scared_protocolos_preparados.json)
+
+<!-- SCARED_PREPARED_END -->
 
 ## Comparadores interactivos {#comparadores}
 

@@ -1,0 +1,101 @@
+{
+  "entries": [
+    {
+      "ID": "E01",
+      "Experimento": "[Sensibilidad al tamaño de contexto](#scared-e01)",
+      "Estado": "Completado"
+    },
+    {
+      "ID": "E02",
+      "Experimento": "[Consistencia de los mismos frames entre contextos](#scared-e02)",
+      "Estado": "Completado"
+    },
+    {
+      "ID": "E03",
+      "Experimento": "[Aislamiento del primer frame](#scared-e03)",
+      "Estado": "Completado"
+    },
+    {
+      "ID": "E04",
+      "Experimento": "[Análisis profundo de KF4](#scared-e04)",
+      "Estado": "Completado"
+    },
+    {
+      "ID": "E05",
+      "Experimento": "[Profundidad frente a puntos globales](#scared-e05)",
+      "Estado": "Completado"
+    },
+    {
+      "ID": "E05-B",
+      "Experimento": "[Coherencia D/P frente a GT](#scared-e05-b)",
+      "Estado": "Completado"
+    },
+    {
+      "ID": "E06",
+      "Experimento": "[Diagnóstico de escala y alineación](#scared-e06)",
+      "Estado": "Completado"
+    },
+    {
+      "ID": "E07",
+      "Experimento": "[Auditoría diferencial de VN18/V9](#scared-e07)",
+      "Estado": "Completado"
+    },
+    {
+      "ID": "E07-B",
+      "Experimento": "[Comparación separada de recetas](#scared-e07-b)",
+      "Estado": "Completado"
+    },
+    {
+      "ID": "E08",
+      "Experimento": "[Consistencia entre vistas sin GT temporal](#scared-e08)",
+      "Estado": "Completado"
+    },
+    {
+      "ID": "E09",
+      "Experimento": "[Dependencia del recorrido y solapamiento](#scared-e09)",
+      "Estado": "Completado"
+    },
+    {
+      "ID": "E10",
+      "Experimento": "[Error condicionado por profundidad](#scared-e10)",
+      "Estado": "Completado"
+    },
+    {
+      "ID": "E10-B",
+      "Experimento": "[Profundidad por ancla](#scared-e10-b)",
+      "Estado": "Completado"
+    },
+    {
+      "ID": "E11",
+      "Experimento": "[Análisis de confianza y cobertura](#scared-e11)",
+      "Estado": "Completado"
+    },
+    {
+      "ID": "E11-B",
+      "Experimento": "[Error–cobertura y controles](#scared-e11-b)",
+      "Estado": "Completado"
+    },
+    {
+      "ID": "E12",
+      "Experimento": "[Generalización entre datasets](#scared-e12)",
+      "Estado": "Completado"
+    },
+    {
+      "ID": "E13",
+      "Experimento": "[Robustez fotométrica](#scared-e13)",
+      "Estado": "Preparado · sin resultados"
+    },
+    {
+      "ID": "E14",
+      "Experimento": "[Oclusiones y recuperación offline](#scared-e14)",
+      "Estado": "Preparado · sin resultados"
+    },
+    {
+      "ID": "E15",
+      "Experimento": "[Eficiencia, memoria y calidad](#scared-e15)",
+      "Estado": "Preparado · sin resultados"
+    }
+  ],
+  "completed": 16,
+  "prepared": 3
+}

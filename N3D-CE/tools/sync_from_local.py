@@ -107,16 +107,23 @@ def main():
     with (dst/'tablas/experimentos_c3vd.csv').open('w',encoding='utf-8-sig',newline='') as f:
         w=csv.DictWriter(f,fieldnames=list(experiments[0]));w.writeheader()
         for r in experiments:w.writerow({k:json.dumps(v,ensure_ascii=False) if isinstance(v,(dict,list)) else v for k,v in r.items()})
-    for name in ['scared_v9_validation.csv','scared_v9_resultados.json','c3vd_scared_transfer_v1.csv','c3vd_scared_transfer_v1.json','experimentos_scared_e01_e12.json','experimentos_scared_e01_e12.csv','scared_e01_e12_datos.csv']:
+    for name in ['scared_v9_validation.csv','scared_v9_resultados.json','c3vd_scared_transfer_v1.csv','c3vd_scared_transfer_v1.json','experimentos_scared_e01_e12.json','experimentos_scared_e01_e12.csv','scared_e01_e12_datos.csv','scared_followups_b_resumen.json','scared_followups_b_tablas.csv','scared_protocolos_preparados.json','menu_experimentos_scared.json']:
         # Granular SCARED records remain local; only the authorized summary is public.
         if name=='experimentos_scared_e01_e12.json' and (src/'tablas'/name).exists():
             if 'detailed_results' in read(src/'tablas'/name):raise RuntimeError('Granular SCARED records are not approved for public export')
         if name=='scared_e01_e12_datos.csv' and (src/'tablas'/name).exists():
             with (src/'tablas'/name).open(encoding='utf-8-sig',newline='') as f:
                 if any(r['experimento'] not in {f'E{i:02d}' for i in range(1,13)} for r in csv.DictReader(f)):raise RuntimeError('Only summary tables are approved for public export')
+        # Followup summaries contain no granular exports.
+        if name in {'scared_followups_b_resumen.json','scared_protocolos_preparados.json'} and (src/'tablas'/name).exists():
+            summary=read(src/'tablas'/name)
+            if summary.get('technical_records_exported') is not False or 'detailed_results' in summary:raise RuntimeError('Only approved summaries may be published')
+        if name=='scared_followups_b_tablas.csv' and (src/'tablas'/name).exists():
+            with (src/'tablas'/name).open(encoding='utf-8-sig',newline='') as f:
+                if any(r['experimento'] not in {'E10-B','E11-B','E07-B','E05-B'} for r in csv.DictReader(f)):raise RuntimeError('Only four summary tables are approved')
         if (src/'tablas'/name).exists():copy(src/'tablas'/name,dst/'tablas'/name)
     # Export report contains reproducible hashes, never machine paths or credentials.
-    report={'project':'N3D-CE','source_qmd_sha256':sha(src/'Bitacora.qmd'),'public_qmd_sha256':sha(dst/'Bitacora.qmd'),'source_data_tables_preserved':len(re.findall(r'(?m)(?:^\|[^\n]*\n)+',q)),'experiment_cards':q.count('class="experiment-card"'),'scared_experiment_cards':q.count('class="scared-experiment-card"'),'public_clouds':[{'id':r['id'],'points':r['points'],'package_sha256':packages[r['pack_key']]['package_sha256']} for r in clouds],'cloud_bytes':public['physical_package_bytes'],'metric_entries':len(met['entries']),'historical_tables':len(tables),'all_saved_vertices_preserved':True,'new_training':False,'new_inference':False}
+    report={'project':'N3D-CE','source_qmd_sha256':sha(src/'Bitacora.qmd'),'public_qmd_sha256':sha(dst/'Bitacora.qmd'),'source_data_tables_preserved':len(re.findall(r'(?m)(?:^\|[^\n]*\n)+',q)),'experiment_cards':q.count('class="experiment-card"'),'scared_experiment_cards':q.count('class="scared-experiment-card"'),'scared_followup_cards':q.count('class="scared-followup-card"'),'prepared_protocol_cards':q.count('class="prepared-experiment-card"'),'public_clouds':[{'id':r['id'],'points':r['points'],'package_sha256':packages[r['pack_key']]['package_sha256']} for r in clouds],'cloud_bytes':public['physical_package_bytes'],'metric_entries':len(met['entries']),'historical_tables':len(tables),'all_saved_vertices_preserved':True,'new_training':False,'new_inference':False}
     dump(dst/'publication_manifest.json',report)
     print(json.dumps({k:v for k,v in report.items() if k!='public_clouds'},ensure_ascii=True))
 if __name__=='__main__':main()
