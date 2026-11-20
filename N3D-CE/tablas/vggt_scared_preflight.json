@@ -1,0 +1,47 @@
+{
+  "P11_status": "forward_backward_verified_optimizer_resume_pending",
+  "configuration_SHA256": "b65503e0c309a3b216d698b56f153508f6f1bde71036a9a4be9add84c72ed961",
+  "windows": {
+    "train": 20,
+    "validation": 5,
+    "reserved": 10
+  },
+  "trainable": [
+    "depth_head"
+  ],
+  "context": "4 when verified video exists, otherwise1; exactly the original prepared windows",
+  "supervised_positions": [
+    0
+  ],
+  "image_long_side": 336,
+  "native_depth_loss": {
+    "weight": 1.0,
+    "gradient_loss_fn": "grad",
+    "valid_range": 0.98
+  },
+  "planned_updates": 3000,
+  "planned_epochs": 30,
+  "optimizer": {
+    "name": "AdamW",
+    "lr": 1e-05,
+    "weight_decay": 0.05,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "schedule": null,
+    "gradient_clipping": null
+  },
+  "seed": 1234,
+  "CPU_verified_windows": 35,
+  "input": "RGB float32*(1/255), NCHW contiguous; no GT neural inputs",
+  "GPU_preflight_passed": true,
+  "preflight_optimizer_steps": 0,
+  "peak_allocated_GiB": 3.926090717315674,
+  "encoder_gradients": false,
+  "depth_gradients_finite_nonzero": true,
+  "production_training_launched": false,
+  "real_AdamW_state_memory_and_resume_verified": false,
+  "note": "Data/forward/backward preflight only. No improvement in reconstruction or trained SCARED model is claimed."
+}

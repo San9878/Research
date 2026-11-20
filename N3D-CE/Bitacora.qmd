@@ -3190,6 +3190,25 @@ Un OOM se conserva como no viable; no se reduce silenciosamente la entrada. Son 
 
 <!-- VGGT_PHASE2_END -->
 
+<!-- VGGT_P11_PREFLIGHT_BEGIN -->
+#### Siguiente etapa · P11, preflight VGGT-SCARED {#vggt-p11-preflight}
+
+**Datos y forward/backward verificados; entrenamiento aún sin lanzar.** La configuración conserva las ventanas, pérdidas y presupuesto preparados. Se armonizó la representación RGB y su layout con los baselines corregidos, y se reutilizan entradas certificadas para evitar descomprimir repetidamente los ZIP.
+
+| Control | Resultado |
+| --- | --- |
+| Entradas CPU | 35 ventanas comprobadas: TRAIN20, VAL5, reservadas10 |
+| Cabezal entrenable | Profundidad; encoder congelado; sin supervisión temporal de cámara |
+| Gradientes | Profundidad finita y no nula; encoder sin gradientes |
+| Optimizer steps del preflight | 0 |
+| Pico CUDA del preflight | 3.926 GiB |
+| Presupuesto preparado | 3.000 pasos,30 épocas,100 pasos/época; una ancla supervisada por paso |
+| Pendiente | Memoria real con estados AdamW, reanudación y autorización del alcance de entrenamiento |
+
+Pasar este control no demuestra que el fine-tuning mejore ni sustituye la evaluación de geometría. El test real de optimización/reanudación sigue pendiente. <a href="tablas/vggt_scared_preflight.json">Resumen reproducible del preflight</a>.
+
+<!-- VGGT_P11_PREFLIGHT_END -->
+
 #### Entrenamiento SCARED preparado · todavía sin lanzar
 
 
@@ -3354,6 +3373,12 @@ Para el entrenamiento SCARED preparado: RGB de todo el contexto → encoder ofic
 <details class="trace-details"><summary>Trazabilidad y protocolo</summary><p><a href="tablas/vggt_fase2.json">Resumen de fase 2</a> · <a href="#vggt-fase2">Resultados y controles</a>.</p></details></div></details>
 
 <!-- VGGT_PHASE2_CARDS_END -->
+
+<!-- VGGT_P11_CARD_BEGIN -->
+#### Fase 3 · preflight y preparación
+
+<details class="vggt-experiment-card" id="vggt-p11" data-vggt-phase3-card><summary><span class="card-status">Verificación parcial</span><span class="card-id">P11</span>Preflight VGGT-SCARED</summary><div class="card-content"><dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>¿La receta preparada recibe RGB y GT coherentes y produce gradientes válidos con el contrato de ejecución corregido?</dd></dl><dl class="card-fields"><dt>Intervención</dt><dd>Comprobar35 ventanas en CPU y ejecutar forward/backward en una ventana TRAIN con4 vistas, sin optimizer.step().</dd></dl><dl class="card-fields"><dt>Controles</dt><dd>Mismos splits, ventanas0/5/10, pérdida nativa y presupuesto; pesos oficiales, encoder congelado, runtime y strides explícitos.</dd></dl><dl class="card-fields"><dt>Métricas</dt><dd>Identidad de entrada/GT, normalización, finitud y presencia de gradientes, VRAM máxima y cantidad de actualizaciones.</dd></dl><dl class="card-fields"><dt>Resultados</dt><dd>CPU35/35 y backward GPU pasaron; cero actualizaciones de pesos persistentes.</dd></dl><dl class="card-fields"><dt>Conclusión</dt><dd>El camino de datos y gradientes es viable en el caso probado; no se ha entrenado ni demostrado una mejora de calidad.</dd></dl><dl class="card-fields"><dt>Limitaciones</dt><dd>Quedan pendientes la prueba real de AdamW/reanudación y el entrenamiento. SCARED no aporta GT temporal certificado.</dd></dl><dl class="card-fields"><dt>Siguiente decisión</dt><dd>Resolver el alcance de la continuación antes de ejecutar P12; conservar intactas las referencias anteriores.</dd></dl><details class="trace-details"><summary>Protocolo y trazabilidad</summary><p><a href="tablas/vggt_scared_preflight.json">Resumen</a> · <a href="#vggt-p11-preflight">Controles y resultados</a>.</p></details></div></details>
+<!-- VGGT_P11_CARD_END -->
 
 #### Serie C01–C10 · estado y pruebas pendientes
 
