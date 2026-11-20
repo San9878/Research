@@ -1,6 +1,6 @@
 {
   "schema": "vggt_C01_C10_plan_v1",
-  "status": "phase1_baselines_completed_other_protocols_prepared",
+  "status": "phases1_to4_executed_and_scientific_closeout_documented",
   "experiments": [
     {
       "id": "C01",
@@ -13,9 +13,9 @@
       "method": "Usar exactamente los mismos RGB rectificados, resolución y soporte GT.",
       "controls": "Pesos identificados por firma; mismo RGB, frames, GT y protocolo por comparación; selección solo en VAL.",
       "results": "P03 completado 35/35, sin fine-tuning SCARED; las ventanas mayores pertenecen a C02.",
-      "conclusion": "Ver resultados de fase1; contextos y transferencia inversa permanecen pendientes.",
+      "conclusion": "Baselines N1 de fase1 y contextos de fase2 disponibles; las transferencias posteriores también están ejecutadas.",
       "limitations": "SCARED no tiene GT temporal certificado; el VGGT histórico carece de point_head afinada.",
-      "next_decision": "Revisar plan y preflight antes de autorizar ejecución; mantener entrenamiento SCARED sin lanzar."
+      "next_decision": "Consultar el cierre P16 y conservar las referencias antes de proponer una nueva intervención."
     },
     {
       "id": "C02",
@@ -28,9 +28,9 @@
       "method": "Separar N con extensión fija de extensión con densidad fija; mismos frames comunes y ancla fija.",
       "controls": "Pesos identificados por firma; mismo RGB, frames, GT y protocolo por comparación; selección solo en VAL.",
       "results": "P05–P10 completados bajo protocolo común; consultar tablas de fase2.",
-      "conclusion": "Pendiente de la prueba uniforme; no convertir evidencia parcial en aceptación del protocolo completo.",
+      "conclusion": "Ejecución de fase2 verificada; consultar resultados por split y contexto y el cierre P16, sin causalidad universal.",
       "limitations": "SCARED no tiene GT temporal certificado; el VGGT histórico carece de point_head afinada.",
-      "next_decision": "Revisar plan y preflight antes de autorizar ejecución; mantener entrenamiento SCARED sin lanzar."
+      "next_decision": "Consultar el cierre P16 y conservar las referencias antes de proponer una nueva intervención."
     },
     {
       "id": "C03",
@@ -43,9 +43,9 @@
       "method": "Auditar P oficial separado; cualquier reinstalación oficial se etiquetará diagnóstico híbrido, nunca P afinado.",
       "controls": "Pesos identificados por firma; mismo RGB, frames, GT y protocolo por comparación; selección solo en VAL.",
       "results": "P05–P10 completados bajo protocolo común; consultar tablas de fase2.",
-      "conclusion": "Pendiente de la prueba uniforme; no convertir evidencia parcial en aceptación del protocolo completo.",
+      "conclusion": "Ejecución de fase2 verificada; consultar resultados por split y contexto y el cierre P16, sin causalidad universal.",
       "limitations": "SCARED no tiene GT temporal certificado; el VGGT histórico carece de point_head afinada.",
-      "next_decision": "Revisar plan y preflight antes de autorizar ejecución; mantener entrenamiento SCARED sin lanzar."
+      "next_decision": "Consultar el cierre P16 y conservar las referencias antes de proponer una nueva intervención."
     },
     {
       "id": "C04",
@@ -58,9 +58,9 @@
       "method": "No puntuar K calibrada como predicción; ATE/RPE indefinidos en N=1 y no certificados en SCARED.",
       "controls": "Pesos identificados por firma; mismo RGB, frames, GT y protocolo por comparación; selección solo en VAL.",
       "results": "P05–P10 completados bajo protocolo común; consultar tablas de fase2.",
-      "conclusion": "Pendiente de la prueba uniforme; no convertir evidencia parcial en aceptación del protocolo completo.",
+      "conclusion": "Ejecución de fase2 verificada; consultar resultados por split y contexto y el cierre P16, sin causalidad universal.",
       "limitations": "SCARED no tiene GT temporal certificado; el VGGT histórico carece de point_head afinada.",
-      "next_decision": "Revisar plan y preflight antes de autorizar ejecución; mantener entrenamiento SCARED sin lanzar."
+      "next_decision": "Consultar el cierre P16 y conservar las referencias antes de proponer una nueva intervención."
     },
     {
       "id": "C05",
@@ -73,39 +73,39 @@
       "method": "Identidad, reverso, primer frame alternativo y permutación fija. Restaurar correspondencias y gauge antes de comparar.",
       "controls": "Pesos identificados por firma; mismo RGB, frames, GT y protocolo por comparación; selección solo en VAL.",
       "results": "P05–P10 completados bajo protocolo común; consultar tablas de fase2.",
-      "conclusion": "Pendiente de la prueba uniforme; no convertir evidencia parcial en aceptación del protocolo completo.",
+      "conclusion": "Ejecución de fase2 verificada; consultar resultados por split y contexto y el cierre P16, sin causalidad universal.",
       "limitations": "SCARED no tiene GT temporal certificado; el VGGT histórico carece de point_head afinada.",
-      "next_decision": "Revisar plan y preflight antes de autorizar ejecución; mantener entrenamiento SCARED sin lanzar."
+      "next_decision": "Consultar el cierre P16 y conservar las referencias antes de proponer una nueva intervención."
     },
     {
       "id": "C06",
       "title": "Fine-tuning comparable",
       "dataset": "C3VD y SCARED",
       "metrics": "Antes/después, módulos, pérdidas, presupuesto",
-      "status": "prepared_with_existing_evidence",
-      "existing_evidence": "C3VD 30ep final recuperado. SCARED depth-only preparado, no ejecutado.",
+      "status": "completed_phase3_4",
+      "existing_evidence": "VGGT-SCARED:3.000 pasos depth-only; BEST500 y FINAL3000 evaluados contra oficiales y VGGT-C3VD.",
       "hypothesis": "La adaptación puede mejorar dentro del dominio sin mejorar todos los componentes o secuencias.",
       "method": "Misma evaluación no implica mismo entrenamiento. Reportar cambios de módulos, resolución y supervisiones.",
       "controls": "Pesos identificados por firma; mismo RGB, frames, GT y protocolo por comparación; selección solo en VAL.",
-      "results": "Solo se recuperan los resultados históricos que se indican; no se ejecutó esta nueva serie.",
-      "conclusion": "Pendiente de la prueba uniforme; no convertir evidencia parcial en aceptación del protocolo completo.",
+      "results": "VGGT-SCARED:3.000 pasos depth-only; BEST500 y FINAL3000 evaluados contra oficiales y VGGT-C3VD.",
+      "conclusion": "Mejora local SCARED con regresiones en otras propiedades. Las recetas históricas no igualan módulos ni presupuesto.",
       "limitations": "SCARED no tiene GT temporal certificado; el VGGT histórico carece de point_head afinada.",
-      "next_decision": "Revisar plan y preflight antes de autorizar ejecución; mantener entrenamiento SCARED sin lanzar."
+      "next_decision": "Consultar el cierre P16 y conservar las referencias antes de proponer una nueva intervención."
     },
     {
       "id": "C07",
       "title": "Transferencia entre datasets",
       "dataset": "C3VD ↔ SCARED",
       "metrics": "Degradación respecto a zero-shot del dataset destino",
-      "status": "partially_completed_forward_N1",
-      "existing_evidence": "C3VD→SCARED completado en35 anclas N1; SCARED→C3VD pendiente de un checkpoint VGGT-SCARED.",
+      "status": "completed_phase3_4",
+      "existing_evidence": "C3VD→SCARED y SCARED→C3VD evaluados sin modificar pesos durante inferencia, con contextos comunes.",
       "hypothesis": "La mejora dentro del dataset de entrenamiento no garantiza transferencia, ni simetría entre dominios.",
       "method": "Mismo caso destino y RGB para pesos oficiales, C3VD-FT y futuro SCARED-FT. Sin recalibrar con TEST.",
       "controls": "Pesos identificados por firma; mismo RGB, frames, GT y protocolo por comparación; selección solo en VAL.",
-      "results": "P04 completado 35/35; transferencia heterogénea. No se lanzó la dirección inversa ni entrenamiento.",
-      "conclusion": "Ver resultados de fase1; contextos y transferencia inversa permanecen pendientes.",
+      "results": "C3VD→SCARED y SCARED→C3VD evaluados sin modificar pesos durante inferencia, con contextos comunes.",
+      "conclusion": "La transferencia no es uniforme; los resultados deben separarse por dirección, secuencia, contexto y ruta.",
       "limitations": "SCARED no tiene GT temporal certificado; el VGGT histórico carece de point_head afinada.",
-      "next_decision": "Revisar plan y preflight antes de autorizar ejecución; mantener entrenamiento SCARED sin lanzar."
+      "next_decision": "Consultar el cierre P16 y conservar las referencias antes de proponer una nueva intervención."
     },
     {
       "id": "C08",
@@ -118,9 +118,9 @@
       "method": "Warm-up 3, mediciones 5, sincronización CUDA; separar carga, RGB/H2D, forward y escritura. No llamar streaming al FPS por lote.",
       "controls": "Pesos identificados por firma; mismo RGB, frames, GT y protocolo por comparación; selección solo en VAL.",
       "results": "P05–P10 completados bajo protocolo común; consultar tablas de fase2.",
-      "conclusion": "Pendiente de la prueba uniforme; no convertir evidencia parcial en aceptación del protocolo completo.",
+      "conclusion": "Ejecución de fase2 verificada; consultar resultados por split y contexto y el cierre P16, sin causalidad universal.",
       "limitations": "SCARED no tiene GT temporal certificado; el VGGT histórico carece de point_head afinada.",
-      "next_decision": "Revisar plan y preflight antes de autorizar ejecución; mantener entrenamiento SCARED sin lanzar."
+      "next_decision": "Consultar el cierre P16 y conservar las referencias antes de proponer una nueva intervención."
     },
     {
       "id": "C09",
@@ -132,10 +132,10 @@
       "hypothesis": "En VGG-T³, variar pasos TTT puede cambiar calidad y coste; este mecanismo no existe en VGGT.",
       "method": "Mismos pesos, entrada y política de memoria; reset entre casos; evitar usar GT en adaptación.",
       "controls": "Pesos identificados por firma; mismo RGB, frames, GT y protocolo por comparación; selección solo en VAL.",
-      "results": "Solo se recuperan los resultados históricos que se indican; no se ejecutó esta nueva serie.",
-      "conclusion": "Pendiente de la prueba uniforme; no convertir evidencia parcial en aceptación del protocolo completo.",
+      "results": "No aplicable a VGGT. Se mantuvieron2 pasos TTT en la comparación oficial, sin ablación C09 en VGGT.",
+      "conclusion": "TTT no pertenece a VGGT; no se declara esta ablación ejecutada.",
       "limitations": "SCARED no tiene GT temporal certificado; el VGGT histórico carece de point_head afinada.",
-      "next_decision": "Revisar plan y preflight antes de autorizar ejecución; mantener entrenamiento SCARED sin lanzar."
+      "next_decision": "Tratar C09 únicamente en VGG-T³ si se autoriza un protocolo específico."
     },
     {
       "id": "C10",
@@ -148,9 +148,9 @@
       "method": "Comparar regiones visibles válidas con oclusión y z-buffer; sin GT temporal, consistencia propia no demuestra exactitud.",
       "controls": "Pesos identificados por firma; mismo RGB, frames, GT y protocolo por comparación; selección solo en VAL.",
       "results": "P05–P10 completados bajo protocolo común; consultar tablas de fase2.",
-      "conclusion": "Pendiente de la prueba uniforme; no convertir evidencia parcial en aceptación del protocolo completo.",
+      "conclusion": "Ejecución de fase2 verificada; consultar resultados por split y contexto y el cierre P16, sin causalidad universal.",
       "limitations": "SCARED no tiene GT temporal certificado; el VGGT histórico carece de point_head afinada.",
-      "next_decision": "Revisar plan y preflight antes de autorizar ejecución; mantener entrenamiento SCARED sin lanzar."
+      "next_decision": "Consultar el cierre P16 y conservar las referencias antes de proponer una nueva intervención."
     }
   ],
   "context_counts": [
