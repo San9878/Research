@@ -1,6 +1,6 @@
 {
   "schema": "vggt_scared_historical_depth_v1",
-  "status": "prepared_not_run",
+  "status": "historical_preparation_followed_by_executed_v2",
   "trainable": [
     "depth_head"
   ],
@@ -46,5 +46,16 @@
   },
   "CPU_windows_checked": 25,
   "GPU_forward_backward": "pending_not_run",
-  "new_training": false
+  "new_training": false,
+  "status_at_original_preparation": "prepared_not_run",
+  "historical_fields_scope": "CPU_preparation_checks/GPU_forward_backward/new_training below describe the original preparation stage, not current execution status.",
+  "current_execution": {
+    "complete": true,
+    "production_recipe": "vggt_scared_depth_v2",
+    "completed_updates": 3000,
+    "BEST_step": 500,
+    "FINAL_step": 3000,
+    "evidence": "vggt_fase34.json",
+    "preflight_passed": true
+  }
 }

@@ -1,0 +1,700 @@
+{
+  "date": "2026-11-20",
+  "scope": "Read-only serialized CPU audit; no training, inference, checkpoint replacement or metric recalculation.",
+  "official_revision": "860abec7937da0a4c03c41d3c269c366e82abdf9",
+  "official_SHA256": "f164acf60724910d8fe1578bb499d800850c7bb0948db7555c413f9fbe60467e",
+  "checkpoint_SHA256": "47676104810d39316e3b5f661a7e8e6796080cde5afba0d162d6ede3697f0bf7",
+  "encoder_compared_tensors": 1210,
+  "encoder_compared_scalars": 909112320,
+  "changed_tensors": 3,
+  "changed_scalars": 39,
+  "all_changed_scalars_in_first_64_per_tensor": true,
+  "changed_tensor_rows": [
+    {
+      "key": "aggregator.patch_embed.blocks.6.mlp.fc2.weight",
+      "count": 18,
+      "dtype": "float32",
+      "shape": [
+        1024,
+        4096
+      ],
+      "zip_member": "c3vd_baseline_heads_30ep/data/103",
+      "zip_CRC_pass": true,
+      "max_abs_difference": 0.03621724620461464,
+      "first_changed_flat": 0,
+      "last_changed_flat": 58,
+      "all_changes_in_first_row": true,
+      "FP16_roundtrip_matches": 0,
+      "BF16_roundtrip_matches": 0,
+      "byte_swap_matches": 0,
+      "zero_values": 1,
+      "subnormal_nonzero_values": 12,
+      "values": [
+        {
+          "index": [
+            0,
+            0
+          ],
+          "flat": 0,
+          "checkpoint": 1.2488451983135982e-34,
+          "official": -0.005596008151769638,
+          "checkpoint_hex_LE": "00002607",
+          "official_hex_LE": "b85eb7bb"
+        },
+        {
+          "index": [
+            0,
+            7
+          ],
+          "flat": 7,
+          "checkpoint": 2.802596928649634e-45,
+          "official": -0.014840471558272839,
+          "checkpoint_hex_LE": "02000000",
+          "official_hex_LE": "732573bc"
+        },
+        {
+          "index": [
+            0,
+            8
+          ],
+          "flat": 8,
+          "checkpoint": 3.8653416839935754e-41,
+          "official": 0.005898697767406702,
+          "checkpoint_hex_LE": "c06b0000",
+          "official_hex_LE": "dd49c13b"
+        },
+        {
+          "index": [
+            0,
+            24
+          ],
+          "flat": 24,
+          "checkpoint": 0.0,
+          "official": -0.01621338538825512,
+          "checkpoint_hex_LE": "00000000",
+          "official_hex_LE": "efd184bc"
+        },
+        {
+          "index": [
+            0,
+            32
+          ],
+          "flat": 32,
+          "checkpoint": 1.401298464324817e-45,
+          "official": 0.024746539071202278,
+          "checkpoint_hex_LE": "01000000",
+          "official_hex_LE": "41b9ca3c"
+        },
+        {
+          "index": [
+            0,
+            33
+          ],
+          "flat": 33,
+          "checkpoint": 1.401298464324817e-45,
+          "official": 0.02325384132564068,
+          "checkpoint_hex_LE": "01000000",
+          "official_hex_LE": "d77ebe3c"
+        },
+        {
+          "index": [
+            0,
+            38
+          ],
+          "flat": 38,
+          "checkpoint": 6.523993647063696e-37,
+          "official": -0.027793806046247482,
+          "checkpoint_hex_LE": "00005e03",
+          "official_hex_LE": "d6afe3bc"
+        },
+        {
+          "index": [
+            0,
+            39
+          ],
+          "flat": 39,
+          "checkpoint": 1.401298464324817e-45,
+          "official": -0.011233947239816189,
+          "checkpoint_hex_LE": "01000000",
+          "official_hex_LE": "970e38bc"
+        },
+        {
+          "index": [
+            0,
+            43
+          ],
+          "flat": 43,
+          "checkpoint": 7.174648137343064e-43,
+          "official": -0.008020470850169659,
+          "checkpoint_hex_LE": "00020000",
+          "official_hex_LE": "4b6803bc"
+        },
+        {
+          "index": [
+            0,
+            44
+          ],
+          "flat": 44,
+          "checkpoint": 1.401298464324817e-45,
+          "official": -0.001793622737750411,
+          "checkpoint_hex_LE": "01000000",
+          "official_hex_LE": "fe17ebba"
+        },
+        {
+          "index": [
+            0,
+            45
+          ],
+          "flat": 45,
+          "checkpoint": 6.200732700587567e-37,
+          "official": 0.02757325768470764,
+          "checkpoint_hex_LE": "00005303",
+          "official_hex_LE": "50e1e13c"
+        },
+        {
+          "index": [
+            0,
+            46
+          ],
+          "flat": 46,
+          "checkpoint": 9.860761315262648e-32,
+          "official": 0.03487680107355118,
+          "checkpoint_hex_LE": "0000000c",
+          "official_hex_LE": "fada0e3d"
+        },
+        {
+          "index": [
+            0,
+            47
+          ],
+          "flat": 47,
+          "checkpoint": 1.401298464324817e-45,
+          "official": 0.03621724620461464,
+          "checkpoint_hex_LE": "01000000",
+          "official_hex_LE": "8958143d"
+        },
+        {
+          "index": [
+            0,
+            48
+          ],
+          "flat": 48,
+          "checkpoint": 6.465218929522581e-37,
+          "official": -0.010818320326507092,
+          "checkpoint_hex_LE": "00005c03",
+          "official_hex_LE": "533f31bc"
+        },
+        {
+          "index": [
+            0,
+            49
+          ],
+          "flat": 49,
+          "checkpoint": 1.401298464324817e-45,
+          "official": -0.014295512810349464,
+          "checkpoint_hex_LE": "01000000",
+          "official_hex_LE": "ba376abc"
+        },
+        {
+          "index": [
+            0,
+            50
+          ],
+          "flat": 50,
+          "checkpoint": 1.274217509192128e-39,
+          "official": 0.008693606592714787,
+          "checkpoint_hex_LE": "00e00d00",
+          "official_hex_LE": "a16f0e3c"
+        },
+        {
+          "index": [
+            0,
+            51
+          ],
+          "flat": 51,
+          "checkpoint": 1.401298464324817e-45,
+          "official": 0.022030692547559738,
+          "checkpoint_hex_LE": "01000000",
+          "official_hex_LE": "b679b43c"
+        },
+        {
+          "index": [
+            0,
+            58
+          ],
+          "flat": 58,
+          "checkpoint": 1.401298464324817e-45,
+          "official": 0.029279636219143867,
+          "checkpoint_hex_LE": "01000000",
+          "official_hex_LE": "d9dbef3c"
+        }
+      ]
+    },
+    {
+      "key": "aggregator.patch_embed.blocks.7.mlp.fc2.weight",
+      "count": 18,
+      "dtype": "float32",
+      "shape": [
+        1024,
+        4096
+      ],
+      "zip_member": "c3vd_baseline_heads_30ep/data/117",
+      "zip_CRC_pass": true,
+      "max_abs_difference": 0.04645903408527374,
+      "first_changed_flat": 0,
+      "last_changed_flat": 58,
+      "all_changes_in_first_row": true,
+      "FP16_roundtrip_matches": 0,
+      "BF16_roundtrip_matches": 0,
+      "byte_swap_matches": 0,
+      "zero_values": 1,
+      "subnormal_nonzero_values": 12,
+      "values": [
+        {
+          "index": [
+            0,
+            0
+          ],
+          "flat": 0,
+          "checkpoint": 1.2488451983135982e-34,
+          "official": -0.0038878892082720995,
+          "checkpoint_hex_LE": "00002607",
+          "official_hex_LE": "f5cb7ebb"
+        },
+        {
+          "index": [
+            0,
+            7
+          ],
+          "flat": 7,
+          "checkpoint": 2.802596928649634e-45,
+          "official": 0.01030373852699995,
+          "checkpoint_hex_LE": "02000000",
+          "official_hex_LE": "03d1283c"
+        },
+        {
+          "index": [
+            0,
+            8
+          ],
+          "flat": 8,
+          "checkpoint": 3.8653416839935754e-41,
+          "official": -0.008081863634288311,
+          "checkpoint_hex_LE": "c06b0000",
+          "official_hex_LE": "cb6904bc"
+        },
+        {
+          "index": [
+            0,
+            24
+          ],
+          "flat": 24,
+          "checkpoint": 0.0,
+          "official": -0.011513037607073784,
+          "checkpoint_hex_LE": "00000000",
+          "official_hex_LE": "2ea13cbc"
+        },
+        {
+          "index": [
+            0,
+            32
+          ],
+          "flat": 32,
+          "checkpoint": 1.401298464324817e-45,
+          "official": 0.011097346432507038,
+          "checkpoint_hex_LE": "01000000",
+          "official_hex_LE": "a5d1353c"
+        },
+        {
+          "index": [
+            0,
+            33
+          ],
+          "flat": 33,
+          "checkpoint": 1.401298464324817e-45,
+          "official": -0.019061582162976265,
+          "checkpoint_hex_LE": "01000000",
+          "official_hex_LE": "09279cbc"
+        },
+        {
+          "index": [
+            0,
+            38
+          ],
+          "flat": 38,
+          "checkpoint": 6.523993647063696e-37,
+          "official": -0.005066702142357826,
+          "checkpoint_hex_LE": "00005e03",
+          "official_hex_LE": "9406a6bb"
+        },
+        {
+          "index": [
+            0,
+            39
+          ],
+          "flat": 39,
+          "checkpoint": 1.401298464324817e-45,
+          "official": 0.02533705160021782,
+          "checkpoint_hex_LE": "01000000",
+          "official_hex_LE": "a68fcf3c"
+        },
+        {
+          "index": [
+            0,
+            43
+          ],
+          "flat": 43,
+          "checkpoint": 7.174648137343064e-43,
+          "official": 0.03345569968223572,
+          "checkpoint_hex_LE": "00020000",
+          "official_hex_LE": "d808093d"
+        },
+        {
+          "index": [
+            0,
+            44
+          ],
+          "flat": 44,
+          "checkpoint": 1.401298464324817e-45,
+          "official": -0.04645903408527374,
+          "checkpoint_hex_LE": "01000000",
+          "official_hex_LE": "d44b3ebd"
+        },
+        {
+          "index": [
+            0,
+            45
+          ],
+          "flat": 45,
+          "checkpoint": 6.200732700587567e-37,
+          "official": 0.018053226172924042,
+          "checkpoint_hex_LE": "00005303",
+          "official_hex_LE": "5ce4933c"
+        },
+        {
+          "index": [
+            0,
+            46
+          ],
+          "flat": 46,
+          "checkpoint": 9.860761315262648e-32,
+          "official": -0.01160604227334261,
+          "checkpoint_hex_LE": "0000000c",
+          "official_hex_LE": "45273ebc"
+        },
+        {
+          "index": [
+            0,
+            47
+          ],
+          "flat": 47,
+          "checkpoint": 1.401298464324817e-45,
+          "official": -0.010761822573840618,
+          "checkpoint_hex_LE": "01000000",
+          "official_hex_LE": "5b5230bc"
+        },
+        {
+          "index": [
+            0,
+            48
+          ],
+          "flat": 48,
+          "checkpoint": 6.465218929522581e-37,
+          "official": -0.009181126020848751,
+          "checkpoint_hex_LE": "00005c03",
+          "official_hex_LE": "6f6c16bc"
+        },
+        {
+          "index": [
+            0,
+            49
+          ],
+          "flat": 49,
+          "checkpoint": 1.401298464324817e-45,
+          "official": -0.005311938002705574,
+          "checkpoint_hex_LE": "01000000",
+          "official_hex_LE": "c40faebb"
+        },
+        {
+          "index": [
+            0,
+            50
+          ],
+          "flat": 50,
+          "checkpoint": 1.274217509192128e-39,
+          "official": 0.03623313084244728,
+          "checkpoint_hex_LE": "00e00d00",
+          "official_hex_LE": "3169143d"
+        },
+        {
+          "index": [
+            0,
+            51
+          ],
+          "flat": 51,
+          "checkpoint": 1.401298464324817e-45,
+          "official": 0.021752143278717995,
+          "checkpoint_hex_LE": "01000000",
+          "official_hex_LE": "8d31b23c"
+        },
+        {
+          "index": [
+            0,
+            58
+          ],
+          "flat": 58,
+          "checkpoint": 1.401298464324817e-45,
+          "official": 0.005292972549796104,
+          "checkpoint_hex_LE": "01000000",
+          "official_hex_LE": "ac70ad3b"
+        }
+      ]
+    },
+    {
+      "key": "aggregator.patch_embed.blocks.10.attn.qkv.weight",
+      "count": 3,
+      "dtype": "float32",
+      "shape": [
+        3072,
+        1024
+      ],
+      "zip_member": "c3vd_baseline_heads_30ep/data/150",
+      "zip_CRC_pass": true,
+      "max_abs_difference": 0.0353710874915123,
+      "first_changed_flat": 7,
+      "last_changed_flat": 24,
+      "all_changes_in_first_row": true,
+      "FP16_roundtrip_matches": 0,
+      "BF16_roundtrip_matches": 0,
+      "byte_swap_matches": 0,
+      "zero_values": 1,
+      "subnormal_nonzero_values": 2,
+      "values": [
+        {
+          "index": [
+            0,
+            7
+          ],
+          "flat": 7,
+          "checkpoint": 2.802596928649634e-45,
+          "official": -0.021086664870381355,
+          "checkpoint_hex_LE": "02000000",
+          "official_hex_LE": "f1bdacbc"
+        },
+        {
+          "index": [
+            0,
+            8
+          ],
+          "flat": 8,
+          "checkpoint": 1.816082809764963e-41,
+          "official": 0.00539958942681551,
+          "checkpoint_hex_LE": "a0320000",
+          "official_hex_LE": "0aefb03b"
+        },
+        {
+          "index": [
+            0,
+            24
+          ],
+          "flat": 24,
+          "checkpoint": 0.0,
+          "official": 0.0353710874915123,
+          "checkpoint_hex_LE": "00000000",
+          "official_hex_LE": "46e1103d"
+        }
+      ]
+    }
+  ],
+  "identical_fc2_changed_indices_and_payload": true,
+  "CRC_scope": "The 1210 aggregator storage payloads read by zipfile passed their CRC; checkpoint full SHA256 matches prior retained identity.",
+  "earlier_checkpoints": [
+    {
+      "file": "c3vd_baseline_heads.pt",
+      "compared_tensors": 3,
+      "changed_scalars": 0
+    },
+    {
+      "file": "c3vd_baseline_heads_smoketrain.pt",
+      "compared_tensors": 3,
+      "changed_scalars": 0
+    }
+  ],
+  "precision_controls": {
+    "FP16_matches_out_of_39": 0,
+    "BF16_matches_out_of_39": 0,
+    "byte_swapping_matches_out_of_39": 0
+  },
+  "official_formats": {
+    "official_url": "https://huggingface.co/facebook/VGGT-1B/resolve/860abec7937da0a4c03c41d3c269c366e82abdf9/model.pt",
+    "full_model_downloaded": false,
+    "rows": [
+      {
+        "key": "aggregator.patch_embed.blocks.10.attn.qkv.weight",
+        "compared_float32_values": 64,
+        "same_shape": true,
+        "first_64_float32_bytes_equal": true,
+        "covers_all_known_changed_positions": true
+      },
+      {
+        "key": "aggregator.patch_embed.blocks.6.mlp.fc2.weight",
+        "compared_float32_values": 64,
+        "same_shape": true,
+        "first_64_float32_bytes_equal": true,
+        "covers_all_known_changed_positions": true
+      },
+      {
+        "key": "aggregator.patch_embed.blocks.7.mlp.fc2.weight",
+        "compared_float32_values": 64,
+        "same_shape": true,
+        "first_64_float32_bytes_equal": true,
+        "covers_all_known_changed_positions": true
+      }
+    ],
+    "passed": true,
+    "received_bytes": 507017,
+    "range_requests": [
+      {
+        "start": 5026874930,
+        "bytes": 22
+      },
+      {
+        "start": 5026874910,
+        "bytes": 20
+      },
+      {
+        "start": 5026874854,
+        "bytes": 56
+      },
+      {
+        "start": 5026753920,
+        "bytes": 120934
+      },
+      {
+        "start": 0,
+        "bytes": 30
+      },
+      {
+        "start": 30,
+        "bytes": 19
+      },
+      {
+        "start": 64,
+        "bytes": 373501
+      },
+      {
+        "start": 2027627216,
+        "bytes": 30
+      },
+      {
+        "start": 2027627246,
+        "bytes": 19
+      },
+      {
+        "start": 2027627328,
+        "bytes": 4096
+      },
+      {
+        "start": 117984208,
+        "bytes": 30
+      },
+      {
+        "start": 117984238,
+        "bytes": 19
+      },
+      {
+        "start": 117984320,
+        "bytes": 4096
+      },
+      {
+        "start": 554760528,
+        "bytes": 30
+      },
+      {
+        "start": 554760558,
+        "bytes": 19
+      },
+      {
+        "start": 554760640,
+        "bytes": 4096
+      }
+    ]
+  },
+  "official_revision_metadata": [
+    {
+      "requested_revision": "860abec7937da0a4c03c41d3c269c366e82abdf9",
+      "resolved_revision": "860abec7937da0a4c03c41d3c269c366e82abdf9",
+      "weight_files": [
+        {
+          "rfilename": "model.pt",
+          "blobId": "3eb19931ec6650af15800cedaa5c89493b1b9759",
+          "size": 5026874952,
+          "lfs": {
+            "sha256": "d15bf50a8615c8225ed48b51ea5cac673d82442ec0309036df555a053253afe0",
+            "size": 5026874952,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model.safetensors",
+          "blobId": "4abd48e1eb927dc9e0ee59d3e52ef35fb4c08c19",
+          "size": 5026367224,
+          "lfs": {
+            "sha256": "f164acf60724910d8fe1578bb499d800850c7bb0948db7555c413f9fbe60467e",
+            "size": 5026367224,
+            "pointerSize": 135
+          }
+        }
+      ]
+    },
+    {
+      "requested_revision": "main",
+      "resolved_revision": "860abec7937da0a4c03c41d3c269c366e82abdf9",
+      "weight_files": [
+        {
+          "rfilename": "model.pt",
+          "blobId": "3eb19931ec6650af15800cedaa5c89493b1b9759",
+          "size": 5026874952,
+          "lfs": {
+            "sha256": "d15bf50a8615c8225ed48b51ea5cac673d82442ec0309036df555a053253afe0",
+            "size": 5026874952,
+            "pointerSize": 135
+          }
+        },
+        {
+          "rfilename": "model.safetensors",
+          "blobId": "4abd48e1eb927dc9e0ee59d3e52ef35fb4c08c19",
+          "size": 5026367224,
+          "lfs": {
+            "sha256": "f164acf60724910d8fe1578bb499d800850c7bb0948db7555c413f9fbe60467e",
+            "size": 5026367224,
+            "pointerSize": 135
+          }
+        }
+      ]
+    }
+  ],
+  "optimizer_mapping_control": {
+    "model_head_tensors": 131,
+    "optimizer_parameters": 131,
+    "all_ordered_shapes_match_camera_depth": true,
+    "step_values": [
+      3000.0
+    ],
+    "limitation": "Saved optimizer IDs have no names; mapping is inferred from current historical script order and matching shapes, not a retained initialization log."
+  },
+  "confirmed": [
+    "Anomalies are present in the serialized storage, before model construction or a current loader can act.",
+    "Official safetensors hash agrees with the published immutable revision; current main resolves to that same revision.",
+    "All 39 affected positions match between the official model.pt and model.safetensors formats.",
+    "The compared three matrices in both earlier retained fine-tuned checkpoints match official weights.",
+    "The 131 optimizer parameter states match camera/depth shapes and ordering in the retained script, with step 3000."
+  ],
+  "interpretation": "The sparse repeated payload pattern is compatible with a localized overwrite; the exact historical mechanism and time are unresolved.",
+  "not_established": [
+    "No proof of accidental write, hardware fault, or a specific PyTorch operation.",
+    "No recorded initialization hash excludes every historical upstream version.",
+    "No causal reconstruction-quality impact has been measured by restoring the 39 values.",
+    "Metrics remain measurements of the identified historical checkpoint, not an isolated heads-only intervention."
+  ]
+}

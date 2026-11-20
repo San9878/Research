@@ -17,7 +17,15 @@
       "Historical serialized encoder differs from retained official weights at 39 scalar values in 3 tensors; the origin is unresolved.",
       "Legacy preprocessor did not implement the subsequently validated geometry_v2 contract. Current geometry_v2 evaluation does not retroactively certify historical training targets.",
       "Historical script evaluated validation record0 per epoch and saved final weights; not a modern joint-metric checkpoint selection."
-    ]
+    ],
+    "followup_encoder_audit": {
+      "date": "2026-11-20",
+      "source": "../contenido/auditoria_vggt_20261120/encoder_audit.json",
+      "normal_precision_conversion_explains_changes": false,
+      "official_pt_safetensors_affected_values_equal": true,
+      "exact_historical_mechanism": "unresolved",
+      "historical_checkpoint_preserved": true
+    }
   },
   "P02": {
     "passed": true,

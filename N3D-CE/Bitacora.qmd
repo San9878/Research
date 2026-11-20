@@ -2741,6 +2741,30 @@ Las fases1–4 (P01–P16) están ejecutadas y verificadas. Se conservó VGGT-C3
 | Alcance de reproducibilidad | Se conservan argumentos y auditoría. El checkpoint antiguo no incorporó el hash del manifiesto; evaluar hoy con geometry_v2 no corrige retroactivamente los datos de aquel entrenamiento. |
 
 
+
+<details id="vggt-encoder-audit"><summary>P01 · origen de los 39 valores del encoder: auditoría adicional</summary>
+
+**Comprobado el 20/11/2026, sin modificar pesos.** Se compararon directamente los bytes de los 1.210 tensores del agregador: 39 valores distintos entre 909.112.320, distribuidos en tres matrices de pesos, no en buffers de estado.
+
+| Matriz del encoder | Valores distintos | Localización |
+| --- | --- | --- |
+| patch_embed.blocks.6.mlp.fc2.weight | 18 | Primera fila, posiciones planas 0–58 |
+| patch_embed.blocks.7.mlp.fc2.weight | 18 | Primera fila, posiciones planas 0–58 |
+| patch_embed.blocks.10.attn.qkv.weight | 3 | Primera fila, posiciones planas 7, 8 y 24 |
+
+**Controles que acotan la explicación.** Los 39 valores no coinciden con redondeo FP16, BF16 ni cambio de endianidad. En las dos matrices fc2 se repiten los mismos bytes anómalos en las mismas posiciones; 26 de los 39 valores son subnormales no nulos. Las cargas y el CRC de esos almacenamientos son válidos; el hash completo del checkpoint coincide con el registro conservado. Por tanto, el cambio ya está serializado y no lo produce el loader actual.
+
+La copia oficial retenida tiene el SHA256 publicado en su revisión de Hugging Face; el main consultado resuelve a esa misma revisión. Se compararon también los primeros 64 valores de cada matriz en el **model.pt oficial remoto** y **safetensors local**: coinciden en todas las posiciones afectadas. Solo se transfirieron 507.017 bytes de metadatos/rangos, sin descargar otro modelo completo. Los dos checkpoints anteriores conservados tienen esas tres matrices idénticas a las oficiales; no se afirma haber auditado el resto de esos dos encoders.
+
+El script conservado excluye el agregador del optimizador. Los 131 estados guardados coinciden en cantidad, orden y formas con las 69 matrices/vectores de cámara y 62 de profundidad, a paso 3.000. Sus IDs no guardan nombres: es evidencia compatible con el ajuste de esas cabezas, no un registro completo de la inicialización. Las tres matrices afectadas son parámetros de capas lineales; train/eval o buffers de normalización no explican por sí solos sus bytes.
+
+**Interpretación, no causa demostrada:** el patrón es compatible con una sobreescritura localizada de memoria o datos antes/durante su conservación. No se puede identificar la operación, el momento ni atribuirlo a escritura accidental, hardware o una versión concreta de PyTorch. Sin el hash de inicialización histórico tampoco se excluyen todas las revisiones pasadas. No se midió aún el efecto causal de restaurar esos 39 valores.
+
+**Alcance de las métricas:** siguen describiendo el checkpoint identificado; no quedan automáticamente invalidadas. Sí queda limitada la reproducibilidad histórica y la atribución de sus resultados exclusivamente al ajuste de cámara/profundidad. No se sustituye ni se repara silenciosamente la referencia.
+
+<p><a href="contenido/auditoria_vggt_20261120/encoder_audit.json">Evidencia, hashes y controles</a> · <a href="https://huggingface.co/facebook/VGGT-1B/tree/860abec7937da0a4c03c41d3c269c366e82abdf9">Archivos oficiales de la revisión contrastada</a></p>
+</details>
+
 #### Partición C3VD
 
 Las ocho secuencias del manifiesto histórico se reparten en **6 de entrenamiento y 2 de validación**; no son ocho de entrenamiento. Se evaluaron además dos secuencias reservadas del mismo phantom, ya inspeccionadas en el proyecto. No equivalen a pacientes nuevos ni a un test todavía ciego.
@@ -3020,7 +3044,7 @@ El CSV local conserva los70 registros por ancla/pesos: `G:/Kaust/VGGT/repo/artif
 <!-- VGGT_PHASE2_BEGIN -->
 #### Fase 2 · contexto, geometría y eficiencia {#vggt-fase2}
 
-**Estado: completada.** P05–P10 estudian los pesos congelados de VGGT; P10 añade VGG-T³ oficial como comparador de eficiencia. No se ejecuta entrenamiento ni la fase 3.
+**Estado: completada.** P05–P10 estudian los pesos congelados de VGGT; P10 añade VGG-T³ oficial como comparador de eficiencia. Esta fase solo evaluó pesos congelados; el entrenamiento posterior ya completado se documenta en las fases 3–4.
 
 C3VD conserva las cuatro secuencias de evaluación documentadas: trans_t1_b, trans_t4_b (validación), cecum_t2_a y trans_t1_a (reservadas, mismo phantom). SCARED conserva 35 anclas N=1; el barrido de contexto utiliza siempre las mismas **26 anclas con vídeo apto**. Las otras nueve no se rellenan ni se mezclan en el promedio entre tamaños.
 
@@ -3384,7 +3408,7 @@ En SCARED son8 anclas con vídeo apto, de los datasets 8/9; en C3VD son2 secuenc
 #### Preparación original del entrenamiento SCARED · antecedente
 
 
-**Preparado, sin entrenar.** Esta es una adaptación explícita del último VGGT C3VD; no se presenta como réplica exacta ni como VN19 de VGG-T³. Se parte otra vez de pesos oficiales.
+**Antecedente de una receta ya ejecutada.** Este bloque conserva el diseño inicial V1; no describe el estado actual. Su adaptación V2 completó **3.000 actualizaciones**, con **BEST en el paso 500** y **FINAL en el 3.000**, después de superar P11. Véanse [entrenamiento y evaluación actuales](#vggt-fase34). Se inició desde pesos oficiales, sin continuar desde el fine-tuning C3VD; no fue una réplica exacta ni un VN19 de VGG-T³.
 
 | Aspecto | VGGT C3VD histórico | VGGT SCARED preparado |
 | --- | --- | --- |
@@ -3412,11 +3436,11 @@ Los IDs de keyframe **original** y **processed** se relacionan mediante el cross
 
 <details><summary>Preparación y verificaciones realizadas</summary>
 
-Se comprobó separación de datasets, firmas de módulos/manifiestos, máscara solo en el ancla y normalización nativa en las 25 ventanas de TRAIN/VAL. Además se comprobó el gradiente de la pérdida en CPU con una ventana de cuatro vistas de TRAIN y el ancla en cuarentena temporal. **No se construyó el modelo, no hubo pasos de optimizador y no se inició CUDA.**
+En la preparación original V1 se comprobó separación de datasets, firmas de módulos/manifiestos, máscara solo en el ancla y normalización nativa en las 25 ventanas de TRAIN/VAL. También se comprobó el gradiente de la pérdida en CPU con una ventana de cuatro vistas de TRAIN y el ancla en cuarentena temporal. **En esa etapa inicial aún no se había construido el modelo ni ejecutado el optimizador o CUDA.** Las verificaciones GPU y el entrenamiento se completaron después con la adaptación V2.
 
-El forward/backward del modelo real y su presupuesto de VRAM siguen **pendientes**. La reducción de resolución es una adaptación de recursos preparada, no una mejora demostrada.
+**Ese pendiente ya se resolvió:** P11 verificó forward/backward, AdamW y reanudación, con pico de 4,296 GiB en el control. La producción posterior conservó la receta de profundidad y corrigió el contrato de runtime y layout de entrada. La reducción de resolución sigue siendo una adaptación de recursos, sin atribuirle por sí sola una mejora de calidad.
 
-Configuración local: `G:/Kaust/VGGT/repo/artifacts/experiments/vggt_scared_depth_v1/config.json`. Lanzador: `G:/Kaust/VGGT/repo/launchers/vggt_scared_depth_v1.ps1`; su modo predeterminado `check` no entrena.
+Archivos históricos de esta preparación: `G:/Kaust/VGGT/repo/artifacts/experiments/vggt_scared_depth_v1/config.json` y `G:/Kaust/VGGT/repo/launchers/vggt_scared_depth_v1.ps1`. La receta ejecutada corresponde a `vggt_scared_depth_v2/config.json`; el cierre verificado de sus 3.000 pasos se conserva en `vggt_phase3_4_v1/training_verified.json`. El estado actual se resume en [P11–P14](#vggt-fase34).
 
 </details>
 
@@ -3437,8 +3461,8 @@ Para el entrenamiento SCARED preparado: RGB de todo el contexto → encoder ofic
 <dl class="card-fields"><dt>Controles</dt><dd>Firma oficial y firma del checkpoint histórico congelado; ninguna escritura de pesos ni nuevo entrenamiento.</dd></dl>
 <dl class="card-fields"><dt>Métricas</dt><dd>Firmas SHA256, grupos de tensores, pasos del optimizador y correspondencia de particiones.</dd></dl>
 <dl class="card-fields"><dt>Resultados</dt><dd>Coinciden las firmas históricas. Los 131 estados del optimizador marcan 3.000 actualizaciones; AdamW LR 1e-5 / WD 0,05. Entrenaron cámara y profundidad; las cabezas de puntos y seguimiento están ausentes.</dd></dl>
-<dl class="card-fields"><dt>Conclusión</dt><dd>Baseline identificado y conservado, con limitaciones de reproducibilidad.</dd></dl>
-<dl class="card-fields"><dt>Limitaciones</dt><dd>No se registró semilla ni hash de los datos originales. Hay 39 valores del encoder diferentes de la versión oficial retenida y su origen no quedó establecido. El loader histórico elige4 imágenes aleatorias de una secuencia completa, sin garantizar continuidad u orden; no confundirlo con4 frames consecutivos. El preprocesado histórico no certifica el contrato geometry_v2 posterior.</dd></dl>
+<dl class="card-fields"><dt>Conclusión</dt><dd>Baseline identificado y conservado. Sus métricas siguen siendo mediciones de ese checkpoint; la identidad del encoder no permite presentarlo como una intervención exclusivamente sobre cabezas. Véase la <a href="#vggt-encoder-audit">auditoría de los 39 valores</a>.</dd></dl>
+<dl class="card-fields"><dt>Limitaciones</dt><dd>No se registró semilla ni hash de los datos originales. Hay 39 valores del encoder diferentes: la auditoría adicional descarta los redondeos probados y la diferencia entre formatos oficiales en esas posiciones; el mecanismo histórico exacto sigue sin establecerse. Esto limita la atribución exclusiva al ajuste de cámara/profundidad. El loader histórico elige4 imágenes aleatorias de una secuencia completa, sin garantizar continuidad u orden; no confundirlo con4 frames consecutivos. El preprocesado histórico no certifica el contrato geometry_v2 posterior.</dd></dl>
 <dl class="card-fields"><dt>Siguiente decisión</dt><dd>Conservar el checkpoint y separar estos límites de los resultados de transferencia. No corregir ni reentrenar los pesos de forma silenciosa.</dd></dl>
 <details class="trace-details"><summary>Trazabilidad y protocolo</summary><p><a href="tablas/vggt_fase1.json">Resumen reproducible de fase 1</a> · <a href="#vggt-fase1">Tablas de resultados</a>. Checkpoints y datos identificados por firma; archivos granulares y predicciones se conservan localmente.</p></details></div></details>
 
@@ -3483,66 +3507,66 @@ Para el entrenamiento SCARED preparado: RGB de todo el contexto → encoder ofic
 <dl class="card-fields"><dt>Intervención</dt><dd>N=1/4/8/16/50 con mismas anclas; extensión fija y prefijos.</dd></dl>
 <dl class="card-fields"><dt>Controles</dt><dd>Mismos pesos, RGB y soporte GT; firmas y semilla1234. Sin entrenamiento ni selección de checkpoints.</dd></dl>
 <dl class="card-fields"><dt>Métricas</dt><dd>AbsRel, δ1, XYZ/p95; cambios en frames comunes.</dd></dl>
-<dl class="card-fields"><dt>Resultados</dt><dd>Tablas y resultados agregados disponibles en fase2.</dd></dl>
-<dl class="card-fields"><dt>Conclusión</dt><dd>Interpretar el resultado por split y contexto; no atribuir causalidad a un único factor.</dd></dl>
-<dl class="card-fields"><dt>Limitaciones</dt><dd>GT temporal SCARED no certificado; FT histórico sin point head; consistencia no equivale a exactitud.</dd></dl>
+<dl class="card-fields"><dt>Resultados</dt><dd>En las dos secuencias reservadas C3VD, con el mismo frame ancla y extensión fija, XYZ del ancla baja de 0.81785 a 0.44835 cm en zero-shot y de 0.38746 a 0.30661 cm en C3VD-FT al pasar de N=1 a N=50. En las ocho anclas reservadas SCARED, C3VD-FT pasa de AbsRel 0.10476 a 0.10775: más contexto no mejora todos los casos.</dd></dl>
+<dl class="card-fields"><dt>Conclusión</dt><dd>El contexto beneficia estas anclas C3VD, pero el efecto no es universal ni monótono entre dominios. No se identifica un umbral fijo de rotura por cantidad de imágenes.</dd></dl>
+<dl class="card-fields"><dt>Limitaciones</dt><dd>C3VD compara la misma ancla y GT; SCARED solo certifica el ancla medida. Estas curvas no validan la geometría completa de todo el vídeo.</dd></dl>
 <dl class="card-fields"><dt>Siguiente decisión</dt><dd>Consultar el cierre P16 de las fases3–4 ya ejecutadas antes de proponer otra intervención.</dd></dl>
-<details class="trace-details"><summary>Trazabilidad y protocolo</summary><p><a href="tablas/vggt_fase2.json">Resumen de fase 2</a> · <a href="#vggt-fase2">Resultados y controles</a>.</p></details></div></details>
+<details class="trace-details"><summary>Trazabilidad y protocolo</summary><p><a href="tablas/vggt_fase2.json">Resumen de fase 2</a> · <a href="#vggt-fase2">Resultados y controles</a> · <a href="contenido/auditoria_vggt_20261120/fichas_evidencia.json">Registros que respaldan estas cifras</a>.</p></details></div></details>
 
 <details class="vggt-experiment-card" id="vggt-p06" data-vggt-phase2-card><summary><span class="card-status">Fase 2 completada</span><span class="card-id">P06 · C04</span>Cámara e intrínsecas</summary><div class="card-content">
 <dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>Los errores de cámara pueden limitar la geometría pese a profundidad mejor.</dd></dl>
 <dl class="card-fields"><dt>Intervención</dt><dd>Cámaras predichas contra GT C3VD; focal contra calibración por imagen.</dd></dl>
 <dl class="card-fields"><dt>Controles</dt><dd>Mismos pesos, RGB y soporte GT; firmas y semilla1234. Sin entrenamiento ni selección de checkpoints.</dd></dl>
 <dl class="card-fields"><dt>Métricas</dt><dd>ATE, RPEr/RPEt, métricas nativas de pose y error focal.</dd></dl>
-<dl class="card-fields"><dt>Resultados</dt><dd>Tablas y resultados agregados disponibles en fase2.</dd></dl>
-<dl class="card-fields"><dt>Conclusión</dt><dd>Interpretar el resultado por split y contexto; no atribuir causalidad a un único factor.</dd></dl>
-<dl class="card-fields"><dt>Limitaciones</dt><dd>GT temporal SCARED no certificado; FT histórico sin point head; consistencia no equivale a exactitud.</dd></dl>
+<dl class="card-fields"><dt>Resultados</dt><dd>En C3VD reservado N=50, el afinado frente al oficial reduce ATE de 0.36543 a 0.30697 cm, RPEr de 0.68994 a 0.55142° y RPEt de 0.17044 a 0.11657 cm. El error focal relativo pasa de 100.24% a 14.32%.</dd></dl>
+<dl class="card-fields"><dt>Conclusión</dt><dd>Las poses y la focal mejoran en esta cohorte C3VD. Esa mejora no se traslada uniformemente a otros datasets ni demuestra por sí sola una reconstrucción global correcta.</dd></dl>
+<dl class="card-fields"><dt>Limitaciones</dt><dd>ATE/RPE usan el protocolo de trayectoria C3VD con Sim(3); el error focal usa K predicha. No hay GT temporal certificado para puntuar trayectorias SCARED.</dd></dl>
 <dl class="card-fields"><dt>Siguiente decisión</dt><dd>Consultar el cierre P16 de las fases3–4 ya ejecutadas antes de proponer otra intervención.</dd></dl>
-<details class="trace-details"><summary>Trazabilidad y protocolo</summary><p><a href="tablas/vggt_fase2.json">Resumen de fase 2</a> · <a href="#vggt-fase2">Resultados y controles</a>.</p></details></div></details>
+<details class="trace-details"><summary>Trazabilidad y protocolo</summary><p><a href="tablas/vggt_fase2.json">Resumen de fase 2</a> · <a href="#vggt-fase2">Resultados y controles</a> · <a href="contenido/auditoria_vggt_20261120/fichas_evidencia.json">Registros que respaldan estas cifras</a>.</p></details></div></details>
 
 <details class="vggt-experiment-card" id="vggt-p07" data-vggt-phase2-card><summary><span class="card-status">Fase 2 completada</span><span class="card-id">P07 · C03</span>Puntos directos y D+K+pose</summary><div class="card-content">
 <dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>Las rutas del mismo encoder pueden diferir.</dd></dl>
 <dl class="card-fields"><dt>Intervención</dt><dd>Point head oficial frente a profundidad/cámara con K conocida o predicha.</dd></dl>
 <dl class="card-fields"><dt>Controles</dt><dd>Mismos pesos, RGB y soporte GT; firmas y semilla1234. Sin entrenamiento ni selección de checkpoints.</dd></dl>
 <dl class="card-fields"><dt>Métricas</dt><dd>XYZ por ruta, desacuerdo D/P; FT sin P queda N/D.</dd></dl>
-<dl class="card-fields"><dt>Resultados</dt><dd>Tablas y resultados agregados disponibles en fase2.</dd></dl>
-<dl class="card-fields"><dt>Conclusión</dt><dd>Interpretar el resultado por split y contexto; no atribuir causalidad a un único factor.</dd></dl>
-<dl class="card-fields"><dt>Limitaciones</dt><dd>GT temporal SCARED no certificado; FT histórico sin point head; consistencia no equivale a exactitud.</dd></dl>
+<dl class="card-fields"><dt>Resultados</dt><dd>En ocho anclas reservadas SCARED N=50 del VGGT oficial, XYZ es 0.54383 cm con D+K calibrada+pose, 1.21191 cm con K predicha y 1.45777 cm con puntos directos, bajo la misma escala de profundidad para puntuar.</dd></dl>
+<dl class="card-fields"><dt>Conclusión</dt><dd>Las rutas no son intercambiables: la calibración conocida mejora aquí la geometría derivada frente a K predicha y P directo. El desacuerdo entre salidas no identifica por sí solo cuál componente es causal.</dd></dl>
+<dl class="card-fields"><dt>Limitaciones</dt><dd>Solo VGGT oficial conserva P directo en esta comparación. El checkpoint C3VD no tiene point head; no se fabricó una cabeza híbrida ni se ajustó cada ruta con una escala independiente.</dd></dl>
 <dl class="card-fields"><dt>Siguiente decisión</dt><dd>Consultar el cierre P16 de las fases3–4 ya ejecutadas antes de proponer otra intervención.</dd></dl>
-<details class="trace-details"><summary>Trazabilidad y protocolo</summary><p><a href="tablas/vggt_fase2.json">Resumen de fase 2</a> · <a href="#vggt-fase2">Resultados y controles</a>.</p></details></div></details>
+<details class="trace-details"><summary>Trazabilidad y protocolo</summary><p><a href="tablas/vggt_fase2.json">Resumen de fase 2</a> · <a href="#vggt-fase2">Resultados y controles</a> · <a href="contenido/auditoria_vggt_20261120/fichas_evidencia.json">Registros que respaldan estas cifras</a>.</p></details></div></details>
 
 <details class="vggt-experiment-card" id="vggt-p08" data-vggt-phase2-card><summary><span class="card-status">Fase 2 completada</span><span class="card-id">P08 · C05</span>Orden, primer frame y solapamiento</summary><div class="card-content">
 <dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>El primer frame y el orden pueden afectar las mismas imágenes.</dd></dl>
 <dl class="card-fields"><dt>Intervención</dt><dd>N16 identidad, shuffle conservando ancla, intercambio0/1 y reverso; restaurar correspondencias/gauge.</dd></dl>
 <dl class="card-fields"><dt>Controles</dt><dd>Mismos pesos, RGB y soporte GT; firmas y semilla1234. Sin entrenamiento ni selección de checkpoints.</dd></dl>
 <dl class="card-fields"><dt>Métricas</dt><dd>Variación de profundidad/puntos, error GT y proxies RGB de correspondencia.</dd></dl>
-<dl class="card-fields"><dt>Resultados</dt><dd>Tablas y resultados agregados disponibles en fase2.</dd></dl>
-<dl class="card-fields"><dt>Conclusión</dt><dd>Interpretar el resultado por split y contexto; no atribuir causalidad a un único factor.</dd></dl>
-<dl class="card-fields"><dt>Limitaciones</dt><dd>GT temporal SCARED no certificado; FT histórico sin point head; consistencia no equivale a exactitud.</dd></dl>
+<dl class="card-fields"><dt>Resultados</dt><dd>Con las mismas 16 imágenes de trans_t4_b y VGGT oficial, barajar las vistas conservando la primera cambia la profundidad bruta un 0.2621%; intercambiar las dos primeras la cambia un 4.1427%. El cambio medio de puntos D+cámara es 0.00926 frente a 0.13847 cm, restaurando IDs y referencia de cámara.</dd></dl>
+<dl class="card-fields"><dt>Conclusión</dt><dd>Este control es más sensible a cambiar la primera vista que a permutar las restantes. La cifra mide variación entre predicciones; no es el error contra GT ni prueba por sí sola la causa del fallo.</dd></dl>
+<dl class="card-fields"><dt>Limitaciones</dt><dd>Ejemplo concreto de una secuencia de validación y N=16; no se generaliza a cualquier recorrido. Los proxies RGB de solapamiento no equivalen a GT de superficie.</dd></dl>
 <dl class="card-fields"><dt>Siguiente decisión</dt><dd>Consultar el cierre P16 de las fases3–4 ya ejecutadas antes de proponer otra intervención.</dd></dl>
-<details class="trace-details"><summary>Trazabilidad y protocolo</summary><p><a href="tablas/vggt_fase2.json">Resumen de fase 2</a> · <a href="#vggt-fase2">Resultados y controles</a>.</p></details></div></details>
+<details class="trace-details"><summary>Trazabilidad y protocolo</summary><p><a href="tablas/vggt_fase2.json">Resumen de fase 2</a> · <a href="#vggt-fase2">Resultados y controles</a> · <a href="contenido/auditoria_vggt_20261120/fichas_evidencia.json">Registros que respaldan estas cifras</a>.</p></details></div></details>
 
 <details class="vggt-experiment-card" id="vggt-p09" data-vggt-phase2-card><summary><span class="card-status">Fase 2 completada</span><span class="card-id">P09 · C10</span>Coherencia y cobertura</summary><div class="card-content">
 <dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>Una superficie consistente no tiene por qué ser anatómicamente correcta.</dd></dl>
 <dl class="card-fields"><dt>Intervención</dt><dd>Proyección bidireccional de todos los píxeles; cobertura y error en soporte visible y proyectado separados.</dd></dl>
 <dl class="card-fields"><dt>Controles</dt><dd>Mismos pesos, RGB y soporte GT; firmas y semilla1234. Sin entrenamiento ni selección de checkpoints.</dd></dl>
 <dl class="card-fields"><dt>Métricas</dt><dd>Acuerdo de profundidad, fracción proyectada, CD/NC y exactitud/completitud contra GT disponible.</dd></dl>
-<dl class="card-fields"><dt>Resultados</dt><dd>Tablas y resultados agregados disponibles en fase2.</dd></dl>
-<dl class="card-fields"><dt>Conclusión</dt><dd>Interpretar el resultado por split y contexto; no atribuir causalidad a un único factor.</dd></dl>
-<dl class="card-fields"><dt>Limitaciones</dt><dd>GT temporal SCARED no certificado; FT histórico sin point head; consistencia no equivale a exactitud.</dd></dl>
+<dl class="card-fields"><dt>Resultados</dt><dd>En SCARED reservado N=50, C3VD-FT aumenta el acuerdo multivista de profundidad dentro del 5% de 95.24% a 96.68%, mientras XYZ del ancla empeora de 0.54383 a 0.79935 cm frente al VGGT oficial.</dd></dl>
+<dl class="card-fields"><dt>Conclusión</dt><dd>Mayor consistencia entre vistas puede coexistir con menor exactitud frente al GT. Es necesario informar ambas propiedades por separado.</dd></dl>
+<dl class="card-fields"><dt>Limitaciones</dt><dd>El acuerdo solo usa soporte proyectado y las predicciones, no GT temporal; XYZ se puntúa únicamente en las ocho anclas medidas. No se demuestra completitud de toda la anatomía.</dd></dl>
 <dl class="card-fields"><dt>Siguiente decisión</dt><dd>Consultar el cierre P16 de las fases3–4 ya ejecutadas antes de proponer otra intervención.</dd></dl>
-<details class="trace-details"><summary>Trazabilidad y protocolo</summary><p><a href="tablas/vggt_fase2.json">Resumen de fase 2</a> · <a href="#vggt-fase2">Resultados y controles</a>.</p></details></div></details>
+<details class="trace-details"><summary>Trazabilidad y protocolo</summary><p><a href="tablas/vggt_fase2.json">Resumen de fase 2</a> · <a href="#vggt-fase2">Resultados y controles</a> · <a href="contenido/auditoria_vggt_20261120/fichas_evidencia.json">Registros que respaldan estas cifras</a>.</p></details></div></details>
 
 <details class="vggt-experiment-card" id="vggt-p10" data-vggt-phase2-card><summary><span class="card-status">Fase 2 completada</span><span class="card-id">P10 · C08</span>Eficiencia y escalabilidad</summary><div class="card-content">
 <dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>Coste y calidad pueden variar con N; VRAM no certifica calidad.</dd></dl>
 <dl class="card-fields"><dt>Intervención</dt><dd>Ambos oficiales en RTX5060,3 warmups y5 mediciones por N y dos formas de imagen.</dd></dl>
 <dl class="card-fields"><dt>Controles</dt><dd>Mismos pesos, RGB y soporte GT; firmas y semilla1234. Sin entrenamiento ni selección de checkpoints.</dd></dl>
 <dl class="card-fields"><dt>Métricas</dt><dd>Latencia con offload/D2H explícitos, VRAM, throughput de lote y calidad del ancla.</dd></dl>
-<dl class="card-fields"><dt>Resultados</dt><dd>Tablas y resultados agregados disponibles en fase2.</dd></dl>
-<dl class="card-fields"><dt>Conclusión</dt><dd>Interpretar el resultado por split y contexto; no atribuir causalidad a un único factor.</dd></dl>
-<dl class="card-fields"><dt>Limitaciones</dt><dd>GT temporal SCARED no certificado; FT histórico sin point head; consistencia no equivale a exactitud.</dd></dl>
+<dl class="card-fields"><dt>Resultados</dt><dd>Con N=50, las medianas son VGGT 10.26400 s frente a VGG-T³ 7.11652 s en el contexto C3VD (336×336), y 7.45191 frente a 5.71723 s en SCARED (266×336). Pesos oficiales, RTX 5060, tres calentamientos y cinco mediciones por condición.</dd></dl>
+<dl class="card-fields"><dt>Conclusión</dt><dd>VGG-T³ es más rápido en estos dos lotes de 50 vistas, pero esta medición offline no acredita un sistema clínico en tiempo real ni una ventaja a cualquier N.</dd></dl>
+<dl class="card-fields"><dt>Limitaciones</dt><dd>Incluye offload de features y salida a CPU; excluye carga del modelo, lectura, H2D inicial y archivos. Son dos contextos de referencia, no una población; cada modelo conserva su política de chunks y decodificación.</dd></dl>
 <dl class="card-fields"><dt>Siguiente decisión</dt><dd>Consultar el cierre P16 de las fases3–4 ya ejecutadas antes de proponer otra intervención.</dd></dl>
-<details class="trace-details"><summary>Trazabilidad y protocolo</summary><p><a href="tablas/vggt_fase2.json">Resumen de fase 2</a> · <a href="#vggt-fase2">Resultados y controles</a>.</p></details></div></details>
+<details class="trace-details"><summary>Trazabilidad y protocolo</summary><p><a href="tablas/vggt_fase2.json">Resumen de fase 2</a> · <a href="#vggt-fase2">Resultados y controles</a> · <a href="contenido/auditoria_vggt_20261120/fichas_evidencia.json">Registros que respaldan estas cifras</a>.</p></details></div></details>
 
 <!-- VGGT_PHASE2_CARDS_END -->
 
