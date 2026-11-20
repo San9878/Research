@@ -3199,7 +3199,7 @@ El control inicial de datos/gradientes y el posterior de AdamW/reanudación pasa
 <!-- VGGT_PHASE34_BEGIN -->
 #### Fases 3 y 4 · VGGT-SCARED y comparación común {#vggt-fase34}
 
-**Estado: autorizadas; entrenamiento y continuación en ejecución.** Un único fine-tuning nuevo; se conservan los pesos y resultados históricos.
+**Estado: completadas y verificadas.** Un único fine-tuning nuevo; se conservan los pesos y resultados históricos.
 
 **P11 superado:** forward/backward nativo y AdamW real; restauración exacta de pesos, estado del optimizador y RNG. El paso repetido en el diagnóstico determinista dio diferencia0. Pico: 4.296GiB. El primer intento no determinista mostró9,16×10⁻⁷ y se conserva en el registro; la receta de producción mantiene su runtime original.
 
@@ -3224,7 +3224,81 @@ El control inicial de datos/gradientes y el posterior de AdamW/reanudación pasa
 
 </details>
 
-Las métricas nuevas se incorporarán automáticamente después de validar los checkpoints y terminar las inferencias; no se adelanta una mejora.
+<details><summary>P13 · todas las35 anclas certificadas SCARED, N=1</summary>
+
+Incluye también las9 anclas sin vídeo apto. No se mezcla este promedio con la población constante usada en el barrido de contexto.
+
+| Split | Modelo | Anclas | AbsRel ↓ | δ1 ↑ | XYZ D+K cm ↓ |
+| --- | --- | --- | --- | --- | --- |
+| train | VGGT_ZS | 20 | 0.10903 | 0.88075 | 0.78782 |
+| validation | VGGT_ZS | 5 | 0.18597 | 0.69717 | 1.31609 |
+| reserved | VGGT_ZS | 10 | 0.09109 | 0.93162 | 0.57189 |
+| train | VGGT_FT | 20 | 0.12744 | 0.82673 | 0.97491 |
+| validation | VGGT_FT | 5 | 0.15946 | 0.71367 | 1.23638 |
+| reserved | VGGT_FT | 10 | 0.10457 | 0.89703 | 0.74137 |
+| train | VGGT_SCARED_BEST | 20 | 0.05011 | 0.97971 | 0.37239 |
+| validation | VGGT_SCARED_BEST | 5 | 0.11812 | 0.81463 | 0.91759 |
+| reserved | VGGT_SCARED_BEST | 10 | 0.07738 | 0.95339 | 0.52962 |
+| train | VGGT_SCARED_FINAL | 20 | 0.03345 | 0.99524 | 0.24276 |
+| validation | VGGT_SCARED_FINAL | 5 | 0.11863 | 0.81260 | 0.90469 |
+| reserved | VGGT_SCARED_FINAL | 10 | 0.06984 | 0.96699 | 0.47709 |
+
+</details>
+
+<details><summary>P13/P14 · resultados frente a zero-shot y transferencia, N=50</summary>
+
+Macro por secuencia C3VD o por dataset SCARED, con igual peso de anclas dentro de cada dataset. XYZ en cm, δ1 como fracción. El soporte SCARED es solo el ancla, no una evaluación global del vídeo.
+
+| Dataset | Split | Modelo | Casos | AbsRel ↓ | δ1 ↑ | XYZ D+K cm ↓ | p95 cm ↓ | CD cm ↓ | NC ↑ |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| SCARED | train | VGGT_ZS | 14 | 0.08513 | 0.92275 | 0.67506 | 2.27952 | 0.43958 | 0.80385 |
+| SCARED | validation | VGGT_ZS | 4 | 0.17641 | 0.70961 | 1.27640 | 3.08400 | 0.76719 | 0.71656 |
+| SCARED | reserved | VGGT_ZS | 8 | 0.07861 | 0.93898 | 0.54383 | 1.42528 | 0.36084 | 0.78102 |
+| C3VD | validation | VGGT_ZS | 2 | 0.23905 | 0.56402 | 0.79614 | 1.76390 | 0.23073 | 0.66829 |
+| C3VD | reserved | VGGT_ZS | 2 | 0.20688 | 0.64679 | 1.44742 | 2.79143 | 0.48501 | 0.66770 |
+| SCARED | train | VGGT_FT | 14 | 0.13255 | 0.80301 | 1.01969 | 2.91496 | 0.61715 | 0.66332 |
+| SCARED | validation | VGGT_FT | 4 | 0.17957 | 0.71076 | 1.34027 | 3.49712 | 0.74830 | 0.66677 |
+| SCARED | reserved | VGGT_FT | 8 | 0.10775 | 0.89313 | 0.79935 | 2.19417 | 0.47582 | 0.67670 |
+| C3VD | validation | VGGT_FT | 2 | 0.15654 | 0.76286 | 0.85041 | 1.64439 | 0.29038 | 0.69284 |
+| C3VD | reserved | VGGT_FT | 2 | 0.11598 | 0.85892 | 1.05335 | 2.39090 | 0.33473 | 0.71436 |
+| SCARED | train | VGGT_SCARED_BEST | 14 | 0.04233 | 0.98467 | 0.30558 | 0.89005 | 0.15769 | 0.78328 |
+| SCARED | validation | VGGT_SCARED_BEST | 4 | 0.12022 | 0.82114 | 0.99180 | 2.50419 | 0.51425 | 0.69599 |
+| SCARED | reserved | VGGT_SCARED_BEST | 8 | 0.04524 | 0.99553 | 0.32439 | 0.93020 | 0.17176 | 0.74578 |
+| C3VD | validation | VGGT_SCARED_BEST | 2 | 0.23743 | 0.60369 | 0.85167 | 2.02781 | 0.21789 | 0.64449 |
+| C3VD | reserved | VGGT_SCARED_BEST | 2 | 0.21335 | 0.65587 | 1.55469 | 3.26662 | 0.36252 | 0.64780 |
+| SCARED | train | VGGT_SCARED_FINAL | 14 | 0.03056 | 0.99730 | 0.22477 | 0.61952 | 0.12203 | 0.81550 |
+| SCARED | validation | VGGT_SCARED_FINAL | 4 | 0.13249 | 0.77707 | 1.05005 | 2.60789 | 0.55928 | 0.70038 |
+| SCARED | reserved | VGGT_SCARED_FINAL | 8 | 0.04466 | 0.99500 | 0.32622 | 0.93818 | 0.18213 | 0.76895 |
+| C3VD | validation | VGGT_SCARED_FINAL | 2 | 0.19250 | 0.71762 | 0.70402 | 1.58661 | 0.18075 | 0.65208 |
+| C3VD | reserved | VGGT_SCARED_FINAL | 2 | 0.21367 | 0.66076 | 1.45649 | 2.93379 | 0.37252 | 0.64964 |
+
+</details>
+
+<details><summary>Cambio favorable respecto a VGGT zero-shot · N50</summary>
+
+| Dataset | Split | Pesos | AbsRel % | δ1 % | XYZ % | CD % | NC % |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| SCARED | train | VGGT_FT | -55.70424 | -12.97700 | -51.05156 | -40.39730 | -17.48252 |
+| SCARED | validation | VGGT_FT | -1.78641 | 0.16175 | -5.00403 | 2.46240 | -6.94831 |
+| SCARED | reserved | VGGT_FT | -37.07613 | -4.88288 | -46.98521 | -31.86382 | -13.35636 |
+| C3VD | validation | VGGT_FT | 34.51717 | 35.25503 | -6.81580 | -25.85000 | 3.67292 |
+| C3VD | reserved | VGGT_FT | 43.93957 | 32.79801 | 27.22599 | 30.98480 | 6.98853 |
+| SCARED | train | VGGT_SCARED_BEST | 50.27686 | 6.70996 | 54.73263 | 64.12758 | -2.55899 |
+| SCARED | validation | VGGT_SCARED_BEST | 31.85576 | 15.71692 | 22.29693 | 32.96969 | -2.87057 |
+| SCARED | reserved | VGGT_SCARED_BEST | 42.44989 | 6.02254 | 40.35102 | 52.39982 | -4.51170 |
+| C3VD | validation | VGGT_SCARED_BEST | 0.68061 | 7.03383 | -6.97422 | 5.56672 | -3.56174 |
+| C3VD | reserved | VGGT_SCARED_BEST | -3.12597 | 1.40414 | -7.41107 | 25.25512 | -2.98030 |
+| SCARED | train | VGGT_SCARED_FINAL | 64.10215 | 8.07842 | 66.70372 | 72.23951 | 1.44947 |
+| SCARED | validation | VGGT_SCARED_FINAL | 24.90038 | 9.50735 | 17.73353 | 27.10033 | -2.25746 |
+| SCARED | reserved | VGGT_SCARED_FINAL | 43.18162 | 5.96670 | 40.01441 | 49.52661 | -1.54497 |
+| C3VD | validation | VGGT_SCARED_FINAL | 19.47302 | 27.23320 | 11.57093 | 21.66109 | -2.42640 |
+| C3VD | reserved | VGGT_SCARED_FINAL | -3.27984 | 2.15991 | -0.62638 | 23.19477 | -2.70473 |
+
+Signo positivo = cambio favorable relativo; negativo = regresión. No son puntos porcentuales ni una prueba estadística.
+
+</details>
+
+**Decisión:** conservar las referencias históricas. Se muestran BEST y FINAL sin elegir con los reservados. Mejorar profundidad en un ancla no demuestra que mejore la trayectoria; los resultados por contexto y los deterioros se conservan en las tablas.
 
 <a href="tablas/vggt_fase34.json">Protocolo, auditoría y resultados agregados</a>. Los RGB, GT, checkpoints y predicciones individuales permanecen locales.
 
@@ -3402,10 +3476,10 @@ Para el entrenamiento SCARED preparado: RGB de todo el contexto → encoder ofic
 <!-- VGGT_PHASE34_CARDS_BEGIN -->
 #### Fase 3 · entrenamiento y evaluación
 
-<details class="vggt-experiment-card" id="vggt-phase34-p11"><summary><span class="card-status">Completado</span><span class="card-id">P11</span>Preflight GPU y reanudación</summary><div class="card-content"><dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>¿Los datos y estados de optimización permiten un entrenamiento reproducible?</dd></dl><dl class="card-fields"><dt>Intervención</dt><dd>Receta de profundidad sellada y evaluación pareada P11–P14; sin nuevas variantes de entrenamiento.</dd></dl><dl class="card-fields"><dt>Controles</dt><dd>Mismos RGB, máscarasGT, escala, layout, runtime y ventanas de evaluación de fase2. Pesos oficiales congelados como referencia.</dd></dl><dl class="card-fields"><dt>Métricas</dt><dd>AbsRel,δ1,XYZ/p95,CD/NC y cámara solo con GT válido. Auditoría de AdamW, gradientes y reanudación.</dd></dl><dl class="card-fields"><dt>Resultados</dt><dd>P11 completo; resultados de calidad nuevos pendientes.</dd></dl><dl class="card-fields"><dt>Conclusión</dt><dd>No se presume mejora antes de completar el protocolo.</dd></dl><dl class="card-fields"><dt>Limitaciones</dt><dd>SCARED solo tiene GT certificado en anclas; encoder y cámara no se afinan; los presupuestos históricos difieren.</dd></dl><dl class="card-fields"><dt>Siguiente decisión</dt><dd>Revisar los resultados y regresiones antes de proponer otra intervención.</dd></dl><p><a href="#vggt-fase34">Protocolo y tablas</a></p></div></details>
-<details class="vggt-experiment-card" id="vggt-phase34-p12"><summary><span class="card-status">En ejecución</span><span class="card-id">P12</span>Fine-tuning VGGT-SCARED</summary><div class="card-content"><dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>¿La adaptación de profundidad con GT medido mejora frente a pesos oficiales?</dd></dl><dl class="card-fields"><dt>Intervención</dt><dd>Receta de profundidad sellada y evaluación pareada P11–P14; sin nuevas variantes de entrenamiento.</dd></dl><dl class="card-fields"><dt>Controles</dt><dd>Mismos RGB, máscarasGT, escala, layout, runtime y ventanas de evaluación de fase2. Pesos oficiales congelados como referencia.</dd></dl><dl class="card-fields"><dt>Métricas</dt><dd>AbsRel,δ1,XYZ/p95,CD/NC y cámara solo con GT válido. Auditoría de AdamW, gradientes y reanudación.</dd></dl><dl class="card-fields"><dt>Resultados</dt><dd>P11 completo; resultados de calidad nuevos pendientes.</dd></dl><dl class="card-fields"><dt>Conclusión</dt><dd>No se presume mejora antes de completar el protocolo.</dd></dl><dl class="card-fields"><dt>Limitaciones</dt><dd>SCARED solo tiene GT certificado en anclas; encoder y cámara no se afinan; los presupuestos históricos difieren.</dd></dl><dl class="card-fields"><dt>Siguiente decisión</dt><dd>Revisar los resultados y regresiones antes de proponer otra intervención.</dd></dl><p><a href="#vggt-fase34">Protocolo y tablas</a></p></div></details>
-<details class="vggt-experiment-card" id="vggt-phase34-p13"><summary><span class="card-status">En cola</span><span class="card-id">P13</span>Evaluación SCARED pareada</summary><div class="card-content"><dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>¿BEST y FINAL mejoran en anclas y contextos comunes sin ocultar regresiones?</dd></dl><dl class="card-fields"><dt>Intervención</dt><dd>Receta de profundidad sellada y evaluación pareada P11–P14; sin nuevas variantes de entrenamiento.</dd></dl><dl class="card-fields"><dt>Controles</dt><dd>Mismos RGB, máscarasGT, escala, layout, runtime y ventanas de evaluación de fase2. Pesos oficiales congelados como referencia.</dd></dl><dl class="card-fields"><dt>Métricas</dt><dd>AbsRel,δ1,XYZ/p95,CD/NC y cámara solo con GT válido. Auditoría de AdamW, gradientes y reanudación.</dd></dl><dl class="card-fields"><dt>Resultados</dt><dd>P11 completo; resultados de calidad nuevos pendientes.</dd></dl><dl class="card-fields"><dt>Conclusión</dt><dd>No se presume mejora antes de completar el protocolo.</dd></dl><dl class="card-fields"><dt>Limitaciones</dt><dd>SCARED solo tiene GT certificado en anclas; encoder y cámara no se afinan; los presupuestos históricos difieren.</dd></dl><dl class="card-fields"><dt>Siguiente decisión</dt><dd>Revisar los resultados y regresiones antes de proponer otra intervención.</dd></dl><p><a href="#vggt-fase34">Protocolo y tablas</a></p></div></details>
-<details class="vggt-experiment-card" id="vggt-phase34-p14"><summary><span class="card-status">En cola</span><span class="card-id">P14</span>Transferencia SCARED a C3VD</summary><div class="card-content"><dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>¿La mejora se conserva fuera del dataset de entrenamiento?</dd></dl><dl class="card-fields"><dt>Intervención</dt><dd>Receta de profundidad sellada y evaluación pareada P11–P14; sin nuevas variantes de entrenamiento.</dd></dl><dl class="card-fields"><dt>Controles</dt><dd>Mismos RGB, máscarasGT, escala, layout, runtime y ventanas de evaluación de fase2. Pesos oficiales congelados como referencia.</dd></dl><dl class="card-fields"><dt>Métricas</dt><dd>AbsRel,δ1,XYZ/p95,CD/NC y cámara solo con GT válido. Auditoría de AdamW, gradientes y reanudación.</dd></dl><dl class="card-fields"><dt>Resultados</dt><dd>P11 completo; resultados de calidad nuevos pendientes.</dd></dl><dl class="card-fields"><dt>Conclusión</dt><dd>No se presume mejora antes de completar el protocolo.</dd></dl><dl class="card-fields"><dt>Limitaciones</dt><dd>SCARED solo tiene GT certificado en anclas; encoder y cámara no se afinan; los presupuestos históricos difieren.</dd></dl><dl class="card-fields"><dt>Siguiente decisión</dt><dd>Revisar los resultados y regresiones antes de proponer otra intervención.</dd></dl><p><a href="#vggt-fase34">Protocolo y tablas</a></p></div></details>
+<details class="vggt-experiment-card" id="vggt-phase34-p11"><summary><span class="card-status">Completado</span><span class="card-id">P11</span>Preflight GPU y reanudación</summary><div class="card-content"><dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>¿Los datos y estados de optimización permiten un entrenamiento reproducible?</dd></dl><dl class="card-fields"><dt>Intervención</dt><dd>Receta de profundidad sellada y evaluación pareada P11–P14; sin nuevas variantes de entrenamiento.</dd></dl><dl class="card-fields"><dt>Controles</dt><dd>Mismos RGB, máscarasGT, escala, layout, runtime y ventanas de evaluación de fase2. Pesos oficiales congelados como referencia.</dd></dl><dl class="card-fields"><dt>Métricas</dt><dd>AbsRel,δ1,XYZ/p95,CD/NC y cámara solo con GT válido. Auditoría de AdamW, gradientes y reanudación.</dd></dl><dl class="card-fields"><dt>Resultados</dt><dd>Tablas y auditoría verificadas en fases3–4.</dd></dl><dl class="card-fields"><dt>Conclusión</dt><dd>Interpretar conjuntamente por split y contexto; ninguna referencia se sustituye automáticamente.</dd></dl><dl class="card-fields"><dt>Limitaciones</dt><dd>SCARED solo tiene GT certificado en anclas; encoder y cámara no se afinan; los presupuestos históricos difieren.</dd></dl><dl class="card-fields"><dt>Siguiente decisión</dt><dd>Revisar los resultados y regresiones antes de proponer otra intervención.</dd></dl><p><a href="#vggt-fase34">Protocolo y tablas</a></p></div></details>
+<details class="vggt-experiment-card" id="vggt-phase34-p12"><summary><span class="card-status">Completado</span><span class="card-id">P12</span>Fine-tuning VGGT-SCARED</summary><div class="card-content"><dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>¿La adaptación de profundidad con GT medido mejora frente a pesos oficiales?</dd></dl><dl class="card-fields"><dt>Intervención</dt><dd>Receta de profundidad sellada y evaluación pareada P11–P14; sin nuevas variantes de entrenamiento.</dd></dl><dl class="card-fields"><dt>Controles</dt><dd>Mismos RGB, máscarasGT, escala, layout, runtime y ventanas de evaluación de fase2. Pesos oficiales congelados como referencia.</dd></dl><dl class="card-fields"><dt>Métricas</dt><dd>AbsRel,δ1,XYZ/p95,CD/NC y cámara solo con GT válido. Auditoría de AdamW, gradientes y reanudación.</dd></dl><dl class="card-fields"><dt>Resultados</dt><dd>Tablas y auditoría verificadas en fases3–4.</dd></dl><dl class="card-fields"><dt>Conclusión</dt><dd>Interpretar conjuntamente por split y contexto; ninguna referencia se sustituye automáticamente.</dd></dl><dl class="card-fields"><dt>Limitaciones</dt><dd>SCARED solo tiene GT certificado en anclas; encoder y cámara no se afinan; los presupuestos históricos difieren.</dd></dl><dl class="card-fields"><dt>Siguiente decisión</dt><dd>Revisar los resultados y regresiones antes de proponer otra intervención.</dd></dl><p><a href="#vggt-fase34">Protocolo y tablas</a></p></div></details>
+<details class="vggt-experiment-card" id="vggt-phase34-p13"><summary><span class="card-status">Completado</span><span class="card-id">P13</span>Evaluación SCARED pareada</summary><div class="card-content"><dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>¿BEST y FINAL mejoran en anclas y contextos comunes sin ocultar regresiones?</dd></dl><dl class="card-fields"><dt>Intervención</dt><dd>Receta de profundidad sellada y evaluación pareada P11–P14; sin nuevas variantes de entrenamiento.</dd></dl><dl class="card-fields"><dt>Controles</dt><dd>Mismos RGB, máscarasGT, escala, layout, runtime y ventanas de evaluación de fase2. Pesos oficiales congelados como referencia.</dd></dl><dl class="card-fields"><dt>Métricas</dt><dd>AbsRel,δ1,XYZ/p95,CD/NC y cámara solo con GT válido. Auditoría de AdamW, gradientes y reanudación.</dd></dl><dl class="card-fields"><dt>Resultados</dt><dd>Tablas y auditoría verificadas en fases3–4.</dd></dl><dl class="card-fields"><dt>Conclusión</dt><dd>Interpretar conjuntamente por split y contexto; ninguna referencia se sustituye automáticamente.</dd></dl><dl class="card-fields"><dt>Limitaciones</dt><dd>SCARED solo tiene GT certificado en anclas; encoder y cámara no se afinan; los presupuestos históricos difieren.</dd></dl><dl class="card-fields"><dt>Siguiente decisión</dt><dd>Revisar los resultados y regresiones antes de proponer otra intervención.</dd></dl><p><a href="#vggt-fase34">Protocolo y tablas</a></p></div></details>
+<details class="vggt-experiment-card" id="vggt-phase34-p14"><summary><span class="card-status">Completado</span><span class="card-id">P14</span>Transferencia SCARED a C3VD</summary><div class="card-content"><dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>¿La mejora se conserva fuera del dataset de entrenamiento?</dd></dl><dl class="card-fields"><dt>Intervención</dt><dd>Receta de profundidad sellada y evaluación pareada P11–P14; sin nuevas variantes de entrenamiento.</dd></dl><dl class="card-fields"><dt>Controles</dt><dd>Mismos RGB, máscarasGT, escala, layout, runtime y ventanas de evaluación de fase2. Pesos oficiales congelados como referencia.</dd></dl><dl class="card-fields"><dt>Métricas</dt><dd>AbsRel,δ1,XYZ/p95,CD/NC y cámara solo con GT válido. Auditoría de AdamW, gradientes y reanudación.</dd></dl><dl class="card-fields"><dt>Resultados</dt><dd>Tablas y auditoría verificadas en fases3–4.</dd></dl><dl class="card-fields"><dt>Conclusión</dt><dd>Interpretar conjuntamente por split y contexto; ninguna referencia se sustituye automáticamente.</dd></dl><dl class="card-fields"><dt>Limitaciones</dt><dd>SCARED solo tiene GT certificado en anclas; encoder y cámara no se afinan; los presupuestos históricos difieren.</dd></dl><dl class="card-fields"><dt>Siguiente decisión</dt><dd>Revisar los resultados y regresiones antes de proponer otra intervención.</dd></dl><p><a href="#vggt-fase34">Protocolo y tablas</a></p></div></details>
 <!-- VGGT_PHASE34_CARDS_END -->
 
 #### Serie C01–C10 · estado y pruebas pendientes
@@ -3590,11 +3664,137 @@ La normalización RGB histórica VGGT usa float/255 y la caché TTT usa float32(
 <!-- VGGT_COMPARISON_PHASE34_BEGIN -->
 #### P15/P16 · comparación bajo protocolo común {#comparacion-fase34}
 
-**Estado: autorizadas; entrenamiento y continuación en ejecución.** Se reutilizan438 resultadosVGGT de fase2. La evaluación adicional conserva N1/4/8/16/50 y las mismas entradas.
+**Estado: completadas y verificadas.** Se reutilizan438 resultadosVGGT de fase2. La evaluación adicional conserva N1/4/8/16/50 y las mismas entradas.
 
 La comparación principal utiliza D+K calibrada+pose. P directo aparece separado: VGGT-C3VD y VGGT-SCARED no tienen point head afinada. V9-C3VD sigue como referencia TTT; VN18-SCARED y V9-SCARED se incluyen como candidatos finales históricos que no superaron sus criterios conjuntos.
 
-Las tablas aparecerán cuando termine la cola, sin mezclar los registros históricos de otro runtime con las evaluaciones nuevas.
+<details><summary>Calidad pareada · validación y reservados · N50</summary>
+
+| Dataset | Split | Modelo | AbsRel ↓ | δ1 ↑ | XYZ D+K cm ↓ | P directo cm ↓ | CD cm ↓ | NC ↑ | ATE cm ↓ | RPEr ° ↓ | RPEt cm ↓ |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| SCARED | validation | VGGT_ZS | 0.17641 | 0.70961 | 1.27640 | 1.78724 | 0.76719 | 0.71656 | N/D | N/D | N/D |
+| SCARED | reserved | VGGT_ZS | 0.07861 | 0.93898 | 0.54383 | 1.45777 | 0.36084 | 0.78102 | N/D | N/D | N/D |
+| C3VD | validation | VGGT_ZS | 0.23905 | 0.56402 | 0.79614 | 1.12673 | 0.23073 | 0.66829 | 0.10828 | 0.52984 | 0.05016 |
+| C3VD | reserved | VGGT_ZS | 0.20688 | 0.64679 | 1.44742 | 1.79994 | 0.48501 | 0.66770 | 0.36543 | 0.68994 | 0.17044 |
+| SCARED | validation | VGGT_FT | 0.17957 | 0.71076 | 1.34027 | N/D | 0.74830 | 0.66677 | N/D | N/D | N/D |
+| SCARED | reserved | VGGT_FT | 0.10775 | 0.89313 | 0.79935 | N/D | 0.47582 | 0.67670 | N/D | N/D | N/D |
+| C3VD | validation | VGGT_FT | 0.15654 | 0.76286 | 0.85041 | N/D | 0.29038 | 0.69284 | 0.08546 | 0.49008 | 0.04292 |
+| C3VD | reserved | VGGT_FT | 0.11598 | 0.85892 | 1.05335 | N/D | 0.33473 | 0.71436 | 0.30697 | 0.55142 | 0.11657 |
+| SCARED | validation | VGGT_SCARED_BEST | 0.12022 | 0.82114 | 0.99180 | N/D | 0.51425 | 0.69599 | N/D | N/D | N/D |
+| SCARED | reserved | VGGT_SCARED_BEST | 0.04524 | 0.99553 | 0.32439 | N/D | 0.17176 | 0.74578 | N/D | N/D | N/D |
+| C3VD | validation | VGGT_SCARED_BEST | 0.23743 | 0.60369 | 0.85167 | N/D | 0.21789 | 0.64449 | 0.10828 | 0.52984 | 0.05016 |
+| C3VD | reserved | VGGT_SCARED_BEST | 0.21335 | 0.65587 | 1.55469 | N/D | 0.36252 | 0.64780 | 0.36543 | 0.68994 | 0.17044 |
+| SCARED | validation | VGGT_SCARED_FINAL | 0.13249 | 0.77707 | 1.05005 | N/D | 0.55928 | 0.70038 | N/D | N/D | N/D |
+| SCARED | reserved | VGGT_SCARED_FINAL | 0.04466 | 0.99500 | 0.32622 | N/D | 0.18213 | 0.76895 | N/D | N/D | N/D |
+| C3VD | validation | VGGT_SCARED_FINAL | 0.19250 | 0.71762 | 0.70402 | N/D | 0.18075 | 0.65208 | 0.10828 | 0.52984 | 0.05016 |
+| C3VD | reserved | VGGT_SCARED_FINAL | 0.21367 | 0.66076 | 1.45649 | N/D | 0.37252 | 0.64964 | 0.36543 | 0.68994 | 0.17044 |
+| SCARED | validation | TTT_ZS | 0.15304 | 0.75661 | 1.12866 | 1.47496 | 0.67152 | 0.72174 | N/D | N/D | N/D |
+| SCARED | reserved | TTT_ZS | 0.08210 | 0.93759 | 0.54665 | 1.34773 | 0.36112 | 0.77136 | N/D | N/D | N/D |
+| C3VD | validation | TTT_ZS | 0.18407 | 0.69279 | 0.80222 | 0.89805 | 0.32237 | 0.65489 | 0.10686 | 0.98795 | 0.05506 |
+| C3VD | reserved | TTT_ZS | 0.19221 | 0.68258 | 1.75755 | 1.83652 | 0.58869 | 0.65084 | 0.55062 | 0.99070 | 0.26446 |
+| SCARED | validation | TTT_C3VD_V9 | 0.15081 | 0.72568 | 1.14057 | 1.75054 | 0.57994 | 0.64621 | N/D | N/D | N/D |
+| SCARED | reserved | TTT_C3VD_V9 | 0.10119 | 0.88906 | 0.75629 | 1.78265 | 0.43237 | 0.63203 | N/D | N/D | N/D |
+| C3VD | validation | TTT_C3VD_V9 | 0.15593 | 0.79500 | 0.61512 | 0.65883 | 0.22249 | 0.66586 | 0.10301 | 0.99989 | 0.05185 |
+| C3VD | reserved | TTT_C3VD_V9 | 0.10457 | 0.88392 | 1.66351 | 1.19412 | 0.42433 | 0.61276 | 0.52142 | 1.17169 | 0.23640 |
+| SCARED | validation | TTT_SCARED_VN18 | 0.09515 | 0.87824 | 0.76554 | 0.99064 | 0.38322 | 0.73200 | N/D | N/D | N/D |
+| SCARED | reserved | TTT_SCARED_VN18 | 0.06297 | 0.98079 | 0.45122 | 0.59243 | 0.25646 | 0.74330 | N/D | N/D | N/D |
+| C3VD | validation | TTT_SCARED_VN18 | 0.16224 | 0.73921 | 0.75461 | 0.84805 | 0.22578 | 0.64892 | 0.10686 | 0.98795 | 0.05506 |
+| C3VD | reserved | TTT_SCARED_VN18 | 0.18117 | 0.71359 | 1.75606 | 1.59696 | 0.50089 | 0.63412 | 0.55062 | 0.99070 | 0.26446 |
+| SCARED | validation | TTT_SCARED_V9 | 0.12385 | 0.83789 | 0.86245 | 0.92162 | 0.37197 | 0.63549 | N/D | N/D | N/D |
+| SCARED | reserved | TTT_SCARED_V9 | 0.09799 | 0.91907 | 0.70387 | 0.82043 | 0.35810 | 0.61684 | N/D | N/D | N/D |
+| C3VD | validation | TTT_SCARED_V9 | 0.14344 | 0.78874 | 0.90381 | 1.10108 | 0.26823 | 0.58090 | 0.10686 | 0.98795 | 0.05506 |
+| C3VD | reserved | TTT_SCARED_V9 | 0.18053 | 0.69815 | 2.07200 | 1.74633 | 0.54261 | 0.55789 | 0.55062 | 0.99070 | 0.26446 |
+
+</details>
+
+<details><summary>Contexto · N1/4/8/16/50 · reservados</summary>
+
+| Dataset | Modelo | N | Casos | AbsRel ↓ | XYZ D+K cm ↓ | P directo cm ↓ | Acuerdo multivista ↑ |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| SCARED | VGGT_ZS | 1 | 8 | 0.09028 | 0.60225 | 1.53463 | N/D |
+| SCARED | VGGT_ZS | 4 | 8 | 0.08149 | 0.56606 | 1.53955 | 0.77317 |
+| SCARED | VGGT_ZS | 8 | 8 | 0.07788 | 0.53842 | 1.48466 | 0.83997 |
+| SCARED | VGGT_ZS | 16 | 8 | 0.07819 | 0.54054 | 1.46355 | 0.89641 |
+| SCARED | VGGT_ZS | 50 | 8 | 0.07861 | 0.54383 | 1.45777 | 0.95237 |
+| C3VD | VGGT_ZS | 1 | 2 | 0.21497 | 0.81785 | 1.49014 | N/D |
+| C3VD | VGGT_ZS | 4 | 2 | 0.21447 | 1.60205 | 1.96768 | 0.34857 |
+| C3VD | VGGT_ZS | 8 | 2 | 0.21840 | 1.54832 | 1.81933 | 0.48310 |
+| C3VD | VGGT_ZS | 16 | 2 | 0.21264 | 1.49360 | 1.80274 | 0.68304 |
+| C3VD | VGGT_ZS | 50 | 2 | 0.20688 | 1.44742 | 1.79994 | 0.79051 |
+| SCARED | VGGT_FT | 1 | 8 | 0.10476 | 0.79112 | N/D | N/D |
+| SCARED | VGGT_FT | 4 | 8 | 0.10131 | 0.75569 | N/D | 0.44359 |
+| SCARED | VGGT_FT | 8 | 8 | 0.10191 | 0.75842 | N/D | 0.75892 |
+| SCARED | VGGT_FT | 16 | 8 | 0.10418 | 0.77292 | N/D | 0.90049 |
+| SCARED | VGGT_FT | 50 | 8 | 0.10775 | 0.79935 | N/D | 0.96678 |
+| C3VD | VGGT_FT | 1 | 2 | 0.10438 | 0.38746 | N/D | N/D |
+| C3VD | VGGT_FT | 4 | 2 | 0.11044 | 0.87599 | N/D | 0.38020 |
+| C3VD | VGGT_FT | 8 | 2 | 0.11575 | 1.02859 | N/D | 0.44125 |
+| C3VD | VGGT_FT | 16 | 2 | 0.11636 | 1.03936 | N/D | 0.70923 |
+| C3VD | VGGT_FT | 50 | 2 | 0.11598 | 1.05335 | N/D | 0.86502 |
+| SCARED | VGGT_SCARED_BEST | 1 | 8 | 0.07519 | 0.53276 | N/D | N/D |
+| SCARED | VGGT_SCARED_BEST | 4 | 8 | 0.05130 | 0.36668 | N/D | 0.52543 |
+| SCARED | VGGT_SCARED_BEST | 8 | 8 | 0.04767 | 0.33976 | N/D | 0.67873 |
+| SCARED | VGGT_SCARED_BEST | 16 | 8 | 0.04574 | 0.32788 | N/D | 0.80588 |
+| SCARED | VGGT_SCARED_BEST | 50 | 8 | 0.04524 | 0.32439 | N/D | 0.91331 |
+| C3VD | VGGT_SCARED_BEST | 1 | 2 | 0.13978 | 0.55097 | N/D | N/D |
+| C3VD | VGGT_SCARED_BEST | 4 | 2 | 0.21192 | 1.60946 | N/D | 0.39907 |
+| C3VD | VGGT_SCARED_BEST | 8 | 2 | 0.19782 | 1.54458 | N/D | 0.35099 |
+| C3VD | VGGT_SCARED_BEST | 16 | 2 | 0.20775 | 1.55366 | N/D | 0.61018 |
+| C3VD | VGGT_SCARED_BEST | 50 | 2 | 0.21335 | 1.55469 | N/D | 0.75791 |
+| SCARED | VGGT_SCARED_FINAL | 1 | 8 | 0.06780 | 0.47954 | N/D | N/D |
+| SCARED | VGGT_SCARED_FINAL | 4 | 8 | 0.04862 | 0.35430 | N/D | 0.61916 |
+| SCARED | VGGT_SCARED_FINAL | 8 | 8 | 0.04553 | 0.33090 | N/D | 0.79211 |
+| SCARED | VGGT_SCARED_FINAL | 16 | 8 | 0.04471 | 0.32634 | N/D | 0.89460 |
+| SCARED | VGGT_SCARED_FINAL | 50 | 8 | 0.04466 | 0.32622 | N/D | 0.96753 |
+| C3VD | VGGT_SCARED_FINAL | 1 | 2 | 0.15383 | 0.61098 | N/D | N/D |
+| C3VD | VGGT_SCARED_FINAL | 4 | 2 | 0.21814 | 1.59475 | N/D | 0.40613 |
+| C3VD | VGGT_SCARED_FINAL | 8 | 2 | 0.20335 | 1.49908 | N/D | 0.48563 |
+| C3VD | VGGT_SCARED_FINAL | 16 | 2 | 0.21045 | 1.48147 | N/D | 0.74088 |
+| C3VD | VGGT_SCARED_FINAL | 50 | 2 | 0.21367 | 1.45649 | N/D | 0.85247 |
+| SCARED | TTT_ZS | 1 | 8 | 0.09640 | 0.64632 | 1.36003 | N/D |
+| SCARED | TTT_ZS | 4 | 8 | 0.08267 | 0.54905 | 1.32454 | 0.83255 |
+| SCARED | TTT_ZS | 8 | 8 | 0.08229 | 0.54414 | 1.31775 | 0.92910 |
+| SCARED | TTT_ZS | 16 | 8 | 0.08175 | 0.54222 | 1.32434 | 0.95466 |
+| SCARED | TTT_ZS | 50 | 8 | 0.08210 | 0.54665 | 1.34773 | 0.98406 |
+| C3VD | TTT_ZS | 1 | 2 | 0.18381 | 0.68947 | 1.36351 | N/D |
+| C3VD | TTT_ZS | 4 | 2 | 0.19245 | 1.92175 | 2.11051 | 0.39688 |
+| C3VD | TTT_ZS | 8 | 2 | 0.18473 | 1.73580 | 1.93601 | 0.62132 |
+| C3VD | TTT_ZS | 16 | 2 | 0.18967 | 1.70310 | 1.86286 | 0.77335 |
+| C3VD | TTT_ZS | 50 | 2 | 0.19221 | 1.75755 | 1.83652 | 0.87958 |
+| SCARED | TTT_C3VD_V9 | 1 | 8 | 0.10585 | 0.80004 | 1.59452 | N/D |
+| SCARED | TTT_C3VD_V9 | 4 | 8 | 0.10120 | 0.75581 | 1.75612 | 0.58187 |
+| SCARED | TTT_C3VD_V9 | 8 | 8 | 0.10041 | 0.74609 | 1.81127 | 0.79630 |
+| SCARED | TTT_C3VD_V9 | 16 | 8 | 0.10029 | 0.74702 | 1.79364 | 0.89007 |
+| SCARED | TTT_C3VD_V9 | 50 | 8 | 0.10119 | 0.75629 | 1.78265 | 0.95712 |
+| C3VD | TTT_C3VD_V9 | 1 | 2 | 0.09175 | 0.37082 | 0.60040 | N/D |
+| C3VD | TTT_C3VD_V9 | 4 | 2 | 0.12342 | 1.79604 | 1.62323 | 0.25740 |
+| C3VD | TTT_C3VD_V9 | 8 | 2 | 0.10200 | 1.68512 | 1.21508 | 0.46763 |
+| C3VD | TTT_C3VD_V9 | 16 | 2 | 0.10679 | 1.66086 | 1.20639 | 0.62747 |
+| C3VD | TTT_C3VD_V9 | 50 | 2 | 0.10457 | 1.66351 | 1.19412 | 0.80983 |
+| SCARED | TTT_SCARED_VN18 | 1 | 8 | 0.08050 | 0.58437 | 0.82091 | N/D |
+| SCARED | TTT_SCARED_VN18 | 4 | 8 | 0.06120 | 0.44676 | 0.59105 | 0.67142 |
+| SCARED | TTT_SCARED_VN18 | 8 | 8 | 0.06150 | 0.44116 | 0.58570 | 0.85742 |
+| SCARED | TTT_SCARED_VN18 | 16 | 8 | 0.06163 | 0.44023 | 0.58433 | 0.92842 |
+| SCARED | TTT_SCARED_VN18 | 50 | 8 | 0.06297 | 0.45122 | 0.59243 | 0.97348 |
+| C3VD | TTT_SCARED_VN18 | 1 | 2 | 0.14121 | 0.58541 | 0.81965 | N/D |
+| C3VD | TTT_SCARED_VN18 | 4 | 2 | 0.18875 | 1.91389 | 1.87461 | 0.36069 |
+| C3VD | TTT_SCARED_VN18 | 8 | 2 | 0.17336 | 1.74912 | 1.71608 | 0.56645 |
+| C3VD | TTT_SCARED_VN18 | 16 | 2 | 0.17989 | 1.71308 | 1.64701 | 0.69242 |
+| C3VD | TTT_SCARED_VN18 | 50 | 2 | 0.18117 | 1.75606 | 1.59696 | 0.81722 |
+| SCARED | TTT_SCARED_V9 | 1 | 8 | 0.10137 | 0.75117 | 1.08940 | N/D |
+| SCARED | TTT_SCARED_V9 | 4 | 8 | 0.09997 | 0.72684 | 0.85228 | 0.34622 |
+| SCARED | TTT_SCARED_V9 | 8 | 8 | 0.09746 | 0.70351 | 0.84809 | 0.50709 |
+| SCARED | TTT_SCARED_V9 | 16 | 8 | 0.09767 | 0.70179 | 0.83103 | 0.63926 |
+| SCARED | TTT_SCARED_V9 | 50 | 8 | 0.09799 | 0.70387 | 0.82043 | 0.79673 |
+| C3VD | TTT_SCARED_V9 | 1 | 2 | 0.16531 | 0.68022 | 0.81997 | N/D |
+| C3VD | TTT_SCARED_V9 | 4 | 2 | 0.20282 | 2.10622 | 2.00853 | 0.19673 |
+| C3VD | TTT_SCARED_V9 | 8 | 2 | 0.18603 | 2.07611 | 1.80817 | 0.38106 |
+| C3VD | TTT_SCARED_V9 | 16 | 2 | 0.17830 | 2.05004 | 1.77199 | 0.50097 |
+| C3VD | TTT_SCARED_V9 | 50 | 2 | 0.18053 | 2.07200 | 1.74633 | 0.64806 |
+
+</details>
+
+**Conclusiones y límites:** las diferencias se describen por dominio, split, contexto y ruta. No se atribuyen causalmente al TTT porque las recetas y presupuestos de fine-tuning históricos no están igualados. En SCARED, exactitud del ancla y consistencia multivista no certifican una trayectoria verdadera. Las regresiones se mantienen visibles; no se promueve ningún candidato automáticamente.
 
 La eficiencia oficial ya se midió en fase2: se reutiliza, sin repetir sus20 casos. El throughput por lote no representa FPS de un sistema clínico. Las latencias operativas de los pesos afinados no se presentan como benchmarks repetidos.
 

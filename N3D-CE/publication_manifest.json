@@ -1,8 +1,8 @@
 {
   "project": "N3D-CE",
-  "source_qmd_sha256": "d359756c42039d6f1b737708870e68461d2f15333a038f4956222b49e07acfdd",
-  "public_qmd_sha256": "66ea8cb41210e05f361a78b6d5584d46b6c167bd0489f726a71aac2ed4a3ff83",
-  "source_data_tables_preserved": 87,
+  "source_qmd_sha256": "eb4dd558619c6d8eb0decb7d36346a8d5ddc577caea446c8547240f365174010",
+  "public_qmd_sha256": "b95c2adf65023fb572751a3e6044423e084b0dc699df620d17c6f65b9646732a",
+  "source_data_tables_preserved": 92,
   "experiment_cards": 44,
   "scared_experiment_cards": 12,
   "scared_followup_cards": 4,
