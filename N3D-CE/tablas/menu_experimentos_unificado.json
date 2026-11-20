@@ -1115,9 +1115,9 @@
       "order": 44,
       "protocol": {
         "Dataset": "SCARED · dataset7",
-        "Partición": "Validación; secundarios identificados en el método",
-        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
-        "Frames y resolución": "N=1/4/8/16/50; RGB 336×266; consultar condiciones de esta ficha",
+        "Partición": "SCARED VAL dataset7; mismas cuatro anclas KF1–4, KF5 excluido de la comparación entre N",
+        "Checkpoint": "VGG-T³ oficial, VN18-SCARED final 3240 y V9-SCARED candidato 1000; únicamente las variantes nombradas en filas",
+        "Frames y resolución": "N=1/4/8/16/50 en tabla38; N=4 frente a50 en tabla39; vídeo0–60 para N≥4; RGB 336×266",
         "Escala / alineamiento": "Escala GT de profundidad por ancla; registros secundarios se identifican aparte",
         "Unidades": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
         "GT disponible": "XYZ/profundidad medidos en el keyframe; sin trayectoria GT temporal validada"
@@ -1139,12 +1139,12 @@
       "order": 45,
       "protocol": {
         "Dataset": "SCARED · dataset7",
-        "Partición": "Validación; secundarios identificados en el método",
-        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
-        "Frames y resolución": "N=1/4/8/16/50; RGB 336×266; consultar condiciones de esta ficha",
+        "Partición": "SCARED VAL dataset7; mismas cuatro anclas KF1–4, KF5 excluido de la comparación entre N",
+        "Checkpoint": "VGG-T³ oficial, VN18-SCARED final 3240 y V9-SCARED candidato 1000; únicamente las variantes nombradas en filas",
+        "Frames y resolución": "N=1/4/8/16/50 en tabla38; N=4 frente a50 en tabla39; vídeo0–60 para N≥4; RGB 336×266",
         "Escala / alineamiento": "Escala GT de profundidad por ancla; registros secundarios se identifican aparte",
         "Unidades": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
-        "GT disponible": "XYZ/profundidad medidos en el keyframe; sin trayectoria GT temporal validada"
+        "GT disponible": "Ancla medida; vídeo0 y60 sin GT. El registro entre predicciones no equivale a exactitud GT"
       },
       "source_file": "experimentos_scared_e01_e12.json",
       "evidence_record": "E02",
@@ -1163,10 +1163,10 @@
       "order": 46,
       "protocol": {
         "Dataset": "SCARED · dataset7",
-        "Partición": "Validación; secundarios identificados en el método",
-        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
-        "Frames y resolución": "N=1/4/8/16/50; RGB 336×266; consultar condiciones de esta ficha",
-        "Escala / alineamiento": "Escala GT de profundidad por ancla; registros secundarios se identifican aparte",
+        "Partición": "SCARED VAL7, KF2 y KF4",
+        "Checkpoint": "VGG-T³ oficial, VN18-SCARED final 3240 y V9-SCARED candidato 1000; únicamente las variantes nombradas en filas",
+        "Frames y resolución": "N=16; identidad, intercambio1/2 y0/1 de los mismos RGB336×266",
+        "Escala / alineamiento": "Profundidad con escala del ancla; P comparado tras Sim(3) del ancla para separar el cambio de marco",
         "Unidades": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
         "GT disponible": "XYZ/profundidad medidos en el keyframe; sin trayectoria GT temporal validada"
       },
@@ -1258,13 +1258,13 @@
       "negative": false,
       "order": 50,
       "protocol": {
-        "Dataset": "SCARED y C3VD trans_t4_b",
-        "Partición": "Validación; secundarios identificados en el método",
-        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
-        "Frames y resolución": "Ancla SCARED y 16 objetivos GT de un contexto C3VD50, según fila",
-        "Escala / alineamiento": "Raw, escala, Sim(3) e ICP se desglosan por diagnóstico; no son resultados intercambiables",
+        "Dataset": "C3VD trans_t4_b",
+        "Partición": "Validación C3VD y transferencia de pesos entrenados con SCARED",
+        "Checkpoint": "VGG-T³ oficial; VN18-SCARED3240; V9-SCARED1000; V9-C3VD850",
+        "Frames y resolución": "Contexto de50 RGB336×336; mismos16 objetivos GT",
+        "Escala / alineamiento": "Columnas separadas: escala D compartida, escala P propia, Sim(3) global y Sim(3) por frame; todos son diagnósticos con GT",
         "Unidades": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
-        "GT disponible": "XYZ/profundidad medidos en el keyframe; sin trayectoria GT temporal validada"
+        "GT disponible": "Profundidad, K y poses de los16 objetivos C3VD"
       },
       "source_file": "experimentos_scared_e01_e12.json",
       "evidence_record": "E06",
@@ -1284,7 +1284,7 @@
       "protocol": {
         "Dataset": "SCARED · TRAIN1/2/3/6 y VAL7",
         "Partición": "Auditoría de TRAIN y fuentes; validación contextual citada aparte",
-        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
+        "Checkpoint": "VGG-T³ oficial, VN18-SCARED final 3240 y V9-SCARED candidato 1000; únicamente las variantes nombradas en filas",
         "Frames y resolución": "Calendarios reales de ambas recetas; no un único contexto",
         "Escala / alineamiento": "Normalización de cada pérdida; no es una nueva evaluación de reconstrucción",
         "Unidades": "Parámetros y normas consignadas; no equivalen a calidad geométrica",
@@ -1500,8 +1500,8 @@
       "protocol": {
         "Dataset": "SCARED dataset7",
         "Partición": "Desarrollo/validación; no se usan test8/9 para seleccionar",
-        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
-        "Frames y resolución": "Previsto: piloto N=16 (E13/E14); N=4/16/50 (E15). SCARED 336×266, C3VD 336²",
+        "Checkpoint": "Previstos: VGG-T³ oficial, VN18-SCARED3240 y V9-SCARED1000; aún sin forwards GPU de este protocolo",
+        "Frames y resolución": "Previsto E13: SCARED7, dos anclas N=16, RGB336×266",
         "Escala / alineamiento": "Prevista: escala de la referencia limpia fija; reajuste solo diagnóstico secundario",
         "Unidades": "Medidas previstas, todavía sin resultados GPU",
         "GT disponible": "Ancla medida por contexto; sin GT temporal validada"
@@ -1524,8 +1524,8 @@
       "protocol": {
         "Dataset": "SCARED7; control C3VD trans_t4_b según protocolo",
         "Partición": "Desarrollo/validación; no se usan test8/9 para seleccionar",
-        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
-        "Frames y resolución": "Previsto: piloto N=16 (E13/E14); N=4/16/50 (E15). SCARED 336×266, C3VD 336²",
+        "Checkpoint": "Previstos: VGG-T³ oficial, VN18-SCARED3240 y V9-SCARED1000; aún sin forwards GPU de este protocolo",
+        "Frames y resolución": "Previsto E14: SCARED7/KF4 y C3VD trans_t4_b, N=16; RGB336×266 y336×336",
         "Escala / alineamiento": "Prevista: escala de la referencia limpia fija; reajuste solo diagnóstico secundario",
         "Unidades": "Medidas previstas, todavía sin resultados GPU",
         "GT disponible": "SCARED: ancla medida; C3VD: 16 referencias del control"
@@ -1548,8 +1548,8 @@
       "protocol": {
         "Dataset": "SCARED7; control C3VD trans_t4_b según protocolo",
         "Partición": "Desarrollo/validación; no se usan test8/9 para seleccionar",
-        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
-        "Frames y resolución": "Previsto: piloto N=16 (E13/E14); N=4/16/50 (E15). SCARED 336×266, C3VD 336²",
+        "Checkpoint": "Previstos: VGG-T³ oficial, VN18-SCARED3240 y V9-SCARED1000; aún sin forwards GPU de este protocolo",
+        "Frames y resolución": "Previsto E15: N=1/4/8/16/32/50; piloto4/16/50; SCARED7/KF2 y C3VD trans_t4_b",
         "Escala / alineamiento": "Prevista: escala de la referencia limpia fija; reajuste solo diagnóstico secundario",
         "Unidades": "Medidas previstas, todavía sin resultados GPU",
         "GT disponible": "SCARED: ancla medida; C3VD: 16 referencias del control"

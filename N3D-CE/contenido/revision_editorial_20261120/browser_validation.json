@@ -1,0 +1,175 @@
+{
+  "passed": true,
+  "browser": "Microsoft Edge headless, software WebGL",
+  "clouds": [
+    {
+      "id": "c3vd-v9",
+      "expected": 5644800,
+      "loaded": 5644800,
+      "drawn": 5644800,
+      "complete": true,
+      "gl_error": 0,
+      "rotation_responded": true
+    },
+    {
+      "id": "c3vd-vn19-a",
+      "expected": 5644800,
+      "loaded": 5644800,
+      "drawn": 5644800,
+      "complete": true,
+      "gl_error": 0,
+      "rotation_responded": true
+    },
+    {
+      "id": "c3vd-vn19-b",
+      "expected": 5644800,
+      "loaded": 5644800,
+      "drawn": 5644800,
+      "complete": true,
+      "gl_error": 0,
+      "rotation_responded": true
+    },
+    {
+      "id": "c3vd-vn18",
+      "expected": 5644800,
+      "loaded": 5644800,
+      "drawn": 5644800,
+      "complete": true,
+      "gl_error": 0,
+      "rotation_responded": true
+    },
+    {
+      "id": "c3vd-zero",
+      "expected": 5644800,
+      "loaded": 5644800,
+      "drawn": 5644800,
+      "complete": true,
+      "gl_error": 0,
+      "rotation_responded": true
+    },
+    {
+      "id": "scared8-vn18",
+      "expected": 4468800,
+      "loaded": 4468800,
+      "drawn": 4468800,
+      "complete": true,
+      "gl_error": 0,
+      "rotation_responded": true
+    },
+    {
+      "id": "scared8-v9",
+      "expected": 4468800,
+      "loaded": 4468800,
+      "drawn": 4468800,
+      "complete": true,
+      "gl_error": 0,
+      "rotation_responded": true
+    },
+    {
+      "id": "scared8-vn19-a",
+      "expected": 4468800,
+      "loaded": 4468800,
+      "drawn": 4468800,
+      "complete": true,
+      "gl_error": 0,
+      "rotation_responded": true
+    },
+    {
+      "id": "scared9-vn18",
+      "expected": 4468800,
+      "loaded": 4468800,
+      "drawn": 4468800,
+      "complete": true,
+      "gl_error": 0,
+      "rotation_responded": true
+    },
+    {
+      "id": "scared9-v9",
+      "expected": 4468800,
+      "loaded": 4468800,
+      "drawn": 4468800,
+      "complete": true,
+      "gl_error": 0,
+      "rotation_responded": true
+    },
+    {
+      "id": "scared9-vn19-a",
+      "expected": 4468800,
+      "loaded": 4468800,
+      "drawn": 4468800,
+      "complete": true,
+      "gl_error": 0,
+      "rotation_responded": true
+    },
+    {
+      "id": "c3vd-scared-vn18",
+      "expected": 5644800,
+      "loaded": 5644800,
+      "drawn": 5644800,
+      "complete": true,
+      "gl_error": 0,
+      "rotation_responded": true
+    },
+    {
+      "id": "scared8-scared-v9",
+      "expected": 4468800,
+      "loaded": 4468800,
+      "drawn": 4468800,
+      "complete": true,
+      "gl_error": 0,
+      "rotation_responded": true
+    },
+    {
+      "id": "scared9-scared-v9",
+      "expected": 4468800,
+      "loaded": 4468800,
+      "drawn": 4468800,
+      "complete": true,
+      "gl_error": 0,
+      "rotation_responded": true
+    },
+    {
+      "id": "c3vd-scared-v9",
+      "expected": 5644800,
+      "loaded": 5644800,
+      "drawn": 5644800,
+      "complete": true,
+      "gl_error": 0,
+      "rotation_responded": true
+    }
+  ],
+  "errors": [],
+  "manual_checks_required": [
+    "Aesthetic review on Ricardo’s actual browser/device and public-host bandwidth remain outside this local browser test."
+  ],
+  "notebook": {
+    "summary": true,
+    "findings": 6,
+    "coverageRows": 10,
+    "removed": false,
+    "cards": 63
+  },
+  "evidence_link": {
+    "hash": "#scared-e02",
+    "open": true,
+    "visible": true
+  },
+  "coverage": {
+    "open": true,
+    "C09": "No aplica\nVGGT original no tiene mecanismo TTT. Evidencia"
+  },
+  "mobile": {
+    "viewport": 390,
+    "document": 375
+  },
+  "paired_reload": {
+    "synchronized": true,
+    "counts": [
+      5644800,
+      5644800
+    ],
+    "all_points": true
+  },
+  "metrics_tab": true,
+  "missing_resources": []
+}

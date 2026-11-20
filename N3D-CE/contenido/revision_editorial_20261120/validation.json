@@ -1,0 +1,349 @@
+{
+  "passed": true,
+  "branch": "editorial/bitacora-review-20261120",
+  "base_commit": "f7d6b303d7b56b39e562536ad0710198713d84b9",
+  "original_tables_unchanged": 93,
+  "original_details_unchanged_except_allowed_metadata_and_notices": 91,
+  "original_anchors_preserved": 244,
+  "original_links_preserved": 719,
+  "original_scientific_JSON_unchanged": 18,
+  "experiment_identifiers_and_results_unchanged": true,
+  "prepared_protocols_not_promoted": true,
+  "cloud_payloads_SHA256_unchanged": 15,
+  "published_clouds": 15,
+  "unique_packages": 15,
+  "cloud_physical_bytes": 921624289,
+  "browser_full_point_clouds_passed": 15,
+  "new_evidence_links_exercised": 31,
+  "paired_reload_and_sync": {
+    "synchronized": true,
+    "counts": [
+      5644800,
+      5644800
+    ],
+    "all_points": true
+  },
+  "mobile_document_overflow": false,
+  "new_training": false,
+  "new_inference": false,
+  "modularization_executed": false,
+  "notices_removed_as_requested": true,
+  "remaining_protocol_qualifiers": [
+    {
+      "table": "tabla-protocolo-15",
+      "field": "Escala y alineamiento",
+      "retained_text": "Protocolo original; no transferir ajustes entre benchmarks",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-15",
+      "field": "Unidades",
+      "retained_text": "NC adimensional; CD en las unidades originales de cada benchmark, sin conversión local",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-15",
+      "field": "GT",
+      "retained_text": "Referencia original de cada benchmark; no nuestro GT local",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-17",
+      "field": "Escala y alineamiento",
+      "retained_text": "Protocolo original; no transferir ajustes entre benchmarks",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-17",
+      "field": "GT",
+      "retained_text": "Referencia original de cada benchmark; no nuestro GT local",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-19",
+      "field": "Escala y alineamiento",
+      "retained_text": "Protocolo original; no transferir ajustes entre benchmarks",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-19",
+      "field": "GT",
+      "retained_text": "Referencia original de cada benchmark; no nuestro GT local",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-21",
+      "field": "Escala y alineamiento",
+      "retained_text": "Protocolo original; no transferir ajustes entre benchmarks",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-21",
+      "field": "Unidades",
+      "retained_text": "Segundos; no mismo hardware ni resolución local",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-21",
+      "field": "GT",
+      "retained_text": "Referencia original de cada benchmark; no nuestro GT local",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-22",
+      "field": "Unidades",
+      "retained_text": "cm, grados, %, segundos y GiB según fila",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-23",
+      "field": "Unidades",
+      "retained_text": "cm, grados, %, segundos y GiB según fila",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-26",
+      "field": "Frames",
+      "retained_text": "17 contextos largos: KF1–4 con N=4/8/16/50; KF5 solo N=1. RGB336×266; agregado por KF según tabla",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-31",
+      "field": "Frames",
+      "retained_text": "17 contextos largos: KF1–4 con N=4/8/16/50; KF5 solo N=1. RGB336×266; agregado por KF según tabla",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-32",
+      "field": "Frames",
+      "retained_text": "17 contextos largos: KF1–4 con N=4/8/16/50; KF5 solo N=1. RGB336×266; agregado por KF según tabla",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-38",
+      "field": "Unidades",
+      "retained_text": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-39",
+      "field": "Unidades",
+      "retained_text": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-40",
+      "field": "Unidades",
+      "retained_text": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-41",
+      "field": "Partición",
+      "retained_text": "Validación; secundarios identificados en el método",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-41",
+      "field": "Frames y resolución",
+      "retained_text": "N=1/4/8/16/50; RGB 336×266; consultar condiciones de esta ficha",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-41",
+      "field": "Unidades",
+      "retained_text": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-42",
+      "field": "Partición",
+      "retained_text": "Validación; secundarios identificados en el método",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-42",
+      "field": "Frames y resolución",
+      "retained_text": "N=1/4/8/16/50; RGB 336×266; consultar condiciones de esta ficha",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-42",
+      "field": "Unidades",
+      "retained_text": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-43",
+      "field": "Partición",
+      "retained_text": "Validación; secundarios identificados en el método",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-43",
+      "field": "Frames y resolución",
+      "retained_text": "Principal: KF1–4 con N=50; secundarios identificados; RGB 336×266",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-43",
+      "field": "Unidades",
+      "retained_text": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-44",
+      "field": "Partición",
+      "retained_text": "Validación; secundarios identificados en el método",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-44",
+      "field": "Frames y resolución",
+      "retained_text": "Principal: KF1–4 con N=50; secundarios identificados; RGB 336×266",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-44",
+      "field": "Unidades",
+      "retained_text": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-45",
+      "field": "Unidades",
+      "retained_text": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-48",
+      "field": "Unidades",
+      "retained_text": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-51",
+      "field": "Dataset",
+      "retained_text": "SCARED7 principal; anclas reservadas8/9 como secundarios identificados",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-51",
+      "field": "Partición",
+      "retained_text": "Validación; secundarios identificados en el método",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-51",
+      "field": "Frames y resolución",
+      "retained_text": "N=1/4/8/16/50; RGB 336×266; consultar condiciones de esta ficha",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-51",
+      "field": "Unidades",
+      "retained_text": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-52",
+      "field": "Partición",
+      "retained_text": "Validación; secundarios identificados en el método",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-52",
+      "field": "Frames y resolución",
+      "retained_text": "Principal: KF1–4 con N=50; secundarios identificados; RGB 336×266",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-52",
+      "field": "Unidades",
+      "retained_text": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-53",
+      "field": "Partición",
+      "retained_text": "Validación; secundarios identificados en el método",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-53",
+      "field": "Frames y resolución",
+      "retained_text": "Principal: KF1–4 con N=50; secundarios identificados; RGB 336×266",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-53",
+      "field": "Unidades",
+      "retained_text": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-54",
+      "field": "Partición",
+      "retained_text": "Validación; secundarios identificados en el método",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-54",
+      "field": "Frames y resolución",
+      "retained_text": "N=1/4/8/16/50; RGB 336×266; consultar condiciones de esta ficha",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-54",
+      "field": "Unidades",
+      "retained_text": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-55",
+      "field": "Partición",
+      "retained_text": "Validación; secundarios identificados en el método",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-55",
+      "field": "Frames y resolución",
+      "retained_text": "Principal: KF1–4 con N=50; secundarios identificados; RGB 336×266",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-55",
+      "field": "Unidades",
+      "retained_text": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-56",
+      "field": "Frames y resolución",
+      "retained_text": "Según cada fila; no mezclar dominios ni poblaciones GT",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-56",
+      "field": "Unidades",
+      "retained_text": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-58",
+      "field": "Dataset",
+      "retained_text": "SCARED7; control C3VD trans_t4_b según protocolo",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    },
+    {
+      "table": "tabla-protocolo-59",
+      "field": "Dataset",
+      "retained_text": "SCARED7; control C3VD trans_t4_b según protocolo",
+      "reason": "Condición heterogénea o detalle no acreditado de forma unívoca en la ficha; no se infiere un valor único."
+    }
+  ],
+  "manual_checks": [
+    "Aesthetic review on Ricardo’s actual browser/device and public-host bandwidth remain outside this local browser test."
+  ],
+  "source_QMD_SHA256": "4f276a03d79eeb10c6baa94765c2227736f8b2423b9a0014e1346d635e775c05"
+}

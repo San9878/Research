@@ -5,11 +5,11 @@
       "kind": "Documentación",
       "protocol": {
         "Dataset": "C3VD",
-        "Partición": "Según versión y filas",
-        "Checkpoint": "V9 / VN19-A/B, según columna",
+        "Partición": "Resumen histórico de versiones; particiones desglosadas en tabla-protocolo-04",
+        "Checkpoint": "V9 paso 850; VN19-A y VN19-B finales 3240",
         "Frames": "No aplica: tabla de documentación",
         "Escala y alineamiento": "No aplica: no es una medición geométrica",
-        "Unidades": "Las explícitas en el registro",
+        "Unidades": "No aplica a una medición nueva; conservar las unidades escritas en cada definición o parámetro",
         "GT": "No aplica a esta tabla de documentación"
       },
       "table_SHA256": "e988bf5b683a66f309dc2e716dd33d9520ef43495e8f8417bf044796919c8845",
@@ -20,11 +20,11 @@
       "kind": "Documentación",
       "protocol": {
         "Dataset": "C3VD",
-        "Partición": "Según versión y filas",
-        "Checkpoint": "V9 / VN19-A/B, según columna",
+        "Partición": "Contrato C3VD de datos y cámara; no es una evaluación por split",
+        "Checkpoint": "No aplica: contrato de datos, no pesos de un modelo",
         "Frames": "No aplica: tabla de documentación",
         "Escala y alineamiento": "No aplica: no es una medición geométrica",
-        "Unidades": "Las explícitas en el registro",
+        "Unidades": "No aplica a una medición nueva; conservar las unidades escritas en cada definición o parámetro",
         "GT": "No aplica a esta tabla de documentación"
       },
       "table_SHA256": "aed685489ab162dd0aef6d4ce3615f7797e1413f083868e3bf7ed89faed700b4",
@@ -35,11 +35,11 @@
       "kind": "Documentación",
       "protocol": {
         "Dataset": "C3VD",
-        "Partición": "Según versión y filas",
-        "Checkpoint": "V9 / VN19-A/B, según columna",
+        "Partición": "Inventario: diez secuencias con GT y screening_t1 sin profundidad GT local",
+        "Checkpoint": "No aplica: inventario de secuencias",
         "Frames": "No aplica: tabla de documentación",
         "Escala y alineamiento": "No aplica: no es una medición geométrica",
-        "Unidades": "Las explícitas en el registro",
+        "Unidades": "No aplica a una medición nueva; conservar las unidades escritas en cada definición o parámetro",
         "GT": "No aplica a esta tabla de documentación"
       },
       "table_SHA256": "db1394b0a1d7f39924ad6af96dcc30e32144cf9d52d12972341bdc95904982cb",
@@ -50,11 +50,11 @@
       "kind": "Documentación",
       "protocol": {
         "Dataset": "C3VD",
-        "Partición": "Según versión y filas",
-        "Checkpoint": "V9 / VN19-A/B, según columna",
+        "Partición": "Roles TRAIN/VAL/reserva separados en columnas históricas y actuales de cada secuencia",
+        "Checkpoint": "Columnas: VGGT histórico/TTT V9-V11 y TTT VN18/VN19",
         "Frames": "No aplica: tabla de documentación",
         "Escala y alineamiento": "No aplica: no es una medición geométrica",
-        "Unidades": "Las explícitas en el registro",
+        "Unidades": "No aplica a una medición nueva; conservar las unidades escritas en cada definición o parámetro",
         "GT": "No aplica a esta tabla de documentación"
       },
       "table_SHA256": "7476be7d4b85e6fff231dd05a38aceed066fc6d68a14f7777db611c4db19525d",
@@ -65,11 +65,11 @@
       "kind": "Documentación",
       "protocol": {
         "Dataset": "C3VD",
-        "Partición": "Según versión y filas",
-        "Checkpoint": "V9 / VN19-A/B, según columna",
+        "Partición": "Splits históricos V9 frente a VN19-A/B; roles de cada secuencia en tabla-protocolo-04",
+        "Checkpoint": "V9 paso 850 y VN19-A/B finales 3240",
         "Frames": "No aplica: tabla de documentación",
         "Escala y alineamiento": "No aplica: no es una medición geométrica",
-        "Unidades": "Las explícitas en el registro",
+        "Unidades": "No aplica a una medición nueva; conservar las unidades escritas en cada definición o parámetro",
         "GT": "No aplica a esta tabla de documentación"
       },
       "table_SHA256": "a2b7d9b51cdeb88dad2a16f7c9eef9f6c5a85daab6344e378d7eaced3f7fb033",
@@ -80,11 +80,11 @@
       "kind": "Documentación",
       "protocol": {
         "Dataset": "C3VD",
-        "Partición": "Según versión y filas",
-        "Checkpoint": "V9 / VN19-A/B, según columna",
+        "Partición": "Recetas TRAIN V9/VN19; no es una tabla de evaluación",
+        "Checkpoint": "V9 y VN19-A/B: hiperparámetros de entrenamiento",
         "Frames": "No aplica: tabla de documentación",
         "Escala y alineamiento": "No aplica: no es una medición geométrica",
-        "Unidades": "Las explícitas en el registro",
+        "Unidades": "No aplica a una medición nueva; conservar las unidades escritas en cada definición o parámetro",
         "GT": "No aplica a esta tabla de documentación"
       },
       "table_SHA256": "4893a079bb7da8c772d73fbc270d180db5a5985abdd3f169af5cf8b43d1a3667",
@@ -95,11 +95,11 @@
       "kind": "Documentación",
       "protocol": {
         "Dataset": "C3VD",
-        "Partición": "Según versión y filas",
-        "Checkpoint": "V9 / VN19-A/B, según columna",
+        "Partición": "Actualizaciones TRAIN, agrupadas por tamaño de contexto",
+        "Checkpoint": "V9 y brazos VN19-A/B; no son mediciones de un checkpoint",
         "Frames": "No aplica: tabla de documentación",
         "Escala y alineamiento": "No aplica: no es una medición geométrica",
-        "Unidades": "Las explícitas en el registro",
+        "Unidades": "No aplica a una medición nueva; conservar las unidades escritas en cada definición o parámetro",
         "GT": "No aplica a esta tabla de documentación"
       },
       "table_SHA256": "b458b27a53aa8dd440b82b941c231474003425196af225e4086033269a9f70e3",
@@ -111,7 +111,7 @@
       "protocol": {
         "Dataset": "C3VD trans_t4_b",
         "Partición": "Validación de los modelos C3VD; lectura de transferencia para pesos SCARED",
-        "Checkpoint": "V9 / VN19-A/B, según columna",
+        "Checkpoint": "Zero-shot de referencia VGG-T³; V9 paso 850; VN19-A/B finales 3240; solo los pesos nombrados en columnas/filas",
         "Frames": "50 RGB 336²; 16 objetivos GT comunes",
         "Escala y alineamiento": "Una escala positiva GT compartida por contexto; sin ICP",
         "Unidades": "cm, grados, porcentajes; AbsRel sin unidad",
@@ -126,7 +126,7 @@
       "protocol": {
         "Dataset": "C3VD trans_t4_b",
         "Partición": "Validación de los modelos C3VD; lectura de transferencia para pesos SCARED",
-        "Checkpoint": "V9 / VN19-A/B, según columna",
+        "Checkpoint": "Zero-shot de referencia VGG-T³; V9 paso 850; VN19-A/B finales 3240; solo los pesos nombrados en columnas/filas",
         "Frames": "50 RGB 336²; 16 objetivos GT comunes",
         "Escala y alineamiento": "Una escala positiva GT compartida por contexto; sin ICP",
         "Unidades": "cm, grados, porcentajes; AbsRel sin unidad",
@@ -141,7 +141,7 @@
       "protocol": {
         "Dataset": "C3VD trans_t4_b",
         "Partición": "Validación de los modelos C3VD; lectura de transferencia para pesos SCARED",
-        "Checkpoint": "V9 / VN19-A/B, según columna",
+        "Checkpoint": "Zero-shot de referencia VGG-T³; V9 paso 850; VN19-A/B finales 3240; solo los pesos nombrados en columnas/filas",
         "Frames": "50 RGB 336²; 16 objetivos GT comunes",
         "Escala y alineamiento": "Una escala positiva GT compartida por contexto; sin ICP",
         "Unidades": "cm, grados, porcentajes; AbsRel sin unidad",
@@ -155,8 +155,8 @@
       "kind": "Evaluación local",
       "protocol": {
         "Dataset": "C3VD · diez secuencias",
-        "Partición": "TRAIN, VAL y reservas según las filas; roles V9/VN19 visibles",
-        "Checkpoint": "V9 / VN19-A/B, según columna",
+        "Partición": "Diez secuencias: grupos TRAIN/VAL/reserva definidos por VN19; la columna Rol V9/VN19 conserva ambos roles",
+        "Checkpoint": "Zero-shot de referencia VGG-T³; V9 paso 850; VN19-A/B finales 3240; solo los pesos nombrados en columnas/filas",
         "Frames": "50 RGB 336²; 16 objetivos GT comunes",
         "Escala y alineamiento": "Una escala positiva GT compartida por contexto; sin ICP",
         "Unidades": "cm, grados, porcentajes; AbsRel sin unidad",
@@ -170,8 +170,8 @@
       "kind": "Evaluación local",
       "protocol": {
         "Dataset": "C3VD · diez secuencias",
-        "Partición": "TRAIN, VAL y reservas según las filas; roles V9/VN19 visibles",
-        "Checkpoint": "V9 / VN19-A/B, según columna",
+        "Partición": "Diez secuencias: grupos TRAIN/VAL/reserva definidos por VN19; la columna Rol V9/VN19 conserva ambos roles",
+        "Checkpoint": "Zero-shot de referencia VGG-T³; V9 paso 850; VN19-A/B finales 3240; solo los pesos nombrados en columnas/filas",
         "Frames": "50 RGB 336²; 16 objetivos GT comunes",
         "Escala y alineamiento": "Una escala positiva GT compartida por contexto; sin ICP",
         "Unidades": "cm, grados, porcentajes; AbsRel sin unidad",
@@ -185,11 +185,11 @@
       "kind": "Documentación",
       "protocol": {
         "Dataset": "C3VD",
-        "Partición": "Según versión y filas",
-        "Checkpoint": "V9 / VN19-A/B, según columna",
+        "Partición": "Síntesis de los experimentos C3VD enlazados; sin agregado nuevo",
+        "Checkpoint": "Versiones citadas en cada conclusión; no un único peso",
         "Frames": "No aplica: tabla de documentación",
         "Escala y alineamiento": "No aplica: no es una medición geométrica",
-        "Unidades": "Las explícitas en el registro",
+        "Unidades": "No aplica a una medición nueva; conservar las unidades escritas en cada definición o parámetro",
         "GT": "No aplica a esta tabla de documentación"
       },
       "table_SHA256": "d37dfe63facf4017fcf8f1b82a51047c191f3a7d03426c72d0c185517aac6182",
@@ -200,11 +200,11 @@
       "kind": "Documentación",
       "protocol": {
         "Dataset": "C3VD",
-        "Partición": "Según versión y filas",
-        "Checkpoint": "V9 / VN19-A/B, según columna",
+        "Partición": "Glosario metodológico; no corresponde a una partición experimental",
+        "Checkpoint": "No aplica: definiciones de métricas",
         "Frames": "No aplica: tabla de documentación",
         "Escala y alineamiento": "No aplica: no es una medición geométrica",
-        "Unidades": "Las explícitas en el registro",
+        "Unidades": "No aplica a una medición nueva; conservar las unidades escritas en cada definición o parámetro",
         "GT": "No aplica a esta tabla de documentación"
       },
       "table_SHA256": "3e5ce28c5cda7f7e9857ea9aa8e1ca17cbbe6157c10c9f53d22eb5e4937bb599",
@@ -214,12 +214,12 @@
       "id": "tabla-protocolo-15",
       "kind": "Referencia publicada",
       "protocol": {
-        "Dataset": "Benchmarks del artículo, según filas",
+        "Dataset": "7Scenes-D, 7Scenes-S, DTU, ETH3D, NRGBD-D y NRGBD-S; cada fila conserva su benchmark original",
         "Partición": "Protocolo original del paper; distinto del local",
         "Checkpoint": "VGG-T³ publicado",
         "Frames": "Los del benchmark; no equivalen a nuestra selección C3VD",
         "Escala y alineamiento": "Protocolo original; no transferir ajustes entre benchmarks",
-        "Unidades": "Unidades publicadas, según benchmark/columna",
+        "Unidades": "NC adimensional; CD en las unidades originales de cada benchmark, sin conversión local",
         "GT": "Referencia original de cada benchmark; no nuestro GT local"
       },
       "table_SHA256": "f1a9e1f5683c8c8020b15f367cb579a9c64a2aa96be410ef23d7a68518b079ce",
@@ -231,7 +231,7 @@
       "protocol": {
         "Dataset": "C3VD trans_t4_b",
         "Partición": "Validación de los modelos C3VD; lectura de transferencia para pesos SCARED",
-        "Checkpoint": "V9 / VN19-A/B, según columna",
+        "Checkpoint": "Zero-shot de referencia VGG-T³; V9 paso 850; VN19-A/B finales 3240; solo los pesos nombrados en columnas/filas",
         "Frames": "50 RGB 336²; 16 objetivos GT comunes",
         "Escala y alineamiento": "CD: Sim(3)+ICP; NC: normales KNN30. No mezclar con XYZ sin ICP",
         "Unidades": "cm, grados, porcentajes; AbsRel sin unidad",
@@ -244,12 +244,12 @@
       "id": "tabla-protocolo-17",
       "kind": "Referencia publicada",
       "protocol": {
-        "Dataset": "Benchmarks del artículo, según filas",
+        "Dataset": "Bonn, KITTI y Sintel; cada fila conserva su benchmark original",
         "Partición": "Protocolo original del paper; distinto del local",
         "Checkpoint": "VGG-T³ publicado",
         "Frames": "Los del benchmark; no equivalen a nuestra selección C3VD",
         "Escala y alineamiento": "Protocolo original; no transferir ajustes entre benchmarks",
-        "Unidades": "Unidades publicadas, según benchmark/columna",
+        "Unidades": "δ < 1.25 y Abs Rel: adimensionales",
         "GT": "Referencia original de cada benchmark; no nuestro GT local"
       },
       "table_SHA256": "b9f5b7997bcac91ef510f55adf4f41c2455a35117ebd4c6b78b4d0fddc5e10bf",
@@ -261,7 +261,7 @@
       "protocol": {
         "Dataset": "C3VD trans_t4_b",
         "Partición": "Validación de los modelos C3VD; lectura de transferencia para pesos SCARED",
-        "Checkpoint": "V9 / VN19-A/B, según columna",
+        "Checkpoint": "Zero-shot de referencia VGG-T³; V9 paso 850; VN19-A/B finales 3240; solo los pesos nombrados en columnas/filas",
         "Frames": "50 RGB 336²; 16 objetivos GT comunes",
         "Escala y alineamiento": "Una escala positiva GT compartida por contexto; sin ICP",
         "Unidades": "cm, grados, porcentajes; AbsRel sin unidad",
@@ -274,12 +274,12 @@
       "id": "tabla-protocolo-19",
       "kind": "Referencia publicada",
       "protocol": {
-        "Dataset": "Benchmarks del artículo, según filas",
+        "Dataset": "ScanNet, Sintel y TUM; cada fila conserva su benchmark original",
         "Partición": "Protocolo original del paper; distinto del local",
         "Checkpoint": "VGG-T³ publicado",
         "Frames": "Los del benchmark; no equivalen a nuestra selección C3VD",
         "Escala y alineamiento": "Protocolo original; no transferir ajustes entre benchmarks",
-        "Unidades": "Unidades publicadas, según benchmark/columna",
+        "Unidades": "RPEr en grados; ATE/RPEt en las unidades originales publicadas, sin conversión local",
         "GT": "Referencia original de cada benchmark; no nuestro GT local"
       },
       "table_SHA256": "996a38ccbe537a389525ab69cf74122cdbd81550bbf6409eef3888018ae36a7e",
@@ -291,7 +291,7 @@
       "protocol": {
         "Dataset": "C3VD trans_t4_b",
         "Partición": "Validación de los modelos C3VD; lectura de transferencia para pesos SCARED",
-        "Checkpoint": "V9 / VN19-A/B, según columna",
+        "Checkpoint": "Zero-shot de referencia VGG-T³; V9 paso 850; VN19-A/B finales 3240; solo los pesos nombrados en columnas/filas",
         "Frames": "50 RGB 336²; 16 objetivos GT comunes",
         "Escala y alineamiento": "Sim(3) global de centros mediante evo; RPE entre poses seleccionadas consecutivas",
         "Unidades": "cm, grados, porcentajes; AbsRel sin unidad",
@@ -323,7 +323,7 @@
         "Partición": "Reservas del protocolo histórico de octubre; mismo phantom",
         "Checkpoint": "Zero-shot y fine-tuning histórico VGG-T³ V9",
         "Frames": "50 vistas a336²; protocolo histórico, distinto de Trans4/16 objetivos",
-        "Escala y alineamiento": "Lo indicado en cada fila: Sim(3), ICP o escala de secuencia",
+        "Escala y alineamiento": "Filas CD/NC: registro Sim(3)+ICP; profundidad: escala única de secuencia; ATE/RPE: Sim(3); latencia/memoria no son registro geométrico",
         "Unidades": "cm, grados, %, segundos y GiB según fila",
         "GT": "GT de las secuencias reservadas y soporte histórico"
       },
@@ -338,7 +338,7 @@
         "Partición": "Reservas del protocolo histórico de octubre; mismo phantom",
         "Checkpoint": "Zero-shot y fine-tuning histórico VGGT",
         "Frames": "50 vistas a336²; protocolo histórico, distinto de Trans4/16 objetivos",
-        "Escala y alineamiento": "Lo indicado en cada fila: Sim(3), ICP o escala de secuencia",
+        "Escala y alineamiento": "Accuracy/Completeness/Overall: Sim(3), sin ICP; AUC conserva su protocolo angular; latencia/memoria no son registro geométrico",
         "Unidades": "cm, grados, %, segundos y GiB según fila",
         "GT": "GT de las secuencias reservadas y soporte histórico"
       },
@@ -350,8 +350,8 @@
       "kind": "Documentación",
       "protocol": {
         "Dataset": "SCARED",
-        "Partición": "TRAIN1/2/3/6; VAL7; reservas8/9, según bloque",
-        "Checkpoint": "VN18-SCARED3240 y/o V9-SCARED1000, según filas",
+        "Partición": "SCARED: TRAIN datasets1/2/3/6, VAL7, reservados8/9; comparación C3VD cuando su columna lo declara",
+        "Checkpoint": "VN18-SCARED final 3240; contraste con las recetas V9/VN19-C3VD",
         "Frames": "No aplica: tabla de documentación",
         "Escala y alineamiento": "No aplica: no es una medición geométrica",
         "Unidades": "Las explícitas en el registro",
@@ -365,8 +365,8 @@
       "kind": "Documentación",
       "protocol": {
         "Dataset": "SCARED",
-        "Partición": "TRAIN1/2/3/6; VAL7; reservas8/9, según bloque",
-        "Checkpoint": "VN18-SCARED3240 y/o V9-SCARED1000, según filas",
+        "Partición": "SCARED: TRAIN datasets1/2/3/6, VAL7, reservados8/9; comparación C3VD cuando su columna lo declara",
+        "Checkpoint": "VN18-SCARED: distribución de las 3240 actualizaciones TRAIN",
         "Frames": "No aplica: tabla de documentación",
         "Escala y alineamiento": "No aplica: no es una medición geométrica",
         "Unidades": "Las explícitas en el registro",
@@ -381,7 +381,7 @@
       "protocol": {
         "Dataset": "SCARED dataset7",
         "Partición": "Validación; no test8/9",
-        "Checkpoint": "VN18-SCARED3240 y/o V9-SCARED1000, según filas",
+        "Checkpoint": "Zero-shot; VN18-SCARED final 3240; V9-SCARED candidato 1000 y selección oficial paso0 cuando aparezca en la fila",
         "Frames": "17 contextos largos: KF1–4 con N=4/8/16/50; KF5 solo N=1. RGB336×266; agregado por KF según tabla",
         "Escala y alineamiento": "Una escala GT de profundidad compartida con puntos por contexto; sin ICP",
         "Unidades": "XYZ/p95 en cm; AbsRel sin unidad; δ/Δ en %",
@@ -396,7 +396,7 @@
       "protocol": {
         "Dataset": "SCARED dataset8",
         "Partición": "Reservado durante entrenamiento; ya inspeccionado históricamente",
-        "Checkpoint": "Los pesos indicados en cada columna/fila; no todos fueron entrenados con SCARED",
+        "Checkpoint": "Columnas/filas identificadas: zero-shot, V9-C3VD 850, VN19-A-C3VD 3240, VN18-SCARED 3240 y V9-SCARED 1000; no se agregan pesos ausentes",
         "Frames": "50 RGB336×266; ventana indicada en la sección",
         "Escala y alineamiento": "Una escala GT compartida de profundidad/puntos; sin ICP",
         "Unidades": "cm y %, AbsRel sin unidad",
@@ -411,7 +411,7 @@
       "protocol": {
         "Dataset": "SCARED dataset9",
         "Partición": "Reservado durante entrenamiento; ya inspeccionado históricamente",
-        "Checkpoint": "Los pesos indicados en cada columna/fila; no todos fueron entrenados con SCARED",
+        "Checkpoint": "Columnas/filas identificadas: zero-shot, V9-C3VD 850, VN19-A-C3VD 3240, VN18-SCARED 3240 y V9-SCARED 1000; no se agregan pesos ausentes",
         "Frames": "50 RGB336×266; ventana indicada en la sección",
         "Escala y alineamiento": "Una escala GT compartida de profundidad/puntos; sin ICP",
         "Unidades": "cm y %, AbsRel sin unidad",
@@ -424,9 +424,9 @@
       "id": "tabla-protocolo-29",
       "kind": "Documentación",
       "protocol": {
-        "Dataset": "SCARED",
-        "Partición": "TRAIN1/2/3/6; VAL7; reservas8/9, según bloque",
-        "Checkpoint": "VN18-SCARED3240 y/o V9-SCARED1000, según filas",
+        "Dataset": "C3VD y SCARED; comparación de las dos recetas V9",
+        "Partición": "SCARED: TRAIN datasets1/2/3/6, VAL7, reservados8/9; comparación C3VD cuando su columna lo declara",
+        "Checkpoint": "V9-C3VD de referencia y V9-SCARED candidato 1000; no implica aceptación",
         "Frames": "No aplica: tabla de documentación",
         "Escala y alineamiento": "No aplica: no es una medición geométrica",
         "Unidades": "Las explícitas en el registro",
@@ -441,7 +441,7 @@
       "protocol": {
         "Dataset": "SCARED dataset7",
         "Partición": "Validación; no test8/9",
-        "Checkpoint": "VN18-SCARED3240 y/o V9-SCARED1000, según filas",
+        "Checkpoint": "Zero-shot; VN18-SCARED final 3240; V9-SCARED candidato 1000 y selección oficial paso0 cuando aparezca en la fila",
         "Frames": "N=1; KF1–5; RGB336×266",
         "Escala y alineamiento": "Una escala GT de profundidad compartida con puntos por contexto; sin ICP",
         "Unidades": "XYZ/p95 en cm; AbsRel sin unidad; δ/Δ en %",
@@ -456,7 +456,7 @@
       "protocol": {
         "Dataset": "SCARED dataset7",
         "Partición": "Validación; no test8/9",
-        "Checkpoint": "VN18-SCARED3240 y/o V9-SCARED1000, según filas",
+        "Checkpoint": "Zero-shot; VN18-SCARED final 3240; V9-SCARED candidato 1000 y selección oficial paso0 cuando aparezca en la fila",
         "Frames": "17 contextos largos: KF1–4 con N=4/8/16/50; KF5 solo N=1. RGB336×266; agregado por KF según tabla",
         "Escala y alineamiento": "Una escala GT de profundidad compartida con puntos por contexto; sin ICP",
         "Unidades": "XYZ/p95 en cm; AbsRel sin unidad; δ/Δ en %",
@@ -471,7 +471,7 @@
       "protocol": {
         "Dataset": "SCARED dataset7",
         "Partición": "Validación; no test8/9",
-        "Checkpoint": "VN18-SCARED3240 y/o V9-SCARED1000, según filas",
+        "Checkpoint": "Zero-shot; VN18-SCARED final 3240; V9-SCARED candidato 1000 y selección oficial paso0 cuando aparezca en la fila",
         "Frames": "17 contextos largos: KF1–4 con N=4/8/16/50; KF5 solo N=1. RGB336×266; agregado por KF según tabla",
         "Escala y alineamiento": "Una escala GT de profundidad compartida con puntos por contexto; sin ICP",
         "Unidades": "XYZ/p95 en cm; AbsRel sin unidad; δ/Δ en %",
@@ -486,7 +486,7 @@
       "protocol": {
         "Dataset": "SCARED dataset8",
         "Partición": "Reservado durante entrenamiento; ya inspeccionado históricamente",
-        "Checkpoint": "Los pesos indicados en cada columna/fila; no todos fueron entrenados con SCARED",
+        "Checkpoint": "Columnas/filas identificadas: zero-shot, V9-C3VD 850, VN19-A-C3VD 3240, VN18-SCARED 3240 y V9-SCARED 1000; no se agregan pesos ausentes",
         "Frames": "50 RGB336×266; ventana indicada en la sección",
         "Escala y alineamiento": "Una escala GT compartida de profundidad/puntos; sin ICP",
         "Unidades": "cm y %, AbsRel sin unidad",
@@ -501,7 +501,7 @@
       "protocol": {
         "Dataset": "SCARED dataset9",
         "Partición": "Reservado durante entrenamiento; ya inspeccionado históricamente",
-        "Checkpoint": "Los pesos indicados en cada columna/fila; no todos fueron entrenados con SCARED",
+        "Checkpoint": "Columnas/filas identificadas: zero-shot, V9-C3VD 850, VN19-A-C3VD 3240, VN18-SCARED 3240 y V9-SCARED 1000; no se agregan pesos ausentes",
         "Frames": "50 RGB336×266; ventana indicada en la sección",
         "Escala y alineamiento": "Una escala GT compartida de profundidad/puntos; sin ICP",
         "Unidades": "cm y %, AbsRel sin unidad",
@@ -516,7 +516,7 @@
       "protocol": {
         "Dataset": "C3VD trans_t4_b",
         "Partición": "Validación de los modelos C3VD; lectura de transferencia para pesos SCARED",
-        "Checkpoint": "Los siete pesos y pasos consignados en las filas (VGGT y VGG-T³; C3VD/SCARED)",
+        "Checkpoint": "VGG-T³: oficial, V9-C3VD 850, VN18-C3VD 3240, VN19-A/B 3240, VN18-SCARED 3240, V9-SCARED 1000; tabla 36 añade VGGT oficial/C3VD 30 épocas",
         "Frames": "50 RGB 336²; 16 objetivos GT comunes",
         "Escala y alineamiento": "Una escala positiva GT compartida por contexto; sin ICP",
         "Unidades": "cm, grados, porcentajes; AbsRel sin unidad",
@@ -531,7 +531,7 @@
       "protocol": {
         "Dataset": "C3VD trans_t4_b",
         "Partición": "Validación de los modelos C3VD; lectura de transferencia para pesos SCARED",
-        "Checkpoint": "Los siete pesos y pasos consignados en las filas (VGGT y VGG-T³; C3VD/SCARED)",
+        "Checkpoint": "VGG-T³: oficial, V9-C3VD 850, VN18-C3VD 3240, VN19-A/B 3240, VN18-SCARED 3240, V9-SCARED 1000; tabla 36 añade VGGT oficial/C3VD 30 épocas",
         "Frames": "50 RGB 336²; 16 objetivos GT comunes",
         "Escala y alineamiento": "Una escala positiva GT compartida por contexto; sin ICP",
         "Unidades": "cm, grados, porcentajes; AbsRel sin unidad",
@@ -546,7 +546,7 @@
       "protocol": {
         "Dataset": "C3VD trans_t4_b",
         "Partición": "Validación de los modelos C3VD; lectura de transferencia para pesos SCARED",
-        "Checkpoint": "Los siete pesos y pasos consignados en las filas (VGGT y VGG-T³; C3VD/SCARED)",
+        "Checkpoint": "VGG-T³: oficial, V9-C3VD 850, VN18-C3VD 3240, VN19-A/B 3240, VN18-SCARED 3240, V9-SCARED 1000; tabla 36 añade VGGT oficial/C3VD 30 épocas",
         "Frames": "50 RGB 336²; 16 objetivos GT comunes",
         "Escala y alineamiento": "Una escala positiva GT compartida por contexto; sin ICP",
         "Unidades": "Índice relativo /100; no es una métrica original ni una puntuación clínica",
@@ -560,9 +560,9 @@
       "kind": "Registro experimental",
       "protocol": {
         "Dataset": "SCARED · dataset7",
-        "Partición": "Validación; secundarios identificados en el método",
-        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
-        "Frames y resolución": "N=1/4/8/16/50; RGB 336×266; consultar condiciones de esta ficha",
+        "Partición": "SCARED VAL dataset7; mismas cuatro anclas KF1–4, KF5 excluido de la comparación entre N",
+        "Checkpoint": "VGG-T³ oficial, VN18-SCARED final 3240 y V9-SCARED candidato 1000; únicamente las variantes nombradas en filas",
+        "Frames y resolución": "N=1/4/8/16/50 en tabla38; N=4 frente a50 en tabla39; vídeo0–60 para N≥4; RGB 336×266",
         "Escala / alineamiento": "Escala GT de profundidad por ancla; registros secundarios se identifican aparte",
         "Unidades": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
         "GT disponible": "XYZ/profundidad medidos en el keyframe; sin trayectoria GT temporal validada"
@@ -575,12 +575,12 @@
       "kind": "Registro experimental",
       "protocol": {
         "Dataset": "SCARED · dataset7",
-        "Partición": "Validación; secundarios identificados en el método",
-        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
-        "Frames y resolución": "N=1/4/8/16/50; RGB 336×266; consultar condiciones de esta ficha",
+        "Partición": "SCARED VAL dataset7; mismas cuatro anclas KF1–4, KF5 excluido de la comparación entre N",
+        "Checkpoint": "VGG-T³ oficial, VN18-SCARED final 3240 y V9-SCARED candidato 1000; únicamente las variantes nombradas en filas",
+        "Frames y resolución": "N=1/4/8/16/50 en tabla38; N=4 frente a50 en tabla39; vídeo0–60 para N≥4; RGB 336×266",
         "Escala / alineamiento": "Escala GT de profundidad por ancla; registros secundarios se identifican aparte",
         "Unidades": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
-        "GT disponible": "XYZ/profundidad medidos en el keyframe; sin trayectoria GT temporal validada"
+        "GT disponible": "Ancla medida; vídeo0 y60 sin GT. El registro entre predicciones no equivale a exactitud GT"
       },
       "table_SHA256": "d961f1cfc862cf8c3ad9a3b6260d056459ca932ba869e7a885d58f0cf8e73832",
       "header": "| Modelo | Frames comunes | Cambio D (%) | Cambio XYZ (cm) | Cambio P tras Sim3 sin GT / mediana D (%) |"
@@ -590,10 +590,10 @@
       "kind": "Registro experimental",
       "protocol": {
         "Dataset": "SCARED · dataset7",
-        "Partición": "Validación; secundarios identificados en el método",
-        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
-        "Frames y resolución": "N=1/4/8/16/50; RGB 336×266; consultar condiciones de esta ficha",
-        "Escala / alineamiento": "Escala GT de profundidad por ancla; registros secundarios se identifican aparte",
+        "Partición": "SCARED VAL7, KF2 y KF4",
+        "Checkpoint": "VGG-T³ oficial, VN18-SCARED final 3240 y V9-SCARED candidato 1000; únicamente las variantes nombradas en filas",
+        "Frames y resolución": "N=16; identidad, intercambio1/2 y0/1 de los mismos RGB336×266",
+        "Escala / alineamiento": "Profundidad con escala del ancla; P comparado tras Sim(3) del ancla para separar el cambio de marco",
         "Unidades": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
         "GT disponible": "XYZ/profundidad medidos en el keyframe; sin trayectoria GT temporal validada"
       },
@@ -606,7 +606,7 @@
       "protocol": {
         "Dataset": "SCARED · dataset7",
         "Partición": "Validación; secundarios identificados en el método",
-        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
+        "Checkpoint": "VGG-T³ oficial, VN18-SCARED final 3240 y V9-SCARED candidato 1000; únicamente las variantes nombradas en filas",
         "Frames y resolución": "N=1/4/8/16/50; RGB 336×266; consultar condiciones de esta ficha",
         "Escala / alineamiento": "Escala GT de profundidad por ancla; registros secundarios se identifican aparte",
         "Unidades": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
@@ -621,7 +621,7 @@
       "protocol": {
         "Dataset": "SCARED · dataset7",
         "Partición": "Validación; secundarios identificados en el método",
-        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
+        "Checkpoint": "VGG-T³ oficial, VN18-SCARED final 3240 y V9-SCARED candidato 1000; únicamente las variantes nombradas en filas",
         "Frames y resolución": "N=1/4/8/16/50; RGB 336×266; consultar condiciones de esta ficha",
         "Escala / alineamiento": "Escala GT de profundidad por ancla; registros secundarios se identifican aparte",
         "Unidades": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
@@ -636,7 +636,7 @@
       "protocol": {
         "Dataset": "SCARED · dataset7",
         "Partición": "Validación; secundarios identificados en el método",
-        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
+        "Checkpoint": "VGG-T³ oficial, VN18-SCARED final 3240 y V9-SCARED candidato 1000; únicamente las variantes nombradas en filas",
         "Frames y resolución": "Principal: KF1–4 con N=50; secundarios identificados; RGB 336×266",
         "Escala / alineamiento": "Escala GT de profundidad por ancla; registros secundarios se identifican aparte",
         "Unidades": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
@@ -651,7 +651,7 @@
       "protocol": {
         "Dataset": "SCARED · dataset7",
         "Partición": "Validación; secundarios identificados en el método",
-        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
+        "Checkpoint": "VGG-T³ oficial, VN18-SCARED final 3240 y V9-SCARED candidato 1000; únicamente las variantes nombradas en filas",
         "Frames y resolución": "Principal: KF1–4 con N=50; secundarios identificados; RGB 336×266",
         "Escala / alineamiento": "Escala GT de profundidad por ancla; registros secundarios se identifican aparte",
         "Unidades": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
@@ -664,13 +664,13 @@
       "id": "tabla-protocolo-45",
       "kind": "Registro experimental",
       "protocol": {
-        "Dataset": "SCARED y C3VD trans_t4_b",
-        "Partición": "Validación; secundarios identificados en el método",
-        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
-        "Frames y resolución": "Ancla SCARED y 16 objetivos GT de un contexto C3VD50, según fila",
-        "Escala / alineamiento": "Raw, escala, Sim(3) e ICP se desglosan por diagnóstico; no son resultados intercambiables",
+        "Dataset": "C3VD trans_t4_b",
+        "Partición": "Validación C3VD y transferencia de pesos entrenados con SCARED",
+        "Checkpoint": "VGG-T³ oficial; VN18-SCARED3240; V9-SCARED1000; V9-C3VD850",
+        "Frames y resolución": "Contexto de50 RGB336×336; mismos16 objetivos GT",
+        "Escala / alineamiento": "Columnas separadas: escala D compartida, escala P propia, Sim(3) global y Sim(3) por frame; todos son diagnósticos con GT",
         "Unidades": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
-        "GT disponible": "XYZ/profundidad medidos en el keyframe; sin trayectoria GT temporal validada"
+        "GT disponible": "Profundidad, K y poses de los16 objetivos C3VD"
       },
       "table_SHA256": "e3b2837d4c83a3ceb80cbd4acf3f0ee829a64a0c83fb44ba98aae7ccae4639b5",
       "header": "| Modelo | Escala D compartida (cm) | Escala P propia (cm) | Sim3 global (cm) | Sim3 por frame (cm) |"
@@ -681,7 +681,7 @@
       "protocol": {
         "Dataset": "SCARED · TRAIN1/2/3/6 y VAL7",
         "Partición": "Auditoría de TRAIN y fuentes; validación contextual citada aparte",
-        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
+        "Checkpoint": "VGG-T³ oficial, VN18-SCARED final 3240 y V9-SCARED candidato 1000; únicamente las variantes nombradas en filas",
         "Frames y resolución": "Calendarios reales de ambas recetas; no un único contexto",
         "Escala / alineamiento": "Normalización de cada pérdida; no es una nueva evaluación de reconstrucción",
         "Unidades": "Parámetros y normas consignadas; no equivalen a calidad geométrica",
@@ -696,7 +696,7 @@
       "protocol": {
         "Dataset": "SCARED · TRAIN1/2/3/6 y VAL7",
         "Partición": "Auditoría de TRAIN y fuentes; validación contextual citada aparte",
-        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
+        "Checkpoint": "VGG-T³ oficial, VN18-SCARED final 3240 y V9-SCARED candidato 1000; únicamente las variantes nombradas en filas",
         "Frames y resolución": "Calendarios reales de ambas recetas; no un único contexto",
         "Escala / alineamiento": "Normalización de cada pérdida; no es una nueva evaluación de reconstrucción",
         "Unidades": "Parámetros y normas consignadas; no equivalen a calidad geométrica",
@@ -711,7 +711,7 @@
       "protocol": {
         "Dataset": "SCARED datasets8/9",
         "Partición": "Recorridos reservados; pesos fijos",
-        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
+        "Checkpoint": "VGG-T³ oficial, VN18-SCARED final 3240 y V9-SCARED candidato 1000; únicamente las variantes nombradas en filas",
         "Frames y resolución": "N=50; mismo recorrido entre variantes",
         "Escala / alineamiento": "Escala GT de profundidad por ancla; registros secundarios se identifican aparte",
         "Unidades": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
@@ -724,13 +724,13 @@
       "id": "tabla-protocolo-49",
       "kind": "Registro experimental",
       "protocol": {
-        "Dataset": "SCARED7/8/9 y control C3VD trans_t4_b",
-        "Partición": "Asociaciones separadas por caso; no agregado entre dominios",
-        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
-        "Frames y resolución": "N=1/4/8/16/50; RGB 336×266; consultar condiciones de esta ficha",
-        "Escala / alineamiento": "Escala GT de profundidad por ancla; registros secundarios se identifican aparte",
-        "Unidades": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
-        "GT disponible": "SCARED: proxies RGB/consistencia; C3VD: poses GT de 16 vistas"
+        "Dataset": "SCARED dataset7, KF1–4",
+        "Partición": "Validación; proxies de correspondencia RGB",
+        "Checkpoint": "No se mide un checkpoint: matches/features y desplazamientos se calculan sobre RGB",
+        "Frames y resolución": "N=4 frente a50; mismo tramo vídeo0–60; RGB336×266",
+        "Escala / alineamiento": "No aplica a estos proxies RGB: no hay ajuste de escala o registro con GT",
+        "Unidades": "Matches/features en %; desplazamiento en píxeles; pares útiles como conteos",
+        "GT disponible": "No es una medición GT de solapamiento, rotación, traslación o paralaje"
       },
       "table_SHA256": "edecc4062b9d7518332efabbf67ce863f2439ae6ebfcf1e0f5dc5f73f8210550",
       "header": "| KF | Matches/features N4 (%) | Matches/features N50 (%) | Pares útiles N4 | Pares útiles N50 | Desplazamiento N4 (px) | Desplazamiento N50 (px) |"
@@ -739,13 +739,13 @@
       "id": "tabla-protocolo-50",
       "kind": "Registro experimental",
       "protocol": {
-        "Dataset": "SCARED7/8/9 y control C3VD trans_t4_b",
-        "Partición": "Asociaciones separadas por caso; no agregado entre dominios",
-        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
-        "Frames y resolución": "N=1/4/8/16/50; RGB 336×266; consultar condiciones de esta ficha",
+        "Dataset": "C3VD trans_t4_b",
+        "Partición": "Validación C3VD; asociación dentro de una trayectoria",
+        "Checkpoint": "VGG-T³ oficial, VN18-SCARED3240, V9-SCARED1000, V9-C3VD850 y VN19-A/B-C3VD3240",
+        "Frames y resolución": "50 RGB336×336;16 objetivos GT, como indica Vistas=16",
         "Escala / alineamiento": "Escala GT de profundidad por ancla; registros secundarios se identifican aparte",
-        "Unidades": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
-        "GT disponible": "SCARED: proxies RGB/consistencia; C3VD: poses GT de 16 vistas"
+        "Unidades": "Coeficientes Spearman rho adimensionales; Vistas es un conteo",
+        "GT disponible": "Poses y geometría GT C3VD de16 vistas; no son poses GT SCARED"
       },
       "table_SHA256": "7686702edfd24ae195307aef18d7aa0b49baa1081480440c04d71302f3ac985a",
       "header": "| Modelo | Vistas | ρ giro / XYZ | ρ distancia / XYZ |"
@@ -756,7 +756,7 @@
       "protocol": {
         "Dataset": "SCARED7 principal; anclas reservadas8/9 como secundarios identificados",
         "Partición": "Validación; secundarios identificados en el método",
-        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
+        "Checkpoint": "VGG-T³ oficial, VN18-SCARED final 3240 y V9-SCARED candidato 1000; únicamente las variantes nombradas en filas",
         "Frames y resolución": "N=1/4/8/16/50; RGB 336×266; consultar condiciones de esta ficha",
         "Escala / alineamiento": "Escala GT de profundidad por ancla; registros secundarios se identifican aparte",
         "Unidades": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
@@ -771,7 +771,7 @@
       "protocol": {
         "Dataset": "SCARED · dataset7",
         "Partición": "Validación; secundarios identificados en el método",
-        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
+        "Checkpoint": "VGG-T³ oficial, VN18-SCARED final 3240 y V9-SCARED candidato 1000; únicamente las variantes nombradas en filas",
         "Frames y resolución": "Principal: KF1–4 con N=50; secundarios identificados; RGB 336×266",
         "Escala / alineamiento": "Escala GT de profundidad por ancla; registros secundarios se identifican aparte",
         "Unidades": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
@@ -786,7 +786,7 @@
       "protocol": {
         "Dataset": "SCARED · dataset7",
         "Partición": "Validación; secundarios identificados en el método",
-        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
+        "Checkpoint": "VGG-T³ oficial, VN18-SCARED final 3240 y V9-SCARED candidato 1000; únicamente las variantes nombradas en filas",
         "Frames y resolución": "Principal: KF1–4 con N=50; secundarios identificados; RGB 336×266",
         "Escala / alineamiento": "Escala GT de profundidad por ancla; registros secundarios se identifican aparte",
         "Unidades": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
@@ -801,7 +801,7 @@
       "protocol": {
         "Dataset": "SCARED · dataset7",
         "Partición": "Validación; secundarios identificados en el método",
-        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
+        "Checkpoint": "VGG-T³ oficial, VN18-SCARED final 3240 y V9-SCARED candidato 1000; únicamente las variantes nombradas en filas",
         "Frames y resolución": "N=1/4/8/16/50; RGB 336×266; consultar condiciones de esta ficha",
         "Escala / alineamiento": "Escala GT de profundidad por ancla; registros secundarios se identifican aparte",
         "Unidades": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
@@ -816,7 +816,7 @@
       "protocol": {
         "Dataset": "SCARED · dataset7",
         "Partición": "Validación; secundarios identificados en el método",
-        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
+        "Checkpoint": "VGG-T³ oficial, VN18-SCARED final 3240 y V9-SCARED candidato 1000; únicamente las variantes nombradas en filas",
         "Frames y resolución": "Principal: KF1–4 con N=50; secundarios identificados; RGB 336×266",
         "Escala / alineamiento": "Escala GT de profundidad por ancla; registros secundarios se identifican aparte",
         "Unidades": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
@@ -831,7 +831,7 @@
       "protocol": {
         "Dataset": "SCARED y C3VD",
         "Partición": "Validación SCARED y lectura de transferencia C3VD; roles declarados en el registro",
-        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
+        "Checkpoint": "VGG-T³ oficial, VN18-SCARED3240, V9-SCARED1000 y V9-C3VD850 cuando aparecen en la fila",
         "Frames y resolución": "Según cada fila; no mezclar dominios ni poblaciones GT",
         "Escala / alineamiento": "Escala GT de profundidad por ancla; registros secundarios se identifican aparte",
         "Unidades": "XYZ en cm; AbsRel sin unidad; porcentajes y ángulos según columnas",
@@ -846,8 +846,8 @@
       "protocol": {
         "Dataset": "SCARED dataset7",
         "Partición": "Desarrollo/validación; no se usan test8/9 para seleccionar",
-        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
-        "Frames y resolución": "Previsto: piloto N=16 (E13/E14); N=4/16/50 (E15). SCARED 336×266, C3VD 336²",
+        "Checkpoint": "Previstos: VGG-T³ oficial, VN18-SCARED3240 y V9-SCARED1000; aún sin forwards GPU de este protocolo",
+        "Frames y resolución": "Previsto E13: SCARED7, dos anclas N=16, RGB336×266",
         "Escala / alineamiento": "Prevista: escala de la referencia limpia fija; reajuste solo diagnóstico secundario",
         "Unidades": "Medidas previstas, todavía sin resultados GPU",
         "GT disponible": "Ancla medida por contexto; sin GT temporal validada"
@@ -861,8 +861,8 @@
       "protocol": {
         "Dataset": "SCARED7; control C3VD trans_t4_b según protocolo",
         "Partición": "Desarrollo/validación; no se usan test8/9 para seleccionar",
-        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
-        "Frames y resolución": "Previsto: piloto N=16 (E13/E14); N=4/16/50 (E15). SCARED 336×266, C3VD 336²",
+        "Checkpoint": "Previstos: VGG-T³ oficial, VN18-SCARED3240 y V9-SCARED1000; aún sin forwards GPU de este protocolo",
+        "Frames y resolución": "Previsto E14: SCARED7/KF4 y C3VD trans_t4_b, N=16; RGB336×266 y336×336",
         "Escala / alineamiento": "Prevista: escala de la referencia limpia fija; reajuste solo diagnóstico secundario",
         "Unidades": "Medidas previstas, todavía sin resultados GPU",
         "GT disponible": "SCARED: ancla medida; C3VD: 16 referencias del control"
@@ -876,8 +876,8 @@
       "protocol": {
         "Dataset": "SCARED7; control C3VD trans_t4_b según protocolo",
         "Partición": "Desarrollo/validación; no se usan test8/9 para seleccionar",
-        "Checkpoint": "Zero-shot oficial; VN18-SCARED 3240; V9-SCARED 1000 (según cada tabla)",
-        "Frames y resolución": "Previsto: piloto N=16 (E13/E14); N=4/16/50 (E15). SCARED 336×266, C3VD 336²",
+        "Checkpoint": "Previstos: VGG-T³ oficial, VN18-SCARED3240 y V9-SCARED1000; aún sin forwards GPU de este protocolo",
+        "Frames y resolución": "Previsto E15: N=1/4/8/16/32/50; piloto4/16/50; SCARED7/KF2 y C3VD trans_t4_b",
         "Escala / alineamiento": "Prevista: escala de la referencia limpia fija; reajuste solo diagnóstico secundario",
         "Unidades": "Medidas previstas, todavía sin resultados GPU",
         "GT disponible": "SCARED: ancla medida; C3VD: 16 referencias del control"

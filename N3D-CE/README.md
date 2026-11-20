@@ -6,7 +6,7 @@
 
 Quarto notebook about C3VD and SCARED reconstruction with VGGT / VGG-T³. Includes 44 experiment records, quantitative comparisons and interactive viewers. Original-paper results retain their dataset and evaluation context; they are methodological references, not direct cross-dataset rankings.
 
-The web edition contains 12 complete primary point clouds (about 744 MiB compressed). Every saved vertex in those exports is retained. Historical exports outside this selection, raw datasets, model checkpoints, environments and private working archives are not part of this repository.
+The web edition contains 15 complete primary point clouds in 15 packages (about 878.9 MiB compressed). Every saved vertex in those exports is retained. Historical exports outside this selection, raw datasets, model checkpoints, environments and private working archives are not part of this repository.
 
 ## Update from the original notebook on this PC
 
@@ -37,3 +37,7 @@ python -m http.server 8000 --directory _site
 Open `http://localhost:8000/N3D-CE/`. The point-cloud viewer requires a browser with WebGL2 and gzip decompression support. Models load on request; use **Liberar 3D** to release the loaded geometry. The Pages URL also works when the author's PC is off.
 
 `publication_manifest.json` records the exported notebook checksum, the selected cloud hashes and exact point counts. The export does not retrain models or recompute scientific metrics.
+
+## Editorial review
+
+[Review report and modularization proposal](contenido/revision_editorial_20261120/Informe_revision_editorial.html). The original scientific tables and cloud hashes are retained; no source modularization was performed.
