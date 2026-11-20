@@ -3191,25 +3191,46 @@ Un OOM se conserva como no viable; no se reduce silenciosamente la entrada. Son 
 <!-- VGGT_PHASE2_END -->
 
 <!-- VGGT_P11_PREFLIGHT_BEGIN -->
-#### Siguiente etapa · P11, preflight VGGT-SCARED {#vggt-p11-preflight}
+#### P11 · verificación completada {#vggt-p11-preflight}
 
-**Datos y forward/backward verificados; entrenamiento aún sin lanzar.** La configuración conserva las ventanas, pérdidas y presupuesto preparados. Se armonizó la representación RGB y su layout con los baselines corregidos, y se reutilizan entradas certificadas para evitar descomprimir repetidamente los ZIP.
-
-| Control | Resultado |
-| --- | --- |
-| Entradas CPU | 35 ventanas comprobadas: TRAIN20, VAL5, reservadas10 |
-| Cabezal entrenable | Profundidad; encoder congelado; sin supervisión temporal de cámara |
-| Gradientes | Profundidad finita y no nula; encoder sin gradientes |
-| Optimizer steps del preflight | 0 |
-| Pico CUDA del preflight | 3.926 GiB |
-| Presupuesto preparado | 3.000 pasos,30 épocas,100 pasos/época; una ancla supervisada por paso |
-| Pendiente | Memoria real con estados AdamW, reanudación y autorización del alcance de entrenamiento |
-
-Pasar este control no demuestra que el fine-tuning mejore ni sustituye la evaluación de geometría. El test real de optimización/reanudación sigue pendiente. <a href="tablas/vggt_scared_preflight.json">Resumen reproducible del preflight</a>.
-
+El control inicial de datos/gradientes y el posterior de AdamW/reanudación pasaron. Véase [fases3–4](#vggt-fase34) para el estado actual y la receta autorizada.
 <!-- VGGT_P11_PREFLIGHT_END -->
 
-#### Entrenamiento SCARED preparado · todavía sin lanzar
+<!-- VGGT_PHASE34_BEGIN -->
+#### Fases 3 y 4 · VGGT-SCARED y comparación común {#vggt-fase34}
+
+**Estado: autorizadas; entrenamiento y continuación en ejecución.** Un único fine-tuning nuevo; se conservan los pesos y resultados históricos.
+
+**P11 superado:** forward/backward nativo y AdamW real; restauración exacta de pesos, estado del optimizador y RNG. El paso repetido en el diagnóstico determinista dio diferencia0. Pico: 4.296GiB. El primer intento no determinista mostró9,16×10⁻⁷ y se conserva en el registro; la receta de producción mantiene su runtime original.
+
+<details><summary>Receta y particiones visibles</summary>
+
+| Elemento | Configuración |
+| --- | --- |
+| Inicio | Pesos oficiales facebook/VGGT-1B; sin transferencia C3VD |
+| Entrenable | Solo depth head; encoder congelado; cámara oficial al inferir; sin point head afinada |
+| TRAIN | Datasets1,2,3,6:20 anclas;14 contextosN4 y6N1 |
+| VAL | Dataset7:5 anclas;4N4 y1N1 |
+| Reservados | Datasets8/9:10 anclas; no se usan para seleccionar pesos |
+| Exclusiones | Datasets4/5 por calibración; dataset6/keyframe1 conserva solo ancla medida |
+| Ventanas | Ancla medida + vídeo0/5/10 cuando hay vídeo apto; una ancla supervisada por paso |
+| Presupuesto | 30 épocas ×100 actualizaciones =3.000 pasos /3.000 supervisiones densas |
+| Pérdida | Nativa VGGT de profundidad con gradiente espacial; normalización nativa solo con el ancla medida |
+| Optimizador | AdamW;LR1e-5,WD0,05,betas(0,9;0,999),eps1e-8; sin clipping ni scheduler |
+| Selección | Menor AbsRel de las5 anclasVAL; se evalúan BEST y FINAL. No equivale a aceptación conjunta |
+| Comparación | RGB/GT/layout/runtime compartidos con fase2; N1/4/8/16/50; todos los píxeles GT válidos |
+| Alineamiento | Escala de profundidad GT compartida; gauge de cámara común; sin Sim(3)/ICP en geometría principal |
+| Disponibilidad GT | SCARED solo ancla medida; no hay ATE/RPE temporal certificado |
+
+</details>
+
+Las métricas nuevas se incorporarán automáticamente después de validar los checkpoints y terminar las inferencias; no se adelanta una mejora.
+
+<a href="tablas/vggt_fase34.json">Protocolo, auditoría y resultados agregados</a>. Los RGB, GT, checkpoints y predicciones individuales permanecen locales.
+
+<!-- VGGT_PHASE34_END -->
+
+#### Preparación original del entrenamiento SCARED · antecedente
 
 
 **Preparado, sin entrenar.** Esta es una adaptación explícita del último VGGT C3VD; no se presenta como réplica exacta ni como VN19 de VGG-T³. Se parte otra vez de pesos oficiales.
@@ -3375,10 +3396,17 @@ Para el entrenamiento SCARED preparado: RGB de todo el contexto → encoder ofic
 <!-- VGGT_PHASE2_CARDS_END -->
 
 <!-- VGGT_P11_CARD_BEGIN -->
-#### Fase 3 · preflight y preparación
 
-<details class="vggt-experiment-card" id="vggt-p11" data-vggt-phase3-card><summary><span class="card-status">Verificación parcial</span><span class="card-id">P11</span>Preflight VGGT-SCARED</summary><div class="card-content"><dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>¿La receta preparada recibe RGB y GT coherentes y produce gradientes válidos con el contrato de ejecución corregido?</dd></dl><dl class="card-fields"><dt>Intervención</dt><dd>Comprobar35 ventanas en CPU y ejecutar forward/backward en una ventana TRAIN con4 vistas, sin optimizer.step().</dd></dl><dl class="card-fields"><dt>Controles</dt><dd>Mismos splits, ventanas0/5/10, pérdida nativa y presupuesto; pesos oficiales, encoder congelado, runtime y strides explícitos.</dd></dl><dl class="card-fields"><dt>Métricas</dt><dd>Identidad de entrada/GT, normalización, finitud y presencia de gradientes, VRAM máxima y cantidad de actualizaciones.</dd></dl><dl class="card-fields"><dt>Resultados</dt><dd>CPU35/35 y backward GPU pasaron; cero actualizaciones de pesos persistentes.</dd></dl><dl class="card-fields"><dt>Conclusión</dt><dd>El camino de datos y gradientes es viable en el caso probado; no se ha entrenado ni demostrado una mejora de calidad.</dd></dl><dl class="card-fields"><dt>Limitaciones</dt><dd>Quedan pendientes la prueba real de AdamW/reanudación y el entrenamiento. SCARED no aporta GT temporal certificado.</dd></dl><dl class="card-fields"><dt>Siguiente decisión</dt><dd>Resolver el alcance de la continuación antes de ejecutar P12; conservar intactas las referencias anteriores.</dd></dl><details class="trace-details"><summary>Protocolo y trazabilidad</summary><p><a href="tablas/vggt_scared_preflight.json">Resumen</a> · <a href="#vggt-p11-preflight">Controles y resultados</a>.</p></details></div></details>
 <!-- VGGT_P11_CARD_END -->
+
+<!-- VGGT_PHASE34_CARDS_BEGIN -->
+#### Fase 3 · entrenamiento y evaluación
+
+<details class="vggt-experiment-card" id="vggt-phase34-p11"><summary><span class="card-status">Completado</span><span class="card-id">P11</span>Preflight GPU y reanudación</summary><div class="card-content"><dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>¿Los datos y estados de optimización permiten un entrenamiento reproducible?</dd></dl><dl class="card-fields"><dt>Intervención</dt><dd>Receta de profundidad sellada y evaluación pareada P11–P14; sin nuevas variantes de entrenamiento.</dd></dl><dl class="card-fields"><dt>Controles</dt><dd>Mismos RGB, máscarasGT, escala, layout, runtime y ventanas de evaluación de fase2. Pesos oficiales congelados como referencia.</dd></dl><dl class="card-fields"><dt>Métricas</dt><dd>AbsRel,δ1,XYZ/p95,CD/NC y cámara solo con GT válido. Auditoría de AdamW, gradientes y reanudación.</dd></dl><dl class="card-fields"><dt>Resultados</dt><dd>P11 completo; resultados de calidad nuevos pendientes.</dd></dl><dl class="card-fields"><dt>Conclusión</dt><dd>No se presume mejora antes de completar el protocolo.</dd></dl><dl class="card-fields"><dt>Limitaciones</dt><dd>SCARED solo tiene GT certificado en anclas; encoder y cámara no se afinan; los presupuestos históricos difieren.</dd></dl><dl class="card-fields"><dt>Siguiente decisión</dt><dd>Revisar los resultados y regresiones antes de proponer otra intervención.</dd></dl><p><a href="#vggt-fase34">Protocolo y tablas</a></p></div></details>
+<details class="vggt-experiment-card" id="vggt-phase34-p12"><summary><span class="card-status">En ejecución</span><span class="card-id">P12</span>Fine-tuning VGGT-SCARED</summary><div class="card-content"><dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>¿La adaptación de profundidad con GT medido mejora frente a pesos oficiales?</dd></dl><dl class="card-fields"><dt>Intervención</dt><dd>Receta de profundidad sellada y evaluación pareada P11–P14; sin nuevas variantes de entrenamiento.</dd></dl><dl class="card-fields"><dt>Controles</dt><dd>Mismos RGB, máscarasGT, escala, layout, runtime y ventanas de evaluación de fase2. Pesos oficiales congelados como referencia.</dd></dl><dl class="card-fields"><dt>Métricas</dt><dd>AbsRel,δ1,XYZ/p95,CD/NC y cámara solo con GT válido. Auditoría de AdamW, gradientes y reanudación.</dd></dl><dl class="card-fields"><dt>Resultados</dt><dd>P11 completo; resultados de calidad nuevos pendientes.</dd></dl><dl class="card-fields"><dt>Conclusión</dt><dd>No se presume mejora antes de completar el protocolo.</dd></dl><dl class="card-fields"><dt>Limitaciones</dt><dd>SCARED solo tiene GT certificado en anclas; encoder y cámara no se afinan; los presupuestos históricos difieren.</dd></dl><dl class="card-fields"><dt>Siguiente decisión</dt><dd>Revisar los resultados y regresiones antes de proponer otra intervención.</dd></dl><p><a href="#vggt-fase34">Protocolo y tablas</a></p></div></details>
+<details class="vggt-experiment-card" id="vggt-phase34-p13"><summary><span class="card-status">En cola</span><span class="card-id">P13</span>Evaluación SCARED pareada</summary><div class="card-content"><dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>¿BEST y FINAL mejoran en anclas y contextos comunes sin ocultar regresiones?</dd></dl><dl class="card-fields"><dt>Intervención</dt><dd>Receta de profundidad sellada y evaluación pareada P11–P14; sin nuevas variantes de entrenamiento.</dd></dl><dl class="card-fields"><dt>Controles</dt><dd>Mismos RGB, máscarasGT, escala, layout, runtime y ventanas de evaluación de fase2. Pesos oficiales congelados como referencia.</dd></dl><dl class="card-fields"><dt>Métricas</dt><dd>AbsRel,δ1,XYZ/p95,CD/NC y cámara solo con GT válido. Auditoría de AdamW, gradientes y reanudación.</dd></dl><dl class="card-fields"><dt>Resultados</dt><dd>P11 completo; resultados de calidad nuevos pendientes.</dd></dl><dl class="card-fields"><dt>Conclusión</dt><dd>No se presume mejora antes de completar el protocolo.</dd></dl><dl class="card-fields"><dt>Limitaciones</dt><dd>SCARED solo tiene GT certificado en anclas; encoder y cámara no se afinan; los presupuestos históricos difieren.</dd></dl><dl class="card-fields"><dt>Siguiente decisión</dt><dd>Revisar los resultados y regresiones antes de proponer otra intervención.</dd></dl><p><a href="#vggt-fase34">Protocolo y tablas</a></p></div></details>
+<details class="vggt-experiment-card" id="vggt-phase34-p14"><summary><span class="card-status">En cola</span><span class="card-id">P14</span>Transferencia SCARED a C3VD</summary><div class="card-content"><dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>¿La mejora se conserva fuera del dataset de entrenamiento?</dd></dl><dl class="card-fields"><dt>Intervención</dt><dd>Receta de profundidad sellada y evaluación pareada P11–P14; sin nuevas variantes de entrenamiento.</dd></dl><dl class="card-fields"><dt>Controles</dt><dd>Mismos RGB, máscarasGT, escala, layout, runtime y ventanas de evaluación de fase2. Pesos oficiales congelados como referencia.</dd></dl><dl class="card-fields"><dt>Métricas</dt><dd>AbsRel,δ1,XYZ/p95,CD/NC y cámara solo con GT válido. Auditoría de AdamW, gradientes y reanudación.</dd></dl><dl class="card-fields"><dt>Resultados</dt><dd>P11 completo; resultados de calidad nuevos pendientes.</dd></dl><dl class="card-fields"><dt>Conclusión</dt><dd>No se presume mejora antes de completar el protocolo.</dd></dl><dl class="card-fields"><dt>Limitaciones</dt><dd>SCARED solo tiene GT certificado en anclas; encoder y cámara no se afinan; los presupuestos históricos difieren.</dd></dl><dl class="card-fields"><dt>Siguiente decisión</dt><dd>Revisar los resultados y regresiones antes de proponer otra intervención.</dd></dl><p><a href="#vggt-fase34">Protocolo y tablas</a></p></div></details>
+<!-- VGGT_PHASE34_CARDS_END -->
 
 #### Serie C01–C10 · estado y pruebas pendientes
 
@@ -3558,6 +3586,35 @@ La normalización RGB histórica VGGT usa float/255 y la caché TTT usa float32(
 ### SCARED · adaptación y transferencia {#vggt-vs-vgg-t3-scared}
 
 <div class="model-placeholder"><span class="placeholder-label">Pendiente de incorporar</span><p>Compatibilidad, entrenamiento, evaluación reservada y transferencia entre datasets.</p></div>
+
+<!-- VGGT_COMPARISON_PHASE34_BEGIN -->
+#### P15/P16 · comparación bajo protocolo común {#comparacion-fase34}
+
+**Estado: autorizadas; entrenamiento y continuación en ejecución.** Se reutilizan438 resultadosVGGT de fase2. La evaluación adicional conserva N1/4/8/16/50 y las mismas entradas.
+
+La comparación principal utiliza D+K calibrada+pose. P directo aparece separado: VGGT-C3VD y VGGT-SCARED no tienen point head afinada. V9-C3VD sigue como referencia TTT; VN18-SCARED y V9-SCARED se incluyen como candidatos finales históricos que no superaron sus criterios conjuntos.
+
+Las tablas aparecerán cuando termine la cola, sin mezclar los registros históricos de otro runtime con las evaluaciones nuevas.
+
+La eficiencia oficial ya se midió en fase2: se reutiliza, sin repetir sus20 casos. El throughput por lote no representa FPS de un sistema clínico. Las latencias operativas de los pesos afinados no se presentan como benchmarks repetidos.
+
+**Relación con los papers:** ATE/RPE,CD/NC y profundidad comparten nombres y definiciones útiles; nuestros valores C3VD/SCARED no son una réplica de ScanNet,DTU o TUM ni permiten una clasificación directa contra sus cifras.
+
+<details><summary>Reproducibilidad y resultados negativos</summary>
+
+- VGGT-SCARED adapts depth only; camera remains official, no trained point head.
+- Historical TTT recipes do not have matched supervision budgets or identical historical C3VD splits.
+- SCARED temporal pose GT not certified; anchor accuracy and multiview consistency are different.
+- Reserved cases were explored historically; no untouched clinical or patient-level test claim.
+- V9/VN18 SCARED final candidates failed historical joint guards; not promoted as selected baselines.
+- Efficiency reuses already verified phase2 official timing; new operational forward timings are not repeated benchmarks.
+- Common runtime and logical RGB do not imply identical decoder kernels across architectures.
+
+<a href="tablas/vggt_fase34.json">Resultados agregados, protocolo y firmas</a>. Las fichasP11–P14 y las pruebasP05–P10 conservan el método y sus límites.
+
+</details>
+
+<!-- VGGT_COMPARISON_PHASE34_END -->
 
 ### Pipeline y puntos de control {#vggt-vs-vgg-t3-pipeline}
 

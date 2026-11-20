@@ -1,0 +1,137 @@
+{
+  "complete": false,
+  "protocol_SHA256": "9059c1bed9d85502119b476ed91679a22fb305a8ea58440eda32570e1c4fd702",
+  "authorization": [
+    3,
+    4
+  ],
+  "phase2_protocol_SHA256": "4ccdfab55cc49766670b7ca77639606a1123f1de5f70995ffccde4e55e192bd5",
+  "GPU_runtime": {
+    "torch": "2.12.0.dev20260408+cu128",
+    "CUDA": "12.8",
+    "cudnn": 92000,
+    "matmul_flags": {
+      "allow_tf32": false,
+      "allow_fp16_reduced_precision_reduction": true,
+      "allow_bf16_reduced_precision_reduction": true
+    },
+    "cudnn_allow_tf32": true,
+    "matmul_precision": "highest",
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": false,
+    "deterministic_algorithms": false,
+    "sdp_backends": {
+      "flash": true,
+      "math": true,
+      "efficient": true,
+      "cudnn": true
+    },
+    "packages": {
+      "torch": "2.12.0.dev20260408+cu128",
+      "numpy": "1.26.4",
+      "safetensors": "0.8.0",
+      "huggingface-hub": "1.28.0"
+    }
+  },
+  "reference_models": {
+    "VGGT_SCARED_BEST": {
+      "checkpoint": "best_depth.pt",
+      "checkpoint_SHA256": null,
+      "selection": "lowest five-anchor VAL7 aligned AbsRel; not a joint geometry acceptance",
+      "kind": "vggt_depth",
+      "joint_unit_conversion": 1.0
+    },
+    "VGGT_SCARED_FINAL": {
+      "checkpoint": "final_depth.pt",
+      "checkpoint_SHA256": null,
+      "selection": "fixed final step3000, no test selection",
+      "kind": "vggt_depth",
+      "joint_unit_conversion": 1.0
+    },
+    "TTT_ZS": {
+      "checkpoint": "model.safetensors",
+      "checkpoint_SHA256": "64f298ff1cde4ebeaadd749edf3ef5f4972b9b1b735785f83cc228637df8eaaf",
+      "selection": "official weights",
+      "kind": "ttt_official",
+      "joint_unit_conversion": 1.0
+    },
+    "TTT_C3VD_V9": {
+      "checkpoint": "best_model.ckpt",
+      "checkpoint_SHA256": "208ddffb2b917dc8e6ed52b803a3d6493dd56655ffb735839a68b96b4a906fdb",
+      "selection": "historical V9 selected reference",
+      "kind": "ttt_full",
+      "joint_unit_conversion": 1.0
+    },
+    "TTT_SCARED_VN18": {
+      "checkpoint": "last.pt",
+      "checkpoint_SHA256": "55be5e27bc4755f01c7209e7097bf8b01ac8985616f679006f6e40b6bc838ec0",
+      "selection": "historical final3240 candidate, NOT accepted by original joint guards",
+      "kind": "ttt_heads",
+      "joint_unit_conversion": 1.0
+    },
+    "TTT_SCARED_V9": {
+      "checkpoint": "best_candidate.pt",
+      "checkpoint_SHA256": "e55591dbf236b41a538c0055972ff904dfef0b5601a9713e340830d4baae4b27",
+      "selection": "historical step1000 candidate, NOT accepted by original joint guards; joint scaling of D,P,translations",
+      "kind": "ttt_heads",
+      "joint_unit_conversion": 0.03
+    }
+  },
+  "training_recipe": {
+    "epochs": 30,
+    "steps_per_epoch": 100,
+    "updates": 3000,
+    "trainable": [
+      "depth_head"
+    ],
+    "optimizer": {
+      "name": "AdamW",
+      "lr": 1e-05,
+      "weight_decay": 0.05,
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "schedule": null,
+      "gradient_clipping": null
+    },
+    "depth_loss": {
+      "weight": 1.0,
+      "gradient_loss_fn": "grad",
+      "valid_range": 0.98
+    },
+    "seed": 1234,
+    "train_datasets": [
+      1,
+      2,
+      3,
+      6
+    ],
+    "validation_datasets": [
+      7
+    ],
+    "reserved_datasets": [
+      8,
+      9
+    ]
+  },
+  "optimizer_resume_preflight": {
+    "passed": true,
+    "serialization_roundtrip_bitwise_exact": true,
+    "resume_weight_max_abs_difference": 0.0,
+    "peak_allocated_GiB": 4.296112060546875,
+    "deterministic_diagnostic_only": true
+  },
+  "GT_arrays_published": false,
+  "reference_replaced": false,
+  "limitations": [
+    "VGGT-SCARED adapts depth only; camera remains official, no trained point head.",
+    "Historical TTT recipes do not have matched supervision budgets or identical historical C3VD splits.",
+    "SCARED temporal pose GT not certified; anchor accuracy and multiview consistency are different.",
+    "Reserved cases were explored historically; no untouched clinical or patient-level test claim.",
+    "V9/VN18 SCARED final candidates failed historical joint guards; not promoted as selected baselines.",
+    "Efficiency reuses already verified phase2 official timing; new operational forward timings are not repeated benchmarks.",
+    "Common runtime and logical RGB do not imply identical decoder kernels across architectures."
+  ]
+}
