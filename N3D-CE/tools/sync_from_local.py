@@ -123,6 +123,7 @@ def main():
                 if any(r['experimento'] not in {'E10-B','E11-B','E07-B','E05-B'} for r in csv.DictReader(f)):raise RuntimeError('Only four summary tables are approved')
         if (src/'tablas'/name).exists():copy(src/'tablas'/name,dst/'tablas'/name)
     copy(src/'contenido/Research_document.pdf',dst/'contenido/Research_document.pdf')
+    copy(src/'contenido/vggt_reproduction_r1/summary.json',dst/'contenido/vggt_reproduction_r1/summary.json')
     # Two read-only audit summaries, without patient data, models or training arrays.
     for name in ['encoder_audit.json','fichas_evidencia.json']:
         copy(src/'contenido/auditoria_vggt_20261120'/name,dst/'contenido/auditoria_vggt_20261120'/name)

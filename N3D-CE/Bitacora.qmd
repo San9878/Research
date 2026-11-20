@@ -2890,6 +2890,88 @@ Las tablas originales del paper usan otros datasets y hardware. Se recuperan sus
 
 </details>
 
+<!-- VGGT_REPRODUCTION_R1_BEGIN -->
+#### Réplica controlada VGGT-C3VD · campaña R01–R12 {#vggt-reproduction-r1}
+
+**Estado de R07: En curso. No se declara terminada ni se sustituye la referencia histórica.** Registro actualizado el 20/11/2026 13:08 (Ciudad de México). Esta campaña es posterior a P01–P16; tiene sus propios controles y cierres.
+
+**Qué se conserva:** pesos oficiales identificados, cámara y profundidad entrenables, agregador congelado, 30×100 actualizaciones, cuatro vistas supervisadas de 518×518, FP32, pérdida nativa de cámara×5/profundidad×1 y AdamW LR1e−5/WD0,05, sin scheduler ni clipping.
+
+**Diferencias explícitas:** geometry_v2 con unidades/GT/calibración validados, semilla1234, calendario completo guardado, control determinista y reanudación. El procesamiento de imagen conserva el crop/resize histórico. Se fija layout NCHW contiguo y se añaden ventanas de monitorización; el checkpoint primario sigue siendo el final, sin early stopping. No es una reproducción exacta del preprocesado ni del RNG histórico desconocido.
+
+<details><summary>R01 · efecto de restaurar únicamente los 39 valores</summary>
+
+Cuatro secuencias × N=1/4/16/50. A1/A2 usan los mismos pesos históricos; B restaura solo39 posiciones en memoria y después vuelve a A. Los archivos históricos conservan su SHA256. No hay nueva cabeza de puntos: XYZ se obtiene de D+K calibrada+pose.
+
+**Protocolo de esta tabla:** N=50, 336×336; mismos RGB y todos los píxeles GT válidos; profundidad con una escala por predicción compartida con XYZ, sin Sim(3)/ICP. La última columna mide cambio entre predicciones usando la escala de A, no error contra GT.
+
+| Secuencia | Split | AbsRel original | AbsRel restaurado | XYZ original cm | XYZ restaurado cm | Cambio XYZ medio mm |
+| --- | --- | --- | --- | --- | --- | --- |
+| cecum_t2_a | reserved | 0.06819 | 0.06828 | 1.42809 | 1.43497 | 0.09228 |
+| trans_t1_a | reserved | 0.16377 | 0.16378 | 0.67861 | 0.67676 | 0.06003 |
+| trans_t1_b | validation | 0.17120 | 0.17133 | 0.91735 | 0.92009 | 0.05489 |
+| trans_t4_b | validation | 0.14188 | 0.14202 | 0.78347 | 0.78785 | 0.08166 |
+
+**Resultado:** los cambios son medibles y su dirección no es uniforme. Restaurar los39 valores no corrige de forma general la geometría. Las repeticiones A1/A2 de estos16 casos dieron diferencia0; eso separa el efecto observado de ese control numérico, no de toda posible variabilidad histórica.
+
+ATE/RPE se evaluaron por separado con Sim(3) de centros. Los IDs originales de frames y los intervalos seleccionados se conservan; no se presentan los saltos como frames originales consecutivos.
+
+</details>
+
+<details><summary>R02–R06 · receta, geometría, congelamiento y reanudación</summary>
+
+| Control | Resultado |
+| --- | --- |
+| R02 · histórico | Receta auditada; semilla y hash originales del preprocesado siguen irrecuperables. Cuatro vistas aleatorias de la secuencia completa, sin continuidad/orden garantizados. |
+| R03 · evaluador | Reutilizada la equivalencia certificada; repetidos6 controles nativos y8 pruebas de geometría. Unidades, máscaras, K, escala y agregaciones separados de los diagnósticos Sim(3)/ICP. |
+| R04 · datos/calendario | 8 ZIP firmados; 6 TRAIN y2 VAL, dos reservadas fuera de entrenamiento. Calendario completo de3.000 actualizaciones y12.000 supervisiones densas;12 controles CPU de geometría aprobados. |
+| R05 · parámetros | 131 tensores /248.829.172 parámetros entrenables en cámara/profundidad; gradientes finitos en ambas. Los1.210 tensores congelados coinciden bit a bit con los oficiales antes/después. |
+| R06 · reanudación | Dos pasos continuos frente al segundo paso reanudado: pesos, AdamW, RNG y resultado iguales bit a bit. No hay scheduler que reconstruir. |
+| Recursos | Pico asignado CUDA del preflight: 9.896 GiB, superior a la VRAM física. Este dato exige considerar memoria compartida/paginación y coste; no implica más capacidad geométrica. |
+| Preservación | Ningún checkpoint histórico fue sobrescrito. El estado nuevo guarda cabezas, AdamW, RNG y referencia/hash del encoder oficial, evitando duplicarlo. |
+
+</details>
+
+<details><summary>R10 · reproducibilidad del VGGT-SCARED existente</summary>
+
+| Elemento | Auditoría |
+| --- | --- |
+| Producción | 3.000 pasos;62 tensores de profundidad; encoder congelado y cámara oficial no afinada. |
+| Procedencia | Configuración, fuentes y35 entradas certificadas verificadas por hash. |
+| Selección | BEST500 corresponde al mínimo AbsRel de las5 anclas VAL; FINAL3000 se conserva. Reservados no participaron en la selección. |
+| Calendario | Reconstruido desde semilla, algoritmo y catálogo ordenado: coincide con conteos y estado terminal del generador. No se presenta como un calendario originalmente guardado. |
+| Límites | Producción con runtime no totalmente determinista. No se conservó hash bit a bit del encoder al terminar; el código excluye gradientes y los checkpoints exportan solo profundidad con referencia oficial. La selección BEST mide profundidad, no geometría global conjunta. |
+
+</details>
+
+<details><summary>Estado de la campaña y evidencia verificable</summary>
+
+| Tarea | Estado |
+| --- | --- |
+| R01 | complete_quantified_diagnostic_only |
+| R02 | complete_audited_with_irrecoverable_limits |
+| R03 | complete_common_protocol_with_historical_limits |
+| R04 | complete_immutable_recipe_calendar_geometry |
+| R05 | passed_native_step |
+| R06 | passed_exact_resume |
+| R07 | running |
+| R08 | pending |
+| R09 | pending |
+| R10 | complete_audited_with_documented_limits |
+| R11 | pending |
+| R12 | pending |
+| R13 | conditional_not_authorized_by_evidence |
+| R14 | conditional_not_authorized_by_evidence |
+| R15 | conditional_no_third_dataset_selected |
+
+R13–R15 permanecen condicionales. No se añaden semillas, ablaciones ni un tercer dataset sin una pregunta científica concreta.
+
+<p><a href="contenido/vggt_reproduction_r1/summary.json">Resumen de resultados, controles y hashes</a></p>
+
+</details>
+
+<!-- VGGT_REPRODUCTION_R1_END -->
+
 ### SCARED · adaptación y transferencia {#vggt-scared}
 #### Fase 1 · verificación y baselines {#vggt-fase1}
 

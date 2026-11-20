@@ -1,0 +1,256 @@
+{
+  "campaign": "VGGT-C3VD controlled reproduction R1",
+  "updated_local": "20/11/2026 13:08",
+  "status": {
+    "R01": "complete_quantified_diagnostic_only",
+    "R02": "complete_audited_with_irrecoverable_limits",
+    "R03": "complete_common_protocol_with_historical_limits",
+    "R04": "complete_immutable_recipe_calendar_geometry",
+    "R05": "passed_native_step",
+    "R06": "passed_exact_resume",
+    "R07": "running",
+    "R08": "pending",
+    "R09": "pending",
+    "R10": "complete_audited_with_documented_limits",
+    "R11": "pending",
+    "R12": "pending",
+    "R13": "conditional_not_authorized_by_evidence",
+    "R14": "conditional_not_authorized_by_evidence",
+    "R15": "conditional_no_third_dataset_selected"
+  },
+  "R01_N50_columns": [
+    "sequence",
+    "split",
+    "original_AbsRel",
+    "restored_AbsRel",
+    "original_XYZ_cm",
+    "restored_XYZ_cm",
+    "prediction_change_mm"
+  ],
+  "R01_N50": [
+    [
+      "cecum_t2_a",
+      "reserved",
+      0.06819451734538327,
+      0.0682772082188251,
+      1.4280852875563292,
+      1.4349685686845068,
+      0.09228438688549087
+    ],
+    [
+      "trans_t1_a",
+      "reserved",
+      0.16376663240412817,
+      0.16377542695642935,
+      0.6786090669050535,
+      0.676757791544853,
+      0.06002735480624071
+    ],
+    [
+      "trans_t1_b",
+      "validation",
+      0.17120306627164672,
+      0.17133143151055977,
+      0.9173457388592763,
+      0.920094295217448,
+      0.05489249061217032
+    ],
+    [
+      "trans_t4_b",
+      "validation",
+      0.1418753968319912,
+      0.14202395137921328,
+      0.7834692727702326,
+      0.7878513189515314,
+      0.08165917807439033
+    ]
+  ],
+  "R05": {
+    "passed": true,
+    "trainable_parameters": 248829172,
+    "trainable_tensors": 131,
+    "frozen_before": {
+      "passed": true,
+      "tensors": 1210,
+      "SHA256_ordered_values": "ad2c6d8d5fe03091ffcd2a8197a3aaf7b6e1ae083476d538b632f30765b41e0e",
+      "equal_official_bitwise": true
+    },
+    "frozen_after": {
+      "passed": true,
+      "tensors": 1210,
+      "SHA256_ordered_values": "ad2c6d8d5fe03091ffcd2a8197a3aaf7b6e1ae083476d538b632f30765b41e0e",
+      "equal_official_bitwise": true
+    },
+    "step": {
+      "objective": 1.444089412689209,
+      "batch_SHA256": "a5af1dbee33efb4a2a8c4b4d273461fdafc16547f24d9218f6771d5dcb56934c",
+      "losses": {
+        "loss_camera": 0.18642982840538025,
+        "loss_T": 0.031573496758937836,
+        "loss_R": 0.0036992745008319616,
+        "loss_FL": 0.3023141026496887,
+        "loss_conf_depth": 0.24339638650417328,
+        "loss_reg_depth": 0.24414348602294922,
+        "loss_grad_depth": 0.02440037578344345,
+        "objective": 1.444089412689209
+      },
+      "gradient_norms": {
+        "camera_head": 1.6451651048607194,
+        "depth_head": 25.184164578583964
+      },
+      "nonzero_gradients": {
+        "camera_head": 216174601,
+        "depth_head": 27153163
+      }
+    },
+    "optimizer": "native torch AdamW on CUDA",
+    "scheduler": null,
+    "clipping": null,
+    "peak_allocated_GiB": 9.896423816680908,
+    "historical_files_modified": false,
+    "training_config_SHA256": "9d467221c4a0a890ee11f054739c9c4139d9422795647b9bb2329104ad7ed7f4",
+    "runtime": {
+      "torch": "2.12.0.dev20260408+cu128",
+      "CUDA": "12.8",
+      "cudnn": 92000,
+      "matmul_flags": {
+        "allow_tf32": false,
+        "allow_fp16_reduced_precision_reduction": true,
+        "allow_bf16_reduced_precision_reduction": true
+      },
+      "cudnn_allow_tf32": true,
+      "matmul_precision": "highest",
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": true,
+      "deterministic_algorithms": true,
+      "sdp_backends": {
+        "flash": true,
+        "math": true,
+        "efficient": true,
+        "cudnn": true
+      },
+      "packages": {
+        "torch": "2.12.0.dev20260408+cu128",
+        "numpy": "1.26.4",
+        "safetensors": "0.8.0",
+        "huggingface-hub": "1.28.0"
+      }
+    }
+  },
+  "R06": {
+    "passed": true,
+    "continuous": {
+      "heads": "c5315458e85f8f31afec1a22908ece001cd26474258383c89802366ee01b2808",
+      "optimizer": "eb96422f18bb7402eb21fd9584558bd7734530b475c515ea542f2316ac2b0e3a",
+      "RNG": "fb2e243b4cd2a00826d15234f83e812dac5c79b8da50feee139a1569c234d716",
+      "second_step": {
+        "objective": 1.5418548583984375,
+        "batch_SHA256": "f2e22e430f5d392dab36f0dd6eb2617fcd37c85408af434d784f067986306ae8",
+        "losses": {
+          "loss_camera": 0.22943687438964844,
+          "loss_T": 0.023908069357275963,
+          "loss_R": 0.004445426631718874,
+          "loss_FL": 0.4021667540073395,
+          "loss_conf_depth": 0.19193831086158752,
+          "loss_reg_depth": 0.1940939575433731,
+          "loss_grad_depth": 0.008638132363557816,
+          "objective": 1.5418548583984375
+        },
+        "gradient_norms": {
+          "camera_head": 1.7552026690082534,
+          "depth_head": 18.269404999074354
+        },
+        "nonzero_gradients": {
+          "camera_head": 216174597,
+          "depth_head": 26398664
+        }
+      }
+    },
+    "resumed": {
+      "heads": "c5315458e85f8f31afec1a22908ece001cd26474258383c89802366ee01b2808",
+      "optimizer": "eb96422f18bb7402eb21fd9584558bd7734530b475c515ea542f2316ac2b0e3a",
+      "RNG": "fb2e243b4cd2a00826d15234f83e812dac5c79b8da50feee139a1569c234d716",
+      "second_step": {
+        "objective": 1.5418548583984375,
+        "batch_SHA256": "f2e22e430f5d392dab36f0dd6eb2617fcd37c85408af434d784f067986306ae8",
+        "losses": {
+          "loss_camera": 0.22943687438964844,
+          "loss_T": 0.023908069357275963,
+          "loss_R": 0.004445426631718874,
+          "loss_FL": 0.4021667540073395,
+          "loss_conf_depth": 0.19193831086158752,
+          "loss_reg_depth": 0.1940939575433731,
+          "loss_grad_depth": 0.008638132363557816,
+          "objective": 1.5418548583984375
+        },
+        "gradient_norms": {
+          "camera_head": 1.7552026690082534,
+          "depth_head": 18.269404999074354
+        },
+        "nonzero_gradients": {
+          "camera_head": 216174597,
+          "depth_head": 26398664
+        }
+      }
+    },
+    "frozen_final": {
+      "passed": true,
+      "tensors": 1210,
+      "SHA256_ordered_values": "ad2c6d8d5fe03091ffcd2a8197a3aaf7b6e1ae083476d538b632f30765b41e0e",
+      "equal_official_bitwise": true
+    },
+    "scheduler_state": null,
+    "exact_bitwise_match": true,
+    "sample_cursor_restored": true,
+    "training_config_SHA256": "9d467221c4a0a890ee11f054739c9c4139d9422795647b9bb2329104ad7ed7f4",
+    "transient_checkpoint_SHA256": "d292ca57b35537504180367d6c0d826ae499de80aa7f47b1adbbc88214755705",
+    "transient_checkpoint_removed_after_exact_validation": true
+  },
+  "training_config_SHA256": "9d467221c4a0a890ee11f054739c9c4139d9422795647b9bb2329104ad7ed7f4",
+  "calendar_SHA256": "b9350e43169439fc453f113d1b2feee50457cd2f718a5f37a6b3086053c1f6b9",
+  "data_manifest_SHA256": "323d1180a0758f4b787fd922729bd2ca0dfdf0e91c86383c32f116f943d04a95",
+  "R10_summary": {
+    "status": "audited_with_documented_limits",
+    "config_SHA256": "b65503e0c309a3b216d698b56f153508f6f1bde71036a9a4be9add84c72ed961",
+    "trainer_SHA256": "117de26394a99b52b57ac3ea6a8fd4352276180d0c26f1a719fae8f18445c356",
+    "completed_updates": 3000,
+    "trainable": [
+      "depth_head"
+    ],
+    "frozen_source": "official encoder referenced by hash; camera restored official only for inference",
+    "checkpoint_contents": "depth head only in BEST/FINAL; last additionally retains AdamW and RNG",
+    "optimizer": {
+      "optimizer_states": 62,
+      "optimizer_steps": [
+        3000.0
+      ]
+    },
+    "train_windows": 20,
+    "val_windows": 5,
+    "inputs_checked": 35,
+    "sample_schedule_reconstructed": true,
+    "counts_and_terminal_numpy_RNG_match": true,
+    "validation_checkpoints": 30,
+    "best_step": 500,
+    "final_step": 3000,
+    "best_criterion": "lowest macro aligned AbsRel over exactly five validation anchors",
+    "reserved_used_for_selection": false,
+    "saved_RNG_fields": [
+      "numpy_rng",
+      "torch_rng",
+      "cuda_rng"
+    ],
+    "resume_control_previously_verified": true,
+    "historical_files_modified": false,
+    "new_training": false,
+    "limitations": [
+      "The 3000-step production runtime was not fully deterministic; exact determinism was verified in a separate controlled preflight.",
+      "No end-of-run bitwise encoder hash was retained; source forbids encoder gradients and deployable checkpoints reference the official encoder rather than serializing it.",
+      "Python/global NumPy RNG were not checkpointed, but the retained sampler uses a dedicated saved Generator and augmentation is disabled; no unsupported stochastic preprocessing should be inferred.",
+      "BEST selected depth only, not joint global geometry; SCARED temporal GT remains uncertified."
+    ]
+  },
+  "R11_comparison": [],
+  "production_complete": false,
+  "historical_checkpoints_unchanged": true
+}
