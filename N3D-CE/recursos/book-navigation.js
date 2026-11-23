@@ -41,5 +41,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   document.addEventListener('click',e=>{const link=e.target.closest('a[href^="#"]');if(link)reveal(link.hash);});
   window.addEventListener('hashchange',()=>reveal(location.hash));filter();if(location.hash)reveal(location.hash);
+  // Keep an initial deep link in place while fonts and images settle.
+  const initialHash=location.hash;
+  if(initialHash){
+    let interacted=false;
+    for(const name of ['wheel','touchstart','pointerdown','keydown'])
+      window.addEventListener(name,()=>{interacted=true;},{once:true,passive:true});
+    const settle=()=>{if(!interacted&&location.hash===initialHash)reveal(initialHash);};
+    window.addEventListener('load',settle,{once:true});
+    document.fonts?.ready.then(settle);
+    for(const delay of [500,1500,3500])setTimeout(settle,delay);
+  }
   window.BookResearch={filter,reveal,count:()=>cards.length};
 });

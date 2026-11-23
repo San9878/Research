@@ -28,25 +28,29 @@ execute:
 <section class="research-cover" aria-label="Portada de investigación">
 <div class="cover-top"><img class="cover-up" src="imagenes/portada_up.png" alt="Universidad Panamericana"><div class="cover-institutions">Universidad Panamericana<br>&amp; King Abdullah<br>University of Science and Technology</div></div>
 <div class="cover-main"><p class="cover-kicker">Research · Bitácora experimental</p><h1 class="cover-title">Neural 3D Scene Reconstruction<br>for Clinical Environments</h1><div class="cover-people"><strong>Santiago Hernández Chávez</strong><br>Advisors: Ivan Viola · Ricardo Abel Espinosa Loera</div></div>
-<div class="cover-bottom"><img class="cover-kaust" src="imagenes/portada_kaust.png" alt="KAUST"><div class="cover-place">Aguascalientes, Aguascalientes · 2026<br><span class="cover-note">C3VD y SCARED · actualizado el 19/11/2026</span></div></div>
+<div class="cover-bottom"><img class="cover-kaust" src="imagenes/portada_kaust.png" alt="KAUST"><div class="cover-place">Aguascalientes, Aguascalientes · 2026<br><span class="cover-note">C3VD y SCARED · actualizado el 23/11/2026</span></div></div>
 </section>
 
 <section class="executive-summary" id="resumen-ejecutivo" aria-labelledby="resumen-titulo">
-<p class="summary-kicker">Estado científico · lectura rápida</p>
-<h2 id="resumen-titulo">Qué sabemos y qué sigue</h2>
-<p><strong>Objetivo.</strong> Caracterizar y adaptar VGGT y VGG-T³ para reconstrucción endoscópica en C3VD y SCARED. El foco experimental es <strong>iluminación/reflejos y oclusiones dinámicas</strong>; eficiencia y secuencias largas son requisitos transversales. La no rigidez queda fuera del alcance experimental actual.</p>
-<p><strong>Estado.</strong> VGGT completó las fases P01–P16. VGG-T³ conserva V9-C3VD como referencia, con candidatos y diagnósticos SCARED documentados. Esto describe ejecución y evidencia disponible; no equivale a superar todas las guardas ni a validación clínica.</p>
+<p class="summary-kicker">Estado científico · actualizado el 23/11/2026</p>
+<h2 id="resumen-titulo">Qué tenemos y cómo leerlo</h2>
+<p><strong>Objetivo.</strong> Caracterizar y adaptar VGGT y VGG-T³ para reconstrucción endoscópica. Cada resultado identifica modelo, dataset de entrenamiento, versión y protocolo de evaluación.</p>
+<table class="coverage-table"><thead><tr><th>Modelo</th><th>Entrenamiento</th><th>Referencia o candidato</th><th>Consultar</th></tr></thead><tbody>
+<tr><td>VGGT</td><td>C3VD · réplica R1</td><td>FINAL3000: referencia de R1; BEST800: diagnóstico</td><td><a href="#vggt-r1-cierre">Cierre R1</a></td></tr>
+<tr><td>VGGT</td><td>SCARED · depth-v2</td><td>BEST500: selección por profundidad VAL; FINAL3000: diagnóstico. Solo profundidad afinada.</td><td><a href="#vggt-scared-audit">Auditoría SCARED</a></td></tr>
+<tr><td>VGG-T³</td><td>C3VD</td><td>V9: referencia conservada; VN19-A/B: candidatos</td><td><a href="#estado">Resultados C3VD</a></td></tr>
+<tr><td>VGG-T³</td><td>SCARED</td><td>VN18/V9-SCARED: candidatos documentados; no son los checkpoints VGGT depth-v2</td><td><a href="#scared">Resultados SCARED</a></td></tr>
+</tbody></table>
+<p><strong>Separación clave.</strong> R1 es un entrenamiento VGGT-C3VD de cámara y profundidad. VGGT-SCARED depth-v2 empezó independientemente desde pesos oficiales y entrenó solo profundidad. No se continuó R1 sobre SCARED. El VGGT-C3VD histórico de30 épocas permanece como antecedente y comparador identificado.</p>
 <ol class="executive-findings">
-<li><span class="finding-type">Observación</span> Cambiar contexto u orden puede alterar los mismos frames; los controles no establecen un umbral universal de rotura. <a href="#scared-e02">E02 · contexto</a>, <a href="#scared-e03">E03 · primer frame</a>.</li>
-<li><span class="finding-type">Observación</span> VN19-A/B mejoraron componentes concretos, pero ningún candidato afinado pasó todas sus guardas conjuntas. <a href="#exp-vn19-ab">VN19-A/B</a>.</li>
-<li><span class="finding-type">Observación</span> Mejorar cámara, profundidad o puntos por separado no garantiza mejorar la reconstrucción conjunta. <a href="#exp-d20">D20 · oráculos y PnP</a>, <a href="#scared-e05">E05 · rutas geométricas</a>.</li>
-<li><span class="finding-type">Observación</span> VGGT-SCARED mejora profundidad y forma local del ancla en SCARED; la transferencia a C3VD es irregular. <a href="#vggt-phase34-p13">P13 · SCARED</a>, <a href="#vggt-phase34-p14">P14 · transferencia</a>.</li>
-<li><span class="finding-type">Observación</span> Escala y registro cambian parte del error, pero no eliminan todo el residuo geométrico. <a href="#scared-e06">E06 · escala y alineación</a>.</li>
-<li><span class="finding-type">Observación</span> La eficiencia se midió con contexto y hardware declarados; throughput por lote no demuestra tiempo real clínico. <a href="#vggt-p10">P10 · eficiencia</a>.</li>
+<li><span class="finding-type">Comprobado</span> R1 completó3000 pasos, sus controles de integridad/reanudación y la comparación BEST/FINAL. BEST mejora parte de la geometría, pero no cumple la mejora conjunta. <a href="#vggt-r1-cierre">Resultados y decisión</a>.</li>
+<li><span class="finding-type">Comprobado</span> VGGT-SCARED depth-v2 ya entrenó3000 pasos; no está pendiente de entrenamiento. Se verificaron35 anclas, siete reproducciones desde TIFF/calibración originales y los estados guardados. <a href="#vggt-scared-audit">Auditoría y límites</a>.</li>
+<li><span class="finding-type">Observación</span> Mejorar profundidad o forma local no garantiza mejores poses ni consistencia global. SCARED no dispone aquí de GT temporal certificado. <a href="#vggt-scared-audit">Protocolo y regresiones</a>.</li>
+<li><span class="finding-type">Observación</span> Contexto, orden, escala y ruta geométrica afectan los resultados; no se encontró un umbral universal de rotura ni una causa única. <a href="#experimentos">Experimentos VGG-T³</a> · <a href="#vggt-experimentos">Experimentos VGGT</a>.</li>
 </ol>
-<p class="summary-limits"><strong>Lectura y límites.</strong> La interpretación documentada es que no hay una explicación única. SCARED solo tiene GT certificado en anclas; el ajuste de escala con GT no demuestra escala métrica autónoma. Cambian recetas y presupuestos, hay pocas secuencias y los reservados ya se inspeccionaron. Estas comparaciones no aíslan causalmente la arquitectura.</p>
-<p><strong>Hipótesis pendientes.</strong> La sensibilidad específica a iluminación y oclusiones requiere ejecutar <a href="#scared-e13">E13</a> y <a href="#scared-e14">E14</a>: están <strong>preparados, no ejecutados en GPU</strong>. <a href="#scared-e15">E15</a> es otra rejilla preparada; no se confunde con P10 ya medido. Su ejecución y cualquier nuevo entrenamiento son decisiones posteriores.</p>
-<nav class="summary-links" aria-label="Acceso a evidencia"><a href="#cobertura-experimental">Cobertura C01–C10</a><a href="#experimentos">Fichas VGG-T³</a><a href="#vggt-experimentos">Fichas VGGT</a><a href="#comparacion-fase34">Comparación pareada</a></nav>
+<p class="summary-limits"><strong>Límites.</strong> Una semilla por receta, presupuestos distintos, pocos dominios y reservados ya inspeccionados. El ajuste de escala con GT no certifica escala métrica autónoma. Los resultados no son una ablación causal de arquitectura ni validación clínica.</p>
+<p><strong>Pendientes separados:</strong> <a href="#scared-e13">E13, fotometría</a>, <a href="#scared-e14">E14, oclusiones</a> y <a href="#scared-e15">E15, otra rejilla de eficiencia</a> siguen preparados, sin resultados GPU. No se ha iniciado otro entrenamiento en esta revisión.</p>
+<nav class="summary-links" aria-label="Acceso a evidencia"><a href="#cobertura-experimental">Cobertura C01–C10</a><a href="#vggt-r1-cierre">VGGT-C3VD R1</a><a href="#vggt-scared-audit">VGGT-SCARED depth-v2</a><a href="#comparacion-fase34">Comparación entre modelos</a></nav>
 </section>
 
 <details class="coverage-panel" id="cobertura-experimental"><summary>Cobertura experimental · VGGT y VGG-T³</summary>
@@ -105,7 +109,7 @@ execute:
 
 ```
 
-<nav class="reading-map model-map" aria-label="Elegir modelo"><a href="#vgg-t3"><strong>VGG-T³</strong><small>C3VD, SCARED y las 63 fichas actuales.</small></a><a href="#vggt"><strong>VGGT</strong><small>C3VD y SCARED · fases P01–P16.</small></a><a href="#vggt-vs-vgg-t3"><strong>VGGT vs VGG-T³</strong><small>Resultados pareados y protocolos visibles.</small></a></nav>
+<nav class="reading-map model-map" aria-label="Elegir modelo"><a href="#vgg-t3"><strong>VGG-T³</strong><small>C3VD, SCARED y las 63 fichas actuales.</small></a><a href="#vggt"><strong>VGGT</strong><small>R1-C3VD y depth-v2-SCARED.</small></a><a href="#vggt-vs-vgg-t3"><strong>VGGT vs VGG-T³</strong><small>Resultados pareados y protocolos visibles.</small></a></nav>
 
 
 
@@ -224,6 +228,8 @@ Son **fine-tunings desde pesos oficiales preentrenados**, no entrenamientos desd
 
 <details class="table-protocol"><summary>Protocolo de esta tabla · frames, pesos, escala, GT y unidades</summary><dl class="protocol-fields"><div><dt>Dataset</dt><dd>C3VD</dd></div><div><dt>Partición</dt><dd>Splits históricos V9 frente a VN19-A/B; roles de cada secuencia en tabla-protocolo-04</dd></div><div><dt>Checkpoint</dt><dd>V9 paso 850 y VN19-A/B finales 3240</dd></div><div><dt>Frames</dt><dd>No aplica: tabla de documentación</dd></div><div><dt>Escala y alineamiento</dt><dd>No aplica: no es una medición geométrica</dd></div><div><dt>Unidades</dt><dd>No aplica a una medición nueva; conservar las unidades escritas en cada definición o parámetro</dd></div><div><dt>GT</dt><dd>No aplica a esta tabla de documentación</dd></div></dl><p class="evidence-note"><a href="#ref-vggttt">Artículo y secciones de referencia</a> · <a href="tablas/protocolos_tablas.json">Índice de protocolos y hashes de tablas</a></p></details>
 
+<details class="metrics-fold"><summary>Cómo se entrenaron V9, VN19-A y VN19-B · ver tabla (12 filas)</summary>
+
 | Elemento | V9 | VN19-A | VN19-B |
 |---|---|---|---|
 | Inicialización | Pesos oficiales; no hereda las cabezas V7 incompatibles con TTT2 | Pesos oficiales frescos | La misma fuente y firma inicial que A |
@@ -238,6 +244,9 @@ Son **fine-tunings desde pesos oficiales preentrenados**, no entrenamientos desd
 | Frames originales con pérdida densa al finalizar | 430 | 919 de1.020 en el pool actual | 1.020 de1.020 en el pool actual |
 | Checkpoint mostrado | Paso850 seleccionado en su validación | Final3240, diagnóstico | Final3240, diagnóstico |
 | Aceptación | Selección mediante score conjunto V9 | Ningún afinado admisible por todas las guardas VN19 | Ningún afinado admisible por todas las guardas VN19 |
+
+</details>
+
 
 Los conteos de frames únicos se refieren a pérdida densa completa y a pools distintos. No significa que los demás frames no tengan contexto o supervisión de cámara. **Congelar TTT en el optimizador externo no desactiva su adaptación interna.** No se utilizó LoRA.
 
@@ -308,6 +317,8 @@ Los pasos de V9 son los1.000 registrados; se muestra su checkpoint850. Las cifra
 
 <details class="table-protocol"><summary>Protocolo de esta tabla · frames, pesos, escala, GT y unidades</summary><dl class="protocol-fields"><div><dt>Dataset</dt><dd>C3VD trans_t4_b</dd></div><div><dt>Partición</dt><dd>Validación de los modelos C3VD; lectura de transferencia para pesos SCARED</dd></div><div><dt>Checkpoint</dt><dd>Zero-shot de referencia VGG-T³; V9 paso 850; VN19-A/B finales 3240; solo los pesos nombrados en columnas/filas</dd></div><div><dt>Frames</dt><dd>50 RGB 336²; 16 objetivos GT comunes</dd></div><div><dt>Escala y alineamiento</dt><dd>Una escala positiva GT compartida por contexto; sin ICP</dd></div><div><dt>Unidades</dt><dd>cm, grados, porcentajes; AbsRel sin unidad</dd></div><div><dt>GT</dt><dd>Profundidad, K y poses de los 16 objetivos; 1.771.907 píxeles válidos</dd></div></dl><p class="evidence-note"><a href="#ref-vggttt">Artículo y secciones de referencia</a> · <a href="tablas/protocolos_tablas.json">Índice de protocolos y hashes de tablas</a></p></details>
 
+<details class="metrics-fold"><summary>Profundidad y geometría · ver tabla (6 filas)</summary>
+
 | Métrica | Zero-shot | V9 | VN19-A | VN19-B | Δ A/V9 favorable | Δ B/V9 favorable |
 | --- | --- | --- | --- | --- | --- | --- |
 | AbsRel ↓ | 0,1824 | 0,1486 | 0,1721 | 0,1722 | -15,84 % | -15,85 % |
@@ -317,12 +328,17 @@ Los pasos de V9 son los1.000 registrados; se muestra su checkpoint850. Las cifra
 | XYZ p95 (cm) ↓ | 2,131 | 1,305 | 1,301 | 1,337 | +0,27 % | -2,47 % |
 | D + K calibrada + pose (cm) ↓ | 0,771 | 0,600 | 0,579 | 0,573 | +3,51 % | +4,49 % |
 
+</details>
+
+
 ##### Cámara y movimiento
 
 
 <div class="protocol-strip" id="tabla-protocolo-09"><strong>Evaluación local</strong> · C3VD trans_t4_b · Validación de los modelos C3VD; lectura de transferencia para pesos SCARED</div>
 
 <details class="table-protocol"><summary>Protocolo de esta tabla · frames, pesos, escala, GT y unidades</summary><dl class="protocol-fields"><div><dt>Dataset</dt><dd>C3VD trans_t4_b</dd></div><div><dt>Partición</dt><dd>Validación de los modelos C3VD; lectura de transferencia para pesos SCARED</dd></div><div><dt>Checkpoint</dt><dd>Zero-shot de referencia VGG-T³; V9 paso 850; VN19-A/B finales 3240; solo los pesos nombrados en columnas/filas</dd></div><div><dt>Frames</dt><dd>50 RGB 336²; 16 objetivos GT comunes</dd></div><div><dt>Escala y alineamiento</dt><dd>Una escala positiva GT compartida por contexto; sin ICP</dd></div><div><dt>Unidades</dt><dd>cm, grados, porcentajes; AbsRel sin unidad</dd></div><div><dt>GT</dt><dd>Profundidad, K y poses de los 16 objetivos; 1.771.907 píxeles válidos</dd></div></dl><p class="evidence-note"><a href="#ref-vggttt">Artículo y secciones de referencia</a> · <a href="tablas/protocolos_tablas.json">Índice de protocolos y hashes de tablas</a></p></details>
+
+<details class="metrics-fold"><summary>Cámara y movimiento · ver tabla (5 filas)</summary>
 
 | Métrica | Zero-shot | V9 | VN19-A | VN19-B | Δ A/V9 favorable | Δ B/V9 favorable |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -331,6 +347,9 @@ Los pasos de V9 son los1.000 registrados; se muestra su checkpoint850. Las cifra
 | RPEr histórico (°) ↓ | 1,759 | 1,476 | 1,261 | 1,250 | +14,57 % | +15,31 % |
 | RPEt histórico (cm) ↓ | 0,065 | 0,065 | 0,062 | 0,062 | +4,46 % | +4,33 % |
 | Error focal relativo (%) ↓ | 20,48 | 3,63 | 1,28 | 1,31 | +64,72 % | +63,79 % |
+
+</details>
+
 
 
 En Trans4, A/B mejoran focal, rotación y algunas medidas de D+cámara respecto a V9, pero empeoran AbsRel y XYZ global medio. Esa compensación impide describirlos como una mejora general.
@@ -695,6 +714,8 @@ Este bloque documenta **VN18 entrenado con SCARED**, separado de VN18-C3VD y de 
 
 <details class="table-protocol"><summary>Protocolo de esta tabla · frames, pesos, escala, GT y unidades</summary><dl class="protocol-fields"><div><dt>Dataset</dt><dd>SCARED</dd></div><div><dt>Partición</dt><dd>SCARED: TRAIN datasets1/2/3/6, VAL7, reservados8/9; comparación C3VD cuando su columna lo declara</dd></div><div><dt>Checkpoint</dt><dd>VN18-SCARED final 3240; contraste con las recetas V9/VN19-C3VD</dd></div><div><dt>Frames</dt><dd>No aplica: tabla de documentación</dd></div><div><dt>Escala y alineamiento</dt><dd>No aplica: no es una medición geométrica</dd></div><div><dt>Unidades</dt><dd>Las explícitas en el registro</dd></div><div><dt>GT</dt><dd>Un keyframe medido por contexto; sin GT temporal validada</dd></div></dl><p class="evidence-note"><a href="#ref-scared">Artículo y secciones de referencia</a> · <a href="tablas/protocolos_tablas.json">Índice de protocolos y hashes de tablas</a></p></details>
 
+<details class="metrics-fold"><summary>Cómo se entrenó · ver tabla (16 filas)</summary>
+
 | Aspecto | VN18-SCARED | Diferencia respecto a V9 / VN19 |
 | --- | --- | --- |
 | Pesos iniciales | Pesos oficiales publicados, inicialización fresca. | También oficiales; no significa entrenamiento desde cero. |
@@ -713,6 +734,9 @@ Este bloque documenta **VN18 entrenado con SCARED**, separado de VN18-C3VD y de 
 | Clipping y LR | Norma 1 por cabeza; warmup 5%; coseno hasta 0,1×LR inicial. | V9/VN19 usa clipping global y warmup de 25 pasos. |
 | Presupuesto / semilla | 3.240 pasos; semilla 1234. | Igual techo de pasos no implica igual cantidad de GT. |
 | Selección | Mejora conjunta exigida 1%, máxima regresión 2%; ningún afinado admitido. | best_heads conserva paso 0; last.pt contiene el final 3240. |
+
+</details>
+
 
 
 <details>
@@ -748,6 +772,8 @@ La escala de salida es normalizada por escena. Un único factor positivo GT usad
 
 <details class="table-protocol"><summary>Protocolo de esta tabla · frames, pesos, escala, GT y unidades</summary><dl class="protocol-fields"><div><dt>Dataset</dt><dd>SCARED dataset7</dd></div><div><dt>Partición</dt><dd>Validación; no test8/9</dd></div><div><dt>Checkpoint</dt><dd>Zero-shot; VN18-SCARED final 3240; V9-SCARED candidato 1000 y selección oficial paso0 cuando aparezca en la fila</dd></div><div><dt>Frames</dt><dd>17 contextos largos: KF1–4 con N=4/8/16/50; KF5 solo N=1. RGB336×266; agregado por KF según tabla</dd></div><div><dt>Escala y alineamiento</dt><dd>Una escala GT de profundidad compartida con puntos por contexto; sin ICP</dd></div><div><dt>Unidades</dt><dd>XYZ/p95 en cm; AbsRel sin unidad; δ/Δ en %</dd></div><div><dt>GT</dt><dd>Un keyframe medido por contexto; sin GT temporal validada</dd></div></dl><p class="evidence-note"><a href="#ref-scared">Artículo y secciones de referencia</a> · <a href="tablas/protocolos_tablas.json">Índice de protocolos y hashes de tablas</a></p></details>
 
+<details class="metrics-fold"><summary>Validación: la media y cada keyframe · ver tabla (6 filas)</summary>
+
 | Validación | AbsRel ZS | AbsRel VN18 | Δ favorable | XYZ ZS (cm) | XYZ VN18 (cm) | Δ favorable |
 | --- | --- | --- | --- | --- | --- | --- |
 | KF1 | 0,2796 | 0,1731 | +38,08 % | 2,726 | 1,610 | +40,95 % |
@@ -756,6 +782,9 @@ La escala de salida es normalizada por escena. Un único factor positivo GT usad
 | KF4 | 0,0689 | 0,0609 | +11,69 % | 0,670 | 0,861 | -28,52 % |
 | KF5 | 0,0933 | 0,0491 | +47,32 % | 1,769 | 0,417 | +76,44 % |
 | Promedio igual por KF | 0,1391 | 0,0882 | +36,59 % | 1,512 | 0,876 | +42,04 % |
+
+</details>
+
 
 
 Dataset7. Primero se promedian los contextos de cada keyframe; después los cinco keyframes reciben el mismo peso. KF4 empeora en XYZ aunque mejora el promedio. Esta es evidencia de validación, no de test.
@@ -773,6 +802,8 @@ Cada caso utiliza el keyframe medido y 49 RGB de vídeo, 50 imágenes en total, 
 
 <details class="table-protocol"><summary>Protocolo de esta tabla · frames, pesos, escala, GT y unidades</summary><dl class="protocol-fields"><div><dt>Dataset</dt><dd>SCARED dataset8</dd></div><div><dt>Partición</dt><dd>Reservado durante entrenamiento; ya inspeccionado históricamente</dd></div><div><dt>Checkpoint</dt><dd>Columnas/filas identificadas: zero-shot, V9-C3VD 850, VN19-A-C3VD 3240, VN18-SCARED 3240 y V9-SCARED 1000; no se agregan pesos ausentes</dd></div><div><dt>Frames</dt><dd>50 RGB336×266; ventana indicada en la sección</dd></div><div><dt>Escala y alineamiento</dt><dd>Una escala GT compartida de profundidad/puntos; sin ICP</dd></div><div><dt>Unidades</dt><dd>cm y %, AbsRel sin unidad</dd></div><div><dt>GT</dt><dd>Solo el keyframe de referencia; no toda la nube ni la trayectoria</dd></div></dl><p class="evidence-note"><a href="#ref-scared">Artículo y secciones de referencia</a> · <a href="tablas/protocolos_tablas.json">Índice de protocolos y hashes de tablas</a></p></details>
 
+<details class="metrics-fold"><summary>SCARED8 y SCARED9: vistas y métricas reservadas · ver tabla (5 filas)</summary>
+
 | Métrica | V9 · C3VD | VN19-A · C3VD | VN18 · SCARED | Δ favorable VN18/V9 |
 | --- | --- | --- | --- | --- |
 | AbsRel ↓ | 0,0770 | 0,0964 | 0,0538 | +30,14 % |
@@ -780,6 +811,9 @@ Cada caso utiliza el keyframe medido y 49 RGB de vídeo, 50 imágenes en total, 
 | RMSE profundidad ↓ (cm) | 1,202 | 1,377 | 0,841 | +30,01 % |
 | Error XYZ medio ↓ (cm) | 2,510 | 4,231 | 0,910 | +63,75 % |
 | Error XYZ p95 ↓ (cm) | 7,229 | 9,611 | 2,475 | +65,77 % |
+
+</details>
+
 
 
 Mismos50 RGB. Las métricas describen el único keyframe medido tras una escala positiva por contexto. No demuestran exactitud de toda la trayectoria. La comparación no aísla el efecto del dataset porque las recetas también difieren.
@@ -793,6 +827,8 @@ Mismos50 RGB. Las métricas describen el único keyframe medido tras una escala 
 
 <details class="table-protocol"><summary>Protocolo de esta tabla · frames, pesos, escala, GT y unidades</summary><dl class="protocol-fields"><div><dt>Dataset</dt><dd>SCARED dataset9</dd></div><div><dt>Partición</dt><dd>Reservado durante entrenamiento; ya inspeccionado históricamente</dd></div><div><dt>Checkpoint</dt><dd>Columnas/filas identificadas: zero-shot, V9-C3VD 850, VN19-A-C3VD 3240, VN18-SCARED 3240 y V9-SCARED 1000; no se agregan pesos ausentes</dd></div><div><dt>Frames</dt><dd>50 RGB336×266; ventana indicada en la sección</dd></div><div><dt>Escala y alineamiento</dt><dd>Una escala GT compartida de profundidad/puntos; sin ICP</dd></div><div><dt>Unidades</dt><dd>cm y %, AbsRel sin unidad</dd></div><div><dt>GT</dt><dd>Solo el keyframe de referencia; no toda la nube ni la trayectoria</dd></div></dl><p class="evidence-note"><a href="#ref-scared">Artículo y secciones de referencia</a> · <a href="tablas/protocolos_tablas.json">Índice de protocolos y hashes de tablas</a></p></details>
 
+<details class="metrics-fold"><summary>SCARED8 y SCARED9: vistas y métricas reservadas · ver tabla (5 filas)</summary>
+
 | Métrica | V9 · C3VD | VN19-A · C3VD | VN18 · SCARED | Δ favorable VN18/V9 |
 | --- | --- | --- | --- | --- |
 | AbsRel ↓ | 0,1277 | 0,1229 | 0,0610 | +52,21 % |
@@ -800,6 +836,9 @@ Mismos50 RGB. Las métricas describen el único keyframe medido tras una escala 
 | RMSE profundidad ↓ (cm) | 1,468 | 1,541 | 0,760 | +48,23 % |
 | Error XYZ medio ↓ (cm) | 2,796 | 2,773 | 0,652 | +76,69 % |
 | Error XYZ p95 ↓ (cm) | 5,321 | 5,603 | 1,714 | +67,80 % |
+
+</details>
+
 
 
 Mismos50 RGB. Las métricas describen el único keyframe medido tras una escala positiva por contexto. No demuestran exactitud de toda la trayectoria. La comparación no aísla el efecto del dataset porque las recetas también difieren.
@@ -2718,15 +2757,17 @@ No todos los ensayos generaron nubes exportadas. Sus fichas indican la disponibi
 
 ## VGGT {#vggt .model-workspace}
 
-<p class="model-state">C3VD y SCARED · fases1–4 ejecutadas y verificadas</p>
+<p class="model-state">VGGT-C3VD R1 y VGGT-SCARED depth-v2 · ejecuciones independientes y evaluadas</p>
 
 <nav class="model-section-nav" aria-label="Apartados VGGT"><a href="#vggt-c3vd">C3VD</a><a href="#vggt-scared">SCARED</a><a href="#vggt-pipeline">Pipeline</a><a href="#vggt-experimentos">Experimentos</a><a href="#vggt-comparadores">Comparadores</a></nav>
 
-Las fases1–4 (P01–P16) están ejecutadas y verificadas. Se conservó VGGT-C3VD de30 épocas y se entrenó VGGT-SCARED con3.000 pasos, afinando solo profundidad. BEST/FINAL, transferencia y comparación con VGG-T³ están evaluados. El [cierre P16](#vggt-p16-cierre) separa mejoras, regresiones y límites del GT.
+Hay dos recetas actuales independientes: [VGGT-C3VD R1](#vggt-r1-cierre), con cámara y profundidad afinadas, y [VGGT-SCARED depth-v2](#vggt-scared-audit), con solo profundidad afinada. Las fases P01–P16 documentan la campaña anterior; sus columnas `VGGT_FT` corresponden al C3VD histórico, no a R1. El histórico se conserva en los desplegables de antecedente.
 
 ### C3VD · referencias y resultados {#vggt-c3vd}
 
 #### Entrenamiento histórico identificado
+
+<details class="metrics-fold"><summary>Entrenamiento histórico identificado · ver tabla (9 filas)</summary>
 
 | Aspecto | Registro recuperado |
 | --- | --- |
@@ -2739,6 +2780,9 @@ Las fases1–4 (P01–P16) están ejecutadas y verificadas. Se conservó VGGT-C3
 | Normalización | Referencia en la primera cámara y escala media de puntos válidos; las salidas no deben suponerse metros brutos. |
 | Selección / semilla | Checkpoint final. La validación del código antiguo tomaba el registro 0 al final de cada época; la semilla de muestreo no quedó fijada/documentada. |
 | Alcance de reproducibilidad | Se conservan argumentos y auditoría. El checkpoint antiguo no incorporó el hash del manifiesto; evaluar hoy con geometry_v2 no corrige retroactivamente los datos de aquel entrenamiento. |
+
+</details>
+
 
 
 
@@ -2758,7 +2802,7 @@ La copia oficial retenida tiene el SHA256 publicado en su revisión de Hugging F
 
 El script conservado excluye el agregador del optimizador. Los 131 estados guardados coinciden en cantidad, orden y formas con las 69 matrices/vectores de cámara y 62 de profundidad, a paso 3.000. Sus IDs no guardan nombres: es evidencia compatible con el ajuste de esas cabezas, no un registro completo de la inicialización. Las tres matrices afectadas son parámetros de capas lineales; train/eval o buffers de normalización no explican por sí solos sus bytes.
 
-**Interpretación, no causa demostrada:** el patrón es compatible con una sobreescritura localizada de memoria o datos antes/durante su conservación. No se puede identificar la operación, el momento ni atribuirlo a escritura accidental, hardware o una versión concreta de PyTorch. Sin el hash de inicialización histórico tampoco se excluyen todas las revisiones pasadas. No se midió aún el efecto causal de restaurar esos 39 valores.
+**Interpretación, no causa demostrada:** el patrón es compatible con una sobreescritura localizada de memoria o datos antes/durante su conservación. No se puede identificar la operación, el momento ni atribuirlo a escritura accidental, hardware o una versión concreta de PyTorch. Sin el hash de inicialización histórico tampoco se excluyen todas las revisiones pasadas. Esta auditoría inicial no midió su efecto; el control posterior [R01](#vggt-reproduction-r1) restauró únicamente esos39 valores y cuantificó el cambio, sin resolver su origen.
 
 **Alcance de las métricas:** siguen describiendo el checkpoint identificado; no quedan automáticamente invalidadas. Sí queda limitada la reproducibilidad histórica y la atribución de sus resultados exclusivamente al ajuste de cámara/profundidad. No se sustituye ni se repara silenciosamente la referencia.
 
@@ -2768,6 +2812,8 @@ El script conservado excluye el agregador del optimizador. Los 131 estados guard
 #### Partición C3VD
 
 Las ocho secuencias del manifiesto histórico se reparten en **6 de entrenamiento y 2 de validación**; no son ocho de entrenamiento. Se evaluaron además dos secuencias reservadas del mismo phantom, ya inspeccionadas en el proyecto. No equivalen a pacientes nuevos ni a un test todavía ciego.
+
+<details class="metrics-fold"><summary>Partición C3VD · ver tabla (10 filas)</summary>
 
 | Uso | Secuencia | Frames disponibles |
 | --- | --- | --- |
@@ -2782,12 +2828,15 @@ Las ocho secuencias del manifiesto histórico se reparten en **6 de entrenamient
 | Reservada | cecum_t2_a | 370 |
 | Reservada | trans_t1_a | 61 |
 
+</details>
 
-#### Zero-shot frente al último fine-tuning
+
+
+#### Zero-shot frente al VGGT-C3VD histórico · resultados archivados
 
 Los porcentajes son cambios relativos favorables: reducción para errores e incremento para métricas de acierto. Un signo negativo indica deterioro. Las métricas proceden de protocolos distintos que se identifican en cada fila.
 
-<details open><summary>Reservadas · cecum_t2_a + trans_t1_a</summary>
+<details><summary>Reservadas · cecum_t2_a + trans_t1_a</summary>
 
 
 <div class="protocol-strip"><strong>Protocolo</strong> · C3VD · Reservadas · cecum_t2_a + trans_t1_a · 50 RGB por secuencia · 336×336 · mismos frames y GT para ZS/FT · media de dos secuencias con igual peso · ruta VGGT D+pose predicha+K calibrada · sin BA</div>
@@ -2889,6 +2938,8 @@ Las tablas originales del paper usan otros datasets y hardware. Se recuperan sus
 <div class="book-actions"><button class="book-open-metrics" data-metrics="paper-vggt-1,paper-vggt-2,paper-vggt-3,paper-vggt-9">Consultar tablas originales de VGGT</button></div>
 
 </details>
+
+<details class="research-archive-fold" id="vggt-r1-antecedentes"><summary>R01–R12 · auditoría histórica y ejecución controlada R1</summary>
 
 <!-- VGGT_REPRODUCTION_R1_BEGIN -->
 #### Réplica controlada VGGT-C3VD · campaña R01–R12 {#vggt-reproduction-r1}
@@ -3009,7 +3060,7 @@ Se comparan el VGGT oficial zero-shot, el checkpoint histórico `c3vd_baseline_h
 
 **Alcance:** cuatro secuencias, N=1/4/8/16/50 y 336×336. Las dos VAL y las dos reservadas se presentan por separado. Las reservadas quedaron fuera de la optimización de esta réplica, pero ya se habían utilizado en análisis previos del proyecto; no constituyen un nuevo test externo ciego. Los promedios de split dan el mismo peso a cada secuencia; no son una prueba de generalización clínica ni una reproducción de los benchmarks de los papers.
 
-<details open><summary>Resumen por split · N=50 · comparación con el VGGT-C3VD anterior</summary>
+<details><summary>Resumen por split · N=50 · comparación con el VGGT-C3VD anterior</summary>
 
 **Geometría primaria:** D predicha + K calibrada + pose predicha, escala mediana de profundidad compartida con XYZ; todos los puntos GT válidos, sin filtro de confianza ni Sim(3)/ICP en XYZ/CD/NC. ATE/RPE usan, aparte, un Sim(3) global de centros de cámara. Las K predichas y el XYZ tras Sim(3) se conservan como diagnósticos separados.
 
@@ -3157,6 +3208,8 @@ Las reconstrucciones completas con D GT y pose GT dieron error interno0 en los p
 <!-- VGGT_R1_ANALYSIS_20261123_END -->
 
 <!-- VGGT_REPRODUCTION_R1_END -->
+
+</details>
 
 <!-- VGGT_R1_CLOSURE_V1_BEGIN -->
 
@@ -3541,6 +3594,262 @@ Las39 discrepancias escalares históricas siguen sin origen demostrado. Esta eva
 <!-- VGGT_R1_CLOSURE_V1_END -->
 
 ### SCARED · adaptación y transferencia {#vggt-scared}
+
+<!-- VGGT_SCARED_REVIEW_V1_BEGIN -->
+
+#### Estado actual · VGGT-SCARED depth-v2 {#vggt-scared-audit}
+
+**Entrenamiento existente verificado: 3.000 pasos; no hace falta repetirlo para evaluarlo.** BEST500 se seleccionó por profundidad en VAL7 y FINAL3000 se conserva como diagnóstico. Esta receta empezó desde pesos oficiales: no es una continuación ni una réplica de R1-C3VD.
+
+**Resultado principal en las 8 anclas reservadas con vídeo, N=50:** SCARED BEST500 cambia favorablemente AbsRel +42.45 %, XYZ local +40.35 % y NC -4.51 % frente al oficial. El último signo muestra que una mejora de profundidad no implica mejorar todas las propiedades.
+
+**Qué se compara ahora:** oficial, SCARED BEST500, SCARED FINAL3000 y transferencia del C3VD R1 FINAL3000, con los mismos RGB/GT/máscaras por caso. Son 556 evaluaciones: 417 reutilizadas y 139 inferencias nuevas de transferencia, sin cambiar pesos. En SCARED, XYZ puntúa solo el ancla medida; no es una medición de la geometría global del vídeo.
+
+**Transferencia C3VD R1→SCARED:** en las ocho anclas reservadas con vídeo, el cambio favorable respecto al oficial es -56.02 % en AbsRel y -66.47 % en XYZ local. Ambos signos indican deterioro. La adaptación a C3VD no se traslada automáticamente a SCARED; esta observación no identifica una causa única.
+
+<button class="book-open-metrics" data-metrics="vggt-scared-review-context-validation-N50-VGGT_ZS,vggt-scared-review-context-validation-N50-VGGT_SCARED_BEST,vggt-scared-review-context-validation-N50-VGGT_SCARED_FINAL,vggt-scared-review-context-validation-N50-VGGT_C3VD_R1_FINAL">Comparar métricas · VAL7 · N=50</button>
+
+<button class="book-open-metrics" data-metrics="vggt-scared-review-context-reserved-N50-VGGT_ZS,vggt-scared-review-context-reserved-N50-VGGT_SCARED_BEST,vggt-scared-review-context-reserved-N50-VGGT_SCARED_FINAL,vggt-scared-review-context-reserved-N50-VGGT_C3VD_R1_FINAL">Comparar métricas · reservados8/9 · N=50</button>
+
+<details class="research-reading-fold"><summary>Receta, ejecución real y controles · comparación clara con R1-C3VD</summary>
+
+| Aspecto | VGGT-C3VD R1 | VGGT-SCARED depth-v2 |
+| --- | --- | --- |
+| Inicialización | Oficial facebook/VGGT-1B | Oficial facebook/VGGT-1B independiente |
+| Módulos afinados | Cámara y profundidad | Solo profundidad; cámara oficial al inferir |
+| Encoder | Congelado;1.210 tensores verificados al cierre | Congelado por código; checkpoint solo de profundidad y referencia oficial |
+| Datos | 6 secuencias TRAIN;2 VAL;2 reservadas | Datasets1/2/3/6 TRAIN;7 VAL;8/9 reservados |
+| Resolución de entrenamiento | 518×518 | 266×336; lado largo336 |
+| Ventanas / supervisión | 4 RGB;4 vistas con GT por paso | N4 donde existe vídeo apto o N1;solo ancla0 con GT |
+| Presupuesto | 3.000 pasos;12.000 exposiciones densas | 3.000 pasos;3.000 exposiciones densas |
+| Precisión de entrenamiento | FP32 | Encoder BF16 congelado;depth head FP32 |
+| Pérdidas | Cámara×5 + profundidad×1 | Profundidad nativa×1;sin pérdida temporal de cámara |
+| Optimizador | AdamW LR1e-5 / WD0,05;sin scheduler/clipping | Mismo AdamW/sin scheduler/clipping |
+| Selección | FINAL3000 por regla conjunta VAL del cierre R1 | BEST500 por menor AbsRel de5 anclas VAL en contextos de entrenamiento |
+| Reproducibilidad | Calendario y RNG guardados;reanudaciones exactas verificadas | Semilla1234;calendario reconstruido exactamente;prueba corta determinista;producción no plenamente determinista |
+
+| Estado | Evidencia |
+| --- | --- |
+| V1 | Preparación antecedente;sin producción |
+| V2 | 3.000 líneas de entrenamiento,30 validaciones,62 tensores de profundidad y62 estados AdamW al paso3000 |
+| BEST / FINAL | BEST500 y FINAL3000 con firmas verificadas;exportaciones sin optimizador |
+| LAST | AdamW + Generator NumPy + RNG Torch CPU/CUDA para reanudación |
+| Limitación | No se retuvo un hash completo del encoder al final de producción;no se afirma retrospectivamente una identidad bit a bit |
+| Flags «preparado» | Estado inmutable al crear configuración/código;el estado efectivo proviene de los recibos de ejecución |
+
+</details>
+
+<details class="research-reading-fold"><summary>Datos y geometría · anclas, unidades, calibración y exclusiones</summary>
+
+| Uso | Datasets | Anclas | Contextos |
+| --- | --- | --- | --- |
+| TRAIN | 1,2,3,6 | 20 | 14 N4 +6 N1 |
+| VAL | 7 | 5 | 4 N4 +1 N1 |
+| Reservados | 8,9 | 10 | 8 con vídeo apto para evaluación;2 solo N1 |
+| Exclusión geométrica | 4,5 | 10 | No se usa hasta una corrección de calibración validada |
+| Exclusión temporal | dataset6/keyframe1 | 1 | Se conserva la ancla medida;sin contexto temporal |
+
+Se verificaron 35 batches contra las anclas certificadas y se reprodujeron RGB, Z, máscara y K directamente desde TIFF/calibración originales para un caso de cada uno de los siete datasets permitidos. Z procede del tercer canal XYZ, mm→m; no es distancia radial. La rectificación/remuestreo transforma K con el mismo convenio de centros de píxel. No se propagan etiquetas GT a los frames del vídeo.
+
+Los IDs originales y processed se relacionan mediante el crosswalk conservado; no se supone que coincidan. Cada ancla conserva su gauge propio. La evaluación de50 vistas incluye una ancla medida y49 vistas de contexto; la supervisión del entrenamiento N4 usaba ancla+vídeo0/5/10. La selección BEST y las tablas de contexto no se mezclan como si fueran el mismo soporte.
+
+</details>
+
+<details class="research-reading-fold"><summary>Todas las 35 anclas · N=1 · TRAIN/VAL/reservados separados</summary>
+
+Una escala mediana GT de profundidad por ancla/contexto;D+K calibrada+pose canónica,sin Sim(3)/ICP. Sin filtro de confianza ni submuestreo. Primero se promedian anclas dentro de cada dataset,luego datasets con igual peso dentro del split.
+
+**TRAIN · diagnóstico de ajuste**
+
+| Modelo | Anclas | AbsRel ↓ | δ1 ↑ | XYZ local cm ↓ | p95 cm ↓ | CD cm ↓ | NC ↑ |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| VGGT oficial zero-shot | 20 | 0.1090 | 0.8807 | 0.7878 | 2.4578 | 0.5121 | 0.7795 |
+| VGGT-SCARED depth-v2 BEST500 | 20 | 0.0501 | 0.9797 | 0.3724 | 1.1622 | 0.1866 | 0.7578 |
+| VGGT-SCARED depth-v2 FINAL3000 | 20 | 0.0334 | 0.9952 | 0.2428 | 0.7093 | 0.1310 | 0.8134 |
+| VGGT-C3VD R1 FINAL3000 → SCARED | 20 | 0.1343 | 0.8125 | 1.0242 | 3.0068 | 0.5814 | 0.6737 |
+
+**VAL · dataset7**
+
+| Modelo | Anclas | AbsRel ↓ | δ1 ↑ | XYZ local cm ↓ | p95 cm ↓ | CD cm ↓ | NC ↑ |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| VGGT oficial zero-shot | 5 | 0.1860 | 0.6972 | 1.3161 | 3.0341 | 0.8251 | 0.6951 |
+| VGGT-SCARED depth-v2 BEST500 | 5 | 0.1181 | 0.8146 | 0.9176 | 2.1210 | 0.4657 | 0.6815 |
+| VGGT-SCARED depth-v2 FINAL3000 | 5 | 0.1186 | 0.8126 | 0.9047 | 2.0777 | 0.4693 | 0.6985 |
+| VGGT-C3VD R1 FINAL3000 → SCARED | 5 | 0.1656 | 0.7017 | 1.2707 | 3.3978 | 0.6993 | 0.6380 |
+
+**Reservados · datasets8/9**
+
+| Modelo | Anclas | AbsRel ↓ | δ1 ↑ | XYZ local cm ↓ | p95 cm ↓ | CD cm ↓ | NC ↑ |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| VGGT oficial zero-shot | 10 | 0.0911 | 0.9316 | 0.5719 | 1.4823 | 0.3801 | 0.7771 |
+| VGGT-SCARED depth-v2 BEST500 | 10 | 0.0774 | 0.9534 | 0.5296 | 1.6032 | 0.2792 | 0.7185 |
+| VGGT-SCARED depth-v2 FINAL3000 | 10 | 0.0698 | 0.9670 | 0.4771 | 1.4393 | 0.2660 | 0.7527 |
+| VGGT-C3VD R1 FINAL3000 → SCARED | 10 | 0.1094 | 0.8785 | 0.7673 | 2.2435 | 0.4554 | 0.6652 |
+
+XYZ/CD/NC describen la superficie del ancla, no toda la nube temporal. ATE/RPE no están disponibles sin GT temporal certificado. N=1 incluye nueve anclas sin vídeo y no debe compararse directamente con N=50 como si fuera la misma población.
+
+</details>
+
+<details class="research-reading-fold"><summary>Cohorte con vídeo · N=50 · TRAIN/VAL/reservados separados</summary>
+
+Una escala mediana GT de profundidad por ancla/contexto;D+K calibrada+pose canónica,sin Sim(3)/ICP. Sin filtro de confianza ni submuestreo. Primero se promedian anclas dentro de cada dataset,luego datasets con igual peso dentro del split.
+
+**TRAIN · diagnóstico de ajuste**
+
+| Modelo | Anclas | AbsRel ↓ | δ1 ↑ | XYZ local cm ↓ | p95 cm ↓ | CD cm ↓ | NC ↑ |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| VGGT oficial zero-shot | 14 | 0.0851 | 0.9228 | 0.6751 | 2.2795 | 0.4396 | 0.8038 |
+| VGGT-SCARED depth-v2 BEST500 | 14 | 0.0423 | 0.9847 | 0.3056 | 0.8901 | 0.1577 | 0.7833 |
+| VGGT-SCARED depth-v2 FINAL3000 | 14 | 0.0306 | 0.9973 | 0.2248 | 0.6195 | 0.1220 | 0.8155 |
+| VGGT-C3VD R1 FINAL3000 → SCARED | 14 | 0.1413 | 0.7784 | 1.0825 | 3.0477 | 0.6430 | 0.6440 |
+
+**VAL · dataset7**
+
+| Modelo | Anclas | AbsRel ↓ | δ1 ↑ | XYZ local cm ↓ | p95 cm ↓ | CD cm ↓ | NC ↑ |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| VGGT oficial zero-shot | 4 | 0.1764 | 0.7096 | 1.2764 | 3.0840 | 0.7672 | 0.7166 |
+| VGGT-SCARED depth-v2 BEST500 | 4 | 0.1202 | 0.8211 | 0.9918 | 2.5042 | 0.5143 | 0.6960 |
+| VGGT-SCARED depth-v2 FINAL3000 | 4 | 0.1325 | 0.7771 | 1.0501 | 2.6079 | 0.5593 | 0.7004 |
+| VGGT-C3VD R1 FINAL3000 → SCARED | 4 | 0.1833 | 0.6842 | 1.3777 | 3.6144 | 0.7592 | 0.6461 |
+
+**Reservados · datasets8/9**
+
+| Modelo | Anclas | AbsRel ↓ | δ1 ↑ | XYZ local cm ↓ | p95 cm ↓ | CD cm ↓ | NC ↑ |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| VGGT oficial zero-shot | 8 | 0.0786 | 0.9390 | 0.5438 | 1.4253 | 0.3608 | 0.7810 |
+| VGGT-SCARED depth-v2 BEST500 | 8 | 0.0452 | 0.9955 | 0.3244 | 0.9302 | 0.1718 | 0.7458 |
+| VGGT-SCARED depth-v2 FINAL3000 | 8 | 0.0447 | 0.9950 | 0.3262 | 0.9382 | 0.1821 | 0.7690 |
+| VGGT-C3VD R1 FINAL3000 → SCARED | 8 | 0.1226 | 0.8688 | 0.9053 | 2.4480 | 0.5249 | 0.6416 |
+
+XYZ/CD/NC describen la superficie del ancla, no toda la nube temporal. ATE/RPE no están disponibles sin GT temporal certificado. N=1 incluye nueve anclas sin vídeo y no debe compararse directamente con N=50 como si fuera la misma población.
+
+</details>
+
+<details class="research-reading-fold"><summary>Contextos comparables · misma cohorte y límites de cámara/consistencia</summary>
+
+La cohorte constante conserva 26 anclas: 14 TRAIN, 4 VAL y 8 reservadas. N=1/4/8/16/50 conserva la misma ancla para puntuar;solo cambia su contexto.
+
+**VAL7**
+
+| N | Modelo | AbsRel ↓ | XYZ local cm ↓ | Acuerdo multivista ↑ |
+| --- | --- | --- | --- | --- |
+| 1 | VGGT oficial zero-shot | 0.2106 | 1.4421 | N/D |
+| 1 | VGGT-SCARED depth-v2 BEST500 | 0.1335 | 1.0172 | N/D |
+| 1 | VGGT-SCARED depth-v2 FINAL3000 | 0.1348 | 1.0056 | N/D |
+| 1 | VGGT-C3VD R1 FINAL3000 → SCARED | 0.1863 | 1.3940 | N/D |
+| 4 | VGGT oficial zero-shot | 0.1950 | 1.3556 | 0.6433 |
+| 4 | VGGT-SCARED depth-v2 BEST500 | 0.1281 | 1.0299 | 0.5086 |
+| 4 | VGGT-SCARED depth-v2 FINAL3000 | 0.1338 | 1.0499 | 0.5551 |
+| 4 | VGGT-C3VD R1 FINAL3000 → SCARED | 0.1863 | 1.4078 | 0.5690 |
+| 8 | VGGT oficial zero-shot | 0.1737 | 1.2414 | 0.6949 |
+| 8 | VGGT-SCARED depth-v2 BEST500 | 0.1219 | 0.9791 | 0.5888 |
+| 8 | VGGT-SCARED depth-v2 FINAL3000 | 0.1285 | 1.0156 | 0.6489 |
+| 8 | VGGT-C3VD R1 FINAL3000 → SCARED | 0.1841 | 1.3974 | 0.6917 |
+| 16 | VGGT oficial zero-shot | 0.1688 | 1.2264 | 0.8097 |
+| 16 | VGGT-SCARED depth-v2 BEST500 | 0.1169 | 0.9648 | 0.7221 |
+| 16 | VGGT-SCARED depth-v2 FINAL3000 | 0.1279 | 1.0234 | 0.7915 |
+| 16 | VGGT-C3VD R1 FINAL3000 → SCARED | 0.1814 | 1.3717 | 0.8123 |
+| 50 | VGGT oficial zero-shot | 0.1764 | 1.2764 | 0.9048 |
+| 50 | VGGT-SCARED depth-v2 BEST500 | 0.1202 | 0.9918 | 0.8670 |
+| 50 | VGGT-SCARED depth-v2 FINAL3000 | 0.1325 | 1.0501 | 0.9236 |
+| 50 | VGGT-C3VD R1 FINAL3000 → SCARED | 0.1833 | 1.3777 | 0.9153 |
+
+**Reservados8/9**
+
+| N | Modelo | AbsRel ↓ | XYZ local cm ↓ | Acuerdo multivista ↑ |
+| --- | --- | --- | --- | --- |
+| 1 | VGGT oficial zero-shot | 0.0903 | 0.6022 | N/D |
+| 1 | VGGT-SCARED depth-v2 BEST500 | 0.0752 | 0.5328 | N/D |
+| 1 | VGGT-SCARED depth-v2 FINAL3000 | 0.0678 | 0.4795 | N/D |
+| 1 | VGGT-C3VD R1 FINAL3000 → SCARED | 0.1111 | 0.8290 | N/D |
+| 4 | VGGT oficial zero-shot | 0.0815 | 0.5661 | 0.7732 |
+| 4 | VGGT-SCARED depth-v2 BEST500 | 0.0513 | 0.3667 | 0.5254 |
+| 4 | VGGT-SCARED depth-v2 FINAL3000 | 0.0486 | 0.3543 | 0.6192 |
+| 4 | VGGT-C3VD R1 FINAL3000 → SCARED | 0.1190 | 0.8869 | 0.5104 |
+| 8 | VGGT oficial zero-shot | 0.0779 | 0.5384 | 0.8400 |
+| 8 | VGGT-SCARED depth-v2 BEST500 | 0.0477 | 0.3398 | 0.6787 |
+| 8 | VGGT-SCARED depth-v2 FINAL3000 | 0.0455 | 0.3309 | 0.7921 |
+| 8 | VGGT-C3VD R1 FINAL3000 → SCARED | 0.1202 | 0.8933 | 0.7299 |
+| 16 | VGGT oficial zero-shot | 0.0782 | 0.5405 | 0.8964 |
+| 16 | VGGT-SCARED depth-v2 BEST500 | 0.0457 | 0.3279 | 0.8059 |
+| 16 | VGGT-SCARED depth-v2 FINAL3000 | 0.0447 | 0.3263 | 0.8946 |
+| 16 | VGGT-C3VD R1 FINAL3000 → SCARED | 0.1215 | 0.8993 | 0.8506 |
+| 50 | VGGT oficial zero-shot | 0.0786 | 0.5438 | 0.9524 |
+| 50 | VGGT-SCARED depth-v2 BEST500 | 0.0452 | 0.3244 | 0.9133 |
+| 50 | VGGT-SCARED depth-v2 FINAL3000 | 0.0447 | 0.3262 | 0.9675 |
+| 50 | VGGT-C3VD R1 FINAL3000 → SCARED | 0.1226 | 0.9053 | 0.9511 |
+
+El acuerdo multivista se calcula entre predicciones;no demuestra exactitud anatómica global ni poses correctas. En el ancla canónica,XYZ con K conocida no mide el error de la cabeza de cámara.
+
+</details>
+
+<details class="research-reading-fold"><summary>Regresiones por caso y conclusiones · sin ocultarlas en el promedio</summary>
+
+Regresiones descriptivas respecto a VGGT oficial; no son nuevos criterios para seleccionar pesos con reservados. Cada celda muestra número de anclas que empeoran.
+
+| Split | N | Modelo | Anclas | AbsRel peor | XYZ peor | CD peor | NC peor |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| validation | 1 | VGGT-SCARED depth-v2 BEST500 | 5 | 0 | 0 | 0 | 3 |
+| reserved | 1 | VGGT-SCARED depth-v2 BEST500 | 10 | 6 | 6 | 2 | 10 |
+| validation | 1 | VGGT-SCARED depth-v2 FINAL3000 | 5 | 0 | 0 | 0 | 3 |
+| reserved | 1 | VGGT-SCARED depth-v2 FINAL3000 | 10 | 6 | 6 | 1 | 6 |
+| validation | 1 | VGGT-C3VD R1 FINAL3000 → SCARED | 5 | 2 | 2 | 2 | 4 |
+| reserved | 1 | VGGT-C3VD R1 FINAL3000 → SCARED | 10 | 8 | 9 | 8 | 10 |
+| validation | 50 | VGGT-SCARED depth-v2 BEST500 | 4 | 0 | 0 | 0 | 3 |
+| reserved | 50 | VGGT-SCARED depth-v2 BEST500 | 8 | 1 | 1 | 0 | 7 |
+| validation | 50 | VGGT-SCARED depth-v2 FINAL3000 | 4 | 0 | 0 | 0 | 3 |
+| reserved | 50 | VGGT-SCARED depth-v2 FINAL3000 | 8 | 1 | 1 | 0 | 4 |
+| validation | 50 | VGGT-C3VD R1 FINAL3000 → SCARED | 4 | 2 | 4 | 2 | 3 |
+| reserved | 50 | VGGT-C3VD R1 FINAL3000 → SCARED | 8 | 7 | 7 | 7 | 8 |
+
+<details class="research-reading-fold"><summary>Identificar las anclas con regresión</summary>
+
+| Split | N | Modelo | AbsRel | XYZ | NC |
+| --- | --- | --- | --- | --- | --- |
+| validation | 1 | VGGT-SCARED depth-v2 BEST500 | Ninguna | Ninguna | d7_kf3; d7_kf4; d7_kf5 |
+| reserved | 1 | VGGT-SCARED depth-v2 BEST500 | d8_kf0; d8_kf1; d8_kf2; d8_kf3; d8_kf4; d9_kf2 | d8_kf0; d8_kf1; d8_kf2; d8_kf3; d8_kf4; d9_kf2 | d8_kf0; d8_kf1; d8_kf2; d8_kf3; d8_kf4; d9_kf0; d9_kf1; d9_kf2; d9_kf3; d9_kf4 |
+| validation | 1 | VGGT-SCARED depth-v2 FINAL3000 | Ninguna | Ninguna | d7_kf3; d7_kf4; d7_kf5 |
+| reserved | 1 | VGGT-SCARED depth-v2 FINAL3000 | d8_kf0; d8_kf1; d8_kf2; d8_kf3; d8_kf4; d9_kf2 | d8_kf0; d8_kf1; d8_kf2; d8_kf3; d8_kf4; d9_kf2 | d8_kf0; d8_kf1; d8_kf2; d8_kf4; d9_kf0; d9_kf1 |
+| validation | 1 | VGGT-C3VD R1 FINAL3000 → SCARED | d7_kf3; d7_kf4 | d7_kf3; d7_kf4 | d7_kf2; d7_kf3; d7_kf4; d7_kf5 |
+| reserved | 1 | VGGT-C3VD R1 FINAL3000 → SCARED | d8_kf0; d8_kf1; d8_kf2; d8_kf3; d8_kf4; d9_kf1; d9_kf2; d9_kf4 | d8_kf0; d8_kf1; d8_kf2; d8_kf3; d8_kf4; d9_kf0; d9_kf1; d9_kf2; d9_kf4 | d8_kf0; d8_kf1; d8_kf2; d8_kf3; d8_kf4; d9_kf0; d9_kf1; d9_kf2; d9_kf3; d9_kf4 |
+| validation | 50 | VGGT-SCARED depth-v2 BEST500 | Ninguna | Ninguna | d7_kf2; d7_kf3; d7_kf4 |
+| reserved | 50 | VGGT-SCARED depth-v2 BEST500 | d8_kf2 | d8_kf2 | d8_kf0; d8_kf1; d8_kf2; d8_kf3; d9_kf0; d9_kf2; d9_kf3 |
+| validation | 50 | VGGT-SCARED depth-v2 FINAL3000 | Ninguna | Ninguna | d7_kf2; d7_kf3; d7_kf4 |
+| reserved | 50 | VGGT-SCARED depth-v2 FINAL3000 | d8_kf2 | d8_kf2 | d8_kf0; d8_kf1; d8_kf2; d9_kf2 |
+| validation | 50 | VGGT-C3VD R1 FINAL3000 → SCARED | d7_kf3; d7_kf4 | d7_kf1; d7_kf2; d7_kf3; d7_kf4 | d7_kf2; d7_kf3; d7_kf4 |
+| reserved | 50 | VGGT-C3VD R1 FINAL3000 → SCARED | d8_kf0; d8_kf1; d8_kf2; d8_kf3; d9_kf1; d9_kf2; d9_kf3 | d8_kf0; d8_kf1; d8_kf2; d8_kf3; d9_kf0; d9_kf1; d9_kf2 | d8_kf0; d8_kf1; d8_kf2; d8_kf3; d9_kf0; d9_kf1; d9_kf2; d9_kf3 |
+
+</details>
+
+**Lectura:** la receta de SCARED mejora medidas de profundidad/forma local en su dominio,pero sus mejoras no son uniformes por ancla o propiedad. La transferencia R1→SCARED usa pesos aprendidos en C3VD;no es un entrenamiento nuevo ni cambia la referencia de R1. Las diferencias entre recetas no aíslan causalmente el efecto de la arquitectura.
+
+**Limitaciones técnicas conservadas:** producción no plenamente determinista;no existe snapshot final completo del encoder;la prueba exacta de reanudación fue un diagnóstico determinista separado. El estado y el sampler guardados sí son verificables. Estas restricciones no obligan por sí solas a repetir el entrenamiento para describir sus resultados.
+
+</details>
+
+<details class="research-reading-fold"><summary>Evidencia, checkpoints y decisión de no reentrenar</summary>
+
+| Modelo/checkpoint | Archivo | SHA256 |
+| --- | --- | --- |
+| VGGT oficial zero-shot | model.safetensors | `f164acf60724910d8fe1578bb499d800850c7bb0948db7555c413f9fbe60467e` |
+| VGGT-SCARED depth-v2 BEST500 | best_depth.pt | `3733885c17c84281e1cc035957d8e47be0e1d39cb01f51a6b432efeb79f05a7a` |
+| VGGT-SCARED depth-v2 FINAL3000 | final_depth.pt | `c8b142f7fc2c982b3050547fd4b749ca75313afbd092cfd90eaafa30978b52ae` |
+| VGGT-C3VD R1 FINAL3000 → SCARED | final_heads.pt | `cf0bbc6f044fc7f23986b9d33112d20f46f1377d6b3c395a73a39be268fd1cf3` |
+
+BEST500 conserva el criterio de selección original de SCARED;FINAL3000-R1 conserva su elección previa con validación C3VD. No se selecciona un ganador usando reservados ni se presenta un baseline universal.
+
+- [Auditoría,resumen,protocolos y regresiones](contenido/vggt_scared_review_v1/summary.json)
+- [Manifiesto que distingue cada checkpoint](contenido/vggt_scared_review_v1/checkpoint_manifest.json)
+- [Métricas por split/cohorte/contexto](contenido/vggt_scared_review_v1/macro_metrics.csv)
+- [Métricas por dataset](contenido/vggt_scared_review_v1/dataset_macro_metrics.csv)
+- [Porcentajes favorables frente a zero-shot](contenido/vggt_scared_review_v1/changes_vs_zero_shot.csv)
+
+No se publican RGB,GT,NPZ ni pesos. Los registros completos por ancla permanecen locales. No se ejecutó entrenamiento ni se cambiaron las recetas selladas.
+
+</details>
+
+<!-- VGGT_SCARED_REVIEW_V1_END -->
+
 #### Fase 1 · verificación y baselines {#vggt-fase1}
 
 **35 anclas medidas × 2 checkpoints = 70 inferencias terminadas**, sin actualización de pesos. Se usaron los datasets 1, 2, 3, 6, 7, 8 y 9 y se mantuvieron excluidos 4/5 por calibración. Dataset6/KF1 participa como imagen medida; su cuarentena afecta al vídeo, que aquí no se utiliza.
@@ -3557,11 +3866,16 @@ Los rótulos TRAIN/VAL/reservados describen el **split previsto de SCARED**, no 
 
 <div class="protocol-strip"><strong>Protocolo</strong> · SCARED · ancla izquierda medida · N=1 · lado largo336, cuadrícula266×336 · RGBfloat32 canónico común · Z en metros · todos los píxeles GT válidos · K rectificada calibrada · una escala mediana GT/pred por ancla · XYZ usa esa misma escala · sin registro/ICP en resultados principales</div>
 
+<details class="metrics-fold"><summary>Fase 1 · verificación y baselines · ver tabla (3 filas)</summary>
+
 | Split | Anclas | AbsRel oficial ↓ | AbsRel C3VD-FT ↓ | Cambio favorable | XYZ oficial cm ↓ | XYZ C3VD-FT cm ↓ |
 | --- | --- | --- | --- | --- | --- | --- |
 | TRAIN previsto SCARED · datasets1/2/3/6 | 20 | 0.10903 | 0.12744 | -16.88 % | 0.7878 | 0.9749 |
 | VAL · dataset7 | 5 | 0.18597 | 0.15946 | +14.26 % | 1.3161 | 1.2364 |
 | Reservados · datasets8/9 | 10 | 0.09109 | 0.10457 | -14.81 % | 0.5719 | 0.7414 |
+
+</details>
+
 
 
 **Hallazgo:** en reservados, AbsRel empeora un **14,81 %** y XYZ medio un **29,63 %**. En VAL7, AbsRel mejora un **14,26 %**, pero p95 XYZ empeora un **8,66 %** y NC un **4,97 %**. No hay mejora conjunta uniforme. El checkpoint C3VD mejora AbsRel en 7/20 anclas TRAIN, 4/5 VAL y 4/10 reservadas.
@@ -3690,6 +4004,8 @@ El CSV local conserva los70 registros por ancla/pesos: `G:/Kaust/VGGT/repo/artif
 
 <details><summary>Resumen y verificaciones de fase 1</summary><p><a href="tablas/vggt_fase1.json">Descargar resultados agregados y protocolo</a>. Los ZIP GT, las cachés por píxel y las predicciones completas permanecen locales. La página comparte resúmenes y gráficos.</p></details>
 
+
+<details class="research-archive-fold" id="vggt-p2-archivo"><summary>P05–P10 · caracterización ejecutada con los checkpoints históricos</summary>
 
 <!-- VGGT_PHASE2_BEGIN -->
 #### Fase 2 · contexto, geometría y eficiencia {#vggt-fase2}
@@ -3899,11 +4215,15 @@ Un OOM se conserva como no viable; no se reduce silenciosamente la entrada. Son 
 
 <!-- VGGT_PHASE2_END -->
 
+</details>
+
 <!-- VGGT_P11_PREFLIGHT_BEGIN -->
 #### P11 · verificación completada {#vggt-p11-preflight}
 
 El control inicial de datos/gradientes y el posterior de AdamW/reanudación pasaron. Véase [fases3–4](#vggt-fase34) para el estado actual y la receta autorizada.
 <!-- VGGT_P11_PREFLIGHT_END -->
+
+<details class="research-archive-fold" id="vggt-p34-archivo"><summary>P11–P16 · ejecución depth-v2 y evaluación original completas</summary>
 
 <!-- VGGT_PHASE34_BEGIN -->
 #### Fases 3 y 4 · VGGT-SCARED y comparación común {#vggt-fase34}
@@ -4013,6 +4333,10 @@ Signo positivo = cambio favorable relativo; negativo = regresión. No son puntos
 
 <!-- VGGT_PHASE34_END -->
 
+</details>
+
+<details class="research-archive-fold" id="vggt-p16-archivo"><summary>P16 · interpretación original y comparación histórica</summary>
+
 <!-- VGGT_P16_READOUT_BEGIN -->
 #### P16 · lectura de los resultados y límites {#vggt-p16-cierre}
 
@@ -4041,7 +4365,7 @@ En SCARED son8 anclas con vídeo apto, de los datasets 8/9; en C3VD son2 secuenc
 
 **6. El contexto ayuda de manera condicionada.** Con las mismas8 anclas reservadas, BEST pasa de AbsRel 0.07519 con N=1 a 0.04524 con N=50. VGG-T³-VN18-SCARED pasa de 0,06120 con N=4 a0,06297 con N=50. No aparece un umbral universal de rotura; estas curvas no prueban calidad global del vídeo porque SCARED solo tiene GT certificado en el ancla.
 
-**7. La comparación entre modelos exige conservar la ruta.** En C3VD reservado, VGGT-C3VD tiene AbsRel 0.11598 y XYZ D+K+pose1.05335 cm; VGG-T³-V9-C3VD tiene AbsRel 0.10457 y XYZ D+K+pose1.66351 cm, mientras su P directo da1.19412 cm. V9 mejora profundidad y P directo frente a su oficial, pero persisten errores de cámara y diferencias entre rutas; esta tabla no descompone causalmente su contribución. No se sustituye D+pose por P directo al comparar una misma columna.
+**7. La comparación entre modelos exige conservar la ruta.** En C3VD reservado, VGGT-C3VD histórico tiene AbsRel 0.11598 y XYZ D+K+pose1.05335 cm; VGG-T³-V9-C3VD tiene AbsRel 0.10457 y XYZ D+K+pose1.66351 cm, mientras su P directo da1.19412 cm. V9 mejora profundidad y P directo frente a su oficial, pero persisten errores de cámara y diferencias entre rutas; esta tabla no descompone causalmente su contribución. No se sustituye D+pose por P directo al comparar una misma columna.
 
 **8. Las recetas no son una ablación causal de arquitectura.** En SCARED reservado, VGGT-SCARED BEST tiene AbsRel 0.04524 y el candidato VGG-T³-VN18-SCARED 0.06297. Cambian cabezas entrenables, pérdidas y presupuesto; este resultado descriptivo no demuestra que VGGT sea intrínsecamente superior ni que TTT cause la diferencia.
 
@@ -4055,12 +4379,16 @@ En SCARED son8 anclas con vídeo apto, de los datasets 8/9; en C3VD son2 secuenc
 
 <!-- VGGT_P16_READOUT_END -->
 
+</details>
+
+<details class="research-reading-fold"><summary>Diseño SCARED v1 · antecedente preparado; la ejecución vigente es depth-v2</summary>
+
 #### Preparación original del entrenamiento SCARED · antecedente
 
 
 **Antecedente de una receta ya ejecutada.** Este bloque conserva el diseño inicial V1; no describe el estado actual. Su adaptación V2 completó **3.000 actualizaciones**, con **BEST en el paso 500** y **FINAL en el 3.000**, después de superar P11. Véanse [entrenamiento y evaluación actuales](#vggt-fase34). Se inició desde pesos oficiales, sin continuar desde el fine-tuning C3VD; no fue una réplica exacta ni un VN19 de VGG-T³.
 
-| Aspecto | VGGT C3VD histórico | VGGT SCARED preparado |
+| Aspecto | VGGT C3VD histórico | Diseño SCARED v1 · antecedente |
 | --- | --- | --- |
 | Cabezas | Cámara + profundidad; sin point head | Solo profundidad; sin cámara, puntos ni tracking durante entrenamiento. Al inferir después, la cámara oficial debe restaurarse y permanecer identificada como no afinada. |
 | GT | Profundidad y cámaras de las ventanas históricas | Solo profundidad medida del ancla; sin supervisión temporal de cámara ni pseudo-GT propagada. |
@@ -4094,7 +4422,10 @@ Archivos históricos de esta preparación: `G:/Kaust/VGGT/repo/artifacts/experim
 
 </details>
 
-**Transferencia:** todavía no se obtuvieron métricas de un VGGT entrenado con SCARED. Las reconstrucciones VN18/V9-SCARED que ya existen en la bitácora pertenecen a VGG-T³.
+**Transferencia ya evaluada:** P14 midió VGGT-SCARED depth-v2→C3VD con pesos fijos; sus métricas están en [P13/P14](#vggt-fase34). VN18/V9-SCARED pertenecen a VGG-T³ y conservan su sección propia.
+
+
+</details>
 
 ### Pipeline y puntos de control {#vggt-pipeline}
 
@@ -4238,6 +4569,8 @@ Para el entrenamiento SCARED preparado: RGB de todo el contexto → encoder ofic
 
 La **fase1 P01–P04 está completada** con los límites indicados. Las fases2–4 están completadas; el cierre P16 conserva sus resultados y límites. C01 comenzó con N=1; las fases posteriores añadieron contextos comunes, VGGT-SCARED y transferencia en ambas direcciones.
 
+<details class="metrics-fold"><summary>Serie C01–C10 · estado de ejecución · ver tabla (10 filas)</summary>
+
 | ID | Experimento | Evidencia disponible / pendiente |
 | --- | --- | --- |
 | C01 | Zero-shot en los mismos datasets | C3VD histórico recuperado y35 anclas oficiales SCARED N1 evaluadas en P03. |
@@ -4250,6 +4583,9 @@ La **fase1 P01–P04 está completada** con los límites indicados. Las fases2�
 | C08 | Escalabilidad y rendimiento | P05–P10 completados bajo protocolo común; consultar tablas de fase2. |
 | C09 | Sensibilidad específica de TTT | No aplicable a VGGT. Reservado para VGG-T³. |
 | C10 | Consistencia y cobertura multivista | P05–P10 completados bajo protocolo común; consultar tablas de fase2. |
+
+</details>
+
 
 
 <details class="vggt-experiment-card" id="vggt-c01" data-vggt-card><summary><span class="card-status">Completado en fase1 · N=1</span><span class="card-id">C01</span>Zero-shot en los mismos datasets</summary><div class="card-content">
@@ -4372,11 +4708,11 @@ La **fase1 P01–P04 está completada** con los límites indicados. Las fases2�
 <dl class="card-fields"><dt>Siguiente decisión</dt><dd>Consultar el cierre P16 y conservar las referencias antes de proponer una nueva intervención.</dd></dl>
 <details class="trace-details"><summary>Protocolo y trazabilidad</summary><p>Registro: <a href="tablas/vggt_C01_C10.json">C01–C10</a> · <a href="tablas/vggt_resultados_recuperados.json">Métricas recuperadas</a>. Pesos, caso, GT, escala y alineamiento se conservan por tabla. Las fichas P05–P10 y el resumen de fase 2 conservan el estado actual y sus resultados.</p></details></div></details>
 
-Se prepararon **52 selecciones de entrada** para C02/C05, aplicables a dos variantes VGGT: extensión fija frente a prefijos con densidad fija, y orden original/inverso/permutado con ancla fija. No se ejecutaron. N=1 no define ATE/RPE multivista ni conserva una extensión temporal. C08 requiere warm-up y repeticiones antes de extraer conclusiones de velocidad.
+El plan inicial contemplaba52 selecciones C02/C05. La caracterización se ejecutó después con el protocolo firmado P05–P10, cuyos resultados y alcance están en [fase2](#vggt-fase2). No se atribuye ejecución a una selección solo por estar preparada. N=1 no define ATE/RPE multivista; P10 ya incluye warm-up y repeticiones.
 
 ### Comparadores interactivos {#vggt-comparadores}
 
-Las métricas históricas y las nuevas de fase1 están en el comparador, con claves de protocolo distintas. La galería histórica y las tablas originales siguen accesibles; no se generaron nuevas nubes ni se publicaron paquetes adicionales en esta revisión.
+El comparador mantiene las claves de protocolo separadas. Las nubes actuales [VGGT-C3VD R1 FINAL/BEST](#vggt-r1-cierre) ya están disponibles; no se añadió una nube del VGGT-C3VD histórico. Las métricas SCARED depth-v2 se documentan por ancla/contexto y no certifican la trayectoria temporal.
 
 <div class="book-actions"><button class="book-open-metrics" data-metrics="vggt-review-heldout_sequence_same_phantom-VGGT_ZS,vggt-review-heldout_sequence_same_phantom-VGGT_FT">Comparar VGGT · reservadas</button><button class="book-open-metrics" data-metrics="vggt-review-validation_selection-VGGT_ZS,vggt-review-validation_selection-VGGT_FT">Comparar VGGT · validación</button><a href="#vistas">Galería histórica de vistas</a></div>
 
@@ -4384,24 +4720,29 @@ Las métricas históricas y las nuevas de fase1 están en el comparador, con cla
 
 ## VGGT vs VGG-T³ {#vggt-vs-vgg-t3 .model-workspace}
 
-<p class="model-state pending">Preparado para completar</p>
+<p class="model-state">Comparación documentada bajo protocolos pareados; recetas y límites diferenciados</p>
 
 <nav class="model-section-nav" aria-label="Apartados del modelo"><a href="#vggt-vs-vgg-t3-c3vd">C3VD</a><a href="#vggt-vs-vgg-t3-scared">SCARED</a><a href="#vggt-vs-vgg-t3-pipeline">Pipeline</a><a href="#vggt-vs-vgg-t3-experimentos">Experimentos</a><a href="#vggt-vs-vgg-t3-comparadores">Comparadores</a></nav>
 
-Espacio reservado para reunir comparaciones entre ambos modelos. Las comparaciones históricas que ya aparecen como controles conservan su ubicación y sus condiciones en las fichas de VGG-T³.
+Este apartado reúne las comparaciones P15/P16 entre modelos. Sus checkpoints y recetas se identifican por dataset; las referencias actuales VGGT-C3VD R1 y VGGT-SCARED depth-v2 mantienen sus decisiones independientes.
 
 ### C3VD · referencias y resultados {#vggt-vs-vgg-t3-c3vd}
 
-Comparación **ya guardada de la misma ruta D+K+pose**, distinta del promedio de reservadas mostrado en VGGT.
+**Comparación histórica, sin R1.** Conserva la misma ruta D+K+pose y un soporte de16 objetivos, distinto de los50 GT del cierre R1. El VGGT-C3VD de esta tabla es el checkpoint histórico30ep.
 
 <div class="protocol-strip"><strong>Protocolo</strong> · trans_t4_b · validación · 50 RGB a 336×336 · 16 objetivos GT comunes · misma K calibrada · una escala de profundidad por ventana · sin ICP · D y poses predichas; no point head directa</div>
+
+<details class="metrics-fold"><summary>C3VD · referencias y resultados · ver tabla (4 filas)</summary>
 
 | Modelo / pesos | AbsRel ↓ | δ1 % ↑ | XYZ D+K+pose cm ↓ | p95 cm ↓ | Rotación ° ↓ |
 | --- | --- | --- | --- | --- | --- |
 | VGGT zero-shot | 0.24231 | 57.80 | 0.8265 | 2.0024 | 7.700 |
-| VGGT C3VD 30ep | 0.14088 | 80.34 | 0.7638 | 1.7177 | 5.541 |
+| VGGT-C3VD histórico 30ep | 0.14088 | 80.34 | 0.7638 | 1.7177 | 5.541 |
 | VGG-T³ zero-shot | 0.18236 | 72.10 | 0.7711 | 2.0430 | 10.797 |
 | VGG-T³ V9-C3VD | 0.14860 | 78.38 | 0.6000 | 1.9298 | 6.907 |
+
+</details>
+
 
 
 La normalización RGB histórica VGGT usa float/255 y la caché TTT usa float32(1/255); esta diferencia está registrada. La comparación no demuestra causalidad del TTT: también cambian arquitectura y entrenamiento.

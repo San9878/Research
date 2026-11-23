@@ -132,6 +132,10 @@ def main():
         copy(src/'contenido/vggt_r1_closure_v1'/name,dst/'contenido/vggt_r1_closure_v1'/name)
     copy(src/'contenido/vggt_r1_closure_v1/cloud_export.json',dst/'contenido/vggt_r1_closure_v1/cloud_export.json')
     copy(src/'contenido/vggt_r1_closure_v1/cloud_decoder_validation.json',dst/'contenido/vggt_r1_closure_v1/cloud_decoder_validation.json')
+    # VGGT_SCARED_REVIEW_V1_PUBLIC_ASSETS
+    for name in ['changes_vs_zero_shot.csv', 'checkpoint_manifest.json', 'dataset_macro_metrics.csv', 'macro_metrics.csv', 'summary.json']:
+        copy(src/'contenido/vggt_scared_review_v1'/name,dst/'contenido/vggt_scared_review_v1'/name)
+    copy(src/'contenido/vggt_scared_review_v1/editorial_verification.json',dst/'contenido/vggt_scared_review_v1/editorial_verification.json')
     # Two read-only audit summaries, without patient data, models or training arrays.
     for name in ['encoder_audit.json','fichas_evidencia.json']:
         copy(src/'contenido/auditoria_vggt_20261120'/name,dst/'contenido/auditoria_vggt_20261120'/name)

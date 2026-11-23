@@ -1,0 +1,66 @@
+{
+  "editorial": {
+    "complete": true,
+    "prior_numeric_tables_preserved": 127,
+    "new_top_level_tables_folded": 12,
+    "source_details_balanced": true,
+    "checkpoint_recipes_unchanged": true,
+    "executive_summary_updated": true,
+    "stale_transfer_statement_corrected": true,
+    "old_code_prepared_flags_preserved_and_explained": true,
+    "public_clouds_unchanged": 19,
+    "notebook_SHA256": "46427440de37efa5f4e04a9518c167e9318ba98e754dbd09301a576dfab98ed5",
+    "publication_pending": true
+  },
+  "browser": {
+    "passed": true,
+    "desktop": {
+      "heading_present": true,
+      "workspace": "vggt",
+      "workspace_display": "block",
+      "tables": 143,
+      "tables_outside_details": 7,
+      "tables_inside_details": 136,
+      "stale_transfer_statement": false,
+      "summary_updated": true,
+      "document_width": 1385,
+      "viewport": 1400
+    },
+    "disclosure": {
+      "initially_closed": true,
+      "tables_inside": 2,
+      "table_display_when_open": "table",
+      "closes_again": true
+    },
+    "comparison": {
+      "dialog_open": true,
+      "selected": [
+        "vggt-scared-review-context-reserved-N50-VGGT_ZS",
+        "vggt-scared-review-context-reserved-N50-VGGT_SCARED_BEST",
+        "vggt-scared-review-context-reserved-N50-VGGT_SCARED_FINAL",
+        "vggt-scared-review-context-reserved-N50-VGGT_C3VD_R1_FINAL"
+      ],
+      "records": 200,
+      "joined_rows": 8,
+      "notice": "Mismo caso y protocolo. La primera columna es la referencia para los porcentajes favorables; positivo mejora y negativo empeora."
+    },
+    "mobile": {
+      "viewport": 390,
+      "visual_viewport": 390,
+      "document_width": 390,
+      "heading_top": 25.875
+    },
+    "isolated_profile": true,
+    "GPU_disabled": true,
+    "no_clouds_loaded": true
+  },
+  "metric_registry": {
+    "passed": true,
+    "prior_entries_values_preserved": 184,
+    "new_macro_entries": 16,
+    "entries": 200,
+    "historical_labels_disambiguated": true,
+    "new_clouds": 0
+  },
+  "scientific_measurements_changed": false
+}

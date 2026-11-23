@@ -5927,7 +5927,7 @@
     },
     {
       "id": "paper-vggt-ttt-1",
-      "label": "VGGT-TTT · Paper tabla1 · Pointmap estimation on dense (-D) and sparse (-S) split",
+      "label": "VGG-T³ · Paper tabla1 · Pointmap estimation on dense (-D) and sparse (-S) split",
       "group": "Papers originales · Tablas de referencia",
       "dataset": "Benchmarks publicados",
       "case": "Pointmap estimation on dense (-D) and sparse (-S) split",
@@ -5976,7 +5976,7 @@
     },
     {
       "id": "paper-vggt-ttt-2",
-      "label": "VGGT-TTT · Paper tabla2 · Video depth estimation",
+      "label": "VGG-T³ · Paper tabla2 · Video depth estimation",
       "group": "Papers originales · Tablas de referencia",
       "dataset": "Benchmarks publicados",
       "case": "Video depth estimation",
@@ -6010,7 +6010,7 @@
     },
     {
       "id": "paper-vggt-ttt-3",
-      "label": "VGGT-TTT · Paper tabla3 · Camera pose estimation",
+      "label": "VGG-T³ · Paper tabla3 · Camera pose estimation",
       "group": "Papers originales · Tablas de referencia",
       "dataset": "Benchmarks publicados",
       "case": "Camera pose estimation",
@@ -6048,7 +6048,7 @@
     },
     {
       "id": "paper-vggt-ttt-4",
-      "label": "VGGT-TTT · Paper tabla4 · Reconstruction latency",
+      "label": "VGG-T³ · Paper tabla4 · Reconstruction latency",
       "group": "Papers originales · Tablas de referencia",
       "dataset": "Benchmarks publicados",
       "case": "Reconstruction latency",
@@ -9682,7 +9682,7 @@
     },
     {
       "id": "c3vd-vggt_ft-derived",
-      "label": "VGGT · fine-tuning C3VD · ruta D+K+pose",
+      "label": "VGGT-C3VD histórico 30ep · ruta D+K+pose",
       "group": "C3VD · Ruta derivada común · VGGT y VGG-T³",
       "dataset": "C3VD",
       "case": "trans_t4_b",
@@ -9740,7 +9740,8 @@
           "value": 10.975794494152069
         }
       ],
-      "cloud_id": null
+      "cloud_id": null,
+      "checkpoint_identity_note": "Historical c3vd_baseline_heads_30ep.pt; not the controlled C3VD R1 checkpoint."
     },
     {
       "id": "vggt-review-heldout_sequence_same_phantom-VGGT_ZS",
@@ -9911,7 +9912,7 @@
     },
     {
       "id": "vggt-review-heldout_sequence_same_phantom-VGGT_FT",
-      "label": "VGGT FT 30ep · reservadas C3VD",
+      "label": "VGGT-C3VD histórico 30ep · reservadas C3VD",
       "group": "VGGT · C3VD recuperado · 50 vistas",
       "dataset": "C3VD",
       "case": "heldout_sequence_same_phantom",
@@ -10074,7 +10075,8 @@
           "value": 5.619760036468506
         }
       ],
-      "cloud_id": null
+      "cloud_id": null,
+      "checkpoint_identity_note": "Historical c3vd_baseline_heads_30ep.pt; not the controlled C3VD R1 checkpoint."
     },
     {
       "id": "vggt-review-validation_selection-VGGT_ZS",
@@ -10245,7 +10247,7 @@
     },
     {
       "id": "vggt-review-validation_selection-VGGT_FT",
-      "label": "VGGT FT 30ep · validación C3VD",
+      "label": "VGGT-C3VD histórico 30ep · validación C3VD",
       "group": "VGGT · C3VD recuperado · 50 vistas",
       "dataset": "C3VD",
       "case": "validation_selection",
@@ -10408,7 +10410,8 @@
           "value": 5.623108863830566
         }
       ],
-      "cloud_id": null
+      "cloud_id": null,
+      "checkpoint_identity_note": "Historical c3vd_baseline_heads_30ep.pt; not the controlled C3VD R1 checkpoint."
     },
     {
       "id": "vggt-p1-train-VGGT_ZS",
@@ -10516,7 +10519,7 @@
     },
     {
       "id": "vggt-p1-train-VGGT_FT",
-      "label": "VGGT C3VD-FT · SCARED N1 · train",
+      "label": "VGGT-C3VD histórico 30ep → SCARED · SCARED N1 · train",
       "group": "VGGT · SCARED · Fase1 N1",
       "dataset": "SCARED",
       "case": "train",
@@ -10616,7 +10619,8 @@
           "value": 0.6835975192544668
         }
       ],
-      "cloud_id": null
+      "cloud_id": null,
+      "checkpoint_identity_note": "Historical c3vd_baseline_heads_30ep.pt; not the controlled C3VD R1 checkpoint."
     },
     {
       "id": "vggt-p1-validation-VGGT_ZS",
@@ -10724,7 +10728,7 @@
     },
     {
       "id": "vggt-p1-validation-VGGT_FT",
-      "label": "VGGT C3VD-FT · SCARED N1 · validation",
+      "label": "VGGT-C3VD histórico 30ep → SCARED · SCARED N1 · validation",
       "group": "VGGT · SCARED · Fase1 N1",
       "dataset": "SCARED",
       "case": "validation",
@@ -10824,7 +10828,8 @@
           "value": 0.6712790814404067
         }
       ],
-      "cloud_id": null
+      "cloud_id": null,
+      "checkpoint_identity_note": "Historical c3vd_baseline_heads_30ep.pt; not the controlled C3VD R1 checkpoint."
     },
     {
       "id": "vggt-p1-reserved-VGGT_ZS",
@@ -10932,7 +10937,7 @@
     },
     {
       "id": "vggt-p1-reserved-VGGT_FT",
-      "label": "VGGT C3VD-FT · SCARED N1 · reserved",
+      "label": "VGGT-C3VD histórico 30ep → SCARED · SCARED N1 · reserved",
       "group": "VGGT · SCARED · Fase1 N1",
       "dataset": "SCARED",
       "case": "reserved",
@@ -11032,7 +11037,8 @@
           "value": 0.6755789748954082
         }
       ],
-      "cloud_id": null
+      "cloud_id": null,
+      "checkpoint_identity_note": "Historical c3vd_baseline_heads_30ep.pt; not the controlled C3VD R1 checkpoint."
     },
     {
       "id": "vggt-c3vd-r1-final-trans4",
@@ -11337,6 +11343,1054 @@
         }
       ],
       "cloud_id": "vggt-c3vd-r1-best-trans1a"
+    },
+    {
+      "id": "vggt-scared-review-all-validation-N1-VGGT_ZS",
+      "label": "VGGT oficial zero-shot · validation · N=1",
+      "group": "VGGT · SCARED · evaluación uniforme actual",
+      "dataset": "SCARED",
+      "case": "validation · 5 anclas · N=1",
+      "kind": "metrics",
+      "comparison_key": "VGGT-SCARED-review|all_measured_anchors_N1|validation|N1|GT-anchor|known-K|shared-D-scale|noICP",
+      "context": "all_measured_anchors_N1; same measured support per comparison, equal datasets inside split. RGB266×336; one GT depth scale; known K; no ICP. No measured temporal ATE/RPE.",
+      "values": [
+        {
+          "key": "AbsRel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.18597138662265528
+        },
+        {
+          "key": "delta1",
+          "label": "δ1",
+          "unit": "%",
+          "higher": true,
+          "value": 69.71712992146703
+        },
+        {
+          "key": "XYZ_cm",
+          "label": "XYZ local",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.3160903891031484
+        },
+        {
+          "key": "p95_cm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 3.03405867923937
+        },
+        {
+          "key": "CD_cm",
+          "label": "CD sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.8251426542461028
+        },
+        {
+          "key": "NC",
+          "label": "NC",
+          "unit": "",
+          "higher": true,
+          "value": 0.6950906077246756
+        },
+        {
+          "key": "focal_error_pct",
+          "label": "Error focal",
+          "unit": "%",
+          "higher": false,
+          "value": 111.45684719085693
+        }
+      ],
+      "cloud_id": null
+    },
+    {
+      "id": "vggt-scared-review-all-validation-N1-VGGT_SCARED_BEST",
+      "label": "VGGT-SCARED depth-v2 BEST500 · validation · N=1",
+      "group": "VGGT · SCARED · evaluación uniforme actual",
+      "dataset": "SCARED",
+      "case": "validation · 5 anclas · N=1",
+      "kind": "metrics",
+      "comparison_key": "VGGT-SCARED-review|all_measured_anchors_N1|validation|N1|GT-anchor|known-K|shared-D-scale|noICP",
+      "context": "all_measured_anchors_N1; same measured support per comparison, equal datasets inside split. RGB266×336; one GT depth scale; known K; no ICP. No measured temporal ATE/RPE.",
+      "values": [
+        {
+          "key": "AbsRel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.11811680547825874
+        },
+        {
+          "key": "delta1",
+          "label": "δ1",
+          "unit": "%",
+          "higher": true,
+          "value": 81.46271746190217
+        },
+        {
+          "key": "XYZ_cm",
+          "label": "XYZ local",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.9175891002566176
+        },
+        {
+          "key": "p95_cm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 2.1210075575461893
+        },
+        {
+          "key": "CD_cm",
+          "label": "CD sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.4656807466572378
+        },
+        {
+          "key": "NC",
+          "label": "NC",
+          "unit": "",
+          "higher": true,
+          "value": 0.6814968732468024
+        },
+        {
+          "key": "focal_error_pct",
+          "label": "Error focal",
+          "unit": "%",
+          "higher": false,
+          "value": 111.45684719085693
+        }
+      ],
+      "cloud_id": null
+    },
+    {
+      "id": "vggt-scared-review-all-validation-N1-VGGT_SCARED_FINAL",
+      "label": "VGGT-SCARED depth-v2 FINAL3000 · validation · N=1",
+      "group": "VGGT · SCARED · evaluación uniforme actual",
+      "dataset": "SCARED",
+      "case": "validation · 5 anclas · N=1",
+      "kind": "metrics",
+      "comparison_key": "VGGT-SCARED-review|all_measured_anchors_N1|validation|N1|GT-anchor|known-K|shared-D-scale|noICP",
+      "context": "all_measured_anchors_N1; same measured support per comparison, equal datasets inside split. RGB266×336; one GT depth scale; known K; no ICP. No measured temporal ATE/RPE.",
+      "values": [
+        {
+          "key": "AbsRel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.11862550199210681
+        },
+        {
+          "key": "delta1",
+          "label": "δ1",
+          "unit": "%",
+          "higher": true,
+          "value": 81.26015365666748
+        },
+        {
+          "key": "XYZ_cm",
+          "label": "XYZ local",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.90469368358246
+        },
+        {
+          "key": "p95_cm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 2.0777112897334145
+        },
+        {
+          "key": "CD_cm",
+          "label": "CD sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.4692864881971337
+        },
+        {
+          "key": "NC",
+          "label": "NC",
+          "unit": "",
+          "higher": true,
+          "value": 0.6985196614641701
+        },
+        {
+          "key": "focal_error_pct",
+          "label": "Error focal",
+          "unit": "%",
+          "higher": false,
+          "value": 111.45684719085693
+        }
+      ],
+      "cloud_id": null
+    },
+    {
+      "id": "vggt-scared-review-all-validation-N1-VGGT_C3VD_R1_FINAL",
+      "label": "VGGT-C3VD R1 FINAL3000 → SCARED · validation · N=1",
+      "group": "VGGT · SCARED · evaluación uniforme actual",
+      "dataset": "SCARED",
+      "case": "validation · 5 anclas · N=1",
+      "kind": "metrics",
+      "comparison_key": "VGGT-SCARED-review|all_measured_anchors_N1|validation|N1|GT-anchor|known-K|shared-D-scale|noICP",
+      "context": "all_measured_anchors_N1; same measured support per comparison, equal datasets inside split. RGB266×336; one GT depth scale; known K; no ICP. No measured temporal ATE/RPE.",
+      "values": [
+        {
+          "key": "AbsRel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.16563489865647774
+        },
+        {
+          "key": "delta1",
+          "label": "δ1",
+          "unit": "%",
+          "higher": true,
+          "value": 70.17179513152918
+        },
+        {
+          "key": "XYZ_cm",
+          "label": "XYZ local",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.270664211999174
+        },
+        {
+          "key": "p95_cm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 3.3977896867007704
+        },
+        {
+          "key": "CD_cm",
+          "label": "CD sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.699305318934112
+        },
+        {
+          "key": "NC",
+          "label": "NC",
+          "unit": "",
+          "higher": true,
+          "value": 0.6380314414952613
+        },
+        {
+          "key": "focal_error_pct",
+          "label": "Error focal",
+          "unit": "%",
+          "higher": false,
+          "value": 24.72198247909546
+        }
+      ],
+      "cloud_id": null
+    },
+    {
+      "id": "vggt-scared-review-all-reserved-N1-VGGT_ZS",
+      "label": "VGGT oficial zero-shot · reserved · N=1",
+      "group": "VGGT · SCARED · evaluación uniforme actual",
+      "dataset": "SCARED",
+      "case": "reserved · 10 anclas · N=1",
+      "kind": "metrics",
+      "comparison_key": "VGGT-SCARED-review|all_measured_anchors_N1|reserved|N1|GT-anchor|known-K|shared-D-scale|noICP",
+      "context": "all_measured_anchors_N1; same measured support per comparison, equal datasets inside split. RGB266×336; one GT depth scale; known K; no ICP. No measured temporal ATE/RPE.",
+      "values": [
+        {
+          "key": "AbsRel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.09108588576609614
+        },
+        {
+          "key": "delta1",
+          "label": "δ1",
+          "unit": "%",
+          "higher": true,
+          "value": 93.16180018613557
+        },
+        {
+          "key": "XYZ_cm",
+          "label": "XYZ local",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.5718892965431713
+        },
+        {
+          "key": "p95_cm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.482269926675666
+        },
+        {
+          "key": "CD_cm",
+          "label": "CD sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.38010652822923985
+        },
+        {
+          "key": "NC",
+          "label": "NC",
+          "unit": "",
+          "higher": true,
+          "value": 0.7771357146840787
+        },
+        {
+          "key": "focal_error_pct",
+          "label": "Error focal",
+          "unit": "%",
+          "higher": false,
+          "value": 67.71673828363419
+        }
+      ],
+      "cloud_id": null
+    },
+    {
+      "id": "vggt-scared-review-all-reserved-N1-VGGT_SCARED_BEST",
+      "label": "VGGT-SCARED depth-v2 BEST500 · reserved · N=1",
+      "group": "VGGT · SCARED · evaluación uniforme actual",
+      "dataset": "SCARED",
+      "case": "reserved · 10 anclas · N=1",
+      "kind": "metrics",
+      "comparison_key": "VGGT-SCARED-review|all_measured_anchors_N1|reserved|N1|GT-anchor|known-K|shared-D-scale|noICP",
+      "context": "all_measured_anchors_N1; same measured support per comparison, equal datasets inside split. RGB266×336; one GT depth scale; known K; no ICP. No measured temporal ATE/RPE.",
+      "values": [
+        {
+          "key": "AbsRel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.07738407127340856
+        },
+        {
+          "key": "delta1",
+          "label": "δ1",
+          "unit": "%",
+          "higher": true,
+          "value": 95.33925064496947
+        },
+        {
+          "key": "XYZ_cm",
+          "label": "XYZ local",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.529617311577719
+        },
+        {
+          "key": "p95_cm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.6031973986995927
+        },
+        {
+          "key": "CD_cm",
+          "label": "CD sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.27922732634220193
+        },
+        {
+          "key": "NC",
+          "label": "NC",
+          "unit": "",
+          "higher": true,
+          "value": 0.718475685486801
+        },
+        {
+          "key": "focal_error_pct",
+          "label": "Error focal",
+          "unit": "%",
+          "higher": false,
+          "value": 67.71673828363419
+        }
+      ],
+      "cloud_id": null
+    },
+    {
+      "id": "vggt-scared-review-all-reserved-N1-VGGT_SCARED_FINAL",
+      "label": "VGGT-SCARED depth-v2 FINAL3000 · reserved · N=1",
+      "group": "VGGT · SCARED · evaluación uniforme actual",
+      "dataset": "SCARED",
+      "case": "reserved · 10 anclas · N=1",
+      "kind": "metrics",
+      "comparison_key": "VGGT-SCARED-review|all_measured_anchors_N1|reserved|N1|GT-anchor|known-K|shared-D-scale|noICP",
+      "context": "all_measured_anchors_N1; same measured support per comparison, equal datasets inside split. RGB266×336; one GT depth scale; known K; no ICP. No measured temporal ATE/RPE.",
+      "values": [
+        {
+          "key": "AbsRel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.06983995337045101
+        },
+        {
+          "key": "delta1",
+          "label": "δ1",
+          "unit": "%",
+          "higher": true,
+          "value": 96.69859785222204
+        },
+        {
+          "key": "XYZ_cm",
+          "label": "XYZ local",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.4770905621491619
+        },
+        {
+          "key": "p95_cm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.4393429466705143
+        },
+        {
+          "key": "CD_cm",
+          "label": "CD sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.2659692069890642
+        },
+        {
+          "key": "NC",
+          "label": "NC",
+          "unit": "",
+          "higher": true,
+          "value": 0.7526660996181721
+        },
+        {
+          "key": "focal_error_pct",
+          "label": "Error focal",
+          "unit": "%",
+          "higher": false,
+          "value": 67.71673828363419
+        }
+      ],
+      "cloud_id": null
+    },
+    {
+      "id": "vggt-scared-review-all-reserved-N1-VGGT_C3VD_R1_FINAL",
+      "label": "VGGT-C3VD R1 FINAL3000 → SCARED · reserved · N=1",
+      "group": "VGGT · SCARED · evaluación uniforme actual",
+      "dataset": "SCARED",
+      "case": "reserved · 10 anclas · N=1",
+      "kind": "metrics",
+      "comparison_key": "VGGT-SCARED-review|all_measured_anchors_N1|reserved|N1|GT-anchor|known-K|shared-D-scale|noICP",
+      "context": "all_measured_anchors_N1; same measured support per comparison, equal datasets inside split. RGB266×336; one GT depth scale; known K; no ICP. No measured temporal ATE/RPE.",
+      "values": [
+        {
+          "key": "AbsRel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.1093718867461869
+        },
+        {
+          "key": "delta1",
+          "label": "δ1",
+          "unit": "%",
+          "higher": true,
+          "value": 87.85156970475
+        },
+        {
+          "key": "XYZ_cm",
+          "label": "XYZ local",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.7673085795358536
+        },
+        {
+          "key": "p95_cm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 2.2434944355079125
+        },
+        {
+          "key": "CD_cm",
+          "label": "CD sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.4554197309024348
+        },
+        {
+          "key": "NC",
+          "label": "NC",
+          "unit": "",
+          "higher": true,
+          "value": 0.6651824091080863
+        },
+        {
+          "key": "focal_error_pct",
+          "label": "Error focal",
+          "unit": "%",
+          "higher": false,
+          "value": 19.442081451416016
+        }
+      ],
+      "cloud_id": null
+    },
+    {
+      "id": "vggt-scared-review-context-validation-N50-VGGT_ZS",
+      "label": "VGGT oficial zero-shot · validation · N=50",
+      "group": "VGGT · SCARED · evaluación uniforme actual",
+      "dataset": "SCARED",
+      "case": "validation · 4 anclas · N=50",
+      "kind": "metrics",
+      "comparison_key": "VGGT-SCARED-review|video_eligible_constant|validation|N50|GT-anchor|known-K|shared-D-scale|noICP",
+      "context": "video_eligible_constant; same measured support per comparison, equal datasets inside split. RGB266×336; one GT depth scale; known K; no ICP. No measured temporal ATE/RPE.",
+      "values": [
+        {
+          "key": "AbsRel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.1764148059524151
+        },
+        {
+          "key": "delta1",
+          "label": "δ1",
+          "unit": "%",
+          "higher": true,
+          "value": 70.96087475846666
+        },
+        {
+          "key": "XYZ_cm",
+          "label": "XYZ local",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.2764033333762597
+        },
+        {
+          "key": "p95_cm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 3.0840030478594143
+        },
+        {
+          "key": "CD_cm",
+          "label": "CD sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.7671938270098717
+        },
+        {
+          "key": "NC",
+          "label": "NC",
+          "unit": "",
+          "higher": true,
+          "value": 0.7165608588201854
+        },
+        {
+          "key": "focal_error_pct",
+          "label": "Error focal",
+          "unit": "%",
+          "higher": false,
+          "value": 51.88249871134758
+        },
+        {
+          "key": "agreement_5pct",
+          "label": "Acuerdo multivista",
+          "unit": "%",
+          "higher": true,
+          "value": 90.48247848027118
+        }
+      ],
+      "cloud_id": null
+    },
+    {
+      "id": "vggt-scared-review-context-validation-N50-VGGT_SCARED_BEST",
+      "label": "VGGT-SCARED depth-v2 BEST500 · validation · N=50",
+      "group": "VGGT · SCARED · evaluación uniforme actual",
+      "dataset": "SCARED",
+      "case": "validation · 4 anclas · N=50",
+      "kind": "metrics",
+      "comparison_key": "VGGT-SCARED-review|video_eligible_constant|validation|N50|GT-anchor|known-K|shared-D-scale|noICP",
+      "context": "video_eligible_constant; same measured support per comparison, equal datasets inside split. RGB266×336; one GT depth scale; known K; no ICP. No measured temporal ATE/RPE.",
+      "values": [
+        {
+          "key": "AbsRel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.12021653213508843
+        },
+        {
+          "key": "delta1",
+          "label": "δ1",
+          "unit": "%",
+          "higher": true,
+          "value": 82.11373879008198
+        },
+        {
+          "key": "XYZ_cm",
+          "label": "XYZ local",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.9918045538366853
+        },
+        {
+          "key": "p95_cm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 2.504191467215003
+        },
+        {
+          "key": "CD_cm",
+          "label": "CD sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.5142523912715468
+        },
+        {
+          "key": "NC",
+          "label": "NC",
+          "unit": "",
+          "higher": true,
+          "value": 0.6959914900909374
+        },
+        {
+          "key": "focal_error_pct",
+          "label": "Error focal",
+          "unit": "%",
+          "higher": false,
+          "value": 51.88249871134758
+        },
+        {
+          "key": "agreement_5pct",
+          "label": "Acuerdo multivista",
+          "unit": "%",
+          "higher": true,
+          "value": 86.69605201049974
+        }
+      ],
+      "cloud_id": null
+    },
+    {
+      "id": "vggt-scared-review-context-validation-N50-VGGT_SCARED_FINAL",
+      "label": "VGGT-SCARED depth-v2 FINAL3000 · validation · N=50",
+      "group": "VGGT · SCARED · evaluación uniforme actual",
+      "dataset": "SCARED",
+      "case": "validation · 4 anclas · N=50",
+      "kind": "metrics",
+      "comparison_key": "VGGT-SCARED-review|video_eligible_constant|validation|N50|GT-anchor|known-K|shared-D-scale|noICP",
+      "context": "video_eligible_constant; same measured support per comparison, equal datasets inside split. RGB266×336; one GT depth scale; known K; no ICP. No measured temporal ATE/RPE.",
+      "values": [
+        {
+          "key": "AbsRel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.1324868473955592
+        },
+        {
+          "key": "delta1",
+          "label": "δ1",
+          "unit": "%",
+          "higher": true,
+          "value": 77.70737320124178
+        },
+        {
+          "key": "XYZ_cm",
+          "label": "XYZ local",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.0500520268611815
+        },
+        {
+          "key": "p95_cm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 2.60788990424654
+        },
+        {
+          "key": "CD_cm",
+          "label": "CD sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.5592817796262989
+        },
+        {
+          "key": "NC",
+          "label": "NC",
+          "unit": "",
+          "higher": true,
+          "value": 0.7003847827936435
+        },
+        {
+          "key": "focal_error_pct",
+          "label": "Error focal",
+          "unit": "%",
+          "higher": false,
+          "value": 51.88249871134758
+        },
+        {
+          "key": "agreement_5pct",
+          "label": "Acuerdo multivista",
+          "unit": "%",
+          "higher": true,
+          "value": 92.35938858475933
+        }
+      ],
+      "cloud_id": null
+    },
+    {
+      "id": "vggt-scared-review-context-validation-N50-VGGT_C3VD_R1_FINAL",
+      "label": "VGGT-C3VD R1 FINAL3000 → SCARED · validation · N=50",
+      "group": "VGGT · SCARED · evaluación uniforme actual",
+      "dataset": "SCARED",
+      "case": "validation · 4 anclas · N=50",
+      "kind": "metrics",
+      "comparison_key": "VGGT-SCARED-review|video_eligible_constant|validation|N50|GT-anchor|known-K|shared-D-scale|noICP",
+      "context": "video_eligible_constant; same measured support per comparison, equal datasets inside split. RGB266×336; one GT depth scale; known K; no ICP. No measured temporal ATE/RPE.",
+      "values": [
+        {
+          "key": "AbsRel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.18333416211629255
+        },
+        {
+          "key": "delta1",
+          "label": "δ1",
+          "unit": "%",
+          "higher": true,
+          "value": 68.42089749493255
+        },
+        {
+          "key": "XYZ_cm",
+          "label": "XYZ local",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.3776566672905552
+        },
+        {
+          "key": "p95_cm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 3.6143531293426086
+        },
+        {
+          "key": "CD_cm",
+          "label": "CD sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.7592159464819282
+        },
+        {
+          "key": "NC",
+          "label": "NC",
+          "unit": "",
+          "higher": true,
+          "value": 0.6460529864881995
+        },
+        {
+          "key": "focal_error_pct",
+          "label": "Error focal",
+          "unit": "%",
+          "higher": false,
+          "value": 23.958058282732964
+        },
+        {
+          "key": "agreement_5pct",
+          "label": "Acuerdo multivista",
+          "unit": "%",
+          "higher": true,
+          "value": 91.52643311120721
+        }
+      ],
+      "cloud_id": null
+    },
+    {
+      "id": "vggt-scared-review-context-reserved-N50-VGGT_ZS",
+      "label": "VGGT oficial zero-shot · reserved · N=50",
+      "group": "VGGT · SCARED · evaluación uniforme actual",
+      "dataset": "SCARED",
+      "case": "reserved · 8 anclas · N=50",
+      "kind": "metrics",
+      "comparison_key": "VGGT-SCARED-review|video_eligible_constant|reserved|N50|GT-anchor|known-K|shared-D-scale|noICP",
+      "context": "video_eligible_constant; same measured support per comparison, equal datasets inside split. RGB266×336; one GT depth scale; known K; no ICP. No measured temporal ATE/RPE.",
+      "values": [
+        {
+          "key": "AbsRel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.07860792903854737
+        },
+        {
+          "key": "delta1",
+          "label": "δ1",
+          "unit": "%",
+          "higher": true,
+          "value": 93.89757838322377
+        },
+        {
+          "key": "XYZ_cm",
+          "label": "XYZ local",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.5438275915149351
+        },
+        {
+          "key": "p95_cm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.4252760034465248
+        },
+        {
+          "key": "CD_cm",
+          "label": "CD sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.36084397588288125
+        },
+        {
+          "key": "NC",
+          "label": "NC",
+          "unit": "",
+          "higher": true,
+          "value": 0.7810183797095185
+        },
+        {
+          "key": "focal_error_pct",
+          "label": "Error focal",
+          "unit": "%",
+          "higher": false,
+          "value": 79.6584915369749
+        },
+        {
+          "key": "agreement_5pct",
+          "label": "Acuerdo multivista",
+          "unit": "%",
+          "higher": true,
+          "value": 95.2366473198734
+        }
+      ],
+      "cloud_id": null
+    },
+    {
+      "id": "vggt-scared-review-context-reserved-N50-VGGT_SCARED_BEST",
+      "label": "VGGT-SCARED depth-v2 BEST500 · reserved · N=50",
+      "group": "VGGT · SCARED · evaluación uniforme actual",
+      "dataset": "SCARED",
+      "case": "reserved · 8 anclas · N=50",
+      "kind": "metrics",
+      "comparison_key": "VGGT-SCARED-review|video_eligible_constant|reserved|N50|GT-anchor|known-K|shared-D-scale|noICP",
+      "context": "video_eligible_constant; same measured support per comparison, equal datasets inside split. RGB266×336; one GT depth scale; known K; no ICP. No measured temporal ATE/RPE.",
+      "values": [
+        {
+          "key": "AbsRel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.045238950307586276
+        },
+        {
+          "key": "delta1",
+          "label": "δ1",
+          "unit": "%",
+          "higher": true,
+          "value": 99.55259663469917
+        },
+        {
+          "key": "XYZ_cm",
+          "label": "XYZ local",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.3243876033019927
+        },
+        {
+          "key": "p95_cm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.9302003886058342
+        },
+        {
+          "key": "CD_cm",
+          "label": "CD sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.17176239623865378
+        },
+        {
+          "key": "NC",
+          "label": "NC",
+          "unit": "",
+          "higher": true,
+          "value": 0.7457811936028845
+        },
+        {
+          "key": "focal_error_pct",
+          "label": "Error focal",
+          "unit": "%",
+          "higher": false,
+          "value": 79.6584915369749
+        },
+        {
+          "key": "agreement_5pct",
+          "label": "Acuerdo multivista",
+          "unit": "%",
+          "higher": true,
+          "value": 91.33063717525339
+        }
+      ],
+      "cloud_id": null
+    },
+    {
+      "id": "vggt-scared-review-context-reserved-N50-VGGT_SCARED_FINAL",
+      "label": "VGGT-SCARED depth-v2 FINAL3000 · reserved · N=50",
+      "group": "VGGT · SCARED · evaluación uniforme actual",
+      "dataset": "SCARED",
+      "case": "reserved · 8 anclas · N=50",
+      "kind": "metrics",
+      "comparison_key": "VGGT-SCARED-review|video_eligible_constant|reserved|N50|GT-anchor|known-K|shared-D-scale|noICP",
+      "context": "video_eligible_constant; same measured support per comparison, equal datasets inside split. RGB266×336; one GT depth scale; known K; no ICP. No measured temporal ATE/RPE.",
+      "values": [
+        {
+          "key": "AbsRel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.04466375569548793
+        },
+        {
+          "key": "delta1",
+          "label": "δ1",
+          "unit": "%",
+          "higher": true,
+          "value": 99.50016739147037
+        },
+        {
+          "key": "XYZ_cm",
+          "label": "XYZ local",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.3262181821156587
+        },
+        {
+          "key": "p95_cm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.9381755464323249
+        },
+        {
+          "key": "CD_cm",
+          "label": "CD sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.1821301904159383
+        },
+        {
+          "key": "NC",
+          "label": "NC",
+          "unit": "",
+          "higher": true,
+          "value": 0.7689518979769769
+        },
+        {
+          "key": "focal_error_pct",
+          "label": "Error focal",
+          "unit": "%",
+          "higher": false,
+          "value": 79.6584915369749
+        },
+        {
+          "key": "agreement_5pct",
+          "label": "Acuerdo multivista",
+          "unit": "%",
+          "higher": true,
+          "value": 96.75277034251887
+        }
+      ],
+      "cloud_id": null
+    },
+    {
+      "id": "vggt-scared-review-context-reserved-N50-VGGT_C3VD_R1_FINAL",
+      "label": "VGGT-C3VD R1 FINAL3000 → SCARED · reserved · N=50",
+      "group": "VGGT · SCARED · evaluación uniforme actual",
+      "dataset": "SCARED",
+      "case": "reserved · 8 anclas · N=50",
+      "kind": "metrics",
+      "comparison_key": "VGGT-SCARED-review|video_eligible_constant|reserved|N50|GT-anchor|known-K|shared-D-scale|noICP",
+      "context": "video_eligible_constant; same measured support per comparison, equal datasets inside split. RGB266×336; one GT depth scale; known K; no ICP. No measured temporal ATE/RPE.",
+      "values": [
+        {
+          "key": "AbsRel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.12264668161786343
+        },
+        {
+          "key": "delta1",
+          "label": "δ1",
+          "unit": "%",
+          "higher": true,
+          "value": 86.88457041975948
+        },
+        {
+          "key": "XYZ_cm",
+          "label": "XYZ local",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.905305129704606
+        },
+        {
+          "key": "p95_cm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 2.447989128635695
+        },
+        {
+          "key": "CD_cm",
+          "label": "CD sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.5248721563888616
+        },
+        {
+          "key": "NC",
+          "label": "NC",
+          "unit": "",
+          "higher": true,
+          "value": 0.641623719791774
+        },
+        {
+          "key": "focal_error_pct",
+          "label": "Error focal",
+          "unit": "%",
+          "higher": false,
+          "value": 18.050842732191086
+        },
+        {
+          "key": "agreement_5pct",
+          "label": "Acuerdo multivista",
+          "unit": "%",
+          "higher": true,
+          "value": 95.11154578698708
+        }
+      ],
+      "cloud_id": null
     }
   ],
   "no_metric_recalculation": true,

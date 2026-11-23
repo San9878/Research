@@ -1,0 +1,26 @@
+{
+  "VGGT_ZS": {
+    "label": "VGGT oficial zero-shot",
+    "file": "model.safetensors",
+    "SHA256": "f164acf60724910d8fe1578bb499d800850c7bb0948db7555c413f9fbe60467e",
+    "training_domain": "none"
+  },
+  "VGGT_SCARED_BEST": {
+    "label": "VGGT-SCARED depth-v2 BEST500",
+    "file": "best_depth.pt",
+    "SHA256": "3733885c17c84281e1cc035957d8e47be0e1d39cb01f51a6b432efeb79f05a7a",
+    "training_domain": "SCARED"
+  },
+  "VGGT_SCARED_FINAL": {
+    "label": "VGGT-SCARED depth-v2 FINAL3000",
+    "file": "final_depth.pt",
+    "SHA256": "c8b142f7fc2c982b3050547fd4b749ca75313afbd092cfd90eaafa30978b52ae",
+    "training_domain": "SCARED"
+  },
+  "VGGT_C3VD_R1_FINAL": {
+    "label": "VGGT-C3VD R1 FINAL3000 → SCARED",
+    "file": "final_heads.pt",
+    "SHA256": "cf0bbc6f044fc7f23986b9d33112d20f46f1377d6b3c395a73a39be268fd1cf3",
+    "training_domain": "C3VD"
+  }
+}
