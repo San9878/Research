@@ -1,0 +1,154 @@
+{
+  "passed": true,
+  "training_steps_executed_by_this_audit": 0,
+  "checkpoints": [
+    {
+      "file": "last.pt",
+      "SHA256": "0947fcf9244322a0e444feeebc86f84be3c02b0bdd1da50e591525a8f0ba7c67",
+      "cursor": 3000,
+      "optimizer_present": true,
+      "optimizer_states": 131,
+      "optimizer_steps": [
+        3000
+      ],
+      "RNG_components": [
+        "CPU",
+        "CUDA",
+        "numpy",
+        "python"
+      ],
+      "scheduler": null,
+      "exact_training_resume_available": true
+    },
+    {
+      "file": "final_heads.pt",
+      "SHA256": "cf0bbc6f044fc7f23986b9d33112d20f46f1377d6b3c395a73a39be268fd1cf3",
+      "cursor": 3000,
+      "optimizer_present": false,
+      "optimizer_states": 0,
+      "optimizer_steps": [],
+      "RNG_components": [
+        "CPU",
+        "CUDA",
+        "numpy",
+        "python"
+      ],
+      "scheduler": null,
+      "exact_training_resume_available": false
+    },
+    {
+      "file": "best_diagnostic_heads.pt",
+      "SHA256": "b946a9bd9a57a2e1eff247117c4caa0eb263021d9474e2aa319a48e77c140cc6",
+      "cursor": 800,
+      "optimizer_present": false,
+      "optimizer_states": 0,
+      "optimizer_steps": [],
+      "RNG_components": [
+        "CPU",
+        "CUDA",
+        "numpy",
+        "python"
+      ],
+      "scheduler": null,
+      "exact_training_resume_available": false
+    }
+  ],
+  "training_source_hashes_unchanged": true,
+  "calendar_SHA256": "b9350e43169439fc453f113d1b2feee50457cd2f718a5f37a6b3086053c1f6b9",
+  "data_manifest_SHA256": "323d1180a0758f4b787fd922729bd2ca0dfdf0e91c86383c32f116f943d04a95",
+  "training_config_SHA256": "9d467221c4a0a890ee11f054739c9c4139d9422795647b9bb2329104ad7ed7f4",
+  "effective_config_SHA256": "b7d79e645a43950dd181ffe5a2e57049878441bef1e6a3e601eb3b6821513506",
+  "short_resume_test_reused": {
+    "file": "R06_resume.json",
+    "SHA256": "6d5a1cb2c215457798ae7c3915c8c8ce4f56afbf2800911087b1c52df65d9180",
+    "exact_bitwise_match": true,
+    "heads_optimizer_RNG_and_second_step_identical": true
+  },
+  "production_history_unique_updates": 3000,
+  "replayed_updates": [
+    1501,
+    1502,
+    1503,
+    1504,
+    1505,
+    1506,
+    1507,
+    1508,
+    1509,
+    1510,
+    1511,
+    1512,
+    1513,
+    1514,
+    1515,
+    1516,
+    1517,
+    1518,
+    1519,
+    2401,
+    2402,
+    2403,
+    2404,
+    2405,
+    2406,
+    2407,
+    2408,
+    2409,
+    2410,
+    2411,
+    2412,
+    2413,
+    2414,
+    2415,
+    2416,
+    2417,
+    2418
+  ],
+  "all_replayed_sample_batch_loss_identical": true,
+  "FINAL_frozen_encoder_1210_bitwise_official": true,
+  "BEST800_integrity": {
+    "passed": true,
+    "frozen_tensors_bitwise_official": 1210,
+    "strict_head_load": true,
+    "head_SHA256": "d76d86873ea62968112f38005e91c8670165cb1c417b0d9c0a6f44cf8b76a41f",
+    "checkpoint_SHA256": "b946a9bd9a57a2e1eff247117c4caa0eb263021d9474e2aa319a48e77c140cc6",
+    "FINAL_prediction_replay_max_abs": {
+      "depth": 0.0,
+      "confidence": 0.0,
+      "poses": 0.0,
+      "predicted_intrinsics": 0.0
+    },
+    "memory_gate": {
+      "passed": true,
+      "probe_views": 3,
+      "feature_max_difference": 0.0,
+      "output_max_differences": {
+        "depth": 0.0,
+        "confidence": 0.0,
+        "poses": 0.0,
+        "predicted_intrinsics": 0.0
+      },
+      "absolute_limits": {
+        "depth": 0.0001,
+        "confidence": 0.001,
+        "poses": 0.0001,
+        "predicted_intrinsics": 0.01,
+        "direct_points": 0.0001,
+        "point_confidence": 0.001
+      },
+      "full_attention_KV_retained": true,
+      "query_chunk": 1024,
+      "frame_chunk": 4,
+      "decoder_features_CPU_offload": true,
+      "not_a_native_N50_GPU_only_equivalence_test": true
+    },
+    "resource": {
+      "GPU": "NVIDIA GeForce RTX 5060",
+      "free_VRAM_GiB": 6.8662109375,
+      "total_VRAM_GiB": 7.933349609375,
+      "free_RAM_GiB": 14.514095306396484,
+      "free_commit_GiB": 24.56427001953125
+    }
+  },
+  "scope": "Exact resume tested for the retained runtime and schedule; no cross-hardware determinism guarantee. BEST800 has RNG but no AdamW state: inference-only export, not exact resume."
+}

@@ -11033,9 +11033,314 @@
         }
       ],
       "cloud_id": null
+    },
+    {
+      "id": "vggt-c3vd-r1-final-trans4",
+      "label": "VGGT-C3VD R1 · FINAL3000 · trans_t4_b",
+      "group": "VGGT-C3VD · réplica controlada R1",
+      "dataset": "C3VD",
+      "case": "trans_t4_b",
+      "kind": "metrics",
+      "comparison_key": "P2-R1|trans_t4_b|RGB50-336|GT50|D-knownK-pose|shared-scale|noICP",
+      "context": "validation; 50 imágenes idénticas entre BEST y FINAL; todos los píxeles GT válidos. D+K calibrada+pose, escala D única. Sin ICP; ATE/RPE con Sim(3) de cámara separado. No mezclar con tablas históricas GT16/P directo.",
+      "values": [
+        {
+          "key": "r1_absrel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.13094978797671603
+        },
+        {
+          "key": "r1_delta1",
+          "label": "δ1",
+          "unit": "%",
+          "higher": true,
+          "value": 82.67078881278292
+        },
+        {
+          "key": "r1_xyz_cm",
+          "label": "XYZ medio",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.6445591797403452
+        },
+        {
+          "key": "r1_p95_cm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.6294586491894807
+        },
+        {
+          "key": "r1_cd_cm",
+          "label": "CD sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.18087308904126742
+        },
+        {
+          "key": "r1_nc",
+          "label": "NC",
+          "unit": "",
+          "higher": true,
+          "value": 0.7141660112226805
+        },
+        {
+          "key": "r1_ATE_cm",
+          "label": "ATE RMSE",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.06203489496910485
+        },
+        {
+          "key": "r1_RPEr_deg",
+          "label": "RPEr RMSE",
+          "unit": "°",
+          "higher": false,
+          "value": 0.5726692551938389
+        },
+        {
+          "key": "r1_RPEt_cm",
+          "label": "RPEt RMSE",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.043740591713598995
+        }
+      ],
+      "cloud_id": "vggt-c3vd-r1-final-trans4"
+    },
+    {
+      "id": "vggt-c3vd-r1-best-trans4",
+      "label": "VGGT-C3VD R1 · BEST800 · trans_t4_b",
+      "group": "VGGT-C3VD · réplica controlada R1",
+      "dataset": "C3VD",
+      "case": "trans_t4_b",
+      "kind": "metrics",
+      "comparison_key": "P2-R1|trans_t4_b|RGB50-336|GT50|D-knownK-pose|shared-scale|noICP",
+      "context": "validation; 50 imágenes idénticas entre BEST y FINAL; todos los píxeles GT válidos. D+K calibrada+pose, escala D única. Sin ICP; ATE/RPE con Sim(3) de cámara separado. No mezclar con tablas históricas GT16/P directo.",
+      "values": [
+        {
+          "key": "r1_absrel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.14541450229649008
+        },
+        {
+          "key": "r1_delta1",
+          "label": "δ1",
+          "unit": "%",
+          "higher": true,
+          "value": 80.8315871815485
+        },
+        {
+          "key": "r1_xyz_cm",
+          "label": "XYZ medio",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.5532865789417806
+        },
+        {
+          "key": "r1_p95_cm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.1155377603890717
+        },
+        {
+          "key": "r1_cd_cm",
+          "label": "CD sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.17201042210870932
+        },
+        {
+          "key": "r1_nc",
+          "label": "NC",
+          "unit": "",
+          "higher": true,
+          "value": 0.7227944629370557
+        },
+        {
+          "key": "r1_ATE_cm",
+          "label": "ATE RMSE",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.0786029448131398
+        },
+        {
+          "key": "r1_RPEr_deg",
+          "label": "RPEr RMSE",
+          "unit": "°",
+          "higher": false,
+          "value": 0.5555948825690129
+        },
+        {
+          "key": "r1_RPEt_cm",
+          "label": "RPEt RMSE",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.039920935245364095
+        }
+      ],
+      "cloud_id": "vggt-c3vd-r1-best-trans4"
+    },
+    {
+      "id": "vggt-c3vd-r1-final-trans1a",
+      "label": "VGGT-C3VD R1 · FINAL3000 · trans_t1_a",
+      "group": "VGGT-C3VD · réplica controlada R1",
+      "dataset": "C3VD",
+      "case": "trans_t1_a",
+      "kind": "metrics",
+      "comparison_key": "P2-R1|trans_t1_a|RGB50-336|GT50|D-knownK-pose|shared-scale|noICP",
+      "context": "reserved; 50 imágenes idénticas entre BEST y FINAL; todos los píxeles GT válidos. D+K calibrada+pose, escala D única. Sin ICP; ATE/RPE con Sim(3) de cámara separado. No mezclar con tablas históricas GT16/P directo.",
+      "values": [
+        {
+          "key": "r1_absrel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.16499837966400385
+        },
+        {
+          "key": "r1_delta1",
+          "label": "δ1",
+          "unit": "%",
+          "higher": true,
+          "value": 72.28077715415253
+        },
+        {
+          "key": "r1_xyz_cm",
+          "label": "XYZ medio",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.7077289250733338
+        },
+        {
+          "key": "r1_p95_cm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.462520063781221
+        },
+        {
+          "key": "r1_cd_cm",
+          "label": "CD sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.2048962961064747
+        },
+        {
+          "key": "r1_nc",
+          "label": "NC",
+          "unit": "",
+          "higher": true,
+          "value": 0.6884945864870535
+        },
+        {
+          "key": "r1_ATE_cm",
+          "label": "ATE RMSE",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.10965117392059325
+        },
+        {
+          "key": "r1_RPEr_deg",
+          "label": "RPEr RMSE",
+          "unit": "°",
+          "higher": false,
+          "value": 0.32350874750958913
+        },
+        {
+          "key": "r1_RPEt_cm",
+          "label": "RPEt RMSE",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.060235647512600125
+        }
+      ],
+      "cloud_id": "vggt-c3vd-r1-final-trans1a"
+    },
+    {
+      "id": "vggt-c3vd-r1-best-trans1a",
+      "label": "VGGT-C3VD R1 · BEST800 · trans_t1_a",
+      "group": "VGGT-C3VD · réplica controlada R1",
+      "dataset": "C3VD",
+      "case": "trans_t1_a",
+      "kind": "metrics",
+      "comparison_key": "P2-R1|trans_t1_a|RGB50-336|GT50|D-knownK-pose|shared-scale|noICP",
+      "context": "reserved; 50 imágenes idénticas entre BEST y FINAL; todos los píxeles GT válidos. D+K calibrada+pose, escala D única. Sin ICP; ATE/RPE con Sim(3) de cámara separado. No mezclar con tablas históricas GT16/P directo.",
+      "values": [
+        {
+          "key": "r1_absrel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.17476956339198774
+        },
+        {
+          "key": "r1_delta1",
+          "label": "δ1",
+          "unit": "%",
+          "higher": true,
+          "value": 70.71570267636707
+        },
+        {
+          "key": "r1_xyz_cm",
+          "label": "XYZ medio",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.6362447519412663
+        },
+        {
+          "key": "r1_p95_cm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.3044702944220103
+        },
+        {
+          "key": "r1_cd_cm",
+          "label": "CD sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.19904301662101892
+        },
+        {
+          "key": "r1_nc",
+          "label": "NC",
+          "unit": "",
+          "higher": true,
+          "value": 0.7186445769646843
+        },
+        {
+          "key": "r1_ATE_cm",
+          "label": "ATE RMSE",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.09415715444392317
+        },
+        {
+          "key": "r1_RPEr_deg",
+          "label": "RPEr RMSE",
+          "unit": "°",
+          "higher": false,
+          "value": 0.35393667183338895
+        },
+        {
+          "key": "r1_RPEt_cm",
+          "label": "RPEt RMSE",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.07544650917721109
+        }
+      ],
+      "cloud_id": "vggt-c3vd-r1-best-trans1a"
     }
   ],
   "no_metric_recalculation": true,
   "unit_conversion": "mm to cm only; percentages computed in UI only for identical comparison_key",
-  "paper_comparisons_are_reference_not_direct_ranking": true
+  "paper_comparisons_are_reference_not_direct_ranking": true,
+  "R1_added_from_evaluated_metrics": true
 }

@@ -1,0 +1,485 @@
+{
+  "complete": true,
+  "protocol_SHA256": "1a447bc4f1ceef51ec1e1eaf28dff054502b11a59d12ae16cf70b0350b99ba11",
+  "selection_SHA256": "5a075203d04aec7cb32457ace21c9182fcfabe8cd560980e2c0ab5ff169b0a9f",
+  "rows": [
+    {
+      "sequence": "trans_t1_a",
+      "split": "reserved",
+      "N": 50,
+      "model": "VGGT_HISTORICAL",
+      "route": "predicted_D_pose",
+      "XYZ_mean_cm": 0.6786090669050535,
+      "XYZ_p95_cm": 1.7144252952714576,
+      "all_valid_points": 5528427,
+      "depth_scale_fixed": 0.023381827369387313,
+      "original_camera_center_RMSE_common_gauge_cm": 0.48495273370394076,
+      "original_ATE_separately_Sim3_aligned_cm": 0.1461697438369779,
+      "origin": "reused verified previous control"
+    },
+    {
+      "sequence": "trans_t1_a",
+      "split": "reserved",
+      "N": 50,
+      "model": "VGGT_HISTORICAL",
+      "route": "GT_pose_predicted_D",
+      "XYZ_mean_cm": 0.4960028209810742,
+      "XYZ_p95_cm": 1.4014388388403276,
+      "all_valid_points": 5528427,
+      "depth_scale_fixed": 0.023381827369387313,
+      "original_camera_center_RMSE_common_gauge_cm": 0.48495273370394076,
+      "original_ATE_separately_Sim3_aligned_cm": 0.1461697438369779,
+      "origin": "reused verified previous control"
+    },
+    {
+      "sequence": "trans_t1_a",
+      "split": "reserved",
+      "N": 50,
+      "model": "VGGT_HISTORICAL",
+      "route": "GT_depth_predicted_pose",
+      "XYZ_mean_cm": 0.46656710037122073,
+      "XYZ_p95_cm": 0.6559752903283713,
+      "all_valid_points": 5528427,
+      "depth_scale_fixed": 0.023381827369387313,
+      "original_camera_center_RMSE_common_gauge_cm": 0.48495273370394076,
+      "original_ATE_separately_Sim3_aligned_cm": 0.1461697438369779,
+      "origin": "reused verified previous control"
+    },
+    {
+      "sequence": "trans_t1_a",
+      "split": "reserved",
+      "N": 50,
+      "model": "VGGT_HISTORICAL",
+      "route": "GT_rotation_predicted_D_translation",
+      "XYZ_mean_cm": 0.6610903421216909,
+      "XYZ_p95_cm": 1.7058244051207054,
+      "all_valid_points": 5528427,
+      "depth_scale_fixed": 0.023381827369387313,
+      "original_camera_center_RMSE_common_gauge_cm": 0.48495273370394076,
+      "original_ATE_separately_Sim3_aligned_cm": 0.1461697438369779,
+      "origin": "reused verified previous control"
+    },
+    {
+      "sequence": "trans_t1_a",
+      "split": "reserved",
+      "N": 50,
+      "model": "VGGT_HISTORICAL",
+      "route": "GT_translation_predicted_D_rotation",
+      "XYZ_mean_cm": 0.5065025624839703,
+      "XYZ_p95_cm": 1.407621459414036,
+      "all_valid_points": 5528427,
+      "depth_scale_fixed": 0.023381827369387313,
+      "original_camera_center_RMSE_common_gauge_cm": 0.48495273370394076,
+      "original_ATE_separately_Sim3_aligned_cm": 0.1461697438369779,
+      "origin": "reused verified previous control"
+    },
+    {
+      "sequence": "trans_t1_a",
+      "split": "reserved",
+      "N": 50,
+      "model": "VGGT_HISTORICAL",
+      "route": "GT_depth_GT_pose",
+      "XYZ_mean_cm": 0.0,
+      "XYZ_p95_cm": 0.0,
+      "all_valid_points": 5528427,
+      "depth_scale_fixed": 0.023381827369387313,
+      "original_camera_center_RMSE_common_gauge_cm": 0.48495273370394076,
+      "original_ATE_separately_Sim3_aligned_cm": 0.1461697438369779,
+      "origin": "reused verified previous control"
+    },
+    {
+      "sequence": "trans_t1_a",
+      "split": "reserved",
+      "N": 50,
+      "model": "R1_FINAL3000",
+      "route": "predicted_D_pose",
+      "XYZ_mean_cm": 0.7077289250733338,
+      "XYZ_p95_cm": 1.462520063781221,
+      "all_valid_points": 5528427,
+      "depth_scale_fixed": 0.020437946508594734,
+      "original_camera_center_RMSE_common_gauge_cm": 0.46769575131899643,
+      "original_ATE_separately_Sim3_aligned_cm": 0.10965117392059325,
+      "origin": "reused verified previous control"
+    },
+    {
+      "sequence": "trans_t1_a",
+      "split": "reserved",
+      "N": 50,
+      "model": "R1_FINAL3000",
+      "route": "GT_pose_predicted_D",
+      "XYZ_mean_cm": 0.5146980025606016,
+      "XYZ_p95_cm": 1.5522746964672725,
+      "all_valid_points": 5528427,
+      "depth_scale_fixed": 0.020437946508594734,
+      "original_camera_center_RMSE_common_gauge_cm": 0.46769575131899643,
+      "original_ATE_separately_Sim3_aligned_cm": 0.10965117392059325,
+      "origin": "reused verified previous control"
+    },
+    {
+      "sequence": "trans_t1_a",
+      "split": "reserved",
+      "N": 50,
+      "model": "R1_FINAL3000",
+      "route": "GT_depth_predicted_pose",
+      "XYZ_mean_cm": 0.429646269491323,
+      "XYZ_p95_cm": 0.7534634513126067,
+      "all_valid_points": 5528427,
+      "depth_scale_fixed": 0.020437946508594734,
+      "original_camera_center_RMSE_common_gauge_cm": 0.46769575131899643,
+      "original_ATE_separately_Sim3_aligned_cm": 0.10965117392059325,
+      "origin": "reused verified previous control"
+    },
+    {
+      "sequence": "trans_t1_a",
+      "split": "reserved",
+      "N": 50,
+      "model": "R1_FINAL3000",
+      "route": "GT_rotation_predicted_D_translation",
+      "XYZ_mean_cm": 0.6941344248246705,
+      "XYZ_p95_cm": 1.4621825329615787,
+      "all_valid_points": 5528427,
+      "depth_scale_fixed": 0.020437946508594734,
+      "original_camera_center_RMSE_common_gauge_cm": 0.46769575131899643,
+      "original_ATE_separately_Sim3_aligned_cm": 0.10965117392059325,
+      "origin": "reused verified previous control"
+    },
+    {
+      "sequence": "trans_t1_a",
+      "split": "reserved",
+      "N": 50,
+      "model": "R1_FINAL3000",
+      "route": "GT_translation_predicted_D_rotation",
+      "XYZ_mean_cm": 0.5282335511076983,
+      "XYZ_p95_cm": 1.560610849613561,
+      "all_valid_points": 5528427,
+      "depth_scale_fixed": 0.020437946508594734,
+      "original_camera_center_RMSE_common_gauge_cm": 0.46769575131899643,
+      "original_ATE_separately_Sim3_aligned_cm": 0.10965117392059325,
+      "origin": "reused verified previous control"
+    },
+    {
+      "sequence": "trans_t1_a",
+      "split": "reserved",
+      "N": 50,
+      "model": "R1_FINAL3000",
+      "route": "GT_depth_GT_pose",
+      "XYZ_mean_cm": 0.0,
+      "XYZ_p95_cm": 0.0,
+      "all_valid_points": 5528427,
+      "depth_scale_fixed": 0.020437946508594734,
+      "original_camera_center_RMSE_common_gauge_cm": 0.46769575131899643,
+      "original_ATE_separately_Sim3_aligned_cm": 0.10965117392059325,
+      "origin": "reused verified previous control"
+    },
+    {
+      "sequence": "trans_t1_a",
+      "split": "reserved",
+      "N": 50,
+      "model": "R1_BEST800",
+      "route": "predicted_D_pose",
+      "XYZ_mean_cm": 0.6362447519412663,
+      "XYZ_p95_cm": 1.3044702944220103,
+      "all_valid_points": 5528427,
+      "depth_scale_fixed": 0.02069978808676189,
+      "original_camera_center_RMSE_common_gauge_cm": 0.34903508087089863,
+      "original_ATE_separately_Sim3_aligned_cm": 0.09415715444392317,
+      "origin": "new BEST800 control, unchanged formulas"
+    },
+    {
+      "sequence": "trans_t1_a",
+      "split": "reserved",
+      "N": 50,
+      "model": "R1_BEST800",
+      "route": "GT_pose_predicted_D",
+      "XYZ_mean_cm": 0.5207091081861681,
+      "XYZ_p95_cm": 1.3816751210222373,
+      "all_valid_points": 5528427,
+      "depth_scale_fixed": 0.02069978808676189,
+      "original_camera_center_RMSE_common_gauge_cm": 0.34903508087089863,
+      "original_ATE_separately_Sim3_aligned_cm": 0.09415715444392317,
+      "origin": "new BEST800 control, unchanged formulas"
+    },
+    {
+      "sequence": "trans_t1_a",
+      "split": "reserved",
+      "N": 50,
+      "model": "R1_BEST800",
+      "route": "GT_depth_predicted_pose",
+      "XYZ_mean_cm": 0.34448798120339597,
+      "XYZ_p95_cm": 0.5260157005488213,
+      "all_valid_points": 5528427,
+      "depth_scale_fixed": 0.02069978808676189,
+      "original_camera_center_RMSE_common_gauge_cm": 0.34903508087089863,
+      "original_ATE_separately_Sim3_aligned_cm": 0.09415715444392317,
+      "origin": "new BEST800 control, unchanged formulas"
+    },
+    {
+      "sequence": "trans_t1_a",
+      "split": "reserved",
+      "N": 50,
+      "model": "R1_BEST800",
+      "route": "GT_rotation_predicted_D_translation",
+      "XYZ_mean_cm": 0.6279728303112609,
+      "XYZ_p95_cm": 1.2973332043516779,
+      "all_valid_points": 5528427,
+      "depth_scale_fixed": 0.02069978808676189,
+      "original_camera_center_RMSE_common_gauge_cm": 0.34903508087089863,
+      "original_ATE_separately_Sim3_aligned_cm": 0.09415715444392317,
+      "origin": "new BEST800 control, unchanged formulas"
+    },
+    {
+      "sequence": "trans_t1_a",
+      "split": "reserved",
+      "N": 50,
+      "model": "R1_BEST800",
+      "route": "GT_translation_predicted_D_rotation",
+      "XYZ_mean_cm": 0.5267664973705395,
+      "XYZ_p95_cm": 1.3838938208310452,
+      "all_valid_points": 5528427,
+      "depth_scale_fixed": 0.02069978808676189,
+      "original_camera_center_RMSE_common_gauge_cm": 0.34903508087089863,
+      "original_ATE_separately_Sim3_aligned_cm": 0.09415715444392317,
+      "origin": "new BEST800 control, unchanged formulas"
+    },
+    {
+      "sequence": "trans_t1_a",
+      "split": "reserved",
+      "N": 50,
+      "model": "R1_BEST800",
+      "route": "GT_depth_GT_pose",
+      "XYZ_mean_cm": 0.0,
+      "XYZ_p95_cm": 0.0,
+      "all_valid_points": 5528427,
+      "depth_scale_fixed": 0.02069978808676189,
+      "original_camera_center_RMSE_common_gauge_cm": 0.34903508087089863,
+      "original_ATE_separately_Sim3_aligned_cm": 0.09415715444392317,
+      "origin": "new BEST800 control, unchanged formulas"
+    }
+  ],
+  "maps": {
+    "cohort": "trans_t1_a",
+    "N": 50,
+    "selected_positions": [
+      0,
+      16,
+      33,
+      49
+    ],
+    "XYZ_color_range_cm": [
+      0,
+      2
+    ],
+    "AbsRel_color_range": [
+      0,
+      0.5
+    ],
+    "invalid_GT": "masked identically for every model"
+  },
+  "actual_frame_ids": [
+    0,
+    19,
+    40,
+    60
+  ],
+  "transforms": [
+    {
+      "model": "VGGT_ZS",
+      "prediction_SHA256": "1f83850cc970f1465327a72ba37df758f8537dbc40709e7c3e2a738128230de3",
+      "valid_points": 5528427,
+      "depth_scale": 0.017915696947479184,
+      "Sim3_scale": 1.1435216844830367,
+      "Sim3_R": [
+        [
+          0.9995142737553325,
+          0.01149850012794055,
+          0.02896551491269901
+        ],
+        [
+          -0.006963559096758821,
+          0.9883475736360693,
+          -0.1520545380197504
+        ],
+        [
+          -0.03037639550795991,
+          0.15177897806515134,
+          0.987947577765866
+        ]
+      ],
+      "Sim3_t_m": [
+        -0.0021985852241287124,
+        0.004445518699024622,
+        -0.005314610065775317
+      ],
+      "before": {
+        "XYZ_mean_cm": 0.9443374208233575,
+        "XYZ_p95_cm": 2.2485929414597807
+      },
+      "after": {
+        "XYZ_mean_cm": 0.8325817040467302,
+        "XYZ_p95_cm": 2.029477921468891
+      },
+      "primary_XYZ_above_2cm_fraction": 0.08445205118924425,
+      "residual_XYZ_above_2cm_fraction": 0.05268243570910858,
+      "depth_AbsRel_above_0_5_fraction": 0.16191802840120706,
+      "single_global_fit": true,
+      "per_frame_alignment": false,
+      "ICP": false
+    },
+    {
+      "model": "VGGT_HISTORICAL",
+      "prediction_SHA256": "4f880f9aa57a0cfa6b7f1a0ede172710f59d597de6c314067bac0a4fbbb01a31",
+      "valid_points": 5528427,
+      "depth_scale": 0.023381827369387313,
+      "Sim3_scale": 1.1210643133011338,
+      "Sim3_R": [
+        [
+          0.999778882182073,
+          0.011570975294342914,
+          0.017558453049797702
+        ],
+        [
+          -0.010706683465355943,
+          0.9987636698111154,
+          -0.04854378224453658
+        ],
+        [
+          -0.01809844390926774,
+          0.04834505555038742,
+          0.998666712137684
+        ]
+      ],
+      "Sim3_t_m": [
+        -0.003261415053093435,
+        0.00060937408815497,
+        0.0034638590410429257
+      ],
+      "before": {
+        "XYZ_mean_cm": 0.6786090669050535,
+        "XYZ_p95_cm": 1.7144252952714576
+      },
+      "after": {
+        "XYZ_mean_cm": 0.5248479150482689,
+        "XYZ_p95_cm": 1.1506193338021293
+      },
+      "primary_XYZ_above_2cm_fraction": 0.03907494844374358,
+      "residual_XYZ_above_2cm_fraction": 0.015534979479696485,
+      "depth_AbsRel_above_0_5_fraction": 0.018156339949862772,
+      "single_global_fit": true,
+      "per_frame_alignment": false,
+      "ICP": false
+    },
+    {
+      "model": "R1_FINAL3000",
+      "prediction_SHA256": "6fb028558d27bcdb9bc8e7a7c1777e8d8b6546ffceee2b7524b137322fa00b2f",
+      "valid_points": 5528427,
+      "depth_scale": 0.020437946508594734,
+      "Sim3_scale": 1.1995223459851154,
+      "Sim3_R": [
+        [
+          0.9999313825461469,
+          0.011308204698438545,
+          0.003058546362165881
+        ],
+        [
+          -0.011097490284554173,
+          0.9980244665940192,
+          -0.06183857848550449
+        ],
+        [
+          -0.003751787405428259,
+          0.06180039309115925,
+          0.9980814773880147
+        ]
+      ],
+      "Sim3_t_m": [
+        -0.0019574574031410216,
+        0.0020117194266811543,
+        -0.005437592232177227
+      ],
+      "before": {
+        "XYZ_mean_cm": 0.7077289250733338,
+        "XYZ_p95_cm": 1.462520063781221
+      },
+      "after": {
+        "XYZ_mean_cm": 0.5930654017183898,
+        "XYZ_p95_cm": 1.2096421461683529
+      },
+      "primary_XYZ_above_2cm_fraction": 0.02282204323218883,
+      "residual_XYZ_above_2cm_fraction": 0.012114114919126182,
+      "depth_AbsRel_above_0_5_fraction": 0.011765191075146692,
+      "single_global_fit": true,
+      "per_frame_alignment": false,
+      "ICP": false
+    },
+    {
+      "model": "R1_BEST800",
+      "prediction_SHA256": "81f2e056b548c9745f743a379a18c9455cf402259b9cda2d7d5364603931a62d",
+      "valid_points": 5528427,
+      "depth_scale": 0.02069978808676189,
+      "Sim3_scale": 1.1648138523098006,
+      "Sim3_R": [
+        [
+          0.9998270518088735,
+          0.01685367095728772,
+          0.007862585226293564
+        ],
+        [
+          -0.01613035382088922,
+          0.9962998408427144,
+          -0.08441823749875196
+        ],
+        [
+          -0.0092562496071667,
+          0.08427681123563151,
+          0.9963993882631423
+        ]
+      ],
+      "Sim3_t_m": [
+        -0.001688391628133274,
+        0.002516154702329766,
+        -0.0044202756164252
+      ],
+      "before": {
+        "XYZ_mean_cm": 0.6362447519412663,
+        "XYZ_p95_cm": 1.3044702944220103
+      },
+      "after": {
+        "XYZ_mean_cm": 0.5201824955330581,
+        "XYZ_p95_cm": 1.1073147607421265
+      },
+      "primary_XYZ_above_2cm_fraction": 0.012025301229445555,
+      "residual_XYZ_above_2cm_fraction": 0.007344946401571369,
+      "depth_AbsRel_above_0_5_fraction": 0.0256892240776626,
+      "single_global_fit": true,
+      "per_frame_alignment": false,
+      "ICP": false
+    }
+  ],
+  "metric_replay": [
+    {
+      "model": "VGGT_ZS",
+      "original_metric_replay_passed": true,
+      "Sim3_metric_replay_passed": true
+    },
+    {
+      "model": "VGGT_HISTORICAL",
+      "original_metric_replay_passed": true,
+      "Sim3_metric_replay_passed": true
+    },
+    {
+      "model": "R1_FINAL3000",
+      "original_metric_replay_passed": true,
+      "Sim3_metric_replay_passed": true
+    },
+    {
+      "model": "R1_BEST800",
+      "original_metric_replay_passed": true,
+      "Sim3_metric_replay_passed": true
+    }
+  ],
+  "all_valid_points": true,
+  "point_subsampling": false,
+  "confidence_filter": false,
+  "scope": "GT substitutions and GT alignment are diagnostics, not deployable scores or causal attribution of training changes",
+  "limits": "Coupled nonadditive errors. Sim3 global alignment sensitivity is not an additive global/residual error decomposition."
+}

@@ -1,0 +1,41 @@
+{
+  "passed": true,
+  "clouds": [
+    {
+      "id": "vggt-c3vd-r1-final-trans4",
+      "points": 5644800,
+      "decoded_XYZ_bitwise_PLY": true,
+      "decoded_RGB_bitwise_PLY": true,
+      "browser_transport_and_decoder_reused": true,
+      "container": "binary-chunks-v1"
+    },
+    {
+      "id": "vggt-c3vd-r1-best-trans4",
+      "points": 5644800,
+      "decoded_XYZ_bitwise_PLY": true,
+      "decoded_RGB_bitwise_PLY": true,
+      "browser_transport_and_decoder_reused": true,
+      "container": "binary-chunks-v1"
+    },
+    {
+      "id": "vggt-c3vd-r1-final-trans1a",
+      "points": 5644800,
+      "decoded_XYZ_bitwise_PLY": true,
+      "decoded_RGB_bitwise_PLY": true,
+      "browser_transport_and_decoder_reused": true,
+      "container": "binary-chunks-v1"
+    },
+    {
+      "id": "vggt-c3vd-r1-best-trans1a",
+      "points": 5644800,
+      "decoded_XYZ_bitwise_PLY": true,
+      "decoded_RGB_bitwise_PLY": true,
+      "browser_transport_and_decoder_reused": true,
+      "container": "binary-chunks-v1"
+    }
+  ],
+  "total_points": 22579200,
+  "point_subsampling": false,
+  "browser_GPU_render_test": false,
+  "test_scope": "Actual browser transport/parser and decoder on all vertices, using Node Web APIs; no WebGL rendering claim"
+}

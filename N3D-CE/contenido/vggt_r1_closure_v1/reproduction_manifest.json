@@ -1,0 +1,95 @@
+{
+  "hashes": {
+    "evaluation_protocol": "1a447bc4f1ceef51ec1e1eaf28dff054502b11a59d12ae16cf70b0350b99ba11",
+    "training_config": "9d467221c4a0a890ee11f054739c9c4139d9422795647b9bb2329104ad7ed7f4",
+    "effective_training_config": "b7d79e645a43950dd181ffe5a2e57049878441bef1e6a3e601eb3b6821513506",
+    "calendar": "b9350e43169439fc453f113d1b2feee50457cd2f718a5f37a6b3086053c1f6b9",
+    "data_manifest": "323d1180a0758f4b787fd922729bd2ca0dfdf0e91c86383c32f116f943d04a95"
+  },
+  "code_manifest": {
+    "choose_baseline.py": "97ba4094d1b2b842c79c325caa6b22a002367ce1e82280e342fe85e445dedcbc",
+    "closure_common.py": "7d5168f5a311727b5eb7295d787500a1291c5b616ab3cfbd0e2ca0275fd935b0",
+    "clouds.py": "45628cb00b787c73d45f9c9470378e03b3b132211f42e7b506eb8d68d26074ed",
+    "cpu.py": "818a8e676e167c9ff257790560db5ce6dd082ddb5a499a55a2840abcdeabeb36",
+    "diagnostics.py": "940d514093917ed8a22e1c7823c819dc7e810447f858bcb26643923cb4600dfb",
+    "finish.py": "a4f035919728496798acfce2322bed6f83b29063333923d6c575a3571c915711",
+    "gpu.py": "841cadb024c92558e78bcfe0ca2466dcfb472b5279d17ea5ba160078d8565a96",
+    "integrity.py": "41f5df0fcb9e474448dbd758cb0608de9596edeeacd721dc66f34ef60d599c0b",
+    "prepare.py": "1e56bb1df9a143af735196d6e0c312a8298652d84fe63757dcd5ba1b81d01095",
+    "report.py": "9b22099471960c53bf2a668bcd319ccb7ecb7aca594acc20d82e32be1fa05156",
+    "run.py": "252d4fb2090f58a8cef80e8599e385a1f30c8b40b46bc414c6a884525660c19f",
+    "verify_files.py": "9067967bfaf05dc11578a0ac91c5a796e8979eebe3e9359f1e82b9eea411a899"
+  },
+  "seed": 1234,
+  "validation_seed": 4321,
+  "training_resolution": [
+    518,
+    518
+  ],
+  "evaluation_protocol": {
+    "dataset": "C3VD geometry_v2",
+    "image_hw": [
+      336,
+      336
+    ],
+    "N": [
+      1,
+      4,
+      8,
+      16,
+      50
+    ],
+    "validation": [
+      "trans_t1_b",
+      "trans_t4_b"
+    ],
+    "reserved": [
+      "cecum_t2_a",
+      "trans_t1_a"
+    ],
+    "primary": "D predicted + K calibrated + pose predicted; one GT median D scale per context applied to D and translation; canonical first-camera gauge; no global Sim3/ICP",
+    "secondary": "one global point Sim3 on same valid correspondences; camera ATE/RPE uses a separate camera-center Sim3",
+    "RPE_interval": "consecutive selected frames, delta=1 in sample positions; original-frame gaps vary with N",
+    "surfaces": "CD mean unsquared bidirectional nearest-neighbour distances / 2; NC native normal consistency; no ICP",
+    "surface_availability": "BEST/FINAL validation all five N; four models N50 all sequences; unavailable metrics remain N/D",
+    "all_GT_valid_points": true,
+    "confidence_filter": false,
+    "point_subsampling": false,
+    "macro": "equal sequence weights, splits separate; missing metric yields N/D rather than dropping sequences",
+    "N1_camera": "ATE/RPE and pairwise pose undefined, not zero",
+    "context_caveat": "N changes selected frames and evaluated support, not a causal fixed-support capacity threshold"
+  },
+  "selection_rule": {
+    "candidate": "R1_BEST800",
+    "reference": "R1_FINAL3000",
+    "support": "validation only; both fixed N50 windows; equal sequence weights",
+    "lower_better": [
+      "AbsRel",
+      "XYZ_cm",
+      "p95_cm",
+      "CD_cm",
+      "ATE_cm",
+      "RPEr_deg",
+      "RPEt_cm",
+      "focal_error_pct"
+    ],
+    "higher_better": [
+      "delta1",
+      "NC"
+    ],
+    "per_sequence_nonregression": [
+      "AbsRel",
+      "XYZ_cm",
+      "p95_cm",
+      "CD_cm",
+      "NC",
+      "ATE_cm"
+    ],
+    "numerical_tolerance": "max(1e-8, 1e-6 * abs(reference)); numerical only, not an allowed quality regression",
+    "decision": "Replace FINAL only if all macro metrics are non-worse, at least one improves, and per-sequence guards pass. Otherwise retain FINAL by continuity and report tradeoffs; never claim universal dominance.",
+    "heldout_access": "BEST800 reserved inference is forbidden until baseline_selection.json is frozen",
+    "smaller_N": "diagnostic, not used to change the primary decision",
+    "secondary_Sim3": "diagnostic only, not optimized for checkpoint selection"
+  },
+  "training_config_and_calendar_preserved_locally": true
+}

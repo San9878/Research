@@ -1,0 +1,30 @@
+{
+  "key": "1d82bb4cbbb61d6b03e10f0f",
+  "points": 5644800,
+  "position_bytes": 4,
+  "codec": "xor-byteplanes-v1",
+  "bbox": [
+    [
+      -0.015794312581419945,
+      -0.02098788134753704,
+      -0.013323253020644188
+    ],
+    [
+      0.021922845393419266,
+      0.0207657553255558,
+      0.06657719612121582
+    ]
+  ],
+  "chunks": 22,
+  "raw_payload_sha256": "a3caff24a054f414400a322dcd3cf69edeab21f28f727ca56b5a51944761fb1a",
+  "package_sha256": "bc483894ab8f9df58ad249e18ac9f58cbe2501e3b8fcc114c3b32d7215c44f63",
+  "package_bytes": 53807036,
+  "path": "datos/1d82bb4cbbb61d6b03e10f0f.bin",
+  "all_vertices_preserved": true,
+  "lossless_compression_roundtrip": true,
+  "source_sha256": "1d82bb4cbbb61d6b03e10f0f757d2870557d3702a639be0dddde3017c52a1c2b",
+  "container": "binary-chunks-v1",
+  "source_js_package_sha256": "21fa09bc8a87de531baec622d94862cab470217ad028aef06d3711ea83a137d1",
+  "compressed_chunks_SHA256": "2ee21477138805c9b2634da95f6414920d75b30e814a26372e995f55e89e449e",
+  "binary_container_roundtrip_exact": true
+}

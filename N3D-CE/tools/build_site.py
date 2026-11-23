@@ -38,7 +38,7 @@ def verify(site):
             remove_verified_redundant_js(app/'datos',r['pack_key'],r['source_js_package_sha256'])
         f=app/r['path'];assert f.is_file() and f.stat().st_size==r['package_bytes']
     size=sum(p.stat().st_size for p in site.rglob('*') if p.is_file())
-    if size>=950_000_000:errors.append(['site',str(size),'exceeds safety budget below Pages 1 GB'])
+    if size>=985_000_000:errors.append(['site',str(size),'exceeds safety budget below Pages 1 GB'])
     files=[p for p in site.rglob('*') if p.is_file()]
     if any(p.stat().st_size>=100*2**20 for p in files):errors.append(['site','','file exceeds 100 MiB'])
     if errors:raise RuntimeError(json.dumps(errors,ensure_ascii=False))

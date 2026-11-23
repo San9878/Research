@@ -2,7 +2,7 @@
 title: "Bitácora"
 subtitle: "VGG-T³ · VGGT · Comparaciones entre modelos"
 author: "Santiago Hernández Chávez"
-date: 2026-11-20
+date: 2026-11-23
 date-format: "DD/MM/YYYY"
 lang: es
 format:
@@ -2699,7 +2699,7 @@ Un solo catálogo de **63 fichas**: 44 de C3VD y 19 seguimientos/protocolos de S
 
 ### Comparadores interactivos {#comparadores}
 
-Esta edición web ofrece **15 nubes principales completas** de C3VD y SCARED. Cada nube conserva el **100 % de sus puntos guardados**. Las demás exportaciones del archivo local no se incluyen en esta publicación.
+Esta edición web ofrece **19 nubes principales completas** de C3VD y SCARED. Cada nube conserva el **100 % de sus puntos guardados**. Las demás exportaciones del archivo local no se incluyen en esta publicación.
 
 
 <p class="scope-note">Visualización consistente: mismos controles de cámara y tamaño de punto, RGB original, trayectorias predichas azules y GT verde cuando está validada. No se aplican nuevos filtros ni registros automáticos. El encuadre individual compara forma; el común requiere unidades y referencia compatibles.</p>
@@ -3099,7 +3099,7 @@ La K calibrada participa en la reconstrucción posterior al modelo. Por ello, la
 | Carga | LAST y FINAL producen salidas iguales bit a bit en el control de carga; ningún checkpoint histórico fue sustituido. |
 | BEST diagnóstico | Paso 800; pérdida fija de validación 0.188764. |
 | FINAL principal | Paso 3.000; pérdida fija de validación 0.306096 (+62.16% frente a BEST). |
-| Límite de interpretación | La pérdida de validación no es CD ni XYZ de 50 vistas. BEST800 no fue evaluado geométricamente en esta entrega y no reemplaza FINAL ni al histórico. |
+| Límite de interpretación | La pérdida de validación no es CD ni XYZ de 50 vistas. BEST800 no estaba evaluado en la entrega original; su evaluación y selección actuales están en el [cierre R1](#vggt-r1-cierre). |
 | Historia disponible | La curva completa de validación no se conservó; solo se grafican los registros observados y los metadatos BEST/FINAL. |
 | Fallo de cola | La fase CPU intentaba importar torch en un entorno CPU sin ese paquete. Se ejecutó la función CPU original y firmada, sin sus imports GPU; se reutilizaron las 20 inferencias ya completas. |
 
@@ -3157,6 +3157,388 @@ Las reconstrucciones completas con D GT y pose GT dieron error interno0 en los p
 <!-- VGGT_R1_ANALYSIS_20261123_END -->
 
 <!-- VGGT_REPRODUCTION_R1_END -->
+
+<!-- VGGT_R1_CLOSURE_V1_BEGIN -->
+
+#### Cierre experimental de R1 · BEST800 y FINAL3000 {#vggt-r1-cierre}
+
+<!-- VGGT_C3VD_R1_CLOUDS_BEGIN -->
+
+<details><summary>VGGT-C3VD · R1 · métricas y nubes comparables</summary>
+
+FINAL3000 es la referencia de R1 por validación conjunta; BEST800 se conserva como diagnóstico. Se reutilizan las inferencias ya evaluadas. No se incorpora la nube del VGGT anterior.
+
+<button class="book-open-clouds" data-clouds="vggt-c3vd-r1-final-trans4,vggt-c3vd-r1-best-trans4">Comparar R1 FINAL y BEST · trans_t4_b</button>
+
+<button class="book-open-clouds" data-clouds="vggt-c3vd-r1-final-trans1a,vggt-c3vd-r1-best-trans1a">Comparar el caso de regresión · trans_t1_a</button>
+
+<button class="book-open-clouds" data-clouds="vggt-c3vd-r1-final-trans4,c3vd-v9,c3vd-vn19-a">Comparar visualmente VGGT R1 con VGG-T³ V9 y VN19-A</button>
+
+| Secuencia | Checkpoint | AbsRel ↓ | δ1 ↑ | XYZ cm ↓ | CD cm ↓ | NC ↑ |
+| --- | --- | --- | --- | --- | --- | --- |
+| trans_t4_b | FINAL3000 | 0.1309 | 82.67 % | 0.6446 | 0.1809 | 0.7142 |
+| trans_t4_b | BEST800 | 0.1454 | 80.83 % | 0.5533 | 0.1720 | 0.7228 |
+| trans_t1_a | FINAL3000 | 0.1650 | 72.28 % | 0.7077 | 0.2049 | 0.6885 |
+| trans_t1_a | BEST800 | 0.1748 | 70.72 % | 0.6362 | 0.1990 | 0.7186 |
+
+Cada nube conserva5.644.800 puntos, sin filtro ni submuestreo; las métricas excluyen únicamente GT inválido. Trayectoria predicha azul y GT verde, ambas en el gauge y escala del scoring, sin ajustar cada frame. Las vistas trans_t4_b coinciden con las exportaciones V9/VN19, pero las rutas P directo y D+cámara se identifican por separado. Las métricas R1 usan50 GT; las tablas históricas de16 objetivos mantienen otro protocolo.
+
+[Verificación del visor: XYZ y RGB exactos en los22.579.200 puntos](contenido/vggt_r1_closure_v1/cloud_decoder_validation.json).
+
+</details>
+
+<!-- VGGT_C3VD_R1_CLOUDS_END -->
+
+**R1-01 a R1-08 completados. Referencia dentro de R1: R1 FINAL3000.** BEST800 no supera todos los controles conjuntos; FINAL3000 se conserva por continuidad, sin declararlo ganador universal. La regla se guardó antes de las nuevas inferencias de BEST800 y la decisión se congeló antes de evaluarlo en reservadas. El histórico y ambos checkpoints se conservan. No se ejecutaron nuevos entrenamientos ni R13–R16.
+
+<div class="protocol-strip"><strong>Protocolo común</strong> · C3VD geometry_v2 · 336×336 · N=1/4/8/16/50 · RGB como única entrada neuronal · D + K calibrada + pose predichas · una escala GT de profundidad por contexto, también para traslación · mismos puntos GT válidos · sin filtro de confianza, submuestreo ni ICP · VAL y reservadas separadas.</div>
+
+**Validación N=50:** frente a FINAL, BEST cambia favorablemente AbsRel -11.61 %, XYZ +5.59 %, CD +3.39 % y RPEr +0.42 %. Una menor pérdida fija de cuatro vistas no garantiza una mejor reconstrucción conjunta de50 vistas.
+
+**Patrón en los cinco contextos de validación:** BEST mejora el promedio XYZ en 4/5 tamaños y AbsRel en 0/5. Estos tamaños son diagnósticos; la decisión predefinida utiliza N=50. No se interpreta esta cuenta como un umbral de capacidad ni una prueba estadística.
+
+<details class="vggt-experiment-card" id="r1-01-best-final"><summary><span class="card-status">Completado</span>R1-01 · BEST800 frente a FINAL3000</summary><div class="card-content"><dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>¿El mínimo de pérdida de validación también mejora las salidas geométricas?</dd></dl><dl class="card-fields"><dt>Intervención</dt><dd>Reutilizar FINAL/histórico/zero-shot; inferir BEST800 en los20 contextos preexistentes. Comparar10 métricas macro VAL N50 y6 controles por secuencia, con tolerancia solo numérica.</dd></dl><dl class="card-fields"><dt>Controles</dt><dd>Mismos RGB, IDs, resolución, K calibrada, GT válido y escala compartida; todos los puntos, sin filtro de confianza.</dd></dl><dl class="card-fields"><dt>Métricas</dt><dd>AbsRel, δ1, XYZ/p95, CD/NC y cámara; Sim(3) global separado del resultado primario.</dd></dl><dl class="card-fields"><dt>Resultados</dt><dd>80 casos consolidados,20 inferencias nuevas; referencia seleccionada: R1 FINAL3000; 8 controles incumplidos.</dd></dl><dl class="card-fields"><dt>Conclusión</dt><dd>La elección por pérdida y la elección por reconstrucción conjunta no son equivalentes.</dd></dl><dl class="card-fields"><dt>Limitaciones</dt><dd>Dos secuencias VAL; una semilla. N cambia composición y soporte. La regla conjunta es local de investigación, no criterio del paper.</dd></dl><dl class="card-fields"><dt>Siguiente decisión</dt><dd>Conservar todos los checkpoints y el criterio congelado; no cambiar selección al observar reservadas.</dd></dl></div></details>
+<details><summary>BEST/FINAL en validación · todas las longitudes y métricas</summary>
+
+**N=1; media con igual peso de trans_t1_b y trans_t4_b**
+
+| Métrica | FINAL3000 | BEST800 | Cambio favorable BEST/FINAL |
+| --- | --- | --- | --- |
+| AbsRel ↓ | 0.0959 | 0.1116 | -16.42 % |
+| δ1 ↑ | 0.8894 | 0.8665 | -2.57 % |
+| XYZ medio (cm) ↓ | 0.3406 | 0.3907 | -14.72 % |
+| XYZ p95 (cm) ↓ | 1.3666 | 1.4424 | -5.55 % |
+| CD (cm) ↓ | 0.1846 | 0.2188 | -18.55 % |
+| NC ↑ | 0.8312 | 0.8349 | +0.45 % |
+| ATE RMSE (cm) ↓ | N/D | N/D | N/D |
+| RPEr RMSE (°) ↓ | N/D | N/D | N/D |
+| RPEt RMSE (cm) ↓ | N/D | N/D | N/D |
+| Error focal (%) ↓ | 13.9496 | 11.7314 | +15.90 % |
+| mAA@30 (%) ↑ | N/D | N/D | N/D |
+
+**N=4; media con igual peso de trans_t1_b y trans_t4_b**
+
+| Métrica | FINAL3000 | BEST800 | Cambio favorable BEST/FINAL |
+| --- | --- | --- | --- |
+| AbsRel ↓ | 0.1146 | 0.1228 | -7.18 % |
+| δ1 ↑ | 0.8756 | 0.8713 | -0.48 % |
+| XYZ medio (cm) ↓ | 0.4999 | 0.4450 | +10.98 % |
+| XYZ p95 (cm) ↓ | 1.0679 | 0.9571 | +10.37 % |
+| CD (cm) ↓ | 0.1973 | 0.1933 | +2.03 % |
+| NC ↑ | 0.8153 | 0.8297 | +1.77 % |
+| ATE RMSE (cm) ↓ | 0.0926 | 0.0928 | -0.20 % |
+| RPEr RMSE (°) ↓ | 2.7601 | 2.4058 | +12.84 % |
+| RPEt RMSE (cm) ↓ | 0.2064 | 0.1847 | +10.52 % |
+| Error focal (%) ↓ | 11.0259 | 10.3056 | +6.53 % |
+| mAA@30 (%) ↑ | 28.8889 | 28.0556 | -2.88 % |
+
+**N=8; media con igual peso de trans_t1_b y trans_t4_b**
+
+| Métrica | FINAL3000 | BEST800 | Cambio favorable BEST/FINAL |
+| --- | --- | --- | --- |
+| AbsRel ↓ | 0.1254 | 0.1372 | -9.46 % |
+| δ1 ↑ | 0.8545 | 0.8367 | -2.08 % |
+| XYZ medio (cm) ↓ | 0.5433 | 0.4955 | +8.81 % |
+| XYZ p95 (cm) ↓ | 1.1765 | 0.9976 | +15.21 % |
+| CD (cm) ↓ | 0.2031 | 0.2036 | -0.26 % |
+| NC ↑ | 0.7930 | 0.8111 | +2.28 % |
+| ATE RMSE (cm) ↓ | 0.0869 | 0.0905 | -4.20 % |
+| RPEr RMSE (°) ↓ | 1.6851 | 1.6412 | +2.61 % |
+| RPEt RMSE (cm) ↓ | 0.1390 | 0.1225 | +11.85 % |
+| Error focal (%) ↓ | 11.0507 | 10.3167 | +6.64 % |
+| mAA@30 (%) ↑ | 28.9881 | 33.7500 | +16.43 % |
+
+**N=16; media con igual peso de trans_t1_b y trans_t4_b**
+
+| Métrica | FINAL3000 | BEST800 | Cambio favorable BEST/FINAL |
+| --- | --- | --- | --- |
+| AbsRel ↓ | 0.1391 | 0.1543 | -10.92 % |
+| δ1 ↑ | 0.8128 | 0.7648 | -5.91 % |
+| XYZ medio (cm) ↓ | 0.5839 | 0.5445 | +6.75 % |
+| XYZ p95 (cm) ↓ | 1.2551 | 1.0990 | +12.43 % |
+| CD (cm) ↓ | 0.1998 | 0.1966 | +1.61 % |
+| NC ↑ | 0.7669 | 0.7797 | +1.67 % |
+| ATE RMSE (cm) ↓ | 0.0872 | 0.0909 | -4.26 % |
+| RPEr RMSE (°) ↓ | 1.0043 | 0.9796 | +2.46 % |
+| RPEt RMSE (cm) ↓ | 0.0855 | 0.0782 | +8.52 % |
+| Error focal (%) ↓ | 10.8452 | 10.0562 | +7.28 % |
+| mAA@30 (%) ↑ | 26.2361 | 31.4167 | +19.75 % |
+
+**N=50; media con igual peso de trans_t1_b y trans_t4_b**
+
+| Métrica | FINAL3000 | BEST800 | Cambio favorable BEST/FINAL |
+| --- | --- | --- | --- |
+| AbsRel ↓ | 0.1506 | 0.1681 | -11.61 % |
+| δ1 ↑ | 0.7839 | 0.7174 | -8.48 % |
+| XYZ medio (cm) ↓ | 0.6261 | 0.5912 | +5.59 % |
+| XYZ p95 (cm) ↓ | 1.4323 | 1.2539 | +12.45 % |
+| CD (cm) ↓ | 0.2047 | 0.1977 | +3.39 % |
+| NC ↑ | 0.7055 | 0.7100 | +0.63 % |
+| ATE RMSE (cm) ↓ | 0.0835 | 0.0908 | -8.78 % |
+| RPEr RMSE (°) ↓ | 0.5111 | 0.5090 | +0.42 % |
+| RPEt RMSE (cm) ↓ | 0.0422 | 0.0403 | +4.66 % |
+| Error focal (%) ↓ | 10.7675 | 9.8856 | +8.19 % |
+| mAA@30 (%) ↑ | 24.8571 | 30.5224 | +22.79 % |
+
+N=1 no define trayectoria ni pares de cámara. RPE usa vistas seleccionadas consecutivas, no un intervalo temporal original constante entre tamaños N. p95 es la media de los p95 por secuencia. CD/NC para BEST/FINAL a N<50 se añadieron usando la misma función de superficie, sin modificar las métricas originales almacenadas.
+
+**Cámara por pares: métricas nativas adicionales en validación**
+
+| N | Modelo | RRA@5 (%) ↑ | RRA@15 (%) ↑ | RRA@30 (%) ↑ | RTA@5 (%) ↑ | RTA@15 (%) ↑ | RTA@30 (%) ↑ |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | R1 FINAL3000 | N/D | N/D | N/D | N/D | N/D | N/D |
+| 1 | R1 BEST800 | N/D | N/D | N/D | N/D | N/D | N/D |
+| 4 | R1 FINAL3000 | 75.0000 | 100.0000 | 100.0000 | 0.0000 | 33.3333 | 66.6667 |
+| 4 | R1 BEST800 | 83.3333 | 100.0000 | 100.0000 | 0.0000 | 33.3333 | 58.3333 |
+| 8 | R1 FINAL3000 | 80.3571 | 100.0000 | 100.0000 | 1.7857 | 33.9286 | 51.7857 |
+| 8 | R1 BEST800 | 83.9286 | 100.0000 | 100.0000 | 0.0000 | 30.3571 | 62.5000 |
+| 16 | R1 FINAL3000 | 80.8333 | 100.0000 | 100.0000 | 0.0000 | 33.7500 | 46.2500 |
+| 16 | R1 BEST800 | 83.3333 | 100.0000 | 100.0000 | 0.4167 | 31.2500 | 60.8333 |
+| 50 | R1 FINAL3000 | 79.2245 | 100.0000 | 100.0000 | 0.4490 | 30.4490 | 44.1633 |
+| 50 | R1 BEST800 | 82.9388 | 100.0000 | 100.0000 | 0.7755 | 32.3673 | 58.0816 |
+
+RRA: proporción de pares cuyo error relativo de rotación cae bajo el umbral angular. RTA: proporción para la dirección de traslación, con la ambigüedad de signo de la fórmula nativa. mAA y RRA/RTA no son ATE ni RPE.
+
+</details>
+
+<details><summary>Zero-shot, histórico, FINAL y BEST · N=50 por split y por secuencia</summary>
+
+**Validación: trans_t1_b + trans_t4_b**
+
+| Métrica | Zero-shot | VGGT histórico | R1 FINAL3000 | R1 BEST800 |
+| --- | --- | --- | --- | --- |
+| AbsRel ↓ | 0.2391 | 0.1565 | 0.1506 | 0.1681 |
+| δ1 ↑ | 0.5640 | 0.7629 | 0.7839 | 0.7174 |
+| XYZ medio (cm) ↓ | 0.7961 | 0.8504 | 0.6261 | 0.5912 |
+| XYZ p95 (cm) ↓ | 1.7639 | 1.6444 | 1.4323 | 1.2539 |
+| CD (cm) ↓ | 0.2307 | 0.2904 | 0.2047 | 0.1977 |
+| NC ↑ | 0.6683 | 0.6928 | 0.7055 | 0.7100 |
+| ATE RMSE (cm) ↓ | 0.1083 | 0.0855 | 0.0835 | 0.0908 |
+| RPEr RMSE (°) ↓ | 0.5298 | 0.4901 | 0.5111 | 0.5090 |
+| RPEt RMSE (cm) ↓ | 0.0502 | 0.0429 | 0.0422 | 0.0403 |
+| Error focal (%) ↓ | 50.1201 | 12.5171 | 10.7675 | 9.8856 |
+| mAA@30 (%) ↑ | 25.6748 | 26.4150 | 24.8571 | 30.5224 |
+
+**Reservadas: cecum_t2_a + trans_t1_a**
+
+| Métrica | Zero-shot | VGGT histórico | R1 FINAL3000 | R1 BEST800 |
+| --- | --- | --- | --- | --- |
+| AbsRel ↓ | 0.2069 | 0.1160 | 0.1104 | 0.1271 |
+| δ1 ↑ | 0.6468 | 0.8589 | 0.8522 | 0.8232 |
+| XYZ medio (cm) ↓ | 1.4474 | 1.0533 | 0.7768 | 0.8325 |
+| XYZ p95 (cm) ↓ | 2.7914 | 2.3909 | 1.6729 | 1.9181 |
+| CD (cm) ↓ | 0.4850 | 0.3347 | 0.2042 | 0.2687 |
+| NC ↑ | 0.6677 | 0.7144 | 0.6921 | 0.7085 |
+| ATE RMSE (cm) ↓ | 0.3654 | 0.3070 | 0.2590 | 0.3376 |
+| RPEr RMSE (°) ↓ | 0.6899 | 0.5514 | 0.5330 | 0.5721 |
+| RPEt RMSE (cm) ↓ | 0.1704 | 0.1166 | 0.1222 | 0.1430 |
+| Error focal (%) ↓ | 100.2419 | 14.3167 | 12.5142 | 11.3077 |
+| mAA@30 (%) ↑ | 46.7524 | 47.7633 | 53.4639 | 54.7701 |
+
+**trans_t1_b · VAL**
+
+| Métrica | Zero-shot | VGGT histórico | R1 FINAL3000 | R1 BEST800 |
+| --- | --- | --- | --- | --- |
+| AbsRel ↓ | 0.2257 | 0.1712 | 0.1703 | 0.1909 |
+| δ1 ↑ | 0.5715 | 0.7251 | 0.7411 | 0.6265 |
+| XYZ medio (cm) ↓ | 0.7538 | 0.9173 | 0.6077 | 0.6291 |
+| XYZ p95 (cm) ↓ | 1.5138 | 1.5139 | 1.2351 | 1.3923 |
+| CD (cm) ↓ | 0.2692 | 0.3340 | 0.2285 | 0.2235 |
+| NC ↑ | 0.6827 | 0.6865 | 0.6969 | 0.6972 |
+| ATE RMSE (cm) ↓ | 0.1163 | 0.1036 | 0.1049 | 0.1030 |
+| RPEr RMSE (°) ↓ | 0.4697 | 0.4413 | 0.4496 | 0.4624 |
+| RPEt RMSE (cm) ↓ | 0.0461 | 0.0405 | 0.0407 | 0.0406 |
+| Error focal (%) ↓ | 73.7080 | 14.1026 | 12.2572 | 10.8952 |
+
+**trans_t4_b · VAL**
+
+| Métrica | Zero-shot | VGGT histórico | R1 FINAL3000 | R1 BEST800 |
+| --- | --- | --- | --- | --- |
+| AbsRel ↓ | 0.2524 | 0.1419 | 0.1309 | 0.1454 |
+| δ1 ↑ | 0.5565 | 0.8007 | 0.8267 | 0.8083 |
+| XYZ medio (cm) ↓ | 0.8385 | 0.7835 | 0.6446 | 0.5533 |
+| XYZ p95 (cm) ↓ | 2.0140 | 1.7749 | 1.6295 | 1.1155 |
+| CD (cm) ↓ | 0.1923 | 0.2467 | 0.1809 | 0.1720 |
+| NC ↑ | 0.6539 | 0.6992 | 0.7142 | 0.7228 |
+| ATE RMSE (cm) ↓ | 0.1002 | 0.0674 | 0.0620 | 0.0786 |
+| RPEr RMSE (°) ↓ | 0.5900 | 0.5389 | 0.5727 | 0.5556 |
+| RPEt RMSE (cm) ↓ | 0.0542 | 0.0453 | 0.0437 | 0.0399 |
+| Error focal (%) ↓ | 26.5322 | 10.9315 | 9.2779 | 8.8760 |
+
+**cecum_t2_a · reservada**
+
+| Métrica | Zero-shot | VGGT histórico | R1 FINAL3000 | R1 BEST800 |
+| --- | --- | --- | --- | --- |
+| AbsRel ↓ | 0.1292 | 0.0682 | 0.0559 | 0.0794 |
+| δ1 ↑ | 0.8199 | 0.9755 | 0.9816 | 0.9392 |
+| XYZ medio (cm) ↓ | 1.9505 | 1.4281 | 0.8458 | 1.0288 |
+| XYZ p95 (cm) ↓ | 3.3343 | 3.0674 | 1.8832 | 2.5318 |
+| CD (cm) ↓ | 0.5493 | 0.4743 | 0.2035 | 0.3383 |
+| NC ↑ | 0.6949 | 0.7135 | 0.6957 | 0.6984 |
+| ATE RMSE (cm) ↓ | 0.6382 | 0.4678 | 0.4083 | 0.5810 |
+| RPEr RMSE (°) ↓ | 1.0117 | 0.7632 | 0.7425 | 0.7903 |
+| RPEt RMSE (cm) ↓ | 0.2692 | 0.1713 | 0.1843 | 0.2105 |
+| Error focal (%) ↓ | 102.8613 | 13.0340 | 11.1175 | 10.6700 |
+
+**trans_t1_a · reservada**
+
+| Métrica | Zero-shot | VGGT histórico | R1 FINAL3000 | R1 BEST800 |
+| --- | --- | --- | --- | --- |
+| AbsRel ↓ | 0.2846 | 0.1638 | 0.1650 | 0.1748 |
+| δ1 ↑ | 0.4736 | 0.7423 | 0.7228 | 0.7072 |
+| XYZ medio (cm) ↓ | 0.9443 | 0.6786 | 0.7077 | 0.6362 |
+| XYZ p95 (cm) ↓ | 2.2486 | 1.7144 | 1.4625 | 1.3045 |
+| CD (cm) ↓ | 0.4207 | 0.1952 | 0.2049 | 0.1990 |
+| NC ↑ | 0.6405 | 0.7153 | 0.6885 | 0.7186 |
+| ATE RMSE (cm) ↓ | 0.0927 | 0.1462 | 0.1097 | 0.0942 |
+| RPEr RMSE (°) ↓ | 0.3682 | 0.3397 | 0.3235 | 0.3539 |
+| RPEt RMSE (cm) ↓ | 0.0717 | 0.0618 | 0.0602 | 0.0754 |
+| Error focal (%) ↓ | 97.6225 | 15.5995 | 13.9109 | 11.9455 |
+
+Reservadas significa excluidas de este fine-tuning; ya se habían inspeccionado en el proyecto. No constituyen una nueva prueba externa ciega ni participan en la selección actual.
+
+![](contenido/vggt_r1_closure_v1/comparison_N50.png){fig-alt="Resultados pareados por secuencia y checkpoint de VGGT"}
+
+</details>
+
+<details class="vggt-experiment-card" id="r1-02-trans1a"><summary><span class="card-status">Completado</span>R1-02 · Regresión de trans_t1_a</summary><div class="card-content"><dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>¿La diferencia procede de profundidad, cámara o su combinación?</dd></dl><dl class="card-fields"><dt>Intervención</dt><dd>Reutilizar controles GT del histórico/FINAL y calcular los de BEST con idénticas fórmulas. Mostrar cuatro frames fijados previamente y perfiles de los50.</dd></dl><dl class="card-fields"><dt>Controles</dt><dd>Mismos RGB, IDs, resolución, K calibrada, GT válido y escala compartida; todos los puntos, sin filtro de confianza.</dd></dl><dl class="card-fields"><dt>Métricas</dt><dd>AbsRel, δ1, XYZ/p95, CD/NC y cámara; Sim(3) global separado del resultado primario.</dd></dl><dl class="card-fields"><dt>Resultados</dt><dd>Los controles reproducen el XYZ primario con tolerancia1e-7cm; GT D + GT pose da0 interno en los píxeles válidos.</dd></dl><dl class="card-fields"><dt>Conclusión</dt><dd>Sustituir una componente cambia la interacción geométrica; las contribuciones no son aditivas.</dd></dl><dl class="card-fields"><dt>Limitaciones</dt><dd>Usa GT para diagnosticar; el0 interno no certifica físicamente el dataset. No identifica la causa de entrenamiento.</dd></dl><dl class="card-fields"><dt>Siguiente decisión</dt><dd>Mantener visible esta regresión y no explicarla únicamente por un error global de escala.</dd></dl></div></details>
+<details><summary>trans_t1_a · controles GT y mapas de error con escalas idénticas</summary>
+
+| Modelo | D+pose predichas cm | Pose GT cm | D GT cm | Solo R GT cm | Solo t GT cm |
+| --- | --- | --- | --- | --- | --- |
+| VGGT histórico | 0.6786 | 0.4960 | 0.4666 | 0.6611 | 0.5065 |
+| R1 FINAL3000 | 0.7077 | 0.5147 | 0.4296 | 0.6941 | 0.5282 |
+| R1 BEST800 | 0.6362 | 0.5207 | 0.3445 | 0.6280 | 0.5268 |
+
+**R1 FINAL3000 frente al histórico en trans_t1_a:** cambio favorable del XYZ combinado -4.29 %, con pose GT -3.77 % y con profundidad GT +7.91 %. Estas rutas muestran qué discrepancias persisten al corregir una componente, sin identificar por sí solas una causa de entrenamiento.
+
+**R1 BEST800 frente al histórico en trans_t1_a:** cambio favorable del XYZ combinado +6.24 %, con pose GT -4.98 % y con profundidad GT +26.17 %. Estas rutas muestran qué discrepancias persisten al corregir una componente, sin identificar por sí solas una causa de entrenamiento.
+
+Cada sustitución mantiene la escala original del modelo; K calibrada común, D/t GT en metros. No se reajusta una escala por ruta.
+
+**XYZ primario sin Sim(3)/ICP**
+
+![](contenido/vggt_r1_closure_v1/error_primary.png){fig-alt="XYZ primario sin Sim(3)/ICP en trans_t1_a"}
+
+**XYZ residual tras un Sim(3) global de la nube completa**
+
+![](contenido/vggt_r1_closure_v1/error_residual.png){fig-alt="XYZ residual tras un Sim(3) global de la nube completa en trans_t1_a"}
+
+**Error relativo absoluto de profundidad**
+
+![](contenido/vggt_r1_closure_v1/error_depth.png){fig-alt="Error relativo absoluto de profundidad en trans_t1_a"}
+
+**Perfiles por frame y error de centros de cámara con escala D común**
+
+![](contenido/vggt_r1_closure_v1/error_profiles.png){fig-alt="Perfiles por frame y error de centros de cámara con escala D común en trans_t1_a"}
+
+Los mapas XYZ comparten rango0–2cm; AbsRel0–0,5. Los valores mayores saturan el color, pero se conservan íntegros en las métricas; gris indica GT inválido.
+
+</details>
+
+<details class="vggt-experiment-card" id="r1-03-sim3"><summary><span class="card-status">Completado</span>R1-03 · Colocación global y error residual</summary><div class="card-content"><dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>¿Cuánto cambia el error al permitir un registro global?</dd></dl><dl class="card-fields"><dt>Intervención</dt><dd>Reutilizar XYZ antes/después y verificar de nuevo un único Sim(3) sobre todos los puntos de trans_t1_a; nunca uno por frame.</dd></dl><dl class="card-fields"><dt>Controles</dt><dd>Mismos RGB, IDs, resolución, K calibrada, GT válido y escala compartida; todos los puntos, sin filtro de confianza.</dd></dl><dl class="card-fields"><dt>Métricas</dt><dd>AbsRel, δ1, XYZ/p95, CD/NC y cámara; Sim(3) global separado del resultado primario.</dd></dl><dl class="card-fields"><dt>Resultados</dt><dd>Los mismos puntos válidos se comparan antes y después; no se ejecuta ICP.</dd></dl><dl class="card-fields"><dt>Conclusión</dt><dd>Una reducción expone sensibilidad al registro; el residual revela error que una transformación global no elimina.</dd></dl><dl class="card-fields"><dt>Limitaciones</dt><dd>La diferencia de errores no es una descomposición causal/aditiva; Sim(3) minimiza cuadrados, no necesariamente la media de distancias.</dd></dl><dl class="card-fields"><dt>Siguiente decisión</dt><dd>No usar el registro GT para ocultar errores del resultado primario.</dd></dl></div></details>
+<details><summary>XYZ primario y residual Sim(3) · N=50 por secuencia</summary>
+
+La ruta primaria utiliza $X_i=s(R_i[D_iK_i^{-1}p]+t_i)$, con poses cámara→mundo expresadas respecto a la cámara canónica y una sola escala $s$ del contexto. El diagnóstico ajusta después $\widetilde X=aQX+b$ a toda la nube. Ambas rutas se puntúan contra los mismos puntos GT; no se corrige cada frame por separado.
+
+| Secuencia | Modelo | XYZ cm | XYZ tras Sim(3) cm | p95 cm | p95 tras Sim(3) cm |
+| --- | --- | --- | --- | --- | --- |
+| trans_t1_b | Zero-shot | 0.7538 | 0.5602 | 1.5138 | 1.0503 |
+| trans_t4_b | Zero-shot | 0.8385 | 0.6476 | 2.0140 | 1.6074 |
+| cecum_t2_a | Zero-shot | 1.9505 | 1.0685 | 3.3343 | 1.9756 |
+| trans_t1_a | Zero-shot | 0.9443 | 0.8326 | 2.2486 | 2.0295 |
+| trans_t1_b | VGGT histórico | 0.9173 | 0.5221 | 1.5139 | 1.0181 |
+| trans_t4_b | VGGT histórico | 0.7835 | 0.5694 | 1.7749 | 1.1531 |
+| cecum_t2_a | VGGT histórico | 1.4281 | 0.6571 | 3.0674 | 1.2649 |
+| trans_t1_a | VGGT histórico | 0.6786 | 0.5248 | 1.7144 | 1.1506 |
+| trans_t1_b | R1 FINAL3000 | 0.6077 | 0.4482 | 1.2351 | 0.9035 |
+| trans_t4_b | R1 FINAL3000 | 0.6446 | 0.4694 | 1.6295 | 1.0326 |
+| cecum_t2_a | R1 FINAL3000 | 0.8458 | 0.5481 | 1.8832 | 1.0870 |
+| trans_t1_a | R1 FINAL3000 | 0.7077 | 0.5931 | 1.4625 | 1.2096 |
+| trans_t1_b | R1 BEST800 | 0.6291 | 0.4542 | 1.3923 | 0.8383 |
+| trans_t4_b | R1 BEST800 | 0.5533 | 0.4313 | 1.1155 | 0.9577 |
+| cecum_t2_a | R1 BEST800 | 1.0288 | 0.7085 | 2.5318 | 1.5797 |
+| trans_t1_a | R1 BEST800 | 0.6362 | 0.5202 | 1.3045 | 1.1073 |
+
+
+</details>
+
+<details><summary>R1-04/R1-06 · Integridad, reanudación y diferencias frente al histórico</summary>
+
+| Control | Resultado |
+| --- | --- |
+| Encoder/agregador | 1.210 tensores bit a bit oficiales; entrenamiento histórico conservado aparte |
+| Carga | FINAL reproduce las cuatro salidas exactamente; BEST carga estricta y finita |
+| Reanudación corta | Prueba R06 conservada: cabezas, AdamW, RNG y segundo paso idénticos bit a bit |
+| Reanudaciones reales | 3.000 updates únicos;37 repeticiones idénticas en muestra, batch y pérdidas |
+| LAST3000 | 131 estados AdamW a paso3000, RNG Python/NumPy/CPU/CUDA y hashes verificados |
+| BEST/FINAL | Exportaciones sin AdamW; no permiten reanudar exactamente el entrenamiento, aunque guardan RNG |
+| Firmas | Fuentes históricas, configuración, manifiesto y calendario originales intactos |
+
+| Aspecto | VGGT histórico | R1 |
+| --- | --- | --- |
+| Inicialización | Oficial declarada; hash inicial histórico no retenido | Oficial SHA256 identificado; carga estricta |
+| Datos | Legacy; calibración/preprocesado no certificados retrospectivamente | geometry_v2 validado, Z/t en metros, RGB y K rectificados |
+| Split TRAIN | cecum_t1_b, cecum_t2_b, cecum_t3_a, desc_t4_a, sigmoid_t1_a, sigmoid_t3_a | Mismas seis secuencias |
+| VAL / reservadas | trans_t1_b, trans_t4_b / cecum_t2_a, trans_t1_a | Mismas dos VAL y dos reservadas; estas últimas ya analizadas antes en el proyecto |
+| Módulos | Cámara/profundidad; 39 escalares del encoder distintos del oficial conservado, origen no resuelto | Cámara/profundidad; 1.210 tensores del agregador iguales al oficial; sin cabeza de puntos/tracking |
+| Presupuesto | 30×100 actualizaciones, cuatro vistas, 518×518, FP32 | Mismo presupuesto, vistas y resolución; no se añadió otro entrenamiento |
+| Pérdidas / normalización | Cámara L1×5 + profundidad confianza/gradiente×1; normalización geométrica nativa | Mismas funciones/ponderaciones; RGB y normalización nativos; fuentes firmadas |
+| Optimizador | AdamW LR1e-5, WD0,05; sin scheduler ni clipping | Igual; betas0,9/0,999 y eps1e-8 registrados |
+| Muestreo | Cuatro IDs aleatorios de toda la secuencia; semilla y orden originales desconocidos | Misma clase de muestreo; semilla1234, calendario completo almacenado; no se impuso continuidad nueva |
+| Validación / selección | Validación legacy variable; checkpoint final | FINAL3000 principal original; BEST800 por pérdida fija guardado aparte y comparado ahora con regla conjunta VAL |
+| Reanudación | Sin RNG/calendario verificables completos | LAST3000 con131 estados AdamW y RNG; prueba corta exacta y37 repeticiones verificadas |
+
+Las39 discrepancias escalares históricas siguen sin origen demostrado. Esta evaluación no las atribuye a una conversión, escritura accidental o versión oficial concreta. La mejora R1 no se atribuye causalmente a una sola diferencia de receta.
+
+| Checkpoint | Archivo | SHA256 |
+| --- | --- | --- |
+| Zero-shot | model.safetensors | `f164acf60724910d8fe1578bb499d800850c7bb0948db7555c413f9fbe60467e` |
+| VGGT histórico | c3vd_baseline_heads_30ep.pt | `47676104810d39316e3b5f661a7e8e6796080cde5afba0d162d6ede3697f0bf7` |
+| R1 FINAL3000 | final_heads.pt | `cf0bbc6f044fc7f23986b9d33112d20f46f1377d6b3c395a73a39be268fd1cf3` |
+| R1 BEST800 | best_diagnostic_heads.pt | `b946a9bd9a57a2e1eff247117c4caa0eb263021d9474e2aa319a48e77c140cc6` |
+
+
+</details>
+
+<details><summary>R1-05/R1-07/R1-08 · Decisión, límites y evidencia descargable</summary>
+
+**Referencia R1: R1 FINAL3000.** La regla exige no empeorar las10 métricas macro de validación N50, mejorar al menos una y conservar seis guardas por secuencia. Es una decisión conservadora local, registrada antes de los resultados nuevos; no es un criterio original del paper.
+
+| Soporte VAL | Métrica | FINAL | BEST | Cambio favorable |
+| --- | --- | --- | --- | --- |
+| VAL_N50_macro | AbsRel ↓ | 0.1506 | 0.1681 | -11.61 % |
+| VAL_N50_macro | ATE RMSE (cm) ↓ | 0.0835 | 0.0908 | -8.78 % |
+| VAL_N50_macro | δ1 ↑ | 0.7839 | 0.7174 | -8.48 % |
+| trans_t1_b | AbsRel ↓ | 0.1703 | 0.1909 | -12.04 % |
+| trans_t1_b | XYZ medio (cm) ↓ | 0.6077 | 0.6291 | -3.51 % |
+| trans_t1_b | XYZ p95 (cm) ↓ | 1.2351 | 1.3923 | -12.73 % |
+| trans_t4_b | AbsRel ↓ | 0.1309 | 0.1454 | -11.05 % |
+| trans_t4_b | ATE RMSE (cm) ↓ | 0.0620 | 0.0786 | -26.71 % |
+
+**Cierre:** la auditoría técnica está resuelta para R1; la caracterización no demuestra una mejora uniforme en todas las secuencias, métricas o contextos. Se conservan las regresiones y todos los checkpoints. Los promedios no reemplazan el análisis por secuencia.
+
+**Preguntas que siguen abiertas:** por qué los mínimos de pérdida no coinciden con todos los mínimos geométricos; qué interacciones de D y pose mantienen el error residual de trans_t1_a; y cuánto de la variación entre contextos procede de composición de vistas frente a adaptación con cuatro vistas. Estos diagnósticos delimitan esas preguntas, pero no prueban una causa única.
+
+**Antes de otro entrenamiento:** formular una hipótesis concreta a partir de los fallos en VAL, cambiar una variable y exigir evidencia conjunta de geometría/profundidad/cámara con el mismo soporte y contextos largos. No se inicia otra receta por el resultado de reservadas. Las réplicas por semilla, nuevas ablaciones, tercer dominio y nuevos tamaños permanecen opcionales y sin ejecutar.
+
+**Límites:** una semilla, dos VAL y dos reservadas del mismo phantom; GT para escala/alineamiento; historia de validación incompleta; causas históricas confundidas; no se certifica tiempo real ni generalización clínica.
+
+- [Resumen, protocolos, selección y métricas](contenido/vggt_r1_closure_v1/summary.json)
+- [80 casos por secuencia/contexto](contenido/vggt_r1_closure_v1/all_cases.csv)
+- [Promedios separados por split/contexto](contenido/vggt_r1_closure_v1/macro_by_split_context.csv)
+- [Porcentajes de mejora o deterioro](contenido/vggt_r1_closure_v1/changes_by_sequence.csv)
+- [Controles GT de trans_t1_a](contenido/vggt_r1_closure_v1/oracle_trans_t1_a.csv)
+- [Perfiles de error por frame](contenido/vggt_r1_closure_v1/error_profiles.csv)
+- [Comparación de recetas](contenido/vggt_r1_closure_v1/recipe_comparison.csv)
+- [Integridad y reanudación](contenido/vggt_r1_closure_v1/technical_integrity.json)
+- [Identidades y hashes de entradas/predicciones](contenido/vggt_r1_closure_v1/paired_identities.json)
+- [Manifiesto de checkpoints conservados; pesos locales, no incluidos en la publicación](contenido/vggt_r1_closure_v1/checkpoint_manifest.json)
+- [Manifiesto de configuración, semillas, calendario y código](contenido/vggt_r1_closure_v1/reproduction_manifest.json)
+
+</details>
+
+<!-- VGGT_R1_CLOSURE_V1_END -->
 
 ### SCARED · adaptación y transferencia {#vggt-scared}
 #### Fase 1 · verificación y baselines {#vggt-fase1}

@@ -1,0 +1,28 @@
+{
+  "checkpoints": {
+    "R1_BEST800": {
+      "file": "best_diagnostic_heads.pt",
+      "SHA256": "b946a9bd9a57a2e1eff247117c4caa0eb263021d9474e2aa319a48e77c140cc6",
+      "cursor": 800
+    },
+    "R1_FINAL3000": {
+      "file": "final_heads.pt",
+      "SHA256": "cf0bbc6f044fc7f23986b9d33112d20f46f1377d6b3c395a73a39be268fd1cf3",
+      "cursor": 3000
+    },
+    "VGGT_ZS": {
+      "file": "model.safetensors",
+      "SHA256": "f164acf60724910d8fe1578bb499d800850c7bb0948db7555c413f9fbe60467e",
+      "cursor": null
+    },
+    "VGGT_HISTORICAL": {
+      "file": "c3vd_baseline_heads_30ep.pt",
+      "SHA256": "47676104810d39316e3b5f661a7e8e6796080cde5afba0d162d6ede3697f0bf7",
+      "cursor": null
+    }
+  },
+  "selected_R1_reference": "R1_FINAL3000",
+  "selection_uses_only_validation": true,
+  "weights_included_in_publication": false,
+  "storage": "Original weights retained locally; use file name and SHA256 to identify each checkpoint"
+}

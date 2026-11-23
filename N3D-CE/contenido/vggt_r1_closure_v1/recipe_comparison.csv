@@ -1,0 +1,12 @@
+﻿aspect,historical,R1
+Inicialización,Oficial declarada; hash inicial histórico no retenido,Oficial SHA256 identificado; carga estricta
+Datos,Legacy; calibración/preprocesado no certificados retrospectivamente,"geometry_v2 validado, Z/t en metros, RGB y K rectificados"
+Split TRAIN,"cecum_t1_b, cecum_t2_b, cecum_t3_a, desc_t4_a, sigmoid_t1_a, sigmoid_t3_a",Mismas seis secuencias
+VAL / reservadas,"trans_t1_b, trans_t4_b / cecum_t2_a, trans_t1_a",Mismas dos VAL y dos reservadas; estas últimas ya analizadas antes en el proyecto
+Módulos,"Cámara/profundidad; 39 escalares del encoder distintos del oficial conservado, origen no resuelto",Cámara/profundidad; 1.210 tensores del agregador iguales al oficial; sin cabeza de puntos/tracking
+Presupuesto,"30×100 actualizaciones, cuatro vistas, 518×518, FP32","Mismo presupuesto, vistas y resolución; no se añadió otro entrenamiento"
+Pérdidas / normalización,Cámara L1×5 + profundidad confianza/gradiente×1; normalización geométrica nativa,Mismas funciones/ponderaciones; RGB y normalización nativos; fuentes firmadas
+Optimizador,"AdamW LR1e-5, WD0,05; sin scheduler ni clipping","Igual; betas0,9/0,999 y eps1e-8 registrados"
+Muestreo,Cuatro IDs aleatorios de toda la secuencia; semilla y orden originales desconocidos,"Misma clase de muestreo; semilla1234, calendario completo almacenado; no se impuso continuidad nueva"
+Validación / selección,Validación legacy variable; checkpoint final,FINAL3000 principal original; BEST800 por pérdida fija guardado aparte y comparado ahora con regla conjunta VAL
+Reanudación,Sin RNG/calendario verificables completos,LAST3000 con131 estados AdamW y RNG; prueba corta exacta y37 repeticiones verificadas

@@ -3,7 +3,7 @@ from pathlib import Path
 import argparse,csv,hashlib,html,io,json,re,shutil
 from public_package import publish_binary,remove_verified_redundant_js,adapt_viewer
 
-IDS=['c3vd-v9','c3vd-vn19-a','c3vd-vn19-b','c3vd-vn18','c3vd-zero','scared8-vn18','scared8-v9','scared8-vn19-a','scared9-vn18','scared9-v9','scared9-vn19-a','c3vd-scared-vn18','scared8-scared-v9','scared9-scared-v9','c3vd-scared-v9']
+IDS=['c3vd-v9', 'c3vd-vn19-a', 'c3vd-vn19-b', 'c3vd-vn18', 'c3vd-zero', 'scared8-vn18', 'scared8-v9', 'scared8-vn19-a', 'scared9-vn18', 'scared9-v9', 'scared9-vn19-a', 'c3vd-scared-vn18', 'scared8-scared-v9', 'scared9-scared-v9', 'c3vd-scared-v9', 'vggt-c3vd-r1-final-trans4', 'vggt-c3vd-r1-best-trans4', 'vggt-c3vd-r1-final-trans1a', 'vggt-c3vd-r1-best-trans1a']
 def read(p):return json.loads(p.read_text(encoding='utf-8-sig'))
 def dump(p,obj):p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(obj,ensure_ascii=False,indent=2),encoding='utf8')
 def sha(p):
@@ -57,7 +57,7 @@ def main():
             block=re.sub(r'<p class="book-cloud-note">.*?</p>','<p class="book-cloud-note">La edición web conserva las mediciones de esta ficha. Las exportaciones específicas del diagnóstico, cuando existen, permanecen en el archivo local.</p>',block)
         return block
     q=re.sub(r'<details class="experiment-card".*?</details>',note,q,flags=re.S)
-    q=re.sub(r'(?m)^(#{2,3}) Comparadores interactivos \{#comparadores\}$', lambda m: m[0]+'\n\nEsta edición web ofrece **15 nubes principales completas** de C3VD y SCARED. Cada nube conserva el **100 % de sus puntos guardados**. Las demás exportaciones del archivo local no se incluyen en esta publicación.\n',q,count=1)
+    q=re.sub(r'(?m)^(#{2,3}) Comparadores interactivos \{#comparadores\}$', lambda m: m[0]+'\n\nEsta edición web ofrece **19 nubes principales completas** de C3VD y SCARED. Cada nube conserva el **100 % de sus puntos guardados**. Las demás exportaciones del archivo local no se incluyen en esta publicación.\n',q,count=1)
     if not same_tables(original,q):raise RuntimeError('Public export changed a notebook data table')
     if q.count('class="experiment-card"')!=original.count('class="experiment-card"'):raise RuntimeError('An experiment card was lost')
     (dst/'Bitacora.qmd').write_text(q,encoding='utf8')
@@ -82,7 +82,7 @@ def main():
         key=r['pack_key'];file=src/'reconstrucciones/interactivo'/r['path'];receipt=file.with_suffix('.json');info=read(receipt)
         if file.stat().st_size>=100*2**20:raise RuntimeError('Package exceeds GitHub file limit')
         if sha(file)!=info['package_sha256']:raise RuntimeError('Package checksum differs: '+id)
-        if id in {'scared8-scared-v9','scared9-scared-v9','c3vd-scared-v9'}:
+        if file.suffix == '.js':  # Lossless binary publication for all clouds; no points removed.
             info=publish_binary(file,app/'datos',info)
             remove_verified_redundant_js(app/'datos',key,info['source_js_package_sha256'])
         else:
@@ -127,6 +127,11 @@ def main():
     # VGGT_R1_REVIEW_20261123_PUBLIC_ASSETS
     for name in ['oracle_components.json', 'oracle_components.csv', 'analysis.json', 'all_cases.csv', 'macro_by_split_context.csv', 'changes_by_sequence.csv', 'changes_by_split.csv', 'training_epoch_summary.csv', 'observed_validation.csv', 'comparison_N50.png', 'training_review.png']:
         copy(src/'contenido/vggt_reproduction_r1'/name,dst/'contenido/vggt_reproduction_r1'/name)
+    # VGGT_R1_CLOSURE_V1_PUBLIC_ASSETS
+    for name in ['all_cases.csv', 'changes_by_sequence.csv', 'checkpoint_manifest.json', 'comparison_N50.png', 'error_depth.png', 'error_primary.png', 'error_profiles.csv', 'error_profiles.png', 'error_residual.png', 'geometry_controls.json', 'macro_by_split_context.csv', 'oracle_trans_t1_a.csv', 'paired_identities.json', 'recipe_comparison.csv', 'reproduction_manifest.json', 'summary.json', 'technical_integrity.json']:
+        copy(src/'contenido/vggt_r1_closure_v1'/name,dst/'contenido/vggt_r1_closure_v1'/name)
+    copy(src/'contenido/vggt_r1_closure_v1/cloud_export.json',dst/'contenido/vggt_r1_closure_v1/cloud_export.json')
+    copy(src/'contenido/vggt_r1_closure_v1/cloud_decoder_validation.json',dst/'contenido/vggt_r1_closure_v1/cloud_decoder_validation.json')
     # Two read-only audit summaries, without patient data, models or training arrays.
     for name in ['encoder_audit.json','fichas_evidencia.json']:
         copy(src/'contenido/auditoria_vggt_20261120'/name,dst/'contenido/auditoria_vggt_20261120'/name)
