@@ -124,6 +124,9 @@ def main():
         if (src/'tablas'/name).exists():copy(src/'tablas'/name,dst/'tablas'/name)
     copy(src/'contenido/Research_document.pdf',dst/'contenido/Research_document.pdf')
     copy(src/'contenido/vggt_reproduction_r1/summary.json',dst/'contenido/vggt_reproduction_r1/summary.json')
+    # VGGT_R1_REVIEW_20261123_PUBLIC_ASSETS
+    for name in ['oracle_components.json', 'oracle_components.csv', 'analysis.json', 'all_cases.csv', 'macro_by_split_context.csv', 'changes_by_sequence.csv', 'changes_by_split.csv', 'training_epoch_summary.csv', 'observed_validation.csv', 'comparison_N50.png', 'training_review.png']:
+        copy(src/'contenido/vggt_reproduction_r1'/name,dst/'contenido/vggt_reproduction_r1'/name)
     # Two read-only audit summaries, without patient data, models or training arrays.
     for name in ['encoder_audit.json','fichas_evidencia.json']:
         copy(src/'contenido/auditoria_vggt_20261120'/name,dst/'contenido/auditoria_vggt_20261120'/name)

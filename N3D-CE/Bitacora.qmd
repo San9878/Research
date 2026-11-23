@@ -2893,7 +2893,7 @@ Las tablas originales del paper usan otros datasets y hardware. Se recuperan sus
 <!-- VGGT_REPRODUCTION_R1_BEGIN -->
 #### Réplica controlada VGGT-C3VD · campaña R01–R12 {#vggt-reproduction-r1}
 
-**Estado de R07: En curso. No se declara terminada ni se sustituye la referencia histórica.** Registro actualizado el 20/11/2026 13:08 (Ciudad de México). Esta campaña es posterior a P01–P16; tiene sus propios controles y cierres.
+**Estado de R07: Completada; checkpoint final y evaluación común verificados.** Registro actualizado el 23/11/2026 09:17 (Ciudad de México). Esta campaña es posterior a P01–P16; tiene sus propios controles y cierres.
 
 **Qué se conserva:** pesos oficiales identificados, cámara y profundidad entrenables, agregador congelado, 30×100 actualizaciones, cuatro vistas supervisadas de 518×518, FP32, pérdida nativa de cámara×5/profundidad×1 y AdamW LR1e−5/WD0,05, sin scheduler ni clipping.
 
@@ -2944,6 +2944,37 @@ ATE/RPE se evaluaron por separado con Sim(3) de centros. Los IDs originales de f
 
 </details>
 
+<details><summary>R08/R11 · comparación común por secuencia</summary>
+
+**Protocolo:** C3VD, N=50,336×336, iguales RGB/GT/máscaras, una escala de profundidad compartida con D+K calibrada+pose, sin registro en XYZ/CD/NC. ATE/RPE se alinean aparte con Sim(3). Cada fila conserva secuencia y modelo; no se mezclan tablas históricas de ICP.
+
+| Secuencia | Modelo | AbsRel↓ | δ1↑ | XYZ cm↓ | p95 cm↓ | CD cm↓ | NC↑ | ATE cm↓ |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| trans_t1_b | VGGT_ZS | 0.22569 | 0.57150 | 0.75377 | 1.51379 | 0.26920 | 0.68272 | 0.11633 |
+| trans_t1_b | VGGT_FT | 0.17120 | 0.72507 | 0.91735 | 1.51390 | 0.33402 | 0.68650 | 0.10356 |
+| trans_t4_b | VGGT_ZS | 0.25242 | 0.55654 | 0.83852 | 2.01401 | 0.19227 | 0.65387 | 0.10023 |
+| trans_t4_b | VGGT_FT | 0.14188 | 0.80065 | 0.78347 | 1.77488 | 0.24673 | 0.69918 | 0.06736 |
+| cecum_t2_a | VGGT_ZS | 0.12921 | 0.81992 | 1.95051 | 3.33426 | 0.54930 | 0.69492 | 0.63818 |
+| cecum_t2_a | VGGT_FT | 0.06819 | 0.97550 | 1.42809 | 3.06737 | 0.47429 | 0.71345 | 0.46777 |
+| trans_t1_a | VGGT_ZS | 0.28455 | 0.47365 | 0.94434 | 2.24859 | 0.42073 | 0.64048 | 0.09267 |
+| trans_t1_a | VGGT_FT | 0.16377 | 0.74234 | 0.67861 | 1.71443 | 0.19517 | 0.71527 | 0.14617 |
+| trans_t1_b | VGGT_REPLICA_FINAL | 0.17034 | 0.74115 | 0.60773 | 1.23512 | 0.22850 | 0.69693 | 0.10489 |
+| trans_t4_b | VGGT_REPLICA_FINAL | 0.13095 | 0.82671 | 0.64456 | 1.62946 | 0.18087 | 0.71417 | 0.06203 |
+| cecum_t2_a | VGGT_REPLICA_FINAL | 0.05586 | 0.98162 | 0.84582 | 1.88318 | 0.20355 | 0.69566 | 0.40829 |
+| trans_t1_a | VGGT_REPLICA_FINAL | 0.16500 | 0.72281 | 0.70773 | 1.46252 | 0.20490 | 0.68849 | 0.10965 |
+| trans_t1_b | TTT_ZS | 0.18437 | 0.66433 | 0.82144 | 1.25158 | 0.39445 | 0.65358 | 0.11781 |
+| trans_t4_b | TTT_ZS | 0.18376 | 0.72124 | 0.78299 | 2.06273 | 0.25030 | 0.65620 | 0.09592 |
+| cecum_t2_a | TTT_ZS | 0.17345 | 0.73761 | 2.13020 | 3.82942 | 0.62165 | 0.62560 | 0.79068 |
+| trans_t1_a | TTT_ZS | 0.21098 | 0.62755 | 1.38490 | 2.55767 | 0.55574 | 0.67608 | 0.31056 |
+| trans_t1_b | TTT_C3VD_V9 | 0.16481 | 0.80329 | 0.62315 | 1.30840 | 0.24004 | 0.66772 | 0.10730 |
+| trans_t4_b | TTT_C3VD_V9 | 0.14706 | 0.78671 | 0.60708 | 1.94612 | 0.20493 | 0.66400 | 0.09872 |
+| cecum_t2_a | TTT_C3VD_V9 | 0.06843 | 0.97082 | 2.08131 | 3.87124 | 0.50914 | 0.61454 | 0.75315 |
+| trans_t1_a | TTT_C3VD_V9 | 0.14070 | 0.79701 | 1.24572 | 2.14499 | 0.33951 | 0.61097 | 0.28969 |
+
+Estas diferencias observadas no aíslan arquitectura: VGGT ajusta cámara/profundidad con cuatro vistas supervisadas; VGG-T³ V9 ajusta tres cabezas con otro contexto, muestreo y presupuesto. El encoder oficial, los pesos de adaptación y el GT disponible se identifican por separado.
+
+</details>
+
 <details><summary>Estado de la campaña y evidencia verificable</summary>
 
 | Tarea | Estado |
@@ -2954,12 +2985,12 @@ ATE/RPE se evaluaron por separado con Sim(3) de centros. Los IDs originales de f
 | R04 | complete_immutable_recipe_calendar_geometry |
 | R05 | passed_native_step |
 | R06 | passed_exact_resume |
-| R07 | running |
-| R08 | pending |
-| R09 | pending |
+| R07 | complete_3000_verified_R08_R09 |
+| R08 | complete_common_protocol |
+| R09 | complete_bitwise_frozen_and_load_parity |
 | R10 | complete_audited_with_documented_limits |
-| R11 | pending |
-| R12 | pending |
+| R11 | complete_observed_results_recipe_confounders_disclosed |
+| R12 | cierre_documental_generado_en_esta_pagina |
 | R13 | conditional_not_authorized_by_evidence |
 | R14 | conditional_not_authorized_by_evidence |
 | R15 | conditional_no_third_dataset_selected |
@@ -2969,6 +3000,161 @@ R13–R15 permanecen condicionales. No se añaden semillas, ablaciones ni un ter
 <p><a href="contenido/vggt_reproduction_r1/summary.json">Resumen de resultados, controles y hashes</a></p>
 
 </details>
+
+<!-- VGGT_R1_ANALYSIS_20261123_BEGIN -->
+
+##### Lectura del resultado · réplica frente a VGGT-C3VD anterior
+
+Se comparan el VGGT oficial zero-shot, el checkpoint histórico `c3vd_baseline_heads_30ep.pt` sin restaurar sus 39 valores anómalos y la nueva réplica R1 FINAL3000. Las 20 predicciones nuevas usan los mismos RGB y firmas de entrada del protocolo común.
+
+**Alcance:** cuatro secuencias, N=1/4/8/16/50 y 336×336. Las dos VAL y las dos reservadas se presentan por separado. Las reservadas quedaron fuera de la optimización de esta réplica, pero ya se habían utilizado en análisis previos del proyecto; no constituyen un nuevo test externo ciego. Los promedios de split dan el mismo peso a cada secuencia; no son una prueba de generalización clínica ni una reproducción de los benchmarks de los papers.
+
+<details open><summary>Resumen por split · N=50 · comparación con el VGGT-C3VD anterior</summary>
+
+**Geometría primaria:** D predicha + K calibrada + pose predicha, escala mediana de profundidad compartida con XYZ; todos los puntos GT válidos, sin filtro de confianza ni Sim(3)/ICP en XYZ/CD/NC. ATE/RPE usan, aparte, un Sim(3) global de centros de cámara. Las K predichas y el XYZ tras Sim(3) se conservan como diagnósticos separados.
+
+**Validación: trans_t1_b + trans_t4_b**
+
+| Métrica | Zero-shot | VGGT-C3VD anterior | Réplica R1 FINAL3000 | Cambio favorable R1/anterior |
+| --- | --- | --- | --- | --- |
+| AbsRel ↓ | 0.2391 | 0.1565 | 0.1506 | +3.76 % |
+| δ1 ↑ | 0.5640 | 0.7629 | 0.7839 | +2.76 % |
+| XYZ medio (cm) ↓ | 0.7961 | 0.8504 | 0.6261 | +26.37 % |
+| XYZ p95 (cm) ↓ | 1.7639 | 1.6444 | 1.4323 | +12.90 % |
+| CD (cm) ↓ | 0.2307 | 0.2904 | 0.2047 | +29.51 % |
+| NC ↑ | 0.6683 | 0.6928 | 0.7055 | +1.83 % |
+| ATE RMSE (cm) ↓ | 0.1083 | 0.0855 | 0.0835 | +2.33 % |
+| RPEr RMSE (°) ↓ | 0.5298 | 0.4901 | 0.5111 | -4.30 % |
+| RPEt RMSE (cm) ↓ | 0.0502 | 0.0429 | 0.0422 | +1.59 % |
+| Error focal (%) ↓ | 50.1201 | 12.5171 | 10.7675 | +13.98 % |
+
+**Reservadas: cecum_t2_a + trans_t1_a**
+
+| Métrica | Zero-shot | VGGT-C3VD anterior | Réplica R1 FINAL3000 | Cambio favorable R1/anterior |
+| --- | --- | --- | --- | --- |
+| AbsRel ↓ | 0.2069 | 0.1160 | 0.1104 | +4.79 % |
+| δ1 ↑ | 0.6468 | 0.8589 | 0.8522 | -0.78 % |
+| XYZ medio (cm) ↓ | 1.4474 | 1.0533 | 0.7768 | +26.26 % |
+| XYZ p95 (cm) ↓ | 2.7914 | 2.3909 | 1.6729 | +30.03 % |
+| CD (cm) ↓ | 0.4850 | 0.3347 | 0.2042 | +38.99 % |
+| NC ↑ | 0.6677 | 0.7144 | 0.6921 | -3.12 % |
+| ATE RMSE (cm) ↓ | 0.3654 | 0.3070 | 0.2590 | +15.64 % |
+| RPEr RMSE (°) ↓ | 0.6899 | 0.5514 | 0.5330 | +3.34 % |
+| RPEt RMSE (cm) ↓ | 0.1704 | 0.1166 | 0.1222 | -4.87 % |
+| Error focal (%) ↓ | 100.2419 | 14.3167 | 12.5142 | +12.59 % |
+
+**Lectura descriptiva frente al VGGT-C3VD anterior:** en el promedio de las dos reservadas, AbsRel mejora un 4.79 %, XYZ mejora un 26.26 %, CD mejora un 38.99 %, ATE mejora un 15.64 %.
+
+La mejora simultánea de AbsRel, XYZ, CD y ATE se observa en 2 de las cuatro secuencias. Las demás métricas, incluidas NC y RPE, se muestran para exponer compromisos; este recuento no es un criterio original de aceptación ni una prueba estadística.
+
+La atribución causal sigue confundida por la corrección de datos, la inicialización verificable y el calendario con semilla. R1 es una réplica controlada con datos corregidos, no una reproducción exacta del preprocesado ni del RNG históricos. El checkpoint anterior permanece conservado.
+
+Un cambio positivo indica mejora según la dirección de la métrica; uno negativo indica deterioro. Es el cambio entre promedios de secuencia, no el promedio de sus porcentajes. No implica significación estadística.
+
+</details>
+
+<details><summary>Qué cambia en cada secuencia y con el contexto</summary>
+
+| Secuencia | Split | AbsRel: mejora (%) | XYZ: mejora (%) | CD: mejora (%) | ATE: mejora (%) |
+| --- | --- | --- | --- | --- | --- |
+| trans_t1_b | validation | +0.50 % | +33.75 % | +31.59 % | -1.29 % |
+| trans_t4_b | validation | +7.70 % | +17.73 % | +26.69 % | +7.90 % |
+| cecum_t2_a | reserved | +18.09 % | +40.77 % | +57.08 % | +12.72 % |
+| trans_t1_a | reserved | -0.75 % | -4.29 % | -4.98 % | +24.98 % |
+
+**Contexto en reservadas; promedio de las mismas dos secuencias**
+
+| N vistas | AbsRel anterior | AbsRel R1 | XYZ anterior cm | XYZ R1 cm |
+| --- | --- | --- | --- | --- |
+| 1 | 0.1044 | 0.0980 | 0.3875 | 0.3644 |
+| 4 | 0.1104 | 0.1090 | 0.8760 | 0.9248 |
+| 8 | 0.1157 | 0.1151 | 1.0286 | 0.8865 |
+| 16 | 0.1164 | 0.1121 | 1.0394 | 0.7880 |
+| 50 | 0.1160 | 0.1104 | 1.0533 | 0.7768 |
+
+Este barrido modifica las vistas seleccionadas y el soporte de evaluación; N=1 solo evalúa una imagen. No permite atribuir causalmente el cambio solo al número de imágenes ni establecer un umbral universal de longitud de trayectoria.
+
+**Separación entre calibración y registro**
+
+| Split | Modelo | XYZ con K calibrada cm | XYZ con K predicha cm | XYZ secundario tras Sim(3) cm |
+| --- | --- | --- | --- | --- |
+| validation | VGGT_ZS | 0.7961 | 0.8889 | 0.6039 |
+| validation | VGGT_FT | 0.8504 | 0.8728 | 0.5457 |
+| validation | VGGT_REPLICA | 0.6261 | 0.6418 | 0.4588 |
+| reserved | VGGT_ZS | 1.4474 | 1.6696 | 0.9505 |
+| reserved | VGGT_FT | 1.0533 | 1.0861 | 0.5910 |
+| reserved | VGGT_REPLICA | 0.7768 | 0.8208 | 0.5706 |
+
+La K calibrada participa en la reconstrucción posterior al modelo. Por ello, la mejora de las intrínsecas predichas no explica por sí sola la mejora del XYZ primario. El ajuste Sim(3) del diagnóstico usa GT para puntuar y no se presenta como capacidad métrica obtenida sin referencia.
+
+</details>
+
+<details><summary>Entrenamiento, reanudaciones, pérdidas y selección del checkpoint</summary>
+
+| Comprobación | Resultado |
+| --- | --- |
+| Actualizaciones | 3000 únicas; 3037 filas en el log por las interrupciones. |
+| Repeticiones | 37 actualizaciones repetidas; todas coinciden exactamente en muestra, batch y pérdidas. Los promedios de entrenamiento las cuentan una sola vez. |
+| Congelamiento | 1.210 tensores del agregador coinciden bit a bit con los oficiales. Cámara y profundidad: 131 tensores finitos. |
+| Carga | LAST y FINAL producen salidas iguales bit a bit en el control de carga; ningún checkpoint histórico fue sustituido. |
+| BEST diagnóstico | Paso 800; pérdida fija de validación 0.188764. |
+| FINAL principal | Paso 3.000; pérdida fija de validación 0.306096 (+62.16% frente a BEST). |
+| Límite de interpretación | La pérdida de validación no es CD ni XYZ de 50 vistas. BEST800 no fue evaluado geométricamente en esta entrega y no reemplaza FINAL ni al histórico. |
+| Historia disponible | La curva completa de validación no se conservó; solo se grafican los registros observados y los metadatos BEST/FINAL. |
+| Fallo de cola | La fase CPU intentaba importar torch en un entorno CPU sin ese paquete. Se ejecutó la función CPU original y firmada, sin sus imports GPU; se reutilizaron las 20 inferencias ya completas. |
+
+![](contenido/vggt_reproduction_r1/training_review.png){fig-alt="Evolución del objetivo de entrenamiento y puntos de validación observados de la réplica R1"}
+
+</details>
+
+<details><summary>Figura comparativa y tablas descargables</summary>
+
+![](contenido/vggt_reproduction_r1/comparison_N50.png){fig-alt="Comparación por secuencia entre VGGT zero-shot, VGGT-C3VD anterior y réplica R1: profundidad, XYZ, CD y ATE"}
+
+- [Métricas principales por caso: 60 filas](contenido/vggt_reproduction_r1/all_cases.csv)
+- [Promedios por split y contexto](contenido/vggt_reproduction_r1/macro_by_split_context.csv)
+- [Cambios porcentuales por secuencia](contenido/vggt_reproduction_r1/changes_by_sequence.csv)
+- [Cambios porcentuales por split](contenido/vggt_reproduction_r1/changes_by_split.csv)
+- [Resumen verificable, protocolo y límites](contenido/vggt_reproduction_r1/analysis.json)
+
+</details>
+
+<details><summary>Receta histórica frente a réplica R1 y diagnóstico con componentes GT</summary>
+
+| Aspecto | VGGT-C3VD anterior | Réplica R1 |
+| --- | --- | --- |
+| Inicialización | Oficial; hash histórico inicial no retenido | Oficial; hash identificado y verificado |
+| Datos | Preprocesado legacy sin contrato geométrico certificado | geometry_v2 validado; mismas seis TRAIN y dos VAL |
+| Módulos | Cámara/profundidad; agregador congelado según script, con39 diferencias escalares observadas | Cámara/profundidad;1.210 tensores del agregador iguales a los oficiales |
+| Presupuesto | 30×100 pasos,4 vistas de518×518 por paso | Mismos30×100,4 vistas y resolución |
+| Pérdidas/optimizador | Cámara×5/profundidad×1; AdamW LR1e-5 y WD0,05; sin scheduler/clipping | La misma receta de pérdidas y optimizador |
+| Muestreo | Cuatro IDs aleatorios de toda la secuencia; semilla desconocida | Calendario almacenado con semilla1234; sin introducir continuidad/orden nuevos |
+| Validación | Registro0 legacy con vistas variables | Dos ventanas fijas; BEST separado para diagnóstico |
+| Checkpoint principal | Final de30 épocas | FINAL3000; no se sustituye por BEST800 |
+| Reanudación | Sin calendario ni RNG históricos completos | AdamW, RNG y cursor restaurados;37 repeticiones verificadas |
+
+**Control adicional de trans_t1_a:** se sustituyen componentes por GT manteniendo K calibrada y la escala original de cada predicción. Las traslaciones predichas se llevan a metros con esa misma escala; las componentes GT ya están en metros. Se usan todos los puntos válidos de las50 vistas. Es un diagnóstico con información de referencia, no un resultado que pueda obtener el modelo sin GT.
+
+| Modelo | D+pose predichas cm | Pose GT + D predicha cm | D GT + pose predicha cm | R GT solamente cm | t GT solamente cm |
+| --- | --- | --- | --- | --- | --- |
+| VGGT_FT | 0.6786 | 0.4960 | 0.4666 | 0.6611 | 0.5065 |
+| VGGT_REPLICA | 0.7077 | 0.5147 | 0.4296 | 0.6941 | 0.5282 |
+
+Con poses GT, el error atribuible a la profundidad predicha bajo este control pasa de 0.4960 a 0.5147cm (+3.77%). Con profundidad GT, el error de la ruta de cámara pasa de 0.4666 a 0.4296cm (-7.91%). En este caso, la profundidad controlada empeora y la cámara controlada mejora; combinar ambas predicciones todavía empeora el XYZ. Los efectos no son aditivos y no identifican qué cambio de entrenamiento produjo el resultado.
+
+| Modelo | RMSE de centros con escala D y gauge común cm | ATE con Sim(3) separado cm |
+| --- | --- | --- |
+| VGGT_FT | 0.4850 | 0.1462 |
+| VGGT_REPLICA | 0.4677 | 0.1097 |
+
+Las reconstrucciones completas con D GT y pose GT dieron error interno0 en los puntos válidos. Los controles reproducen el XYZ original con tolerancia1e-7cm. Los NaN fuera de la máscara GT se excluyen exactamente como en el evaluador primario; no se añade un filtro de confianza ni se reduce la nube. Ese0 es un control interno de la sustitución, no una nueva certificación física del dataset.
+
+- [Controles de componentes en las cuatro secuencias:48 filas](contenido/vggt_reproduction_r1/oracle_components.csv)
+- [Definición y limitaciones de los controles](contenido/vggt_reproduction_r1/oracle_components.json)
+
+</details>
+
+<!-- VGGT_R1_ANALYSIS_20261123_END -->
 
 <!-- VGGT_REPRODUCTION_R1_END -->
 
