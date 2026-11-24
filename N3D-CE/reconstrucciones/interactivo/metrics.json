@@ -20515,6 +20515,918 @@
         }
       ],
       "model_family": "VGGT"
+    },
+    {
+      "id": "c3vd-paired-r1-v9-case-trans_t1_b-R1_FINAL3000",
+      "label": "VGGT R1 FINAL3000 · trans_t1_b",
+      "model_family": "VGGT",
+      "group": "C3VD · referencias actuales pareadas · N50 / GT50",
+      "dataset": "C3VD",
+      "case": "trans_t1_b",
+      "kind": "metrics",
+      "comparison_key": "C3VD-R1-V9-paired-v1|case|trans_t1_b|N50-GT50-336|D-knownK-pose|shared-depth-scale|noICP",
+      "context": "validation. Mismos 50 RGB, GT, máscaras, K y gauge. D+K calibrada+pose, una escala de profundidad GT por contexto, sin ICP. ATE/RPE con Sim(3) global de cámaras separado. Recetas de entrenamiento diferentes.",
+      "values": [
+        {
+          "key": "AbsRel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.1703446842405054
+        },
+        {
+          "key": "delta1_pct",
+          "label": "δ1",
+          "unit": "%",
+          "higher": true,
+          "value": 74.11499078798187
+        },
+        {
+          "key": "XYZ_cm",
+          "label": "XYZ D+K+pose",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.60772733905955
+        },
+        {
+          "key": "p95_cm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.2351241799360544
+        },
+        {
+          "key": "CD_cm",
+          "label": "CD sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.22849830178696173
+        },
+        {
+          "key": "NC",
+          "label": "NC",
+          "unit": "",
+          "higher": true,
+          "value": 0.6969326461131036
+        },
+        {
+          "key": "ATE_cm",
+          "label": "ATE RMSE",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.10489459346302143
+        },
+        {
+          "key": "RPEr_deg",
+          "label": "RPEr RMSE",
+          "unit": "°",
+          "higher": false,
+          "value": 0.44961012783146026
+        },
+        {
+          "key": "RPEt_cm",
+          "label": "RPEt RMSE",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.04073514929696918
+        }
+      ]
+    },
+    {
+      "id": "c3vd-paired-r1-v9-case-trans_t1_b-TTT_C3VD_V9",
+      "label": "VGG-T³ V9 · trans_t1_b",
+      "model_family": "VGG-T³",
+      "group": "C3VD · referencias actuales pareadas · N50 / GT50",
+      "dataset": "C3VD",
+      "case": "trans_t1_b",
+      "kind": "metrics",
+      "comparison_key": "C3VD-R1-V9-paired-v1|case|trans_t1_b|N50-GT50-336|D-knownK-pose|shared-depth-scale|noICP",
+      "context": "validation. Mismos 50 RGB, GT, máscaras, K y gauge. D+K calibrada+pose, una escala de profundidad GT por contexto, sin ICP. ATE/RPE con Sim(3) global de cámaras separado. Recetas de entrenamiento diferentes.",
+      "values": [
+        {
+          "key": "AbsRel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.16480573721629083
+        },
+        {
+          "key": "delta1_pct",
+          "label": "δ1",
+          "unit": "%",
+          "higher": true,
+          "value": 80.32904620181405
+        },
+        {
+          "key": "XYZ_cm",
+          "label": "XYZ D+K+pose",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.6231537175862151
+        },
+        {
+          "key": "p95_cm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.3084032257711742
+        },
+        {
+          "key": "CD_cm",
+          "label": "CD sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.24003782909492138
+        },
+        {
+          "key": "NC",
+          "label": "NC",
+          "unit": "",
+          "higher": true,
+          "value": 0.667723892364529
+        },
+        {
+          "key": "ATE_cm",
+          "label": "ATE RMSE",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.10729725818961945
+        },
+        {
+          "key": "RPEr_deg",
+          "label": "RPEr RMSE",
+          "unit": "°",
+          "higher": false,
+          "value": 0.9926930497245701
+        },
+        {
+          "key": "RPEt_cm",
+          "label": "RPEt RMSE",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.06183780220182168
+        }
+      ]
+    },
+    {
+      "id": "c3vd-paired-r1-v9-case-trans_t4_b-R1_FINAL3000",
+      "label": "VGGT R1 FINAL3000 · trans_t4_b",
+      "model_family": "VGGT",
+      "group": "C3VD · referencias actuales pareadas · N50 / GT50",
+      "dataset": "C3VD",
+      "case": "trans_t4_b",
+      "kind": "metrics",
+      "comparison_key": "C3VD-R1-V9-paired-v1|case|trans_t4_b|N50-GT50-336|D-knownK-pose|shared-depth-scale|noICP",
+      "context": "validation. Mismos 50 RGB, GT, máscaras, K y gauge. D+K calibrada+pose, una escala de profundidad GT por contexto, sin ICP. ATE/RPE con Sim(3) global de cámaras separado. Recetas de entrenamiento diferentes.",
+      "values": [
+        {
+          "key": "AbsRel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.13094978797671603
+        },
+        {
+          "key": "delta1_pct",
+          "label": "δ1",
+          "unit": "%",
+          "higher": true,
+          "value": 82.67078881278292
+        },
+        {
+          "key": "XYZ_cm",
+          "label": "XYZ D+K+pose",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.6445591797403452
+        },
+        {
+          "key": "p95_cm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.6294586491894807
+        },
+        {
+          "key": "CD_cm",
+          "label": "CD sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.18087308904126742
+        },
+        {
+          "key": "NC",
+          "label": "NC",
+          "unit": "",
+          "higher": true,
+          "value": 0.7141660112226805
+        },
+        {
+          "key": "ATE_cm",
+          "label": "ATE RMSE",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.06203489496910485
+        },
+        {
+          "key": "RPEr_deg",
+          "label": "RPEr RMSE",
+          "unit": "°",
+          "higher": false,
+          "value": 0.5726692551938389
+        },
+        {
+          "key": "RPEt_cm",
+          "label": "RPEt RMSE",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.043740591713598995
+        }
+      ]
+    },
+    {
+      "id": "c3vd-paired-r1-v9-case-trans_t4_b-TTT_C3VD_V9",
+      "label": "VGG-T³ V9 · trans_t4_b",
+      "model_family": "VGG-T³",
+      "group": "C3VD · referencias actuales pareadas · N50 / GT50",
+      "dataset": "C3VD",
+      "case": "trans_t4_b",
+      "kind": "metrics",
+      "comparison_key": "C3VD-R1-V9-paired-v1|case|trans_t4_b|N50-GT50-336|D-knownK-pose|shared-depth-scale|noICP",
+      "context": "validation. Mismos 50 RGB, GT, máscaras, K y gauge. D+K calibrada+pose, una escala de profundidad GT por contexto, sin ICP. ATE/RPE con Sim(3) global de cámaras separado. Recetas de entrenamiento diferentes.",
+      "values": [
+        {
+          "key": "AbsRel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.1470559593612589
+        },
+        {
+          "key": "delta1_pct",
+          "label": "δ1",
+          "unit": "%",
+          "higher": true,
+          "value": 78.67109001042274
+        },
+        {
+          "key": "XYZ_cm",
+          "label": "XYZ D+K+pose",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.6070804344157383
+        },
+        {
+          "key": "p95_cm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.9461156981759653
+        },
+        {
+          "key": "CD_cm",
+          "label": "CD sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.2049342950101008
+        },
+        {
+          "key": "NC",
+          "label": "NC",
+          "unit": "",
+          "higher": true,
+          "value": 0.6639979894011844
+        },
+        {
+          "key": "ATE_cm",
+          "label": "ATE RMSE",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.09872318977088138
+        },
+        {
+          "key": "RPEr_deg",
+          "label": "RPEr RMSE",
+          "unit": "°",
+          "higher": false,
+          "value": 1.007088974474428
+        },
+        {
+          "key": "RPEt_cm",
+          "label": "RPEt RMSE",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.04186611884919744
+        }
+      ]
+    },
+    {
+      "id": "c3vd-paired-r1-v9-case-cecum_t2_a-R1_FINAL3000",
+      "label": "VGGT R1 FINAL3000 · cecum_t2_a",
+      "model_family": "VGGT",
+      "group": "C3VD · referencias actuales pareadas · N50 / GT50",
+      "dataset": "C3VD",
+      "case": "cecum_t2_a",
+      "kind": "metrics",
+      "comparison_key": "C3VD-R1-V9-paired-v1|case|cecum_t2_a|N50-GT50-336|D-knownK-pose|shared-depth-scale|noICP",
+      "context": "reserved. Mismos 50 RGB, GT, máscaras, K y gauge. D+K calibrada+pose, una escala de profundidad GT por contexto, sin ICP. ATE/RPE con Sim(3) global de cámaras separado. Recetas de entrenamiento diferentes.",
+      "values": [
+        {
+          "key": "AbsRel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.05586018556115678
+        },
+        {
+          "key": "delta1_pct",
+          "label": "δ1",
+          "unit": "%",
+          "higher": true,
+          "value": 98.16227324263038
+        },
+        {
+          "key": "XYZ_cm",
+          "label": "XYZ D+K+pose",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.845817308921909
+        },
+        {
+          "key": "p95_cm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.8831813106281272
+        },
+        {
+          "key": "CD_cm",
+          "label": "CD sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.20354782039534208
+        },
+        {
+          "key": "NC",
+          "label": "NC",
+          "unit": "",
+          "higher": true,
+          "value": 0.6956619908448809
+        },
+        {
+          "key": "ATE_cm",
+          "label": "ATE RMSE",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.4082903992158252
+        },
+        {
+          "key": "RPEr_deg",
+          "label": "RPEr RMSE",
+          "unit": "°",
+          "higher": false,
+          "value": 0.7424793399174703
+        },
+        {
+          "key": "RPEt_cm",
+          "label": "RPEt RMSE",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.18425561560057227
+        }
+      ]
+    },
+    {
+      "id": "c3vd-paired-r1-v9-case-cecum_t2_a-TTT_C3VD_V9",
+      "label": "VGG-T³ V9 · cecum_t2_a",
+      "model_family": "VGG-T³",
+      "group": "C3VD · referencias actuales pareadas · N50 / GT50",
+      "dataset": "C3VD",
+      "case": "cecum_t2_a",
+      "kind": "metrics",
+      "comparison_key": "C3VD-R1-V9-paired-v1|case|cecum_t2_a|N50-GT50-336|D-knownK-pose|shared-depth-scale|noICP",
+      "context": "reserved. Mismos 50 RGB, GT, máscaras, K y gauge. D+K calibrada+pose, una escala de profundidad GT por contexto, sin ICP. ATE/RPE con Sim(3) global de cámaras separado. Recetas de entrenamiento diferentes.",
+      "values": [
+        {
+          "key": "AbsRel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.06843470158391632
+        },
+        {
+          "key": "delta1_pct",
+          "label": "δ1",
+          "unit": "%",
+          "higher": true,
+          "value": 97.08235898526077
+        },
+        {
+          "key": "XYZ_cm",
+          "label": "XYZ D+K+pose",
+          "unit": "cm",
+          "higher": false,
+          "value": 2.081308181789803
+        },
+        {
+          "key": "p95_cm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 3.8712405871194675
+        },
+        {
+          "key": "CD_cm",
+          "label": "CD sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.5091422377701837
+        },
+        {
+          "key": "NC",
+          "label": "NC",
+          "unit": "",
+          "higher": true,
+          "value": 0.6145425497158119
+        },
+        {
+          "key": "ATE_cm",
+          "label": "ATE RMSE",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.7531461787983165
+        },
+        {
+          "key": "RPEr_deg",
+          "label": "RPEr RMSE",
+          "unit": "°",
+          "higher": false,
+          "value": 1.981794586026978
+        },
+        {
+          "key": "RPEt_cm",
+          "label": "RPEt RMSE",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.33261005928906306
+        }
+      ]
+    },
+    {
+      "id": "c3vd-paired-r1-v9-case-trans_t1_a-R1_FINAL3000",
+      "label": "VGGT R1 FINAL3000 · trans_t1_a",
+      "model_family": "VGGT",
+      "group": "C3VD · referencias actuales pareadas · N50 / GT50",
+      "dataset": "C3VD",
+      "case": "trans_t1_a",
+      "kind": "metrics",
+      "comparison_key": "C3VD-R1-V9-paired-v1|case|trans_t1_a|N50-GT50-336|D-knownK-pose|shared-depth-scale|noICP",
+      "context": "reserved. Mismos 50 RGB, GT, máscaras, K y gauge. D+K calibrada+pose, una escala de profundidad GT por contexto, sin ICP. ATE/RPE con Sim(3) global de cámaras separado. Recetas de entrenamiento diferentes.",
+      "values": [
+        {
+          "key": "AbsRel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.16499837966400385
+        },
+        {
+          "key": "delta1_pct",
+          "label": "δ1",
+          "unit": "%",
+          "higher": true,
+          "value": 72.28077715415253
+        },
+        {
+          "key": "XYZ_cm",
+          "label": "XYZ D+K+pose",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.7077289250733338
+        },
+        {
+          "key": "p95_cm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.462520063781221
+        },
+        {
+          "key": "CD_cm",
+          "label": "CD sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.2048962961064747
+        },
+        {
+          "key": "NC",
+          "label": "NC",
+          "unit": "",
+          "higher": true,
+          "value": 0.6884945864870535
+        },
+        {
+          "key": "ATE_cm",
+          "label": "ATE RMSE",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.10965117392059325
+        },
+        {
+          "key": "RPEr_deg",
+          "label": "RPEr RMSE",
+          "unit": "°",
+          "higher": false,
+          "value": 0.32350874750958913
+        },
+        {
+          "key": "RPEt_cm",
+          "label": "RPEt RMSE",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.060235647512600125
+        }
+      ]
+    },
+    {
+      "id": "c3vd-paired-r1-v9-case-trans_t1_a-TTT_C3VD_V9",
+      "label": "VGG-T³ V9 · trans_t1_a",
+      "model_family": "VGG-T³",
+      "group": "C3VD · referencias actuales pareadas · N50 / GT50",
+      "dataset": "C3VD",
+      "case": "trans_t1_a",
+      "kind": "metrics",
+      "comparison_key": "C3VD-R1-V9-paired-v1|case|trans_t1_a|N50-GT50-336|D-knownK-pose|shared-depth-scale|noICP",
+      "context": "reserved. Mismos 50 RGB, GT, máscaras, K y gauge. D+K calibrada+pose, una escala de profundidad GT por contexto, sin ICP. ATE/RPE con Sim(3) global de cámaras separado. Recetas de entrenamiento diferentes.",
+      "values": [
+        {
+          "key": "AbsRel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.14069912792861228
+        },
+        {
+          "key": "delta1_pct",
+          "label": "δ1",
+          "unit": "%",
+          "higher": true,
+          "value": 79.70145938437824
+        },
+        {
+          "key": "XYZ_cm",
+          "label": "XYZ D+K+pose",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.2457205602182093
+        },
+        {
+          "key": "p95_cm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 2.1449935997857312
+        },
+        {
+          "key": "CD_cm",
+          "label": "CD sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.3395106302757575
+        },
+        {
+          "key": "NC",
+          "label": "NC",
+          "unit": "",
+          "higher": true,
+          "value": 0.6109676811043556
+        },
+        {
+          "key": "ATE_cm",
+          "label": "ATE RMSE",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.28968905738443573
+        },
+        {
+          "key": "RPEr_deg",
+          "label": "RPEr RMSE",
+          "unit": "°",
+          "higher": false,
+          "value": 0.3615783912356012
+        },
+        {
+          "key": "RPEt_cm",
+          "label": "RPEt RMSE",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.14018803192698648
+        }
+      ]
+    },
+    {
+      "id": "c3vd-paired-r1-v9-macro-validation-R1_FINAL3000",
+      "label": "VGGT R1 FINAL3000 · validation",
+      "model_family": "VGGT",
+      "group": "C3VD · referencias actuales pareadas · N50 / GT50",
+      "dataset": "C3VD",
+      "case": "validation",
+      "kind": "metrics",
+      "comparison_key": "C3VD-R1-V9-paired-v1|macro|validation|N50-GT50-336|D-knownK-pose|shared-depth-scale|noICP",
+      "context": "Igual peso por secuencia dentro de validation. Mismos 50 RGB, GT, máscaras, K y gauge. D+K calibrada+pose, una escala de profundidad GT por contexto, sin ICP. ATE/RPE con Sim(3) global de cámaras separado. Recetas de entrenamiento diferentes.",
+      "values": [
+        {
+          "key": "AbsRel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.1506472361086107
+        },
+        {
+          "key": "delta1_pct",
+          "label": "δ1",
+          "unit": "%",
+          "higher": true,
+          "value": 78.39288980038239
+        },
+        {
+          "key": "XYZ_cm",
+          "label": "XYZ D+K+pose",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.6261432593999476
+        },
+        {
+          "key": "p95_cm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.4322914145627674
+        },
+        {
+          "key": "CD_cm",
+          "label": "CD sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.20468569541411458
+        },
+        {
+          "key": "NC",
+          "label": "NC",
+          "unit": "",
+          "higher": true,
+          "value": 0.705549328667892
+        },
+        {
+          "key": "ATE_cm",
+          "label": "ATE RMSE",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.08346474421606315
+        },
+        {
+          "key": "RPEr_deg",
+          "label": "RPEr RMSE",
+          "unit": "°",
+          "higher": false,
+          "value": 0.5111396915126496
+        },
+        {
+          "key": "RPEt_cm",
+          "label": "RPEt RMSE",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.04223787050528409
+        }
+      ]
+    },
+    {
+      "id": "c3vd-paired-r1-v9-macro-validation-TTT_C3VD_V9",
+      "label": "VGG-T³ V9 · validation",
+      "model_family": "VGG-T³",
+      "group": "C3VD · referencias actuales pareadas · N50 / GT50",
+      "dataset": "C3VD",
+      "case": "validation",
+      "kind": "metrics",
+      "comparison_key": "C3VD-R1-V9-paired-v1|macro|validation|N50-GT50-336|D-knownK-pose|shared-depth-scale|noICP",
+      "context": "Igual peso por secuencia dentro de validation. Mismos 50 RGB, GT, máscaras, K y gauge. D+K calibrada+pose, una escala de profundidad GT por contexto, sin ICP. ATE/RPE con Sim(3) global de cámaras separado. Recetas de entrenamiento diferentes.",
+      "values": [
+        {
+          "key": "AbsRel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.15593084828877485
+        },
+        {
+          "key": "delta1_pct",
+          "label": "δ1",
+          "unit": "%",
+          "higher": true,
+          "value": 79.50006810611839
+        },
+        {
+          "key": "XYZ_cm",
+          "label": "XYZ D+K+pose",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.6151170760009768
+        },
+        {
+          "key": "p95_cm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.6272594619735696
+        },
+        {
+          "key": "CD_cm",
+          "label": "CD sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.2224860620525111
+        },
+        {
+          "key": "NC",
+          "label": "NC",
+          "unit": "",
+          "higher": true,
+          "value": 0.6658609408828566
+        },
+        {
+          "key": "ATE_cm",
+          "label": "ATE RMSE",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.10301022398025042
+        },
+        {
+          "key": "RPEr_deg",
+          "label": "RPEr RMSE",
+          "unit": "°",
+          "higher": false,
+          "value": 0.999891012099499
+        },
+        {
+          "key": "RPEt_cm",
+          "label": "RPEt RMSE",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.05185196052550956
+        }
+      ]
+    },
+    {
+      "id": "c3vd-paired-r1-v9-macro-reserved-R1_FINAL3000",
+      "label": "VGGT R1 FINAL3000 · reserved",
+      "model_family": "VGGT",
+      "group": "C3VD · referencias actuales pareadas · N50 / GT50",
+      "dataset": "C3VD",
+      "case": "reserved",
+      "kind": "metrics",
+      "comparison_key": "C3VD-R1-V9-paired-v1|macro|reserved|N50-GT50-336|D-knownK-pose|shared-depth-scale|noICP",
+      "context": "Igual peso por secuencia dentro de reserved. Mismos 50 RGB, GT, máscaras, K y gauge. D+K calibrada+pose, una escala de profundidad GT por contexto, sin ICP. ATE/RPE con Sim(3) global de cámaras separado. Recetas de entrenamiento diferentes.",
+      "values": [
+        {
+          "key": "AbsRel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.11042928261258031
+        },
+        {
+          "key": "delta1_pct",
+          "label": "δ1",
+          "unit": "%",
+          "higher": true,
+          "value": 85.22152519839145
+        },
+        {
+          "key": "XYZ_cm",
+          "label": "XYZ D+K+pose",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.7767731169976214
+        },
+        {
+          "key": "p95_cm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.672850687204674
+        },
+        {
+          "key": "CD_cm",
+          "label": "CD sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.2042220582509084
+        },
+        {
+          "key": "NC",
+          "label": "NC",
+          "unit": "",
+          "higher": true,
+          "value": 0.6920782886659672
+        },
+        {
+          "key": "ATE_cm",
+          "label": "ATE RMSE",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.2589707865682092
+        },
+        {
+          "key": "RPEr_deg",
+          "label": "RPEr RMSE",
+          "unit": "°",
+          "higher": false,
+          "value": 0.5329940437135297
+        },
+        {
+          "key": "RPEt_cm",
+          "label": "RPEt RMSE",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.1222456315565862
+        }
+      ]
+    },
+    {
+      "id": "c3vd-paired-r1-v9-macro-reserved-TTT_C3VD_V9",
+      "label": "VGG-T³ V9 · reserved",
+      "model_family": "VGG-T³",
+      "group": "C3VD · referencias actuales pareadas · N50 / GT50",
+      "dataset": "C3VD",
+      "case": "reserved",
+      "kind": "metrics",
+      "comparison_key": "C3VD-R1-V9-paired-v1|macro|reserved|N50-GT50-336|D-knownK-pose|shared-depth-scale|noICP",
+      "context": "Igual peso por secuencia dentro de reserved. Mismos 50 RGB, GT, máscaras, K y gauge. D+K calibrada+pose, una escala de profundidad GT por contexto, sin ICP. ATE/RPE con Sim(3) global de cámaras separado. Recetas de entrenamiento diferentes.",
+      "values": [
+        {
+          "key": "AbsRel",
+          "label": "AbsRel",
+          "unit": "",
+          "higher": false,
+          "value": 0.1045669147562643
+        },
+        {
+          "key": "delta1_pct",
+          "label": "δ1",
+          "unit": "%",
+          "higher": true,
+          "value": 88.3919091848195
+        },
+        {
+          "key": "XYZ_cm",
+          "label": "XYZ D+K+pose",
+          "unit": "cm",
+          "higher": false,
+          "value": 1.6635143710040063
+        },
+        {
+          "key": "p95_cm",
+          "label": "XYZ p95",
+          "unit": "cm",
+          "higher": false,
+          "value": 3.0081170934525994
+        },
+        {
+          "key": "CD_cm",
+          "label": "CD sin ICP",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.42432643402297066
+        },
+        {
+          "key": "NC",
+          "label": "NC",
+          "unit": "",
+          "higher": true,
+          "value": 0.6127551154100838
+        },
+        {
+          "key": "ATE_cm",
+          "label": "ATE RMSE",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.5214176180913761
+        },
+        {
+          "key": "RPEr_deg",
+          "label": "RPEr RMSE",
+          "unit": "°",
+          "higher": false,
+          "value": 1.1716864886312894
+        },
+        {
+          "key": "RPEt_cm",
+          "label": "RPEt RMSE",
+          "unit": "cm",
+          "higher": false,
+          "value": 0.23639904560802477
+        }
+      ]
     }
   ],
   "no_metric_recalculation": true,

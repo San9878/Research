@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   release();const frame=document.createElement('iframe');frame.title='Nubes, trayectorias y métricas comparadas';frame.className='book-comparator-frame';frame.allow='fullscreen';
   const request={type:tab==='metrics'?'bitacora-open-metrics':'bitacora-open-clouds',ids,scope,load:tab==='clouds'};
   active={frame,request,ready:false};
-  const query='?v=20261124-layout&embed=1&tab='+tab+'&models='+encodeURIComponent(ids.join(','))+'&scope='+encodeURIComponent(scope);
+  const query='?v=20261124-paired&embed=1&tab='+tab+'&models='+encodeURIComponent(ids.join(','))+'&scope='+encodeURIComponent(scope);
   frame.src='reconstrucciones/interactivo/comparador.html'+query;
   frame.addEventListener('load',()=>{if(active?.frame===frame){active.ready=true;send();}});mount.append(frame);
   document.getElementById('book-dialog-title').textContent=tab==='metrics'?'Métricas · selección dinámica':'Nubes y trayectorias · selección dinámica';

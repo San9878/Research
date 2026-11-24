@@ -165,6 +165,8 @@ def main():
         data=read(path);data.pop('future_training_conditions',None)
         if isinstance(data.get('campaign_status'),dict):data['campaign_status']={k:v for k,v in data['campaign_status'].items() if k not in {'R13','R14','R15','R16'}}
         dump(path,data)
+    for name in ['summary.json','pairing_verification.json','per_sequence.csv','macro_by_split.csv']:
+        copy(src/'contenido/c3vd_r1_v9_paired_v1'/name,dst/'contenido/c3vd_r1_v9_paired_v1'/name)
     # Export report contains reproducible hashes, never machine paths or credentials.
     report={'project':'N3D-CE','source_qmd_sha256':sha(src/'Bitacora.qmd'),'public_qmd_sha256':sha(dst/'Bitacora.qmd'),'source_data_tables_preserved':len(re.findall(r'(?m)(?:^\|[^\n]*\n)+',q)),'experiment_cards':q.count('class="experiment-card"'),'scared_experiment_cards':q.count('class="scared-experiment-card"'),'scared_followup_cards':q.count('class="scared-followup-card"'),'prepared_protocol_cards':q.count('class="prepared-experiment-card"'),'unified_experiment_cards':q.count('data-research-card'),'VGGT_protocol_cards':q.count('data-vggt-card'),'VGGT_phase1_cards':q.count('data-vggt-phase1-card'),'public_clouds':[{'id':r['id'],'points':r['points'],'package_sha256':packages[r['pack_key']]['package_sha256']} for r in clouds],'cloud_bytes':public['physical_package_bytes'],'metric_entries':len(met['entries']),'historical_tables':len(tables),'all_saved_vertices_preserved':True,'export_ran_training':False,'export_ran_inference':False}
     dump(dst/'publication_manifest.json',report)

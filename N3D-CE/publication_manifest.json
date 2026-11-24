@@ -1,8 +1,8 @@
 {
   "project": "N3D-CE",
-  "source_qmd_sha256": "a522bacf282863e391359805b8f0ae09e80abfd43242795bd583288e200a1abe",
-  "public_qmd_sha256": "2dc3cdec8bdc0f0b9fa98056356586789a50b868ffb3c2f24bb3544a88472f82",
-  "source_data_tables_preserved": 160,
+  "source_qmd_sha256": "ca61c6632ac77177559a52bf495c63ebbbe60aa4347e848f21fbc0a4a4e76b90",
+  "public_qmd_sha256": "a22bffa76c33a0d44238c28789cec9f5dcf1e163b838f3103dfba6107dc107a7",
+  "source_data_tables_preserved": 162,
   "experiment_cards": 44,
   "scared_experiment_cards": 12,
   "scared_followup_cards": 4,
@@ -123,7 +123,7 @@
     }
   ],
   "cloud_bytes": 951173115,
-  "metric_entries": 315,
+  "metric_entries": 327,
   "historical_tables": 496,
   "all_saved_vertices_preserved": true,
   "export_ran_training": false,
