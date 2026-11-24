@@ -34124,7 +34124,7 @@
       {
         "id": "D12193",
         "path": "index.html",
-        "context": "screening_t1 preparado"
+        "context": "screening_t1 rectificado y verificado"
       }
     ]
   },
@@ -100880,19 +100880,15 @@
       [
         "Forward/backward nativo GPU",
         "Pasó en VGG-T3: encoder completo congelado,2 pasos TTT, backward de cámara/profundidad/puntos y3 actualizaciones desechables."
-      ],
-      [
-        "Nuevo entrenamiento largo",
-        "Todavía no lanzado. Falta fijar la receta de modelo/pérdidas y el protocolo de evaluación."
       ]
     ],
-    "total_rows": 8,
+    "total_rows": 7,
     "id": "T0492",
     "origins": [
       {
         "id": "D25999",
         "path": "index.html",
-        "context": "Pruebas realizadas y pendiente"
+        "context": "Comprobaciones realizadas"
       }
     ]
   },
