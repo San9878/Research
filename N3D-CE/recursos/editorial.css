@@ -23,3 +23,15 @@ html{scroll-padding-top:1.5rem}main{max-width:1080px}#title-block-header{display
 
 /* SCARED review model ledger */
 .executive-summary .coverage-table th:first-child{min-width:70px}.executive-summary .coverage-table td{min-width:140px}
+
+/* Editorial reading hierarchy, 2026-11-24. */
+.cover-navigation{display:flex;flex-wrap:wrap;justify-content:center;gap:.45rem .7rem;font:13px/1.5 system-ui}
+.cover-navigation a{color:#315b42;text-decoration:none;border-bottom:1px solid #bdcfc1;padding:.15rem .2rem}
+.protocol-reading-guide{font-size:.82rem;color:#5a7061;margin:.7rem 0 1.2rem}
+.protocol-main{margin:.75rem 0}.protocol-main>summary{font-size:.83rem;padding:.65rem .9rem}
+.protocol-main .protocol-fields{margin:.8rem 1rem}
+.table-context{font-size:.77rem;color:#536b5d;line-height:1.6;margin:.65rem 0 .2rem;overflow-wrap:anywhere}
+.protocol-kind{font-weight:650;color:#355944}.protocol-differences{display:block;margin-top:.2rem}
+.comparison-history>summary{font-size:.95rem;background:#f4f6f4}
+.comparison-history[open]{border-color:#bdcbbf}
+@media(max-width:600px){.cover-navigation{font-size:.76rem;gap:.4rem}.protocol-main .protocol-fields{margin:.8rem}.protocol-differences{font-size:.75rem}}
