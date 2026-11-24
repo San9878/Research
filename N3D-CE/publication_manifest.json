@@ -1,14 +1,14 @@
 {
   "project": "N3D-CE",
-  "source_qmd_sha256": "3c355bfe52904f57e3db5976d9d98982eaa82a4303125111a9cbdf7647aaaf4f",
-  "public_qmd_sha256": "0b78f4d95922927589f986523f14e6b83108d50675beb0754e78194c46d764ce",
-  "source_data_tables_preserved": 142,
+  "source_qmd_sha256": "a522bacf282863e391359805b8f0ae09e80abfd43242795bd583288e200a1abe",
+  "public_qmd_sha256": "2dc3cdec8bdc0f0b9fa98056356586789a50b868ffb3c2f24bb3544a88472f82",
+  "source_data_tables_preserved": 160,
   "experiment_cards": 44,
   "scared_experiment_cards": 12,
   "scared_followup_cards": 4,
-  "prepared_protocol_cards": 3,
-  "unified_experiment_cards": 63,
-  "VGGT_protocol_cards": 10,
+  "prepared_protocol_cards": 0,
+  "unified_experiment_cards": 60,
+  "VGGT_protocol_cards": 0,
   "VGGT_phase1_cards": 4,
   "public_clouds": [
     {
@@ -105,10 +105,25 @@
       "id": "vggt-c3vd-r1-best-trans1a",
       "points": 5644800,
       "package_sha256": "bc483894ab8f9df58ad249e18ac9f58cbe2501e3b8fcc114c3b32d7215c44f63"
+    },
+    {
+      "id": "vggt-scared8-zs-n4",
+      "points": 357504,
+      "package_sha256": "5e988a6b4eb377daff1a5d8bf0cc4db0ace5c56e1413285ee484390826939f5f"
+    },
+    {
+      "id": "vggt-scared8-best-n4",
+      "points": 357504,
+      "package_sha256": "3961e5fa37ebca00b37cb78b66478604662d28b5248ef9f7b3ef7453ed19701c"
+    },
+    {
+      "id": "ttt-scared8-vn18-n4",
+      "points": 357504,
+      "package_sha256": "f469dc682612e3fd09ad5832702a3895f7adf4abea4c3142686dc6b55011d19d"
     }
   ],
-  "cloud_bytes": 941211815,
-  "metric_entries": 200,
+  "cloud_bytes": 951173115,
+  "metric_entries": 315,
   "historical_tables": 496,
   "all_saved_vertices_preserved": true,
   "export_ran_training": false,

@@ -1,56 +1,44 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const $ = id => document.getElementById(id);
-  document.querySelectorAll('main table').forEach(table => {
-    if (table.closest('.table-responsive')) return;
-    const wrap = document.createElement('div');wrap.className='table-responsive';
-    wrap.tabIndex=0;wrap.setAttribute('role','region');wrap.setAttribute('aria-label','Tabla: desplazamiento horizontal');
-    table.before(wrap);wrap.append(table);
-  });
-  const experimentRoot=$('experimentos');
-  const cards=[...(experimentRoot?.querySelectorAll('[data-research-card]')||[])], search=$('experiment-search');
-  const controls=['experiment-problem','experiment-dataset','experiment-status','experiment-result','experiment-order'];
-  const normalize=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
-  const entries=cards.map(card=>({card,text:normalize(card.textContent)}));
-  function filter(){
-    if(!search)return;
-    const q=normalize(search.value),topic=$('experiment-problem').value,dataset=$('experiment-dataset').value,status=$('experiment-status').value,result=$('experiment-result').value;
-    let n=0;
-    for(const {card,text} of entries){
-      card.hidden=!!((q&&!text.includes(q))||(topic&&!card.dataset.problems.split('|').includes(topic))||(dataset&&!card.dataset.datasets.split('|').includes(dataset))||(status&&card.dataset.status!==status)||(result==='negative'&&card.dataset.negative!=='true'));
-      if(!card.hidden)n++;
-    }
-    $('experiment-count').textContent=n+' de '+cards.length+' fichas';
-    $('experiment-empty').hidden=n>0;
-    const order=$('experiment-order').value,host=$('all-experiment-cards');
-    [...cards].sort((a,b)=>order==='problem'?a.dataset.primary.localeCompare(b.dataset.primary,'es')||Number(a.dataset.order)-Number(b.dataset.order):Number(a.dataset.order)-Number(b.dataset.order)).forEach(c=>host.append(c));
+document.addEventListener('DOMContentLoaded',()=>{
+ const $=id=>document.getElementById(id),root=$('experimentos');
+ document.querySelectorAll('main table').forEach(table=>{
+  if(table.closest('.table-responsive'))return;
+  const wrap=document.createElement('div');wrap.className='table-responsive';wrap.tabIndex=0;
+  wrap.setAttribute('role','region');wrap.setAttribute('aria-label','Tabla con desplazamiento horizontal');
+  table.before(wrap);wrap.append(table);
+ });
+ const cards=[...(root?.querySelectorAll('[data-experiment]')||[])];
+ const normalize=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+ const entries=cards.map(card=>({card,text:normalize(card.textContent)}));
+ function filter(){
+  const query=normalize($('experiment-search')?.value||''),model=$('experiment-model')?.value||'',dataset=$('experiment-dataset')?.value||'';
+  let count=0;
+  for(const {card,text} of entries){card.hidden=!!((query&&!text.includes(query))||(model&&card.dataset.model!==model)||(dataset&&card.dataset.scope!==dataset));if(!card.hidden)count++;}
+  for(const group of root?.querySelectorAll('.experiment-group,.experiment-model')||[]){
+   const visible=[...group.querySelectorAll('[data-experiment]')].some(card=>!card.hidden);
+   group.hidden=!visible;if(visible&&(query||model||dataset))group.open=true;
   }
-  search?.addEventListener('input',filter);controls.forEach(id=>$(id)?.addEventListener('change',filter));
-  $('experiment-reset')?.addEventListener('click',()=>{search.value='';for(const id of controls)$(id).value=id==='experiment-order'?'series':'';filter();});
-  document.querySelectorAll('[data-filter-problem]').forEach(button=>button.addEventListener('click',()=>{
-    $('experiment-problem').value=button.dataset.filterProblem;filter();$('experiment-controls').scrollIntoView({behavior:'smooth',block:'start'});
-  }));
-  $('experiment-collapse')?.addEventListener('click',()=>cards.forEach(c=>c.open=false));
-  function reveal(hash){
-    let id;try{id=decodeURIComponent(hash.replace(/^#/,''));}catch{return;}
-    const aliases={'scared-experimentos':'experimentos','scared-seguimiento-b':'experimentos','scared-protocolos-preparados':'scared-e13'};
-    const target=$(aliases[id]||id);if(!target)return;
-    const card=target.matches('[data-research-card]')?target:target.closest('[data-research-card]');
-    if(card){search.value='';for(const c of controls)if(c!=='experiment-order')$(c).value='';filter();card.open=true;}
-    for(let parent=target;parent;parent=parent.parentElement)if(parent.tagName==='DETAILS')parent.open=true;
-    requestAnimationFrame(()=>target.scrollIntoView({behavior:'instant',block:'start'}));
-  }
-  document.addEventListener('click',e=>{const link=e.target.closest('a[href^="#"]');if(link)reveal(link.hash);});
-  window.addEventListener('hashchange',()=>reveal(location.hash));filter();if(location.hash)reveal(location.hash);
-  // Keep an initial deep link in place while fonts and images settle.
-  const initialHash=location.hash;
-  if(initialHash){
-    let interacted=false;
-    for(const name of ['wheel','touchstart','pointerdown','keydown'])
-      window.addEventListener(name,()=>{interacted=true;},{once:true,passive:true});
-    const settle=()=>{if(!interacted&&location.hash===initialHash)reveal(initialHash);};
-    window.addEventListener('load',settle,{once:true});
-    document.fonts?.ready.then(settle);
-    for(const delay of [500,1500,3500])setTimeout(settle,delay);
-  }
-  window.BookResearch={filter,reveal,count:()=>cards.length};
+  if($('experiment-count'))$('experiment-count').textContent=count+' de '+cards.length+' experimentos realizados';
+  if($('experiment-empty'))$('experiment-empty').hidden=count>0;
+ }
+ function reset(){for(const id of ['experiment-search','experiment-model','experiment-dataset'])if($(id))$(id).value='';filter();}
+ $('experiment-search')?.addEventListener('input',filter);
+ for(const id of ['experiment-model','experiment-dataset'])$(id)?.addEventListener('change',filter);
+ $('experiment-reset')?.addEventListener('click',reset);
+ $('experiment-collapse')?.addEventListener('click',()=>cards.forEach(card=>card.open=false));
+ function reveal(hash){
+  let id;try{id=decodeURIComponent(hash.replace(/^#/,''));}catch{return;}
+  let target=$(id);if(!target)return;
+  if(target.dataset.aliasTarget)target=$(target.dataset.aliasTarget)||target;
+  if(target.closest('#experimentos'))reset();
+  for(let node=target;node;node=node.parentElement)if(node.tagName==='DETAILS')node.open=true;
+  requestAnimationFrame(()=>target.scrollIntoView({behavior:'instant',block:'start'}));
+ }
+ document.addEventListener('click',event=>{const a=event.target.closest('a[href^="#"]');if(a)reveal(a.hash);});
+ window.addEventListener('hashchange',()=>reveal(location.hash));filter();
+ if(location.hash){reveal(location.hash);let interacted=false;
+  for(const name of ['wheel','touchstart','pointerdown','keydown'])window.addEventListener(name,()=>interacted=true,{once:true,passive:true});
+  const initial=location.hash,settle=()=>{if(!interacted&&location.hash===initial)reveal(initial);};
+  window.addEventListener('load',settle,{once:true});document.fonts?.ready.then(settle);setTimeout(settle,1200);
+ }
+ window.BookResearch={filter,reveal,count:()=>cards.length};
 });

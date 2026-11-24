@@ -839,51 +839,6 @@
       },
       "table_SHA256": "a135fd109a85c8affab101f9ca1e4fd358d3f0db0b969c885af98f2640ac93ed",
       "header": "| Evaluación | Modelo | AbsRel | XYZ (cm) | Mejora D / ZS (%) | Mejora P / ZS (%) |"
-    },
-    {
-      "id": "tabla-protocolo-57",
-      "kind": "Registro experimental",
-      "protocol": {
-        "Dataset": "SCARED dataset7",
-        "Partición": "Desarrollo/validación; no se usan test8/9 para seleccionar",
-        "Checkpoint": "Previstos: VGG-T³ oficial, VN18-SCARED3240 y V9-SCARED1000; aún sin forwards GPU de este protocolo",
-        "Frames y resolución": "Previsto E13: SCARED7, dos anclas N=16, RGB336×266",
-        "Escala / alineamiento": "Prevista: escala de la referencia limpia fija; reajuste solo diagnóstico secundario",
-        "Unidades": "Medidas previstas, todavía sin resultados GPU",
-        "GT disponible": "Ancla medida por contexto; sin GT temporal validada"
-      },
-      "table_SHA256": "111b6fd4ad0839d0e7d7fa0396970df896f92ba5c268aa52a32a08930796dded",
-      "header": "| Elemento | Protocolo |"
-    },
-    {
-      "id": "tabla-protocolo-58",
-      "kind": "Registro experimental",
-      "protocol": {
-        "Dataset": "SCARED7; control C3VD trans_t4_b según protocolo",
-        "Partición": "Desarrollo/validación; no se usan test8/9 para seleccionar",
-        "Checkpoint": "Previstos: VGG-T³ oficial, VN18-SCARED3240 y V9-SCARED1000; aún sin forwards GPU de este protocolo",
-        "Frames y resolución": "Previsto E14: SCARED7/KF4 y C3VD trans_t4_b, N=16; RGB336×266 y336×336",
-        "Escala / alineamiento": "Prevista: escala de la referencia limpia fija; reajuste solo diagnóstico secundario",
-        "Unidades": "Medidas previstas, todavía sin resultados GPU",
-        "GT disponible": "SCARED: ancla medida; C3VD: 16 referencias del control"
-      },
-      "table_SHA256": "5279c1a7d0620b02fb93cffadc7189ac73a67086ffd82e4ad7029812ec8c7ea8",
-      "header": "| Elemento | Protocolo |"
-    },
-    {
-      "id": "tabla-protocolo-59",
-      "kind": "Registro experimental",
-      "protocol": {
-        "Dataset": "SCARED7; control C3VD trans_t4_b según protocolo",
-        "Partición": "Desarrollo/validación; no se usan test8/9 para seleccionar",
-        "Checkpoint": "Previstos: VGG-T³ oficial, VN18-SCARED3240 y V9-SCARED1000; aún sin forwards GPU de este protocolo",
-        "Frames y resolución": "Previsto E15: N=1/4/8/16/32/50; piloto4/16/50; SCARED7/KF2 y C3VD trans_t4_b",
-        "Escala / alineamiento": "Prevista: escala de la referencia limpia fija; reajuste solo diagnóstico secundario",
-        "Unidades": "Medidas previstas, todavía sin resultados GPU",
-        "GT disponible": "SCARED: ancla medida; C3VD: 16 referencias del control"
-      },
-      "table_SHA256": "653703648967b038a3c74bf8e4bd3a40b8daef62d06f8eae124f453987ed5b74",
-      "header": "| Elemento | Protocolo |"
     }
   ],
   "all_numbers_unchanged": true

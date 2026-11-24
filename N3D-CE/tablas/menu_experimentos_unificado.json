@@ -1485,81 +1485,9 @@
       "source_file": "experimentos_scared_e01_e12.json",
       "evidence_record": "E12",
       "decision": "Conservar el hallazgo con sus límites. La siguiente comparación debe mantener el mismo caso y soporte GT; esta orientación no es un resultado nuevo."
-    },
-    {
-      "id": "E13",
-      "anchor": "scared-e13",
-      "title": "Robustez fotométrica",
-      "dataset": "SCARED",
-      "status": "prepared",
-      "problems": [
-        "Iluminación y reflejos"
-      ],
-      "negative": false,
-      "order": 60,
-      "protocol": {
-        "Dataset": "SCARED dataset7",
-        "Partición": "Desarrollo/validación; no se usan test8/9 para seleccionar",
-        "Checkpoint": "Previstos: VGG-T³ oficial, VN18-SCARED3240 y V9-SCARED1000; aún sin forwards GPU de este protocolo",
-        "Frames y resolución": "Previsto E13: SCARED7, dos anclas N=16, RGB336×266",
-        "Escala / alineamiento": "Prevista: escala de la referencia limpia fija; reajuste solo diagnóstico secundario",
-        "Unidades": "Medidas previstas, todavía sin resultados GPU",
-        "GT disponible": "Ancla medida por contexto; sin GT temporal validada"
-      },
-      "source_file": "scared_protocolos_preparados.json",
-      "evidence_record": "E13",
-      "decision": "Propuesta: completar el preflight y el piloto descritos antes de interpretar robustez o eficiencia. No lanzar otro entrenamiento por esta ficha."
-    },
-    {
-      "id": "E14",
-      "anchor": "scared-e14",
-      "title": "Oclusiones y recuperación offline",
-      "dataset": "SCARED|C3VD",
-      "status": "prepared",
-      "problems": [
-        "Oclusiones"
-      ],
-      "negative": false,
-      "order": 61,
-      "protocol": {
-        "Dataset": "SCARED7; control C3VD trans_t4_b según protocolo",
-        "Partición": "Desarrollo/validación; no se usan test8/9 para seleccionar",
-        "Checkpoint": "Previstos: VGG-T³ oficial, VN18-SCARED3240 y V9-SCARED1000; aún sin forwards GPU de este protocolo",
-        "Frames y resolución": "Previsto E14: SCARED7/KF4 y C3VD trans_t4_b, N=16; RGB336×266 y336×336",
-        "Escala / alineamiento": "Prevista: escala de la referencia limpia fija; reajuste solo diagnóstico secundario",
-        "Unidades": "Medidas previstas, todavía sin resultados GPU",
-        "GT disponible": "SCARED: ancla medida; C3VD: 16 referencias del control"
-      },
-      "source_file": "scared_protocolos_preparados.json",
-      "evidence_record": "E14",
-      "decision": "Propuesta: completar el preflight y el piloto descritos antes de interpretar robustez o eficiencia. No lanzar otro entrenamiento por esta ficha."
-    },
-    {
-      "id": "E15",
-      "anchor": "scared-e15",
-      "title": "Eficiencia, memoria y calidad",
-      "dataset": "SCARED|C3VD",
-      "status": "prepared",
-      "problems": [
-        "Eficiencia y secuencias largas"
-      ],
-      "negative": false,
-      "order": 62,
-      "protocol": {
-        "Dataset": "SCARED7; control C3VD trans_t4_b según protocolo",
-        "Partición": "Desarrollo/validación; no se usan test8/9 para seleccionar",
-        "Checkpoint": "Previstos: VGG-T³ oficial, VN18-SCARED3240 y V9-SCARED1000; aún sin forwards GPU de este protocolo",
-        "Frames y resolución": "Previsto E15: N=1/4/8/16/32/50; piloto4/16/50; SCARED7/KF2 y C3VD trans_t4_b",
-        "Escala / alineamiento": "Prevista: escala de la referencia limpia fija; reajuste solo diagnóstico secundario",
-        "Unidades": "Medidas previstas, todavía sin resultados GPU",
-        "GT disponible": "SCARED: ancla medida; C3VD: 16 referencias del control"
-      },
-      "source_file": "scared_protocolos_preparados.json",
-      "evidence_record": "E15",
-      "decision": "Propuesta: completar el preflight y el piloto descritos antes de interpretar robustez o eficiencia. No lanzar otro entrenamiento por esta ficha."
     }
   ],
-  "record_count": 63,
+  "record_count": 60,
   "results_recomputed": false,
   "technical_records_exported": false
 }

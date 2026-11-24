@@ -3,7 +3,7 @@ from pathlib import Path
 import argparse,csv,hashlib,html,io,json,re,shutil
 from public_package import publish_binary,remove_verified_redundant_js,adapt_viewer
 
-IDS=['c3vd-v9', 'c3vd-vn19-a', 'c3vd-vn19-b', 'c3vd-vn18', 'c3vd-zero', 'scared8-vn18', 'scared8-v9', 'scared8-vn19-a', 'scared9-vn18', 'scared9-v9', 'scared9-vn19-a', 'c3vd-scared-vn18', 'scared8-scared-v9', 'scared9-scared-v9', 'c3vd-scared-v9', 'vggt-c3vd-r1-final-trans4', 'vggt-c3vd-r1-best-trans4', 'vggt-c3vd-r1-final-trans1a', 'vggt-c3vd-r1-best-trans1a']
+IDS=['c3vd-v9', 'c3vd-vn19-a', 'c3vd-vn19-b', 'c3vd-vn18', 'c3vd-zero', 'scared8-vn18', 'scared8-v9', 'scared8-vn19-a', 'scared9-vn18', 'scared9-v9', 'scared9-vn19-a', 'c3vd-scared-vn18', 'scared8-scared-v9', 'scared9-scared-v9', 'c3vd-scared-v9', 'vggt-c3vd-r1-final-trans4', 'vggt-c3vd-r1-best-trans4', 'vggt-c3vd-r1-final-trans1a', 'vggt-c3vd-r1-best-trans1a', 'vggt-scared8-zs-n4', 'vggt-scared8-best-n4', 'ttt-scared8-vn18-n4']
 def read(p):return json.loads(p.read_text(encoding='utf-8-sig'))
 def dump(p,obj):p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(obj,ensure_ascii=False,indent=2),encoding='utf8')
 def sha(p):
@@ -107,7 +107,7 @@ def main():
     with (dst/'tablas/experimentos_c3vd.csv').open('w',encoding='utf-8-sig',newline='') as f:
         w=csv.DictWriter(f,fieldnames=list(experiments[0]));w.writeheader()
         for r in experiments:w.writerow({k:json.dumps(v,ensure_ascii=False) if isinstance(v,(dict,list)) else v for k,v in r.items()})
-    for name in ['scared_v9_validation.csv','scared_v9_resultados.json','c3vd_scared_transfer_v1.csv','c3vd_scared_transfer_v1.json','experimentos_scared_e01_e12.json','experimentos_scared_e01_e12.csv','scared_e01_e12_datos.csv','scared_followups_b_resumen.json','scared_followups_b_tablas.csv','scared_protocolos_preparados.json','menu_experimentos_scared.json','menu_experimentos_unificado.json','referencias_consulta.json','protocolos_tablas.json','recetas_reproducibles.json','vggt_resultados_recuperados.json','vggt_C01_C10.json','vggt_scared_preparado.json','vggt_fase1.json','vggt_fase2.json','vggt_scared_preflight.json','vggt_fase34.json','vggt_cierre_fases.json']:
+    for name in ['scared_v9_validation.csv','scared_v9_resultados.json','c3vd_scared_transfer_v1.csv','c3vd_scared_transfer_v1.json','experimentos_scared_e01_e12.json','experimentos_scared_e01_e12.csv','scared_e01_e12_datos.csv','scared_followups_b_resumen.json','scared_followups_b_tablas.csv','menu_experimentos_scared.json','menu_experimentos_unificado.json','referencias_consulta.json','protocolos_tablas.json','recetas_reproducibles.json','vggt_resultados_recuperados.json','vggt_fase1.json','vggt_fase2.json','vggt_scared_preflight.json','vggt_fase34.json','vggt_cierre_fases.json']:
         # Granular SCARED records remain local; only the authorized summary is public.
         if name=='experimentos_scared_e01_e12.json' and (src/'tablas'/name).exists():
             if 'detailed_results' in read(src/'tablas'/name):raise RuntimeError('Granular SCARED records are not approved for public export')
@@ -141,6 +141,30 @@ def main():
         copy(src/'contenido/auditoria_vggt_20261120'/name,dst/'contenido/auditoria_vggt_20261120'/name)
     for name in ['c3vd-v9','c3vd-vn19','c3vd-vn18','scared-vn18','scared-v9']:copy(src/'recursos/recetas'/(name+'.html'),dst/'recursos/recetas'/(name+'.html'))
     copy(src/'tablas/protocolos_lectura_20261124.json',dst/'tablas/protocolos_lectura_20261124.json')
+    copy(src/'tablas/experimentos_realizados.json',dst/'tablas/experimentos_realizados.json')
+    # Prepared protocols are private; remove only explicitly named old public documents.
+    for name in ['scared_protocolos_preparados.json','vggt_scared_preparado.json','vggt_C01_C10.json']:
+        for base in [dst/'tablas',repo/'_site/N3D-CE/tablas']:
+            path=base/name
+            assert path.resolve().is_relative_to(repo)
+            if path.exists():path.unlink()
+    for name in ['menu_experimentos_scared.json','menu_experimentos_unificado.json','protocolos_tablas.json','protocolos_lectura_20261124.json']:
+        path=dst/'tablas'/name
+        if not path.exists():continue
+        data=read(path)
+        def completed(value):
+            if isinstance(value,list):return [completed(x) for x in value if not (isinstance(x,dict) and (x.get('id') in {'E13','E14','E15','scared-e13','scared-e14','scared-e15','tabla-protocolo-57','tabla-protocolo-58','tabla-protocolo-59'} or x.get('id','').endswith(('scared-e13','scared-e14','scared-e15')) or x.get('status') in {'prepared','pending'} or x.get('owner_experiment') in {'scared-e13','scared-e14','scared-e15'} or x.get('experiment') in {'scared-e13','scared-e14','scared-e15'}))]
+            if isinstance(value,dict):return {k:completed(v) for k,v in value.items()}
+            return value
+        data=completed(data)
+        if isinstance(data,dict) and 'record_count' in data and isinstance(data.get('experiments'),list):data['record_count']=len(data['experiments'])
+        dump(path,data)
+    for rel in ['contenido/vggt_r1_closure_v1/summary.json','contenido/vggt_reproduction_r1/summary.json']:
+        path=dst/rel
+        if not path.exists():continue
+        data=read(path);data.pop('future_training_conditions',None)
+        if isinstance(data.get('campaign_status'),dict):data['campaign_status']={k:v for k,v in data['campaign_status'].items() if k not in {'R13','R14','R15','R16'}}
+        dump(path,data)
     # Export report contains reproducible hashes, never machine paths or credentials.
     report={'project':'N3D-CE','source_qmd_sha256':sha(src/'Bitacora.qmd'),'public_qmd_sha256':sha(dst/'Bitacora.qmd'),'source_data_tables_preserved':len(re.findall(r'(?m)(?:^\|[^\n]*\n)+',q)),'experiment_cards':q.count('class="experiment-card"'),'scared_experiment_cards':q.count('class="scared-experiment-card"'),'scared_followup_cards':q.count('class="scared-followup-card"'),'prepared_protocol_cards':q.count('class="prepared-experiment-card"'),'unified_experiment_cards':q.count('data-research-card'),'VGGT_protocol_cards':q.count('data-vggt-card'),'VGGT_phase1_cards':q.count('data-vggt-phase1-card'),'public_clouds':[{'id':r['id'],'points':r['points'],'package_sha256':packages[r['pack_key']]['package_sha256']} for r in clouds],'cloud_bytes':public['physical_package_bytes'],'metric_entries':len(met['entries']),'historical_tables':len(tables),'all_saved_vertices_preserved':True,'export_ran_training':False,'export_ran_inference':False}
     dump(dst/'publication_manifest.json',report)

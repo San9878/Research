@@ -5030,10 +5030,5 @@
     "GT scale, Sim3 alignment and oracle swaps are diagnostic scoring aids, not GT-free clinical capability.",
     "Historical encoder discrepancy origin unresolved; a new strict encoder does not retrospectively repair its provenance.",
     "Failure of joint guards means tradeoffs, not proof that BEST is worse on every property."
-  ],
-  "future_training_conditions": [
-    "A validation failure must motivate a precise hypothesis and a single controlled intervention.",
-    "Require paired geometry/depth and camera criteria with identical data and adequate long contexts; keep per-sequence guards.",
-    "Do not choose a recipe or checkpoint by the reserved results; new seeds/ablations/domains remain unexecuted optional work."
   ]
 }

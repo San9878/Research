@@ -35,3 +35,16 @@ html{scroll-padding-top:1.5rem}main{max-width:1080px}#title-block-header{display
 .comparison-history>summary{font-size:.95rem;background:#f4f6f4}
 .comparison-history[open]{border-color:#bdcbbf}
 @media(max-width:600px){.cover-navigation{font-size:.76rem;gap:.4rem}.protocol-main .protocol-fields{margin:.8rem}.protocol-differences{font-size:.75rem}}
+
+/* Organized reading edition: one hierarchy for both models. */
+.dataset-fold>summary,.comparison-fold>summary,.experiments-menu>summary,.experiment-model>summary{font-size:1.1rem;padding:1rem 1.15rem;background:#edf4ef}
+.reading-fold>summary,.experiment-group>summary{font-size:.95rem;background:#f5f8f5}
+.dataset-fold,.comparison-fold{margin:.8rem 0}.dataset-fold>p,.comparison-fold>p{font-size:.92rem}
+.dataset-fold>details,.comparison-fold>details,.experiment-model>details,.experiment-group>details,.experiments-menu>details{margin:1rem}
+.reading-fold>table,.evidence-archive>table{margin:1rem 0}
+.experiment-controls{display:flex;flex-wrap:wrap;gap:.7rem;padding:1rem;align-items:end;background:#f4f8f5}
+.experiment-controls label{display:flex;flex-direction:column;gap:.3rem;font-size:.8rem}.experiment-controls input,.experiment-controls select{padding:.5rem;border:1px solid #b8cabb;border-radius:6px;max-width:100%}
+.experiment-controls button{font:inherit;font-size:.8rem;padding:.5rem;border:1px solid #b8cabb;border-radius:6px;background:white;color:#315b42}
+#experiment-count{font-size:.8rem;color:#526b5a}.verdict{border-left:3px solid #b5cbbd;padding-left:.8rem}.anchor-alias{display:block;scroll-margin-top:2rem}
+.evidence-archive>summary{font-size:.85rem;color:#526b5a}.evidence-archive h4{font-size:1rem}
+@media(max-width:600px){.dataset-fold>details,.comparison-fold>details,.experiment-model>details,.experiment-group>details,.experiments-menu>details{margin:.65rem}.experiment-controls{display:grid;grid-template-columns:1fr;padding:.8rem}.experiment-controls input,.experiment-controls select{width:100%}.dataset-fold>summary,.comparison-fold>summary{font-size:1rem}}

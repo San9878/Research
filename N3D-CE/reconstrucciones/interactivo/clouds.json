@@ -9020,12 +9020,222 @@
       "source": "Exportación guardada · VGGT-C3VD R1 · BEST800",
       "container": "binary-chunks-v1",
       "source_js_package_sha256": "21fa09bc8a87de531baec622d94862cab470217ad028aef06d3711ea83a137d1"
+    },
+    {
+      "id": "vggt-scared8-zs-n4",
+      "label": "VGGT oficial · SCARED8 N4",
+      "case": "SCARED8 · original KF0 / processed KF1 · 4 RGB · 266×336",
+      "family": "scared8-kf0-common-n4",
+      "model": "VGGT_ZS",
+      "kind": "primary",
+      "source_type": "ply",
+      "source_sha256": "c2472ea330b42d83adadb49237b025f661157e23ed5bca882cb0cdf4daf0f616",
+      "scale": 1.0,
+      "all_source_pixels": true,
+      "frames": [
+        "measured_anchor",
+        0,
+        30,
+        60
+      ],
+      "trajectory": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          -0.0001559815718792379,
+          -0.0003752991324290633,
+          -0.0015265210531651974
+        ],
+        [
+          -0.003408753080293536,
+          0.0001330476807197556,
+          0.0013037595199421048
+        ],
+        [
+          -0.000488914200104773,
+          0.0005830532754771411,
+          -9.700252849142998e-05
+        ]
+      ],
+      "gt_trajectory": null,
+      "scale_note": "4 vistas completas: ancla medida y vídeo0/30/60. Ruta D+K calibrada+pose predicha; escala GT única del ancla, sin ICP. No hay trayectoria GT temporal validada.",
+      "accepted": null,
+      "pack_key": "c2472ea330b42d83adadb492",
+      "points": 357504,
+      "position_bytes": 4,
+      "bbox": [
+        [
+          -0.06989499181509018,
+          -0.06748350709676743,
+          0.09936872869729996
+        ],
+        [
+          0.08091646432876587,
+          0.0573183037340641,
+          0.13241888582706451
+        ]
+      ],
+      "package_bytes": 3202106,
+      "path": "datos/c2472ea330b42d83adadb492.bin",
+      "available": true,
+      "geometry_route": "D+calibrated K+predicted pose",
+      "no_subsampling": true,
+      "prediction_SHA256": "3b20f5b1b456a349d131fffe26efbb6264d38aef70c85433a4cb330d6f39ecc1",
+      "input_float_SHA256": "c7e61e30da80ad07047bd963e3a68bd7816c3bace07481d3a5833157eb69ba88",
+      "original_keyframe": 0,
+      "processed_keyframe": 1,
+      "source": "Exportación guardada · VGGT oficial · SCARED8 N4",
+      "container": "binary-chunks-v1",
+      "source_js_package_sha256": "516345d5469a8e12fb5c1b97d7210c2983fcb9ce0855e47658165940c25fe15f"
+    },
+    {
+      "id": "vggt-scared8-best-n4",
+      "label": "VGGT-SCARED BEST500 · N4",
+      "case": "SCARED8 · original KF0 / processed KF1 · 4 RGB · 266×336",
+      "family": "scared8-kf0-common-n4",
+      "model": "VGGT_SCARED_BEST",
+      "kind": "primary",
+      "source_type": "ply",
+      "source_sha256": "1cd8666fc2cb155c896bb5508720ecf60759a7be5b464b2035c852eb083fcc34",
+      "scale": 1.0,
+      "all_source_pixels": true,
+      "frames": [
+        "measured_anchor",
+        0,
+        30,
+        60
+      ],
+      "trajectory": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          -0.0001645375887164846,
+          -0.00039588534855283797,
+          -0.001610254985280335
+        ],
+        [
+          -0.003595732618123293,
+          0.00014034571358934045,
+          0.0013752743834629655
+        ],
+        [
+          -0.0005157325067557395,
+          0.000615035358350724,
+          -0.00010232338536297902
+        ]
+      ],
+      "gt_trajectory": null,
+      "scale_note": "4 vistas completas: ancla medida y vídeo0/30/60. Ruta D+K calibrada+pose predicha; escala GT única del ancla, sin ICP. No hay trayectoria GT temporal validada.",
+      "accepted": null,
+      "pack_key": "1cd8666fc2cb155c896bb550",
+      "points": 357504,
+      "position_bytes": 4,
+      "bbox": [
+        [
+          -0.08173473924398422,
+          -0.08026739209890366,
+          0.08632858842611313
+        ],
+        [
+          0.08603132516145706,
+          0.05781755968928337,
+          0.17010553181171417
+        ]
+      ],
+      "package_bytes": 3387617,
+      "path": "datos/1cd8666fc2cb155c896bb550.bin",
+      "available": true,
+      "geometry_route": "D+calibrated K+predicted pose",
+      "no_subsampling": true,
+      "prediction_SHA256": "6ae41e522049bccb25b93e81beb65d16585d9b13c4881d7151d99409c9350472",
+      "input_float_SHA256": "c7e61e30da80ad07047bd963e3a68bd7816c3bace07481d3a5833157eb69ba88",
+      "original_keyframe": 0,
+      "processed_keyframe": 1,
+      "source": "Exportación guardada · VGGT-SCARED BEST500 · N4",
+      "container": "binary-chunks-v1",
+      "source_js_package_sha256": "4cf9e27ef27766e7fc4eb93d1d5ffdbed163403365475be2958764bcfd928586"
+    },
+    {
+      "id": "ttt-scared8-vn18-n4",
+      "label": "VGG-T³ VN18-SCARED · N4 · D+cámara",
+      "case": "SCARED8 · original KF0 / processed KF1 · 4 RGB · 266×336",
+      "family": "scared8-kf0-common-n4",
+      "model": "TTT_SCARED_VN18",
+      "kind": "primary",
+      "source_type": "ply",
+      "source_sha256": "a3aedc5eea95da9e26c78887db3fa33bd6b5def8f7945fd71211e2bdce530690",
+      "scale": 1.0,
+      "all_source_pixels": true,
+      "frames": [
+        "measured_anchor",
+        0,
+        30,
+        60
+      ],
+      "trajectory": [
+        [
+          0.0,
+          1.1452495310600164e-13,
+          0.0
+        ],
+        [
+          -0.0025900236796587706,
+          -0.0014244726626202464,
+          -0.019042780622839928
+        ],
+        [
+          0.0036737248301506042,
+          -0.00038880156353116035,
+          -0.02034740522503853
+        ],
+        [
+          -0.0014990094350650907,
+          0.00016449201211798936,
+          -0.012264749966561794
+        ]
+      ],
+      "gt_trajectory": null,
+      "scale_note": "4 vistas completas: ancla medida y vídeo0/30/60. Ruta D+K calibrada+pose predicha; escala GT única del ancla, sin ICP. No hay trayectoria GT temporal validada.",
+      "accepted": null,
+      "pack_key": "a3aedc5eea95da9e26c78887",
+      "points": 357504,
+      "position_bytes": 4,
+      "bbox": [
+        [
+          -0.08736914396286011,
+          -0.08237755298614502,
+          0.07174279540777206
+        ],
+        [
+          0.09164107590913773,
+          0.06387055665254593,
+          0.1783944070339203
+        ]
+      ],
+      "package_bytes": 3371577,
+      "path": "datos/a3aedc5eea95da9e26c78887.bin",
+      "available": true,
+      "geometry_route": "D+calibrated K+predicted pose",
+      "no_subsampling": true,
+      "prediction_SHA256": "f4e1bbc0b0d544b7337f133701a90a03bb4a2caeed13cc0a0b6aba04e6b62dd2",
+      "input_float_SHA256": "c7e61e30da80ad07047bd963e3a68bd7816c3bace07481d3a5833157eb69ba88",
+      "original_keyframe": 0,
+      "processed_keyframe": 1,
+      "source": "Exportación guardada · VGG-T³ VN18-SCARED · N4 · D+cámara",
+      "container": "binary-chunks-v1",
+      "source_js_package_sha256": "07f03a7643a06a1c626b19707d07d3fa7f886a764745faa8b6eb2a0448feec62"
     }
   ],
   "errors": [],
   "no_new_inference_or_training": false,
   "point_sampling": false,
-  "public_scope": "19 main complete clouds; other historical exports remain local",
-  "unique_packages": 19,
-  "physical_package_bytes": 941211815
+  "public_scope": "22 main complete clouds; other historical exports remain local",
+  "unique_packages": 22,
+  "physical_package_bytes": 951173115
 }
