@@ -34,6 +34,13 @@ def verify(site):
     assert {r['id'] for r in registry}=={r['id'] for r in expected}
     assert all(r['available'] and r['all_source_pixels'] for r in registry)
     for r in registry:
+        if r.get('external_asset_commit'):
+            expected='https://raw.githubusercontent.com/San9878/Research/'+r['external_asset_commit']+'/clouds/'+r['pack_key']+'.bin'
+            assert re.fullmatch('[0-9a-f]{40}',r['external_asset_commit']) and r['path']==expected
+            receipt=json.loads((app/'datos'/(r['pack_key']+'.json')).read_text(encoding='utf8'))
+            assert receipt['points']==r['points'] and receipt['package_sha256']==r['package_sha256']
+            assert receipt['package_bytes']==r['package_bytes'] and receipt['all_vertices_preserved']
+            continue
         if r.get('container')=='binary-chunks-v1':
             remove_verified_redundant_js(app/'datos',r['pack_key'],r['source_js_package_sha256'])
         f=app/r['path'];assert f.is_file() and f.stat().st_size==r['package_bytes']

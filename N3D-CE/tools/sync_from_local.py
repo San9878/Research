@@ -5,7 +5,7 @@ from public_package import publish_binary,remove_verified_redundant_js,adapt_vie
 
 IDS=['c3vd-v9', 'c3vd-vn19-a', 'c3vd-vn19-b', 'c3vd-vn18', 'c3vd-zero', 'scared8-vn18', 'scared8-v9', 'scared8-vn19-a', 'scared9-vn18', 'scared9-v9', 'scared9-vn19-a', 'c3vd-scared-vn18', 'scared8-scared-v9', 'scared9-scared-v9', 'c3vd-scared-v9', 'vggt-c3vd-r1-final-trans4', 'vggt-c3vd-r1-best-trans4', 'vggt-c3vd-r1-final-trans1a', 'vggt-c3vd-r1-best-trans1a', 'vggt-scared8-zs-n4', 'vggt-scared8-best-n4', 'ttt-scared8-vn18-n4']
 def read(p):return json.loads(p.read_text(encoding='utf-8-sig'))
-def dump(p,obj):p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(obj,ensure_ascii=False,indent=2),encoding='utf8')
+def dump(p,obj):p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(obj,ensure_ascii=False,separators=(',',':')),encoding='utf8')
 def sha(p):
     h=hashlib.sha256()
     with p.open('rb') as f:
@@ -45,7 +45,7 @@ def main():
     if re.search(r'\]\(antiguos(?:%20| )informes',q):raise RuntimeError('An unpublished archive link needs an explicit public replacement')
     q=q.replace('[Catálogo activo de documentos]','[Contenido de la edición web]')
     q=q.replace('Los originales y ediciones anteriores siguen conservados; no se han borrado resultados ni modificado entrenamientos.','Los originales y ediciones anteriores se conservan en el archivo local. Esta edición web comparte la documentación, las tablas y una selección de reconstrucciones completas.')
-    published=set(IDS)
+    published=set(IDS)|{r['id'] for r in read(src/'reconstrucciones/interactivo/clouds.json')['clouds'] if r.get('public_base_comparison')}
     def action(m):
         tag=m[0];ids=re.search(r'data-clouds="([^"]+)"',tag)[1].split(',');kept=[i for i in ids if i in published]
         if not kept:return ''
@@ -80,10 +80,23 @@ def main():
     (app/'viewer.js').write_text(viewer,encoding='utf8')
     manifest=read(src/'reconstrucciones/interactivo/clouds.json');byid={x['id']:x for x in manifest['clouds']}
     clouds=[];packages={}
-    for id in IDS:
+    selected_ids=IDS+[r['id'] for r in manifest['clouds'] if r.get('public_base_comparison') and r['id'] not in IDS]
+    for id in selected_ids:
         r=byid[id]
         if not r.get('available') or not r.get('all_source_pixels'):raise RuntimeError('Primary cloud is incomplete: '+id)
-        key=r['pack_key'];file=src/'reconstrucciones/interactivo'/r['path'];receipt=file.with_suffix('.json');info=read(receipt)
+        key=r['pack_key']
+        if r.get('external_asset_commit'):
+            expected='https://raw.githubusercontent.com/San9878/Research/'+r['external_asset_commit']+'/clouds/'+key+'.bin'
+            if not re.fullmatch('[0-9a-f]{40}',r['external_asset_commit']) or r['path']!=expected:raise RuntimeError('Unpinned external asset URL')
+            asset_store=Path('F:/santiago/Kaust/KAUST/VGGT/completion_20261125/cloud-assets/clouds')
+            file=asset_store/(key+'.bin');receipt=file.with_suffix('.json');info=read(receipt)
+            if sha(file)!=r['package_sha256'] or info['package_sha256']!=r['package_sha256']:raise RuntimeError('External asset checksum differs')
+            if info['points']!=r['points'] or not info['all_vertices_preserved']:raise RuntimeError('Incomplete external cloud')
+            copy(receipt,app/'datos'/receipt.name)
+            packages[key]=dict(info,external=True)
+            safe=clean(r);safe['source']='Exportación guardada · '+r['label'];clouds.append(safe)
+            continue
+        file=src/'reconstrucciones/interactivo'/r['path'];receipt=file.with_suffix('.json');info=read(receipt)
         if file.stat().st_size>=100*2**20:raise RuntimeError('Package exceeds GitHub file limit')
         if sha(file)!=info['package_sha256']:raise RuntimeError('Package checksum differs: '+id)
         if file.suffix == '.js':  # Lossless binary publication for all clouds; no points removed.
@@ -96,8 +109,9 @@ def main():
         for field in ['path','package_bytes','container','source_js_package_sha256']:
             if field in info:safe[field]=info[field]
         clouds.append(safe)
-    public={'version':manifest['version'],'clouds':clouds,'errors':[],'no_new_inference_or_training':manifest.get('no_new_inference_or_training', True),'point_sampling':False,'public_scope':str(len(IDS))+' main complete clouds; other historical exports remain local','unique_packages':len(packages),'physical_package_bytes':sum(x['package_bytes'] for x in packages.values())}
+    public={'version':manifest['version'],'clouds':clouds,'errors':[],'no_new_inference_or_training':manifest.get('no_new_inference_or_training', True),'point_sampling':False,'public_scope':str(len(selected_ids))+' main complete clouds; other historical exports remain local','unique_packages':len(packages),'physical_package_bytes':sum(x['package_bytes'] for x in packages.values() if not x.get('external'))}
     dump(app/'clouds.json',public);(app/'clouds.js').write_text('window.CLOUD_REGISTRY='+json.dumps(public,ensure_ascii=False).replace('<','\\u003c')+';',encoding='utf8')
+    copy(src/'tablas/comparaciones_base_n50.json',dst/'tablas/comparaciones_base_n50.json')
     met=clean(read(src/'reconstrucciones/interactivo/metrics.json'));dump(app/'metrics.json',met)
     (app/'metrics.js').write_text('window.METRIC_REGISTRY='+json.dumps(met,ensure_ascii=False).replace('<','\\u003c')+';',encoding='utf8')
     raw=(src/'tablas/biblioteca.js').read_text(encoding='utf8');tables=json.loads(raw[len('window.tablas='):].rstrip(';\n\r '))

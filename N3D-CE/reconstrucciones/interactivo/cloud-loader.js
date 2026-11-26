@@ -80,7 +80,7 @@
     let timedOut = false;
     const timer = setTimeout(() => { timedOut = true; controller.abort(); }, options.timeoutMs ?? 900000);
     try {
-      return (root.location?.protocol === 'file:') ? await filePackage(meta, controller.signal) :
+      return (root.location?.protocol === 'file:' && !/^https?:/.test(meta.path)) ? await filePackage(meta, controller.signal) :
         await fetchPackage(meta, controller.signal, options.onProgress);
     } catch (e) {
       if (timedOut) throw Error('La descarga excedió 15 minutos. Reintenta una nube individual o revisa la conexión.');
