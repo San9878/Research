@@ -1,0 +1,103 @@
+{
+  "scope": "Full point populations for the N3D-CE research notebook; scientific predictions, no raw dataset/GT images or checkpoints.",
+  "points_per_cloud": [
+    {
+      "id": "base-d8_kf0-vggt_zs",
+      "points": 4468800
+    },
+    {
+      "id": "base-d8_kf0-r1_final3000",
+      "points": 4468800
+    },
+    {
+      "id": "base-d8_kf0-vggt_scared_best",
+      "points": 4468800
+    },
+    {
+      "id": "base-d8_kf0-ttt_zs",
+      "points": 4468800
+    },
+    {
+      "id": "base-d8_kf0-ttt_c3vd_v9",
+      "points": 4468800
+    },
+    {
+      "id": "base-d8_kf0-ttt_c3vd_vn18",
+      "points": 4468800
+    },
+    {
+      "id": "base-d8_kf0-ttt_scared_vn18",
+      "points": 4468800
+    },
+    {
+      "id": "base-d8_kf0-ttt_scared_v9",
+      "points": 4468800
+    },
+    {
+      "id": "base-d9_kf0-vggt_zs",
+      "points": 4468800
+    },
+    {
+      "id": "base-d9_kf0-r1_final3000",
+      "points": 4468800
+    },
+    {
+      "id": "base-d9_kf0-vggt_scared_best",
+      "points": 4468800
+    },
+    {
+      "id": "base-d9_kf0-ttt_zs",
+      "points": 4468800
+    },
+    {
+      "id": "base-d9_kf0-ttt_c3vd_v9",
+      "points": 4468800
+    },
+    {
+      "id": "base-d9_kf0-ttt_c3vd_vn18",
+      "points": 4468800
+    },
+    {
+      "id": "base-d9_kf0-ttt_scared_vn18",
+      "points": 4468800
+    },
+    {
+      "id": "base-d9_kf0-ttt_scared_v9",
+      "points": 4468800
+    },
+    {
+      "id": "base-trans_t4_b-vggt_zs",
+      "points": 5644800
+    },
+    {
+      "id": "base-trans_t4_b-r1_final3000",
+      "points": 5644800
+    },
+    {
+      "id": "base-trans_t4_b-vggt_scared_best",
+      "points": 5644800
+    },
+    {
+      "id": "base-trans_t4_b-ttt_zs",
+      "points": 5644800
+    },
+    {
+      "id": "base-trans_t4_b-ttt_c3vd_v9",
+      "points": 5644800
+    },
+    {
+      "id": "base-trans_t4_b-ttt_c3vd_vn18",
+      "points": 5644800
+    },
+    {
+      "id": "base-trans_t4_b-ttt_scared_vn18",
+      "points": 5644800
+    },
+    {
+      "id": "base-trans_t4_b-ttt_scared_v9",
+      "points": 5644800
+    }
+  ],
+  "codec": "N3DPACK1; lossless gzip XOR-byteplanes; 32-bit saved export; no sampling",
+  "primary_comparison": "RGB input hashes, N50, order, K, GT masks and geometry route match within each case."
+}

@@ -1,0 +1,26 @@
+{
+  "key": "9b37bcd3ec6974459077e139",
+  "points": 5644800,
+  "position_bytes": 4,
+  "bbox": [
+    [
+      -0.02499382011592388,
+      -0.031017674133181572,
+      0.003510901937261224
+    ],
+    [
+      0.01692449301481247,
+      0.013168330304324627,
+      0.0938323587179184
+    ]
+  ],
+  "package_bytes": 51736293,
+  "package_sha256": "f58a68d8838fc43a0d9a7346b2673826cf00cd10b4a463b91cb9304e0462f074",
+  "container": "binary-chunks-v1",
+  "path": "clouds/9b37bcd3ec6974459077e139.bin",
+  "all_vertices_preserved": true,
+  "lossless_compression_roundtrip": true,
+  "raw_payload_sha256": "be0053a19758039362875a9ed03d9c4708bc8aa1ea9c78f2e79ea84c844bd7f4",
+  "codec": "xor-byteplanes-v1",
+  "source_js_package_sha256": null
+}
