@@ -112,6 +112,7 @@ def main():
     public={'version':manifest['version'],'clouds':clouds,'errors':[],'no_new_inference_or_training':manifest.get('no_new_inference_or_training', True),'point_sampling':False,'public_scope':str(len(selected_ids))+' main complete clouds; other historical exports remain local','unique_packages':len(packages),'physical_package_bytes':sum(x['package_bytes'] for x in packages.values() if not x.get('external'))}
     dump(app/'clouds.json',public);(app/'clouds.js').write_text('window.CLOUD_REGISTRY='+json.dumps(public,ensure_ascii=False).replace('<','\\u003c')+';',encoding='utf8')
     copy(src/'tablas/comparaciones_base_n50.json',dst/'tablas/comparaciones_base_n50.json')
+    if (src/'tablas/robustez_endoscopia_resultados.json').exists():copy(src/'tablas/robustez_endoscopia_resultados.json',dst/'tablas/robustez_endoscopia_resultados.json')
     met=clean(read(src/'reconstrucciones/interactivo/metrics.json'));dump(app/'metrics.json',met)
     (app/'metrics.js').write_text('window.METRIC_REGISTRY='+json.dumps(met,ensure_ascii=False).replace('<','\\u003c')+';',encoding='utf8')
     raw=(src/'tablas/biblioteca.js').read_text(encoding='utf8');tables=json.loads(raw[len('window.tablas='):].rstrip(';\n\r '))

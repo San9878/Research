@@ -3369,6 +3369,98 @@ Para las variantes VGG-T³ de esta tabla, la secuencia quedó fuera de sus ajust
 
 </details>
 
+<!-- COMPLETED ROBUSTNESS E13 E14 E15 -->
+<details class="experiment-group" id="robustness-completed"><summary>Robustez y eficiencia · C3VD y SCARED</summary>
+<details class="experiment-card" id="exp-e13-executed" data-research-card data-experiment data-model="VGG-T³" data-scope="Global" data-datasets="SCARED C3VD" data-status="executed" data-order="110" data-problems="Robustez y eficiencia">
+<summary><span class="card-status">Ejecutado</span><span class="card-id">E13</span>Robustez frente a iluminación y reflejos sintéticos<span class="card-teaser">Piloto controlado: 24 mediciones guardadas. 16/16 condiciones alteradas cambiaron la predicción de profundidad en el soporte evaluado.</span></summary>
+<div class="card-content"><dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>Manteniendo la geometría y las cámaras, alterar solo RGB puede cambiar la profundidad y los puntos globales.</dd><dt>Cómo se realizó</dt><dd>Se modifica únicamente RGB con exposición y brillos aditivos controlados; el protocolo completo añade intensidades y variación radial. Cada condición recomputa el encoder. La escala se obtiene en la referencia limpia y permanece fija.</dd><dt>Controles</dt><dd>Pesos oficiales y tres fine-tunings congelados: VN18-C3VD, VN18-SCARED y V9-SCARED. Semilla fija, mismos RGB por condición, intrínsecas y GT constantes, dos pasos TTT. Sin entrenamiento ni sustitución de checkpoints.</dd><dt>Métricas</dt><dd>AbsRel, δ1, XYZ/p95, deriva de D/P y desacuerdo en correspondencias fijas; este último no sustituye GT anatómico.</dd></dl>
+<div class="card-result"><strong>Resultados</strong><p>Piloto controlado: 24 mediciones guardadas. 16/16 condiciones alteradas cambiaron la predicción de profundidad en el soporte evaluado.</p></div>
+<details class="protocol-details"><summary>Protocolo y alcance</summary><p>SCARED: anclas medidas de validación del dataset7, sin GT temporal. C3VD: trans_t4_b de validación; solo se puntúan las referencias GT seleccionadas. Profundidad y P directo con escala limpia fija, sin ICP; eficiencia y calidad por contexto se presentan por separado.</p></details>
+<details class="metrics-fold"><summary>Tabla de resultados</summary>
+
+
+
+| Modelo | Caso | N | Condición de mayor ΔAbsRel | ΔAbsRel (%) | ΔXYZ (%) | Vistas GT |
+|---|---|---|---|---|---|---|
+| V9_SCARED | scared7_kf2 | 16 | highlight_0.03 | +1.21 | -6.54 | 1 |
+| V9_SCARED | scared7_kf4 | 16 | highlight_0.03 | +7.05 | -5.37 | 1 |
+| VN18_C3VD | scared7_kf2 | 16 | exposure_0.75 | -1.06 | -0.90 | 1 |
+| VN18_C3VD | scared7_kf4 | 16 | exposure_0.75 | -0.31 | -0.38 | 1 |
+| VN18_SCARED | scared7_kf2 | 16 | highlight_0.03 | -2.70 | +0.93 | 1 |
+| VN18_SCARED | scared7_kf4 | 16 | exposure_0.75 | -2.09 | -1.44 | 1 |
+| zero_shot | scared7_kf2 | 16 | exposure_0.75 | -1.75 | -1.46 | 1 |
+| zero_shot | scared7_kf4 | 16 | highlight_0.03 | +2.89 | +0.02 | 1 |
+
+<p>Variación respecto a limpio sobre el mismo soporte visible; valores positivos indican deterioro. Se muestra la condición de mayor ΔAbsRel por caso, modelo y N; las demás condiciones se conservan en el archivo de resultados.</p>
+</details>
+<dl class="card-fields"><dt>Conclusión y confirmación de la hipótesis</dt><dd>Apoyada para estas perturbaciones y ventanas: existe sensibilidad de la predicción al contenido RGB. La dirección del cambio depende del modelo y del caso; no se atribuye a una única causa clínica.</dd><dt>Limitaciones</dt><dd>Los brillos son una perturbación visual sintética, no una simulación física de mucosa húmeda. El efecto observado no identifica por sí solo la causa de un fallo clínico.</dd><dt>Siguiente decisión</dt><dd>Conservar las referencias y usar estos controles para localizar condiciones vulnerables antes de proponer cambios de entrenamiento. Estas pruebas no sustituyen un fine-tuning ni seleccionan nuevos pesos.</dd></dl>
+<details class="trace-details"><summary>Configuración y evidencia</summary><p><a href="tablas/robustez_endoscopia_resultados.json">Resultados estructurados y protocolo</a>. Fuentes históricas y checkpoints conservados. Los controles de identidad, reinicio y máscaras se verifican antes de completar la etapa; los registros técnicos completos permanecen en el proyecto local.</p></details></div></details>
+<details class="experiment-card" id="exp-e14-executed" data-research-card data-experiment data-model="VGG-T³" data-scope="Global" data-datasets="SCARED C3VD" data-status="executed" data-order="110" data-problems="Robustez y eficiencia">
+<summary><span class="card-status">Ejecutado</span><span class="card-id">E14</span>Oclusiones controladas y tejido visible<span class="card-teaser">Piloto controlado: 32 mediciones guardadas. 16/16 condiciones alteradas cambiaron la predicción de profundidad en el soporte evaluado.</span></summary>
+<div class="card-content"><dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>Un oclusor puede alterar la predicción del tejido que sigue visible, incluso cuando se excluye el objeto de la evaluación.</dd><dt>Cómo se realizó</dt><dd>Se introducen oclusores sintéticos y una secuencia de aparición/desaparición. Se compara limpio y alterado sobre exactamente los mismos píxeles GT de tejido visible. Se verifica la vuelta a la entrada limpia idéntica.</dd><dt>Controles</dt><dd>Pesos oficiales y tres fine-tunings congelados: VN18-C3VD, VN18-SCARED y V9-SCARED. Semilla fija, mismos RGB por condición, intrínsecas y GT constantes, dos pasos TTT. Sin entrenamiento ni sustitución de checkpoints.</dd><dt>Métricas</dt><dd>AbsRel, δ1, XYZ/p95, deriva de D/P y desacuerdo en correspondencias fijas; este último no sustituye GT anatómico.</dd></dl>
+<div class="card-result"><strong>Resultados</strong><p>Piloto controlado: 32 mediciones guardadas. 16/16 condiciones alteradas cambiaron la predicción de profundidad en el soporte evaluado.</p></div>
+<details class="protocol-details"><summary>Protocolo y alcance</summary><p>SCARED: anclas medidas de validación del dataset7, sin GT temporal. C3VD: trans_t4_b de validación; solo se puntúan las referencias GT seleccionadas. Profundidad y P directo con escala limpia fija, sin ICP; eficiencia y calidad por contexto se presentan por separado.</p></details>
+<details class="metrics-fold"><summary>Tabla de resultados</summary>
+
+
+
+| Modelo | Caso | N | Condición de mayor ΔAbsRel | ΔAbsRel (%) | ΔXYZ (%) | Vistas GT |
+|---|---|---|---|---|---|---|
+| V9_SCARED | c3vd_trans4 | 16 | moving_0.15 | +4.18 | -2.85 | 7 |
+| V9_SCARED | scared7_kf4 | 16 | moving_0.15 | +69.81 | +0.53 | 1 |
+| VN18_C3VD | c3vd_trans4 | 16 | moving_0.15 | +44.04 | +24.60 | 7 |
+| VN18_C3VD | scared7_kf4 | 16 | moving_0.15 | +12.61 | -4.95 | 1 |
+| VN18_SCARED | c3vd_trans4 | 16 | moving_0.15 | +42.53 | +18.15 | 7 |
+| VN18_SCARED | scared7_kf4 | 16 | burst_015 | -3.29 | -0.99 | 1 |
+| zero_shot | c3vd_trans4 | 16 | moving_0.15 | +36.10 | -1.95 | 7 |
+| zero_shot | scared7_kf4 | 16 | moving_0.15 | +10.40 | +10.74 | 1 |
+
+<p>Variación respecto a limpio sobre el mismo soporte visible; valores positivos indican deterioro. Se muestra la condición de mayor ΔAbsRel por caso, modelo y N; las demás condiciones se conservan en el archivo de resultados.</p>
+</details>
+<dl class="card-fields"><dt>Conclusión y confirmación de la hipótesis</dt><dd>Apoyada para estas perturbaciones y ventanas: existe sensibilidad de la predicción al contenido RGB. La dirección del cambio depende del modelo y del caso; no se atribuye a una única causa clínica.</dd><dt>Limitaciones</dt><dd>No existe profundidad GT del oclusor. La vuelta a limpio comprueba reinicio y repetibilidad offline; no demuestra recuperación de un sistema de seguimiento online.</dd><dt>Siguiente decisión</dt><dd>Conservar las referencias y usar estos controles para localizar condiciones vulnerables antes de proponer cambios de entrenamiento. Estas pruebas no sustituyen un fine-tuning ni seleccionan nuevos pesos.</dd></dl>
+<details class="trace-details"><summary>Configuración y evidencia</summary><p><a href="tablas/robustez_endoscopia_resultados.json">Resultados estructurados y protocolo</a>. Fuentes históricas y checkpoints conservados. Los controles de identidad, reinicio y máscaras se verifican antes de completar la etapa; los registros técnicos completos permanecen en el proyecto local.</p></details></div></details>
+<details class="experiment-card" id="exp-e15-executed" data-research-card data-experiment data-model="VGG-T³" data-scope="Global" data-datasets="SCARED C3VD" data-status="executed" data-order="110" data-problems="Robustez y eficiencia">
+<summary><span class="card-status">Ejecutado</span><span class="card-id">E15</span>Eficiencia con recomputación del encoder<span class="card-teaser">Piloto controlado: 96 ejecuciones y 24 grupos modelo/caso/N, con calentamientos excluidos y repetición explícita.</span></summary>
+<div class="card-content"><dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>La longitud de contexto cambia el coste de la inferencia completa y su calidad, aunque los pesos permanezcan congelados.</dd><dt>Cómo se realizó</dt><dd>Se repite cada colección con calentamientos excluidos, sincronización CUDA y recomputación RGB completa. Se guardan mediana, intervalo intercuartil, primer resultado denso y memoria máxima; no se incluyen la carga inicial de pesos ni la extracción ZIP.</dd><dt>Controles</dt><dd>Pesos oficiales y tres fine-tunings congelados: VN18-C3VD, VN18-SCARED y V9-SCARED. Semilla fija, mismos RGB por condición, intrínsecas y GT constantes, dos pasos TTT. Sin entrenamiento ni sustitución de checkpoints.</dd><dt>Métricas</dt><dd>Latencia de inferencia, tiempo al primer resultado, pico CUDA y calidad en el ancla común.</dd></dl>
+<div class="card-result"><strong>Resultados</strong><p>Piloto controlado: 96 ejecuciones y 24 grupos modelo/caso/N, con calentamientos excluidos y repetición explícita.</p></div>
+<details class="protocol-details"><summary>Protocolo y alcance</summary><p>SCARED: anclas medidas de validación del dataset7, sin GT temporal. C3VD: trans_t4_b de validación; solo se puntúan las referencias GT seleccionadas. Profundidad y P directo con escala limpia fija, sin ICP; eficiencia y calidad por contexto se presentan por separado.</p></details>
+<details class="metrics-fold"><summary>Tabla de resultados</summary>
+
+
+
+| Modelo | Caso | N | Mediana (s) | IQR (s) | Pico CUDA (GiB) | AbsRel ancla | XYZ ancla (cm) |
+|---|---|---|---|---|---|---|---|
+| V9_SCARED | c3vd_trans4 | 4 | 2.678 | 2.678–2.728 | 3.762 | 0.20319 | 0.6348 |
+| V9_SCARED | c3vd_trans4 | 16 | 4.643 | 4.638–4.648 | 4.168 | 0.21524 | 0.6540 |
+| V9_SCARED | c3vd_trans4 | 50 | 10.031 | 10.012–10.057 | 4.971 | 0.22929 | 0.6620 |
+| VN18_C3VD | c3vd_trans4 | 4 | 2.717 | 2.713–2.750 | 3.762 | 0.08004 | 0.4687 |
+| VN18_C3VD | c3vd_trans4 | 16 | 4.661 | 4.652–4.678 | 4.168 | 0.07703 | 0.4648 |
+| VN18_C3VD | c3vd_trans4 | 50 | 10.056 | 10.048–10.071 | 4.971 | 0.07726 | 0.4782 |
+| VN18_SCARED | c3vd_trans4 | 4 | 2.770 | 2.744–2.772 | 3.762 | 0.21193 | 0.6865 |
+| VN18_SCARED | c3vd_trans4 | 16 | 4.779 | 4.745–4.830 | 4.168 | 0.22101 | 0.6724 |
+| VN18_SCARED | c3vd_trans4 | 50 | 10.209 | 10.135–10.242 | 4.971 | 0.22712 | 0.6666 |
+| zero_shot | c3vd_trans4 | 4 | 2.948 | 2.916–3.007 | 3.762 | 0.19034 | 0.7323 |
+| zero_shot | c3vd_trans4 | 16 | 4.682 | 4.657–4.743 | 4.168 | 0.17777 | 0.7019 |
+| zero_shot | c3vd_trans4 | 50 | 10.089 | 10.040–10.101 | 4.971 | 0.17750 | 0.6974 |
+| V9_SCARED | scared7_kf2 | 4 | 2.489 | 2.480–2.602 | 3.704 | 0.13419 | 1.0462 |
+| V9_SCARED | scared7_kf2 | 16 | 4.210 | 4.195–4.231 | 4.089 | 0.14221 | 1.0620 |
+| V9_SCARED | scared7_kf2 | 50 | 8.525 | 8.520–8.527 | 4.727 | 0.14171 | 1.0224 |
+| VN18_C3VD | scared7_kf2 | 4 | 2.478 | 2.475–2.517 | 3.704 | 0.20348 | 1.6754 |
+| VN18_C3VD | scared7_kf2 | 16 | 4.138 | 4.124–4.140 | 4.089 | 0.19353 | 1.5764 |
+| VN18_C3VD | scared7_kf2 | 50 | 8.694 | 8.593–8.699 | 4.727 | 0.19399 | 1.5538 |
+| VN18_SCARED | scared7_kf2 | 4 | 2.758 | 2.753–2.763 | 3.704 | 0.12048 | 0.9362 |
+| VN18_SCARED | scared7_kf2 | 16 | 4.519 | 4.475–4.524 | 4.089 | 0.10251 | 0.8893 |
+| VN18_SCARED | scared7_kf2 | 50 | 8.821 | 8.777–8.894 | 4.727 | 0.10105 | 0.8785 |
+| zero_shot | scared7_kf2 | 4 | 3.250 | 3.240–3.315 | 3.704 | 0.19196 | 1.5975 |
+| zero_shot | scared7_kf2 | 16 | 4.823 | 4.797–4.858 | 4.089 | 0.17942 | 1.4809 |
+| zero_shot | scared7_kf2 | 50 | 8.918 | 8.902–8.960 | 4.727 | 0.17981 | 1.4868 |
+
+<p>Tiempos con encoder y traslados CPU/GPU incluidos. Calidad medida en la misma primera ancla para comparar N. Las mediciones de latencia son operativas en este equipo; no son una comparación directa con A100/H100.</p>
+</details>
+<dl class="card-fields"><dt>Conclusión y confirmación de la hipótesis</dt><dd>Caracterización medida del coste y calidad frente a N; no establece un umbral universal de rotura ni demuestra funcionamiento clínico en tiempo real.</dd><dt>Limitaciones</dt><dd>Medición operativa en RTX 5060 con offload CPU/GPU. El throughput por lote no equivale a FPS clínicos online. Para calidad frente a N se usa la misma primera ancla: el resto del soporte GT de C3VD cambia con la selección.</dd><dt>Siguiente decisión</dt><dd>Conservar las referencias y usar estos controles para localizar condiciones vulnerables antes de proponer cambios de entrenamiento. Estas pruebas no sustituyen un fine-tuning ni seleccionan nuevos pesos.</dd></dl>
+<details class="trace-details"><summary>Configuración y evidencia</summary><p><a href="tablas/robustez_endoscopia_resultados.json">Resultados estructurados y protocolo</a>. Fuentes históricas y checkpoints conservados. Los controles de identidad, reinicio y máscaras se verifican antes de completar la etapa; los registros técnicos completos permanecen en el proyecto local.</p></details></div></details>
+</details>
+<!-- END COMPLETED ROBUSTNESS -->
 </details>
 
 <details class="experiment-model" id="vggt-experimentos"><summary>VGGT</summary>
