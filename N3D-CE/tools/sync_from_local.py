@@ -2,6 +2,7 @@
 from pathlib import Path
 import argparse,csv,hashlib,html,io,json,re,shutil
 from public_package import publish_binary,remove_verified_redundant_js,adapt_viewer
+from lineage_guard import verify_root
 
 IDS=['c3vd-v9', 'c3vd-vn19-a', 'c3vd-vn19-b', 'c3vd-vn18', 'c3vd-zero', 'scared8-vn18', 'scared8-v9', 'scared8-vn19-a', 'scared9-vn18', 'scared9-v9', 'scared9-vn19-a', 'c3vd-scared-vn18', 'scared8-scared-v9', 'scared9-scared-v9', 'c3vd-scared-v9', 'vggt-c3vd-r1-final-trans4', 'vggt-c3vd-r1-best-trans4', 'vggt-c3vd-r1-final-trans1a', 'vggt-c3vd-r1-best-trans1a', 'vggt-scared8-zs-n4', 'vggt-scared8-best-n4', 'ttt-scared8-vn18-n4']
 def read(p):return json.loads(p.read_text(encoding='utf-8-sig'))
@@ -27,6 +28,7 @@ def main():
     p=argparse.ArgumentParser();p.add_argument('--source',required=True,type=Path);p.add_argument('--repository',required=True,type=Path);args=p.parse_args()
     src=args.source.resolve();repo=args.repository.resolve();dst=repo/'N3D-CE'
     if not (repo/'.git').is_dir() or not (src/'Bitacora.qmd').is_file():raise RuntimeError('Expected the local notebook and Research Git checkout')
+    verify_root(src)
     dst.mkdir(exist_ok=True)
     q=(src/'Bitacora.qmd').read_text(encoding='utf8');original=q
     # These two records are lightweight diagnostic data, not the original archives.
@@ -112,6 +114,7 @@ def main():
     public={'version':manifest['version'],'clouds':clouds,'errors':[],'no_new_inference_or_training':manifest.get('no_new_inference_or_training', True),'point_sampling':False,'public_scope':str(len(selected_ids))+' main complete clouds; other historical exports remain local','unique_packages':len(packages),'physical_package_bytes':sum(x['package_bytes'] for x in packages.values() if not x.get('external'))}
     dump(app/'clouds.json',public);(app/'clouds.js').write_text('window.CLOUD_REGISTRY='+json.dumps(public,ensure_ascii=False).replace('<','\\u003c')+';',encoding='utf8')
     copy(src/'tablas/comparaciones_base_n50.json',dst/'tablas/comparaciones_base_n50.json')
+    copy(src/'tablas/verificacion_24_comparaciones.json',dst/'tablas/verificacion_24_comparaciones.json')
     if (src/'tablas/robustez_endoscopia_resultados.json').exists():copy(src/'tablas/robustez_endoscopia_resultados.json',dst/'tablas/robustez_endoscopia_resultados.json')
     met=clean(read(src/'reconstrucciones/interactivo/metrics.json'));dump(app/'metrics.json',met)
     (app/'metrics.js').write_text('window.METRIC_REGISTRY='+json.dumps(met,ensure_ascii=False).replace('<','\\u003c')+';',encoding='utf8')

@@ -21117,7 +21117,15 @@
       "errors_cm": null,
       "raw_errors_cm": null,
       "GT_temporal_certified": false,
-      "context": "SCARED8 · original KF0 / processed KF1; reserved; mismos 50 RGB, orden y calibración; D+K calibrada+pose predicha; escala GT única por secuencia, sin ICP. GT solo en el ancla medida; sin GT temporal certificado."
+      "context": "SCARED8 · original KF0 / processed KF1; reserved; mismos 50 RGB, orden y calibración; D+K calibrada+pose predicha; escala GT única por secuencia, sin ICP. GT solo en el ancla medida; sin GT temporal certificado.",
+      "model_variant": "VGGT_ZS",
+      "checkpoint_SHA256": "f164acf60724910d8fe1578bb499d800850c7bb0948db7555c413f9fbe60467e",
+      "prediction_SHA256": "eba56241529b4ebabfe433cda290c89050b8ef55126e23d26fed5b9f0cf87f5c",
+      "input_float_SHA256": "0d449daa05d161b974fd240ed8f9eb4a58971a2b7a77997cd4e661cf75c865fd",
+      "input_views": 50,
+      "gt_reference_views": 1,
+      "gt_valid_pixels": 70594,
+      "gt_evaluation_scope": "measured_anchor_valid_pixels"
     },
     {
       "id": "base-d8_kf0-r1_final3000",
@@ -21434,7 +21442,15 @@
       "errors_cm": null,
       "raw_errors_cm": null,
       "GT_temporal_certified": false,
-      "context": "SCARED8 · original KF0 / processed KF1; reserved; mismos 50 RGB, orden y calibración; D+K calibrada+pose predicha; escala GT única por secuencia, sin ICP. GT solo en el ancla medida; sin GT temporal certificado."
+      "context": "SCARED8 · original KF0 / processed KF1; reserved; mismos 50 RGB, orden y calibración; D+K calibrada+pose predicha; escala GT única por secuencia, sin ICP. GT solo en el ancla medida; sin GT temporal certificado.",
+      "model_variant": "R1_FINAL3000",
+      "checkpoint_SHA256": "cf0bbc6f044fc7f23986b9d33112d20f46f1377d6b3c395a73a39be268fd1cf3",
+      "prediction_SHA256": "6413cce4ace359e16c071a64481d3cc574d0db3cf01f78a9ec80aa992055f3ca",
+      "input_float_SHA256": "0d449daa05d161b974fd240ed8f9eb4a58971a2b7a77997cd4e661cf75c865fd",
+      "input_views": 50,
+      "gt_reference_views": 1,
+      "gt_valid_pixels": 70594,
+      "gt_evaluation_scope": "measured_anchor_valid_pixels"
     },
     {
       "id": "base-d8_kf0-vggt_scared_best",
@@ -21751,7 +21767,15 @@
       "errors_cm": null,
       "raw_errors_cm": null,
       "GT_temporal_certified": false,
-      "context": "SCARED8 · original KF0 / processed KF1; reserved; mismos 50 RGB, orden y calibración; D+K calibrada+pose predicha; escala GT única por secuencia, sin ICP. GT solo en el ancla medida; sin GT temporal certificado."
+      "context": "SCARED8 · original KF0 / processed KF1; reserved; mismos 50 RGB, orden y calibración; D+K calibrada+pose predicha; escala GT única por secuencia, sin ICP. GT solo en el ancla medida; sin GT temporal certificado.",
+      "model_variant": "VGGT_SCARED_BEST",
+      "checkpoint_SHA256": "3733885c17c84281e1cc035957d8e47be0e1d39cb01f51a6b432efeb79f05a7a",
+      "prediction_SHA256": "c39a902f7bc419ce66074d2fdb4854153ccb5499f4a87c6ecaedd93095eefef0",
+      "input_float_SHA256": "0d449daa05d161b974fd240ed8f9eb4a58971a2b7a77997cd4e661cf75c865fd",
+      "input_views": 50,
+      "gt_reference_views": 1,
+      "gt_valid_pixels": 70594,
+      "gt_evaluation_scope": "measured_anchor_valid_pixels"
     },
     {
       "id": "base-d8_kf0-ttt_zs",
@@ -22068,7 +22092,15 @@
       "errors_cm": null,
       "raw_errors_cm": null,
       "GT_temporal_certified": false,
-      "context": "SCARED8 · original KF0 / processed KF1; reserved; mismos 50 RGB, orden y calibración; D+K calibrada+pose predicha; escala GT única por secuencia, sin ICP. GT solo en el ancla medida; sin GT temporal certificado."
+      "context": "SCARED8 · original KF0 / processed KF1; reserved; mismos 50 RGB, orden y calibración; D+K calibrada+pose predicha; escala GT única por secuencia, sin ICP. GT solo en el ancla medida; sin GT temporal certificado.",
+      "model_variant": "TTT_ZS",
+      "checkpoint_SHA256": "64f298ff1cde4ebeaadd749edf3ef5f4972b9b1b735785f83cc228637df8eaaf",
+      "prediction_SHA256": "32fb9a2746f512554226f6f5ed5459d23b3e9a20790d643ed81dda24395886a8",
+      "input_float_SHA256": "0d449daa05d161b974fd240ed8f9eb4a58971a2b7a77997cd4e661cf75c865fd",
+      "input_views": 50,
+      "gt_reference_views": 1,
+      "gt_valid_pixels": 70594,
+      "gt_evaluation_scope": "measured_anchor_valid_pixels"
     },
     {
       "id": "base-d8_kf0-ttt_c3vd_v9",
@@ -22385,7 +22417,15 @@
       "errors_cm": null,
       "raw_errors_cm": null,
       "GT_temporal_certified": false,
-      "context": "SCARED8 · original KF0 / processed KF1; reserved; mismos 50 RGB, orden y calibración; D+K calibrada+pose predicha; escala GT única por secuencia, sin ICP. GT solo en el ancla medida; sin GT temporal certificado."
+      "context": "SCARED8 · original KF0 / processed KF1; reserved; mismos 50 RGB, orden y calibración; D+K calibrada+pose predicha; escala GT única por secuencia, sin ICP. GT solo en el ancla medida; sin GT temporal certificado.",
+      "model_variant": "TTT_C3VD_V9",
+      "checkpoint_SHA256": "208ddffb2b917dc8e6ed52b803a3d6493dd56655ffb735839a68b96b4a906fdb",
+      "prediction_SHA256": "54adf3620af86491e0d051d26dd3e6c6c1b1134681549f63ab1efdee68a9ed0c",
+      "input_float_SHA256": "0d449daa05d161b974fd240ed8f9eb4a58971a2b7a77997cd4e661cf75c865fd",
+      "input_views": 50,
+      "gt_reference_views": 1,
+      "gt_valid_pixels": 70594,
+      "gt_evaluation_scope": "measured_anchor_valid_pixels"
     },
     {
       "id": "base-d8_kf0-ttt_c3vd_vn18",
@@ -22702,7 +22742,15 @@
       "errors_cm": null,
       "raw_errors_cm": null,
       "GT_temporal_certified": false,
-      "context": "SCARED8 · original KF0 / processed KF1; reserved; mismos 50 RGB, orden y calibración; D+K calibrada+pose predicha; escala GT única por secuencia, sin ICP. GT solo en el ancla medida; sin GT temporal certificado."
+      "context": "SCARED8 · original KF0 / processed KF1; reserved; mismos 50 RGB, orden y calibración; D+K calibrada+pose predicha; escala GT única por secuencia, sin ICP. GT solo en el ancla medida; sin GT temporal certificado.",
+      "model_variant": "TTT_C3VD_VN18",
+      "checkpoint_SHA256": "b731be12f2a81db90d43fcb38a983b2fd5d10b200a0a53a31473cba274f4d32a",
+      "prediction_SHA256": "61addef3e1fa18b2fe9275ebcd52f0667d0e07693eda8532fe84b2f0301ff35b",
+      "input_float_SHA256": "0d449daa05d161b974fd240ed8f9eb4a58971a2b7a77997cd4e661cf75c865fd",
+      "input_views": 50,
+      "gt_reference_views": 1,
+      "gt_valid_pixels": 70594,
+      "gt_evaluation_scope": "measured_anchor_valid_pixels"
     },
     {
       "id": "base-d8_kf0-ttt_scared_vn18",
@@ -23019,7 +23067,15 @@
       "errors_cm": null,
       "raw_errors_cm": null,
       "GT_temporal_certified": false,
-      "context": "SCARED8 · original KF0 / processed KF1; reserved; mismos 50 RGB, orden y calibración; D+K calibrada+pose predicha; escala GT única por secuencia, sin ICP. GT solo en el ancla medida; sin GT temporal certificado."
+      "context": "SCARED8 · original KF0 / processed KF1; reserved; mismos 50 RGB, orden y calibración; D+K calibrada+pose predicha; escala GT única por secuencia, sin ICP. GT solo en el ancla medida; sin GT temporal certificado.",
+      "model_variant": "TTT_SCARED_VN18",
+      "checkpoint_SHA256": "55be5e27bc4755f01c7209e7097bf8b01ac8985616f679006f6e40b6bc838ec0",
+      "prediction_SHA256": "4bf6397733fcdc30f0bf8f2c1753d9bb72a368989a942b62f0f6ae80427182f9",
+      "input_float_SHA256": "0d449daa05d161b974fd240ed8f9eb4a58971a2b7a77997cd4e661cf75c865fd",
+      "input_views": 50,
+      "gt_reference_views": 1,
+      "gt_valid_pixels": 70594,
+      "gt_evaluation_scope": "measured_anchor_valid_pixels"
     },
     {
       "id": "base-d8_kf0-ttt_scared_v9",
@@ -23336,7 +23392,15 @@
       "errors_cm": null,
       "raw_errors_cm": null,
       "GT_temporal_certified": false,
-      "context": "SCARED8 · original KF0 / processed KF1; reserved; mismos 50 RGB, orden y calibración; D+K calibrada+pose predicha; escala GT única por secuencia, sin ICP. GT solo en el ancla medida; sin GT temporal certificado."
+      "context": "SCARED8 · original KF0 / processed KF1; reserved; mismos 50 RGB, orden y calibración; D+K calibrada+pose predicha; escala GT única por secuencia, sin ICP. GT solo en el ancla medida; sin GT temporal certificado.",
+      "model_variant": "TTT_SCARED_V9",
+      "checkpoint_SHA256": "e55591dbf236b41a538c0055972ff904dfef0b5601a9713e340830d4baae4b27",
+      "prediction_SHA256": "ee6386939b2869a7263f284a58b9f68671be541e36e5e9a595554c6d2e1a3e25",
+      "input_float_SHA256": "0d449daa05d161b974fd240ed8f9eb4a58971a2b7a77997cd4e661cf75c865fd",
+      "input_views": 50,
+      "gt_reference_views": 1,
+      "gt_valid_pixels": 70594,
+      "gt_evaluation_scope": "measured_anchor_valid_pixels"
     },
     {
       "id": "base-d9_kf0-vggt_zs",
@@ -23653,7 +23717,15 @@
       "errors_cm": null,
       "raw_errors_cm": null,
       "GT_temporal_certified": false,
-      "context": "SCARED9 · original KF0 / processed KF1; reserved; mismos 50 RGB, orden y calibración; D+K calibrada+pose predicha; escala GT única por secuencia, sin ICP. GT solo en el ancla medida; sin GT temporal certificado."
+      "context": "SCARED9 · original KF0 / processed KF1; reserved; mismos 50 RGB, orden y calibración; D+K calibrada+pose predicha; escala GT única por secuencia, sin ICP. GT solo en el ancla medida; sin GT temporal certificado.",
+      "model_variant": "VGGT_ZS",
+      "checkpoint_SHA256": "f164acf60724910d8fe1578bb499d800850c7bb0948db7555c413f9fbe60467e",
+      "prediction_SHA256": "c3299205a0e2eb4bdc272a8137ea33da834d12f809168bde6a5d29ea6ff68288",
+      "input_float_SHA256": "086928496a2ea0656f91ca5a0387cdae15ac64bdaee4c2cfff1b92fb871d7118",
+      "input_views": 50,
+      "gt_reference_views": 1,
+      "gt_valid_pixels": 72656,
+      "gt_evaluation_scope": "measured_anchor_valid_pixels"
     },
     {
       "id": "base-d9_kf0-r1_final3000",
@@ -23970,7 +24042,15 @@
       "errors_cm": null,
       "raw_errors_cm": null,
       "GT_temporal_certified": false,
-      "context": "SCARED9 · original KF0 / processed KF1; reserved; mismos 50 RGB, orden y calibración; D+K calibrada+pose predicha; escala GT única por secuencia, sin ICP. GT solo en el ancla medida; sin GT temporal certificado."
+      "context": "SCARED9 · original KF0 / processed KF1; reserved; mismos 50 RGB, orden y calibración; D+K calibrada+pose predicha; escala GT única por secuencia, sin ICP. GT solo en el ancla medida; sin GT temporal certificado.",
+      "model_variant": "R1_FINAL3000",
+      "checkpoint_SHA256": "cf0bbc6f044fc7f23986b9d33112d20f46f1377d6b3c395a73a39be268fd1cf3",
+      "prediction_SHA256": "92cd526d20c5618c1cb70f32755cd007060a73dbac5d8a169cb15be831240118",
+      "input_float_SHA256": "086928496a2ea0656f91ca5a0387cdae15ac64bdaee4c2cfff1b92fb871d7118",
+      "input_views": 50,
+      "gt_reference_views": 1,
+      "gt_valid_pixels": 72656,
+      "gt_evaluation_scope": "measured_anchor_valid_pixels"
     },
     {
       "id": "base-d9_kf0-vggt_scared_best",
@@ -24287,7 +24367,15 @@
       "errors_cm": null,
       "raw_errors_cm": null,
       "GT_temporal_certified": false,
-      "context": "SCARED9 · original KF0 / processed KF1; reserved; mismos 50 RGB, orden y calibración; D+K calibrada+pose predicha; escala GT única por secuencia, sin ICP. GT solo en el ancla medida; sin GT temporal certificado."
+      "context": "SCARED9 · original KF0 / processed KF1; reserved; mismos 50 RGB, orden y calibración; D+K calibrada+pose predicha; escala GT única por secuencia, sin ICP. GT solo en el ancla medida; sin GT temporal certificado.",
+      "model_variant": "VGGT_SCARED_BEST",
+      "checkpoint_SHA256": "3733885c17c84281e1cc035957d8e47be0e1d39cb01f51a6b432efeb79f05a7a",
+      "prediction_SHA256": "7cd298f0984d2c533c6ee584bab05fd3e60670fcdee05676f9726831581b22b8",
+      "input_float_SHA256": "086928496a2ea0656f91ca5a0387cdae15ac64bdaee4c2cfff1b92fb871d7118",
+      "input_views": 50,
+      "gt_reference_views": 1,
+      "gt_valid_pixels": 72656,
+      "gt_evaluation_scope": "measured_anchor_valid_pixels"
     },
     {
       "id": "base-d9_kf0-ttt_zs",
@@ -24604,7 +24692,15 @@
       "errors_cm": null,
       "raw_errors_cm": null,
       "GT_temporal_certified": false,
-      "context": "SCARED9 · original KF0 / processed KF1; reserved; mismos 50 RGB, orden y calibración; D+K calibrada+pose predicha; escala GT única por secuencia, sin ICP. GT solo en el ancla medida; sin GT temporal certificado."
+      "context": "SCARED9 · original KF0 / processed KF1; reserved; mismos 50 RGB, orden y calibración; D+K calibrada+pose predicha; escala GT única por secuencia, sin ICP. GT solo en el ancla medida; sin GT temporal certificado.",
+      "model_variant": "TTT_ZS",
+      "checkpoint_SHA256": "64f298ff1cde4ebeaadd749edf3ef5f4972b9b1b735785f83cc228637df8eaaf",
+      "prediction_SHA256": "05f391185c636e29ac3ff7ca63df25bfa76ea583520139755142828432165440",
+      "input_float_SHA256": "086928496a2ea0656f91ca5a0387cdae15ac64bdaee4c2cfff1b92fb871d7118",
+      "input_views": 50,
+      "gt_reference_views": 1,
+      "gt_valid_pixels": 72656,
+      "gt_evaluation_scope": "measured_anchor_valid_pixels"
     },
     {
       "id": "base-d9_kf0-ttt_c3vd_v9",
@@ -24921,7 +25017,15 @@
       "errors_cm": null,
       "raw_errors_cm": null,
       "GT_temporal_certified": false,
-      "context": "SCARED9 · original KF0 / processed KF1; reserved; mismos 50 RGB, orden y calibración; D+K calibrada+pose predicha; escala GT única por secuencia, sin ICP. GT solo en el ancla medida; sin GT temporal certificado."
+      "context": "SCARED9 · original KF0 / processed KF1; reserved; mismos 50 RGB, orden y calibración; D+K calibrada+pose predicha; escala GT única por secuencia, sin ICP. GT solo en el ancla medida; sin GT temporal certificado.",
+      "model_variant": "TTT_C3VD_V9",
+      "checkpoint_SHA256": "208ddffb2b917dc8e6ed52b803a3d6493dd56655ffb735839a68b96b4a906fdb",
+      "prediction_SHA256": "05ebae9842faa63d380b563e013c1ad89f6434f08545fcc54360f5909b85db3a",
+      "input_float_SHA256": "086928496a2ea0656f91ca5a0387cdae15ac64bdaee4c2cfff1b92fb871d7118",
+      "input_views": 50,
+      "gt_reference_views": 1,
+      "gt_valid_pixels": 72656,
+      "gt_evaluation_scope": "measured_anchor_valid_pixels"
     },
     {
       "id": "base-d9_kf0-ttt_c3vd_vn18",
@@ -25238,7 +25342,15 @@
       "errors_cm": null,
       "raw_errors_cm": null,
       "GT_temporal_certified": false,
-      "context": "SCARED9 · original KF0 / processed KF1; reserved; mismos 50 RGB, orden y calibración; D+K calibrada+pose predicha; escala GT única por secuencia, sin ICP. GT solo en el ancla medida; sin GT temporal certificado."
+      "context": "SCARED9 · original KF0 / processed KF1; reserved; mismos 50 RGB, orden y calibración; D+K calibrada+pose predicha; escala GT única por secuencia, sin ICP. GT solo en el ancla medida; sin GT temporal certificado.",
+      "model_variant": "TTT_C3VD_VN18",
+      "checkpoint_SHA256": "b731be12f2a81db90d43fcb38a983b2fd5d10b200a0a53a31473cba274f4d32a",
+      "prediction_SHA256": "a931c8e7b106d73e252961cfbb7d8c548a6f168f1db2974155b41ab49316e73d",
+      "input_float_SHA256": "086928496a2ea0656f91ca5a0387cdae15ac64bdaee4c2cfff1b92fb871d7118",
+      "input_views": 50,
+      "gt_reference_views": 1,
+      "gt_valid_pixels": 72656,
+      "gt_evaluation_scope": "measured_anchor_valid_pixels"
     },
     {
       "id": "base-d9_kf0-ttt_scared_vn18",
@@ -25555,7 +25667,15 @@
       "errors_cm": null,
       "raw_errors_cm": null,
       "GT_temporal_certified": false,
-      "context": "SCARED9 · original KF0 / processed KF1; reserved; mismos 50 RGB, orden y calibración; D+K calibrada+pose predicha; escala GT única por secuencia, sin ICP. GT solo en el ancla medida; sin GT temporal certificado."
+      "context": "SCARED9 · original KF0 / processed KF1; reserved; mismos 50 RGB, orden y calibración; D+K calibrada+pose predicha; escala GT única por secuencia, sin ICP. GT solo en el ancla medida; sin GT temporal certificado.",
+      "model_variant": "TTT_SCARED_VN18",
+      "checkpoint_SHA256": "55be5e27bc4755f01c7209e7097bf8b01ac8985616f679006f6e40b6bc838ec0",
+      "prediction_SHA256": "b644c4eaa1f0299e3ef6f07dbba8ad9f896a67151e51d0e589087c9f72b228cd",
+      "input_float_SHA256": "086928496a2ea0656f91ca5a0387cdae15ac64bdaee4c2cfff1b92fb871d7118",
+      "input_views": 50,
+      "gt_reference_views": 1,
+      "gt_valid_pixels": 72656,
+      "gt_evaluation_scope": "measured_anchor_valid_pixels"
     },
     {
       "id": "base-d9_kf0-ttt_scared_v9",
@@ -25872,7 +25992,15 @@
       "errors_cm": null,
       "raw_errors_cm": null,
       "GT_temporal_certified": false,
-      "context": "SCARED9 · original KF0 / processed KF1; reserved; mismos 50 RGB, orden y calibración; D+K calibrada+pose predicha; escala GT única por secuencia, sin ICP. GT solo en el ancla medida; sin GT temporal certificado."
+      "context": "SCARED9 · original KF0 / processed KF1; reserved; mismos 50 RGB, orden y calibración; D+K calibrada+pose predicha; escala GT única por secuencia, sin ICP. GT solo en el ancla medida; sin GT temporal certificado.",
+      "model_variant": "TTT_SCARED_V9",
+      "checkpoint_SHA256": "e55591dbf236b41a538c0055972ff904dfef0b5601a9713e340830d4baae4b27",
+      "prediction_SHA256": "29c5cc3dbcc0e12bd5b10c56b0fa3de908cfaa1f9d9adf56c0fd9e7b33e983d0",
+      "input_float_SHA256": "086928496a2ea0656f91ca5a0387cdae15ac64bdaee4c2cfff1b92fb871d7118",
+      "input_views": 50,
+      "gt_reference_views": 1,
+      "gt_valid_pixels": 72656,
+      "gt_evaluation_scope": "measured_anchor_valid_pixels"
     },
     {
       "id": "base-trans_t4_b-vggt_zs",
@@ -26822,7 +26950,15 @@
       },
       "ATE_cm": 0.10023280394709376,
       "accuracy_at_2mm_pct": 100.0,
-      "native_accuracy_at_2mm_pct": 62.0
+      "native_accuracy_at_2mm_pct": 62.0,
+      "model_variant": "VGGT_ZS",
+      "checkpoint_SHA256": "f164acf60724910d8fe1578bb499d800850c7bb0948db7555c413f9fbe60467e",
+      "prediction_SHA256": "9ba580c8efdc11e40da18eca2f58bcfd37e8c6157c93ccd5e3319fc1e5c7f96b",
+      "input_float_SHA256": "855e2e2d932ce6c350bd787e7660e257a2919d9d8db1a3f896af304d350dbf8b",
+      "input_views": 50,
+      "gt_reference_views": 50,
+      "gt_valid_pixels": 5537892,
+      "gt_evaluation_scope": "reference_views_valid_pixels"
     },
     {
       "id": "base-trans_t4_b-r1_final3000",
@@ -27772,7 +27908,15 @@
       },
       "ATE_cm": 0.06203489584849889,
       "accuracy_at_2mm_pct": 100.0,
-      "native_accuracy_at_2mm_pct": 22.0
+      "native_accuracy_at_2mm_pct": 22.0,
+      "model_variant": "R1_FINAL3000",
+      "checkpoint_SHA256": "cf0bbc6f044fc7f23986b9d33112d20f46f1377d6b3c395a73a39be268fd1cf3",
+      "prediction_SHA256": "e4c52e5bf399d5e372d1eed5b6e01c7d69233f54dbbec7b09824438327a1962b",
+      "input_float_SHA256": "855e2e2d932ce6c350bd787e7660e257a2919d9d8db1a3f896af304d350dbf8b",
+      "input_views": 50,
+      "gt_reference_views": 50,
+      "gt_valid_pixels": 5537892,
+      "gt_evaluation_scope": "reference_views_valid_pixels"
     },
     {
       "id": "base-trans_t4_b-vggt_scared_best",
@@ -28722,7 +28866,15 @@
       },
       "ATE_cm": 0.10023280318913419,
       "accuracy_at_2mm_pct": 100.0,
-      "native_accuracy_at_2mm_pct": 62.0
+      "native_accuracy_at_2mm_pct": 62.0,
+      "model_variant": "VGGT_SCARED_BEST",
+      "checkpoint_SHA256": "3733885c17c84281e1cc035957d8e47be0e1d39cb01f51a6b432efeb79f05a7a",
+      "prediction_SHA256": "7de322c6926ebc94f10c41c6363c8164cfe85cc8bb0fe2cd1dd61c96c2818032",
+      "input_float_SHA256": "855e2e2d932ce6c350bd787e7660e257a2919d9d8db1a3f896af304d350dbf8b",
+      "input_views": 50,
+      "gt_reference_views": 50,
+      "gt_valid_pixels": 5537892,
+      "gt_evaluation_scope": "reference_views_valid_pixels"
     },
     {
       "id": "base-trans_t4_b-ttt_zs",
@@ -29672,7 +29824,15 @@
       },
       "ATE_cm": 0.09591590387522617,
       "accuracy_at_2mm_pct": 100.0,
-      "native_accuracy_at_2mm_pct": 72.0
+      "native_accuracy_at_2mm_pct": 72.0,
+      "model_variant": "TTT_ZS",
+      "checkpoint_SHA256": "64f298ff1cde4ebeaadd749edf3ef5f4972b9b1b735785f83cc228637df8eaaf",
+      "prediction_SHA256": "58f83e0b93774dbbf992f85fb2d52f244786af94808f5e39a0a9f5f07da2b704",
+      "input_float_SHA256": "855e2e2d932ce6c350bd787e7660e257a2919d9d8db1a3f896af304d350dbf8b",
+      "input_views": 50,
+      "gt_reference_views": 50,
+      "gt_valid_pixels": 5537892,
+      "gt_evaluation_scope": "reference_views_valid_pixels"
     },
     {
       "id": "base-trans_t4_b-ttt_c3vd_v9",
@@ -30622,7 +30782,15 @@
       },
       "ATE_cm": 0.0987231907997447,
       "accuracy_at_2mm_pct": 100.0,
-      "native_accuracy_at_2mm_pct": 62.0
+      "native_accuracy_at_2mm_pct": 62.0,
+      "model_variant": "TTT_C3VD_V9",
+      "checkpoint_SHA256": "208ddffb2b917dc8e6ed52b803a3d6493dd56655ffb735839a68b96b4a906fdb",
+      "prediction_SHA256": "de0ac771a63e705c1e1e79c29d17c84a48c3ce19af7ae378cce773d6c89f4928",
+      "input_float_SHA256": "855e2e2d932ce6c350bd787e7660e257a2919d9d8db1a3f896af304d350dbf8b",
+      "input_views": 50,
+      "gt_reference_views": 50,
+      "gt_valid_pixels": 5537892,
+      "gt_evaluation_scope": "reference_views_valid_pixels"
     },
     {
       "id": "base-trans_t4_b-ttt_c3vd_vn18",
@@ -31572,7 +31740,15 @@
       },
       "ATE_cm": 0.09591590256358275,
       "accuracy_at_2mm_pct": 100.0,
-      "native_accuracy_at_2mm_pct": 68.0
+      "native_accuracy_at_2mm_pct": 68.0,
+      "model_variant": "TTT_C3VD_VN18",
+      "checkpoint_SHA256": "b731be12f2a81db90d43fcb38a983b2fd5d10b200a0a53a31473cba274f4d32a",
+      "prediction_SHA256": "4f63c13adbe9a83da50f4c1ddd454ab08df2eb8e5f65143f20c927694300c54b",
+      "input_float_SHA256": "855e2e2d932ce6c350bd787e7660e257a2919d9d8db1a3f896af304d350dbf8b",
+      "input_views": 50,
+      "gt_reference_views": 50,
+      "gt_valid_pixels": 5537892,
+      "gt_evaluation_scope": "reference_views_valid_pixels"
     },
     {
       "id": "base-trans_t4_b-ttt_scared_vn18",
@@ -32522,7 +32698,15 @@
       },
       "ATE_cm": 0.09591590208019414,
       "accuracy_at_2mm_pct": 100.0,
-      "native_accuracy_at_2mm_pct": 72.0
+      "native_accuracy_at_2mm_pct": 72.0,
+      "model_variant": "TTT_SCARED_VN18",
+      "checkpoint_SHA256": "55be5e27bc4755f01c7209e7097bf8b01ac8985616f679006f6e40b6bc838ec0",
+      "prediction_SHA256": "b68de4b24fbca2ffa94ba909bc4cda7347650d963a74cdad90f7f67a5d36d3ca",
+      "input_float_SHA256": "855e2e2d932ce6c350bd787e7660e257a2919d9d8db1a3f896af304d350dbf8b",
+      "input_views": 50,
+      "gt_reference_views": 50,
+      "gt_valid_pixels": 5537892,
+      "gt_evaluation_scope": "reference_views_valid_pixels"
     },
     {
       "id": "base-trans_t4_b-ttt_scared_v9",
@@ -33472,7 +33656,15 @@
       },
       "ATE_cm": 0.09591590103576896,
       "accuracy_at_2mm_pct": 100.0,
-      "native_accuracy_at_2mm_pct": 68.0
+      "native_accuracy_at_2mm_pct": 68.0,
+      "model_variant": "TTT_SCARED_V9",
+      "checkpoint_SHA256": "e55591dbf236b41a538c0055972ff904dfef0b5601a9713e340830d4baae4b27",
+      "prediction_SHA256": "cc90cdbcad1f8138a43b22524288f8991b05587409ae18ba42047b7aeefc6f47",
+      "input_float_SHA256": "855e2e2d932ce6c350bd787e7660e257a2919d9d8db1a3f896af304d350dbf8b",
+      "input_views": 50,
+      "gt_reference_views": 50,
+      "gt_valid_pixels": 5537892,
+      "gt_evaluation_scope": "reference_views_valid_pixels"
     }
   ],
   "skipped_without_saved_poses": []

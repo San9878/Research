@@ -2,8 +2,6 @@
 title: "Bitácora"
 subtitle: "VGG-T³ · VGGT · Comparaciones entre modelos"
 author: "Santiago Hernández Chávez"
-date: 2026-11-26
-date-format: "DD/MM/YYYY"
 lang: es
 format:
   html:
@@ -29,7 +27,7 @@ execute:
 <div class="cover-top"><img class="cover-up" src="imagenes/portada_up.png" alt="Universidad Panamericana"><div class="cover-institutions">Universidad Panamericana<br>&amp; King Abdullah<br>University of Science and Technology</div></div>
 <div class="cover-main"><p class="cover-kicker">Research · Bitácora experimental</p><h1 class="cover-title">Neural 3D Scene Reconstruction<br>for Clinical Environments</h1><div class="cover-people"><strong>Santiago Hernández Chávez</strong><br>Advisors: Ivan Viola · Ricardo Abel Espinosa Loera</div></div>
 <nav class="cover-navigation" aria-label="Accesos de portada"><a href="#resumen-ejecutivo">Qué sabemos</a><a href="#comparacion-referencias-actuales">Referencias actuales</a><a href="#fundamentos-propuesta">Fundamentos y propuesta</a></nav>
-<div class="cover-bottom"><img class="cover-kaust" src="imagenes/portada_kaust.png" alt="KAUST"><div class="cover-place">Aguascalientes, Aguascalientes · 2026<br><span class="cover-note">C3VD y SCARED · actualizado el 24/11/2026</span></div></div>
+<div class="cover-bottom"><img class="cover-kaust" src="imagenes/portada_kaust.png" alt="KAUST"><div class="cover-place">Aguascalientes, Aguascalientes<br><span class="cover-note">C3VD y SCARED</span></div></div>
 </section>
 
 <section class="executive-summary" id="resumen-ejecutivo" aria-labelledby="resumen-titulo"><h2 id="resumen-titulo">Qué tenemos y cómo leerlo</h2>
@@ -37,6 +35,7 @@ execute:
 <p>La caracterización de ambos modelos constituye la base experimental para estudiar los efectos de la iluminación dinámica, los reflejos especulares y las oclusiones sobre la reconstrucción geométrica.</p>
 <ul><li><strong>VGG-T³:</strong> V9 es la referencia C3VD; VN19-A/B permiten estudiar el muestreo. En SCARED se documentan VN18 y V9 adaptados.</li><li><strong>VGGT:</strong> R1 es la réplica controlada C3VD; depth-v2 es la adaptación SCARED de profundidad.</li><li><strong>Hallazgo compartido:</strong> mejorar profundidad, puntos o cámara por separado no garantiza una reconstrucción conjunta mejor. El contexto y la ruta geométrica también influyen.</li></ul>
 <p>En cada modelo encontrarás datos y splits, métricas frente a su zero-shot y vistas de las reconstrucciones. Las transferencias y comparaciones se reúnen en sus propios desplegables. En SCARED, el GT mide anclas; las trayectorias temporales se muestran como predicciones.</p>
+<p class="gt-scope-note" id="alcance-vistas-gt"><strong>Vistas de entrada y soporte GT.</strong> N indica imágenes de entrada, no imágenes con GT. En SCARED, 50 vistas aportan contexto, pero las métricas frente a GT se calculan solo sobre los píxeles válidos del ancla medida; no evalúan las 50 vistas ni certifican la trayectoria completa. En C3VD, el soporte depende del protocolo: 50 referencias o 16 objetivos seleccionados, siempre con sus máscaras válidas.</p>
 <nav class="summary-links"><a href="#vgg-t3">VGG-T³</a><a href="#vggt">VGGT</a><a href="#vggt-vs-vgg-t3">Comparar modelos</a><a href="#experimentos">Experimentos realizados</a></nav></section>
 ```
 
@@ -1007,6 +1006,10 @@ Selecciona hasta cuatro resultados. Los porcentajes se calculan únicamente entr
 
 <p>Casos base para comparar los modelos: las mismas 50 imágenes, orden de entrada y ruta D + K calibrada + pose predicha. VN18-C3VD y VN18-SCARED se identifican por separado. La selección de modelos sigue disponible en cada visor.</p>
 
+<p class="gt-scope-note">50 vistas de entrada no significan 50 vistas con GT. En SCARED, las métricas de estas comparaciones describen únicamente el ancla medida; las otras 49 imágenes aportan contexto. Cada tabla indica su soporte de evaluación.</p>
+
+<details class="trace-details" id="verificacion-24-comparaciones"><summary>Verificación automática · 24 de 24 comparaciones</summary><p>Se comprobaron los SHA256 de ocho checkpoints, los manifiestos y las predicciones, todos los puntos XYZ/RGB de las 24 nubes, las trayectorias y las métricas guardadas. La publicación se detiene si cambia una correspondencia. Es una verificación de trazabilidad y exportación, sin ejecutar de nuevo los modelos.</p><p><a href="tablas/verificacion_24_comparaciones.json">Consultar comprobaciones y huellas de identidad</a></p></details>
+
 <details class="reading-fold" id="base-trans_t4_b"><summary>C3VD · trans_t4_b · N50</summary>
 
 <p>Este recorrido se usa como prueba base de reconstrucción y transferencia. Son 50 imágenes entre los frames 0 y 596; no son 597 imágenes procesadas. Ha participado en validación y análisis previos: no se presenta como una prueba ciega. Aquí se puntúan las 50 referencias GT del protocolo común, sin mezclar el protocolo anterior de 16 objetivos.</p>
@@ -1047,7 +1050,7 @@ Selecciona hasta cuatro resultados. Los porcentajes se calculan únicamente entr
 
 <div class="book-actions"><button type="button" class="book-open-clouds" data-clouds="base-d8_kf0-vggt_zs,base-d8_kf0-r1_final3000,base-d8_kf0-ttt_zs,base-d8_kf0-ttt_c3vd_vn18">Comparación base · oficiales, R1 y VN18-C3VD</button><button type="button" class="book-open-clouds" data-clouds="base-d8_kf0-ttt_c3vd_v9,base-d8_kf0-ttt_c3vd_vn18,base-d8_kf0-ttt_scared_vn18,base-d8_kf0-vggt_scared_best">Comparar fine-tunings · elegir modelos</button><button type="button" class="book-open-trajectories" data-trajectories="base-d8_kf0-ttt_c3vd_v9,base-d8_kf0-ttt_c3vd_vn18,base-d8_kf0-ttt_scared_vn18,base-d8_kf0-vggt_scared_best">Comparar trayectorias</button><button type="button" class="book-open-metrics" data-metrics="base-d8_kf0-ttt_c3vd_v9,base-d8_kf0-ttt_c3vd_vn18,base-d8_kf0-ttt_scared_vn18,base-d8_kf0-vggt_scared_best">Comparar métricas · elegir modelos</button></div>
 
-<details class="metrics-fold"><summary>Métricas principales · protocolo pareado N50</summary>
+<details class="metrics-fold"><summary>Métricas del ancla GT · 50 vistas de entrada, 1 ancla medida</summary>
 
 
 
@@ -1077,7 +1080,7 @@ Selecciona hasta cuatro resultados. Los porcentajes se calculan únicamente entr
 
 <div class="book-actions"><button type="button" class="book-open-clouds" data-clouds="base-d9_kf0-vggt_zs,base-d9_kf0-r1_final3000,base-d9_kf0-ttt_zs,base-d9_kf0-ttt_c3vd_vn18">Comparación base · oficiales, R1 y VN18-C3VD</button><button type="button" class="book-open-clouds" data-clouds="base-d9_kf0-ttt_c3vd_v9,base-d9_kf0-ttt_c3vd_vn18,base-d9_kf0-ttt_scared_vn18,base-d9_kf0-vggt_scared_best">Comparar fine-tunings · elegir modelos</button><button type="button" class="book-open-trajectories" data-trajectories="base-d9_kf0-ttt_c3vd_v9,base-d9_kf0-ttt_c3vd_vn18,base-d9_kf0-ttt_scared_vn18,base-d9_kf0-vggt_scared_best">Comparar trayectorias</button><button type="button" class="book-open-metrics" data-metrics="base-d9_kf0-ttt_c3vd_v9,base-d9_kf0-ttt_c3vd_vn18,base-d9_kf0-ttt_scared_vn18,base-d9_kf0-vggt_scared_best">Comparar métricas · elegir modelos</button></div>
 
-<details class="metrics-fold"><summary>Métricas principales · protocolo pareado N50</summary>
+<details class="metrics-fold"><summary>Métricas del ancla GT · 50 vistas de entrada, 1 ancla medida</summary>
 
 
 
@@ -3370,10 +3373,10 @@ Para las variantes VGG-T³ de esta tabla, la secuencia quedó fuera de sus ajust
 </details>
 
 <!-- COMPLETED ROBUSTNESS E13 E14 E15 -->
-<details class="experiment-group" id="robustness-completed"><summary>Robustez y eficiencia · C3VD y SCARED</summary>
+<details class="experiment-group" id="robustness-completed"><summary>E13–E15 · VGG-T³ · Robustez y eficiencia</summary><p class="architecture-scope-note" id="arquitectura-e13-e15">E13, E14 y E15 se realizaron exclusivamente con VGG-T³: zero-shot, VN18-C3VD, VN18-SCARED y V9-SCARED. VGGT no participó en estas tres pruebas; la comparación entre arquitecturas se documenta en su apartado propio.</p>
 <details class="experiment-card" id="exp-e13-executed" data-research-card data-experiment data-model="VGG-T³" data-scope="SCARED" data-datasets="SCARED" data-status="executed" data-order="110" data-problems="Iluminación y reflejos">
 <summary><span class="card-status">Ejecutado</span><span class="card-id">E13</span>Robustez frente a iluminación y reflejos sintéticos<span class="card-teaser">Protocolo completo: 320 mediciones guardadas. 288/288 condiciones alteradas cambiaron la predicción de profundidad en el soporte evaluado.</span><span class="card-topics">SCARED · Iluminación y reflejos</span></summary>
-<div class="card-content"><dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>Manteniendo la geometría y las cámaras, alterar solo RGB puede cambiar la profundidad y los puntos globales.</dd><dt>Cómo se realizó</dt><dd>Se modifica únicamente RGB con exposición y brillos aditivos controlados; el protocolo completo añade intensidades y variación radial. Cada condición recomputa el encoder. La escala se obtiene en la referencia limpia y permanece fija.</dd><dt>Controles</dt><dd>Pesos oficiales y tres fine-tunings congelados: VN18-C3VD, VN18-SCARED y V9-SCARED. Semilla fija, mismos RGB por condición, intrínsecas y GT constantes, dos pasos TTT. Sin entrenamiento ni sustitución de checkpoints.</dd><dt>Métricas</dt><dd>AbsRel, δ1, XYZ/p95, deriva de D/P y desacuerdo en correspondencias fijas; este último no sustituye GT anatómico.</dd></dl>
+<div class="card-content"><dl class="card-fields"><dt>Arquitectura evaluada</dt><dd>VGG-T³</dd><dt>Hipótesis / pregunta</dt><dd>Manteniendo la geometría y las cámaras, alterar solo RGB puede cambiar la profundidad y los puntos globales.</dd><dt>Cómo se realizó</dt><dd>Se modifica únicamente RGB con exposición y brillos aditivos controlados; el protocolo completo añade intensidades y variación radial. Cada condición recomputa el encoder. La escala se obtiene en la referencia limpia y permanece fija.</dd><dt>Controles</dt><dd>Pesos oficiales y tres fine-tunings congelados: VN18-C3VD, VN18-SCARED y V9-SCARED. Semilla fija, mismos RGB por condición, intrínsecas y GT constantes, dos pasos TTT. Sin entrenamiento ni sustitución de checkpoints.</dd><dt>Métricas</dt><dd>AbsRel, δ1, XYZ/p95, deriva de D/P y desacuerdo en correspondencias fijas; este último no sustituye GT anatómico.</dd></dl>
 <div class="card-result"><strong>Resultados</strong><p>Protocolo completo: 320 mediciones guardadas. 288/288 condiciones alteradas cambiaron la predicción de profundidad en el soporte evaluado.</p></div>
 <details class="protocol-details"><summary>Protocolo y alcance</summary><p>Casos: scared7_kf1, scared7_kf2, scared7_kf3, scared7_kf4. Contextos N: 16, 50.</p><p>SCARED: anclas medidas de validación del dataset7, sin GT temporal. Profundidad y P directo con escala limpia fija, sin ICP.</p></details>
 <details class="metrics-fold"><summary>Tabla de resultados</summary>
@@ -3421,7 +3424,7 @@ Para las variantes VGG-T³ de esta tabla, la secuencia quedó fuera de sus ajust
 <details class="trace-details"><summary>Configuración y evidencia</summary><p><a href="tablas/robustez_endoscopia_resultados.json">Resultados estructurados y protocolo</a>. Fuentes históricas y checkpoints conservados. Los controles de identidad, reinicio y máscaras se verifican antes de completar la etapa; los registros técnicos completos permanecen en el proyecto local.</p></details></div></details>
 <details class="experiment-card" id="exp-e14-executed" data-research-card data-experiment data-model="VGG-T³" data-scope="Global" data-datasets="SCARED C3VD" data-status="executed" data-order="110" data-problems="Oclusiones">
 <summary><span class="card-status">Ejecutado</span><span class="card-id">E14</span>Oclusiones controladas y tejido visible<span class="card-teaser">Protocolo completo: 360 mediciones guardadas. 280/280 condiciones alteradas cambiaron la predicción de profundidad en el soporte evaluado.</span><span class="card-topics">SCARED C3VD · Oclusiones</span></summary>
-<div class="card-content"><dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>Un oclusor puede alterar la predicción del tejido que sigue visible, incluso cuando se excluye el objeto de la evaluación.</dd><dt>Cómo se realizó</dt><dd>Se introducen oclusores sintéticos y una secuencia de aparición/desaparición. Se compara limpio y alterado sobre exactamente los mismos píxeles GT de tejido visible. Se verifica la vuelta a la entrada limpia idéntica.</dd><dt>Controles</dt><dd>Pesos oficiales y tres fine-tunings congelados: VN18-C3VD, VN18-SCARED y V9-SCARED. Semilla fija, mismos RGB por condición, intrínsecas y GT constantes, dos pasos TTT. Sin entrenamiento ni sustitución de checkpoints.</dd><dt>Métricas</dt><dd>AbsRel, δ1, XYZ/p95, deriva de D/P y desacuerdo en correspondencias fijas; este último no sustituye GT anatómico.</dd></dl>
+<div class="card-content"><dl class="card-fields"><dt>Arquitectura evaluada</dt><dd>VGG-T³</dd><dt>Hipótesis / pregunta</dt><dd>Un oclusor puede alterar la predicción del tejido que sigue visible, incluso cuando se excluye el objeto de la evaluación.</dd><dt>Cómo se realizó</dt><dd>Se introducen oclusores sintéticos y una secuencia de aparición/desaparición. Se compara limpio y alterado sobre exactamente los mismos píxeles GT de tejido visible. Se verifica la vuelta a la entrada limpia idéntica.</dd><dt>Controles</dt><dd>Pesos oficiales y tres fine-tunings congelados: VN18-C3VD, VN18-SCARED y V9-SCARED. Semilla fija, mismos RGB por condición, intrínsecas y GT constantes, dos pasos TTT. Sin entrenamiento ni sustitución de checkpoints.</dd><dt>Métricas</dt><dd>AbsRel, δ1, XYZ/p95, deriva de D/P y desacuerdo en correspondencias fijas; este último no sustituye GT anatómico.</dd></dl>
 <div class="card-result"><strong>Resultados</strong><p>Protocolo completo: 360 mediciones guardadas. 280/280 condiciones alteradas cambiaron la predicción de profundidad en el soporte evaluado.</p></div>
 <details class="protocol-details"><summary>Protocolo y alcance</summary><p>Casos: c3vd_trans4, scared7_kf1, scared7_kf2, scared7_kf3, scared7_kf4. Contextos N: 16, 50.</p><p>SCARED: anclas medidas de validación del dataset7, sin GT temporal. C3VD: trans_t4_b de validación; solo se puntúan las referencias GT seleccionadas. Profundidad y P directo con escala limpia fija, sin ICP; eficiencia y calidad por contexto se presentan por separado.</p></details>
 <details class="metrics-fold"><summary>Tabla de resultados</summary>
@@ -3477,7 +3480,7 @@ Para las variantes VGG-T³ de esta tabla, la secuencia quedó fuera de sus ajust
 <details class="trace-details"><summary>Configuración y evidencia</summary><p><a href="tablas/robustez_endoscopia_resultados.json">Resultados estructurados y protocolo</a>. Fuentes históricas y checkpoints conservados. Los controles de identidad, reinicio y máscaras se verifican antes de completar la etapa; los registros técnicos completos permanecen en el proyecto local.</p></details></div></details>
 <details class="experiment-card" id="exp-e15-executed" data-research-card data-experiment data-model="VGG-T³" data-scope="Global" data-datasets="SCARED C3VD" data-status="executed" data-order="110" data-problems="Eficiencia y secuencias largas">
 <summary><span class="card-status">Ejecutado</span><span class="card-id">E15</span>Eficiencia con recomputación del encoder<span class="card-teaser">Protocolo completo: 336 ejecuciones y 48 grupos modelo/caso/N, con calentamientos excluidos y repetición explícita.</span><span class="card-topics">SCARED C3VD · Eficiencia y secuencias largas</span></summary>
-<div class="card-content"><dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>La longitud de contexto cambia el coste de la inferencia completa y su calidad, aunque los pesos permanezcan congelados.</dd><dt>Cómo se realizó</dt><dd>Se repite cada colección con calentamientos excluidos, sincronización CUDA y recomputación RGB completa. Se guardan mediana, intervalo intercuartil, primer resultado denso y memoria máxima; no se incluyen la carga inicial de pesos ni la extracción ZIP.</dd><dt>Controles</dt><dd>Pesos oficiales y tres fine-tunings congelados: VN18-C3VD, VN18-SCARED y V9-SCARED. Semilla fija, mismos RGB por condición, intrínsecas y GT constantes, dos pasos TTT. Sin entrenamiento ni sustitución de checkpoints.</dd><dt>Métricas</dt><dd>Latencia de inferencia, tiempo al primer resultado, pico CUDA y calidad en el ancla común.</dd></dl>
+<div class="card-content"><dl class="card-fields"><dt>Arquitectura evaluada</dt><dd>VGG-T³</dd><dt>Hipótesis / pregunta</dt><dd>La longitud de contexto cambia el coste de la inferencia completa y su calidad, aunque los pesos permanezcan congelados.</dd><dt>Cómo se realizó</dt><dd>Se repite cada colección con calentamientos excluidos, sincronización CUDA y recomputación RGB completa. Se guardan mediana, intervalo intercuartil, primer resultado denso y memoria máxima; no se incluyen la carga inicial de pesos ni la extracción ZIP.</dd><dt>Controles</dt><dd>Pesos oficiales y tres fine-tunings congelados: VN18-C3VD, VN18-SCARED y V9-SCARED. Semilla fija, mismos RGB por condición, intrínsecas y GT constantes, dos pasos TTT. Sin entrenamiento ni sustitución de checkpoints.</dd><dt>Métricas</dt><dd>Latencia de inferencia, tiempo al primer resultado, pico CUDA y calidad en el ancla común.</dd></dl>
 <div class="card-result"><strong>Resultados</strong><p>Protocolo completo: 336 ejecuciones y 48 grupos modelo/caso/N, con calentamientos excluidos y repetición explícita.</p></div>
 <details class="protocol-details"><summary>Protocolo y alcance</summary><p>Casos: c3vd_trans4, scared7_kf2. Contextos N: 1, 4, 8, 16, 32, 50.</p><p>SCARED: anclas medidas de validación del dataset7, sin GT temporal. C3VD: trans_t4_b de validación; solo se puntúan las referencias GT seleccionadas. Profundidad y P directo con escala limpia fija, sin ICP; eficiencia y calidad por contexto se presentan por separado.</p></details>
 <details class="metrics-fold"><summary>Tabla de resultados</summary>
@@ -3766,7 +3769,7 @@ Las tablas originales del paper usan otros datasets y hardware. Se recuperan sus
 <!-- VGGT_REPRODUCTION_R1_BEGIN -->
 <h4 id="vggt-reproduction-r1">Réplica controlada VGGT-C3VD · campaña R01–R12</h4>
 
-**Estado de R07: Completada; checkpoint final y evaluación común verificados.** Registro actualizado el 23/11/2026 09: 17 (Ciudad de México). Esta campaña es posterior a P01–P16; tiene sus propios controles y cierres.
+**Estado de R07: Completada; checkpoint final y evaluación común verificados.** Esta campaña es posterior a P01–P16; tiene sus propios controles y cierres.
 
 **Qué se conserva:** pesos oficiales identificados, cámara y profundidad entrenables, agregador congelado, 30×100 actualizaciones, cuatro vistas supervisadas de 518×518, FP32, pérdida nativa de cámara×5/profundidad×1 y AdamW LR1e−5/WD0,05, sin scheduler ni clipping.
 
