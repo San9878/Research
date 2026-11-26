@@ -54,6 +54,8 @@ execute:
 | VN18 · SCARED | Candidato SCARED | Profundidad/puntos, cámara congelada; mejor geometría que V9-SCARED en los ejemplos mostrados. |
 | V9 adaptado · SCARED | Diagnóstico | Receta V9 adaptada al ancla medida; no sustituyó la referencia conservada. |
 
+<div class="version-scores" data-version-scores="VGG-T³"><noscript>Activa JavaScript para ver el índice calculado con las métricas guardadas.</noscript></div>
+
 </details>
 
 
@@ -489,6 +491,8 @@ Selecciona hasta cuatro resultados. Los porcentajes se calculan únicamente entr
 | R1 BEST800 · C3VD | Diagnóstico | Checkpoint intermedio de R1; no pasó la mejora conjunta. |
 | depth-v2 BEST500 · SCARED | Referencia SCARED | Profundidad afinada; elegido por validación; cámara y encoder congelados. |
 | depth-v2 FINAL3000 · SCARED | Comparador | Checkpoint final de la misma ejecución depth-v2. |
+
+<div class="version-scores" data-version-scores="VGGT"><noscript>Activa JavaScript para ver el índice calculado con las métricas guardadas.</noscript></div>
 
 </details>
 
@@ -5897,3 +5901,12 @@ P15/P16 consolidan las pruebas ya ejecutadas; no añaden entrenamientos ni convi
 
 </details>
 
+
+<details class="reading-fold" id="glosario-indice-comparativo"><summary>Índice comparativo de reconstrucción · score 0–100</summary>
+<p>Es un resumen añadido para ordenar las reconstrucciones del mismo set y protocolo. No es una métrica de los papers, un porcentaje de exactitud ni un criterio clínico.</p>
+<p>Se utilizan cuatro métricas con un peso de 25 % cada una: AbsRel y δ1 para profundidad; XYZ medio y p95 para geometría. Se conserva la unidad y dirección de cada métrica. Cámara, CD/NC, eficiencia y cobertura no entran en este índice y deben leerse por separado.</p>
+<p>Para cada métrica, x es el valor del modelo y b el de los pesos oficiales bajo exactamente el mismo protocolo. Para errores (AbsRel, XYZ y p95): <code>s = 100 × b / (b + x)</code>. Para δ1, donde mayor es mejor: <code>s = 100 × x / (b + x)</code>. El índice final es <code>(sAbsRel + sδ1 + sXYZ + sp95) / 4</code>.</p>
+<p>La referencia es VGGT oficial en D+K+pose de la base común, contexto N4 y evaluación R1; VGG-T³ oficial en P directo. El zero-shot elegido como referencia obtiene exactamente 50/100. Las referencias son fijas por protocolo: añadir, retirar o filtrar candidatos no modifica las notas existentes.</p>
+<p>Ejemplo hipotético: si el modelo reduce a la mitad los tres errores y duplica δ1, sin superar su límite de 100 %, cada componente obtiene 66,67 y el índice es 66,67/100. Si x = b en las cuatro métricas, obtiene 50/100. Cien no significa reconstrucción perfecta; es el límite matemático de esta transformación relativa.</p>
+<p>Los pesos y la elección de métricas son decisiones explícitas de presentación. No se comparan índices entre datasets, secuencias, rutas geométricas, cantidades de vistas o soportes GT distintos. En SCARED solo se puntúa el ancla medida; no certifica las otras vistas ni la trayectoria completa. Un índice mayor en un ejemplo no sustituye los criterios de validación ni la referencia de entrenamiento conservada. Se ordena con los valores sin redondear; la interfaz muestra una cifra decimal.</p>
+</details>

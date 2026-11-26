@@ -6,6 +6,7 @@
  const definitions={AbsRel:'Error relativo medio de profundidad; menor es mejor.','δ1':'Porcentaje de píxeles con razón de profundidad menor que 1,25; mayor es mejor.',XYZ:'Distancia 3D al GT; comprueba qué ruta geométrica se está evaluando.',p95:'Percentil 95 del error: describe la cola, no el promedio.',CD:'Distancia entre superficies. Comprueba escala y si se utilizó ICP.',NC:'Consistencia de normales de superficie; mayor es mejor.',ATE:'Error global de centros de cámara tras el alineamiento declarado.',RPEr:'Error de rotación del movimiento relativo entre vistas.',RPEt:'Error de traslación del movimiento relativo entre vistas.'};
  function current(r){if(clouds.has(r.id))return true;return /^(c3vd-(zero|v9|vn19-[ab])$|scared[89]-(zero-new|vn18|scared-v9)$|vggt-c3vd-r1-|vggt-scared-review-context-(validation|reserved)-N50-|c3vd-paired-r1-v9-)/.test(r.id)}
  function description(id){
+  const scoreDescription=window.BookCloudRankings?.description(id);if(scoreDescription)return scoreDescription;
   const r=clouds.get(id)||metrics.get(id)||(window.TRAJECTORY_REGISTRY?.trajectories||[]).find(r=>r.id===id);if(!r)return '';
   const profile=/vggt-scared.*best|VGGT_SCARED_BEST/.test(id)?'VGGT-SCARED: solo profundidad; BEST500 seleccionado por validación.':/vggt-c3vd-r1|paired-R1/.test(id)?'VGGT-C3VD R1: cámara y profundidad; FINAL3000 de referencia, BEST800 diagnóstico.':/vn19-a/.test(id)?'VN19-A: C3VD, selección aleatoria de vistas supervisadas.':/vn19-b/.test(id)?'VN19-B: C3VD, cobertura controlada y repetición de vistas profundas.':/scared-v9/.test(id)?'V9-SCARED: adaptación de profundidad y puntos; cámara congelada.':/scared.*vn18|ttt-scared/.test(id)?'VN18-SCARED: profundidad y puntos; cámara congelada.':/c3vd-v9|scared[89]-v9|paired-V9/.test(id)?'V9-C3VD: referencia conservada, checkpoint 850.':/zero|VGGT_ZS|-zs-/.test(id)?'Pesos oficiales, sin fine-tuning local.':'';
   if(profile&&clouds.has(id))return profile+' '+r.case+' '+(r.gt_trajectory?'Trayectoria GT disponible.':'Sin GT temporal certificado.');
@@ -19,7 +20,7 @@
   if(select.closest('.pretty-choice'))return;
   const wrapper=document.createElement('span');wrapper.className='pretty-choice';select.before(wrapper);wrapper.append(select);select.classList.add('choice-native');
   const button=document.createElement('button');button.type='button';button.className='choice-trigger';button.setAttribute('aria-haspopup','listbox');button.setAttribute('aria-expanded','false');wrapper.append(button);
-  const refreshButton=()=>{const option=select.selectedOptions[0];button.textContent=option?.textContent||t('Seleccionar…');button.dataset.tip=description(select.value);button.disabled=select.disabled;};
+  const refreshButton=()=>{const option=select.selectedOptions[0];button.textContent=option?.textContent||t('Seleccionar…');button.dataset.tip=description(select.value)||option?.textContent||'';button.disabled=select.disabled;};
   select.addEventListener('change',refreshButton);wrapper.refreshButton=refreshButton;
   button.onclick=()=>{
    close();popup=document.createElement('div');popup.className='choice-popover';popup.innerHTML='<input type="search" placeholder="'+t('Buscar versión o inferencia…')+'" aria-label="'+t('Buscar versión o inferencia…')+'"><div role="listbox" class="choice-options"></div>';document.body.append(popup);
@@ -27,7 +28,7 @@
    const input=popup.querySelector('input'),list=popup.querySelector('.choice-options');
    function render(){list.replaceChildren();const q=input.value.toLowerCase();
     for(const option of select.options){if(!option.value||q&&!(option.textContent+' '+description(option.value)+' '+t(description(option.value))).toLowerCase().includes(q))continue;
-     const row=document.createElement('button');row.type='button';row.setAttribute('role','option');row.setAttribute('aria-selected',option.selected?'true':'false');row.dataset.value=option.value;const label=document.createElement('strong');label.textContent=option.textContent;const help=document.createElement('small');help.textContent=t(description(option.value));row.append(label,help);
+     const row=document.createElement('button');row.type='button';row.setAttribute('role','option');row.setAttribute('aria-selected',option.selected?'true':'false');row.dataset.value=option.value;const label=document.createElement('strong');label.textContent=option.textContent;const help=document.createElement('small');help.textContent=t(description(option.value)||option.parentElement?.label||'');row.append(label,help);
      row.onpointerenter=e=>tip(description(option.value),e.clientX,e.clientY);row.onpointerleave=hideTip;row.onfocus=()=>{const r=row.getBoundingClientRect();tip(description(option.value),r.right,r.top)};
      row.onclick=()=>{select.value=option.value;close();button.setAttribute('aria-expanded','false');select.dispatchEvent(new Event('change',{bubbles:true}));refreshButton();button.focus()};list.append(row);
     }
@@ -41,7 +42,7 @@
  }
  function refresh(){
   observer?.disconnect();
-  document.querySelectorAll('#metric-selectors select,#slots select,#trajectory-selectors select').forEach(enhanceSelect);
+  document.querySelectorAll('#metric-selectors select,#slots select,#trajectory-selectors select,#cloud-case,#cloud-protocol').forEach(enhanceSelect);
   document.querySelectorAll('.pretty-choice').forEach(w=>w.refreshButton?.());
   const joined=$('joined-metrics')?.querySelector('tbody tr');
   document.querySelectorAll('.metric-card:not([data-tidied])').forEach(card=>{

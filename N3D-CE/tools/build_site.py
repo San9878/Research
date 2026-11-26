@@ -5,6 +5,7 @@ from urllib.parse import urlsplit,unquote
 import argparse,json,re,shutil
 from public_package import remove_verified_redundant_js
 from lineage_guard import verify_root
+from ranking_guard import verify_ranking
 
 class Doc(HTMLParser):
     def __init__(self):super().__init__();self.links=[];self.ids=set()
@@ -30,6 +31,7 @@ def verify(site):
             if not target.exists():errors.append([str(p.relative_to(site)),link,'missing resource'])
             elif not u.path and u.fragment and unquote(u.fragment) not in d.ids:errors.append([str(p.relative_to(site)),link,'missing anchor'])
     verify_root(site/'N3D-CE')
+    verify_ranking(site/'N3D-CE')
     app=site/'N3D-CE/reconstrucciones/interactivo'
     registry=json.loads((app/'clouds.json').read_text(encoding='utf8'))['clouds']
     expected=json.loads((site/'N3D-CE/publication_manifest.json').read_text(encoding='utf8'))['public_clouds']

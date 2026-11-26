@@ -3,6 +3,7 @@ from pathlib import Path
 import argparse,csv,hashlib,html,io,json,re,shutil
 from public_package import publish_binary,remove_verified_redundant_js,adapt_viewer
 from lineage_guard import verify_root
+from ranking_guard import verify_ranking
 
 IDS=['c3vd-v9', 'c3vd-vn19-a', 'c3vd-vn19-b', 'c3vd-vn18', 'c3vd-zero', 'scared8-vn18', 'scared8-v9', 'scared8-vn19-a', 'scared9-vn18', 'scared9-v9', 'scared9-vn19-a', 'c3vd-scared-vn18', 'scared8-scared-v9', 'scared9-scared-v9', 'c3vd-scared-v9', 'vggt-c3vd-r1-final-trans4', 'vggt-c3vd-r1-best-trans4', 'vggt-c3vd-r1-final-trans1a', 'vggt-c3vd-r1-best-trans1a', 'vggt-scared8-zs-n4', 'vggt-scared8-best-n4', 'ttt-scared8-vn18-n4']
 def read(p):return json.loads(p.read_text(encoding='utf-8-sig'))
@@ -29,6 +30,7 @@ def main():
     src=args.source.resolve();repo=args.repository.resolve();dst=repo/'N3D-CE'
     if not (repo/'.git').is_dir() or not (src/'Bitacora.qmd').is_file():raise RuntimeError('Expected the local notebook and Research Git checkout')
     verify_root(src)
+    verify_ranking(src)
     dst.mkdir(exist_ok=True)
     q=(src/'Bitacora.qmd').read_text(encoding='utf8');original=q
     # These two records are lightweight diagnostic data, not the original archives.
@@ -72,7 +74,7 @@ def main():
     for img in (src/'imagenes').glob('*'):
         if img.is_file():copy(img,dst/'imagenes'/img.name)
     app=dst/'reconstrucciones/interactivo';app.mkdir(parents=True,exist_ok=True)
-    for name in ['comparador.html','app.css','viewer.js','metric-viewer.js','cloud-loader.js']:copy(src/'reconstrucciones/interactivo'/name,app/name)
+    for name in ['comparador.html','app.css','viewer.js','metric-viewer.js','cloud-loader.js','case-rankings.js','rankings.json']:copy(src/'reconstrucciones/interactivo'/name,app/name)
     # A network download of a full cloud may take longer than a local disk read.
     viewer=(app/'viewer.js').read_text(encoding='utf8')
     viewer=viewer.replace('}},120000);','}},600000);').replace(')),120000);',')),600000);')
