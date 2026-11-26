@@ -3372,9 +3372,9 @@ Para las variantes VGG-T³ de esta tabla, la secuencia quedó fuera de sus ajust
 <!-- COMPLETED ROBUSTNESS E13 E14 E15 -->
 <details class="experiment-group" id="robustness-completed"><summary>Robustez y eficiencia · C3VD y SCARED</summary>
 <details class="experiment-card" id="exp-e13-executed" data-research-card data-experiment data-model="VGG-T³" data-scope="Global" data-datasets="SCARED C3VD" data-status="executed" data-order="110" data-problems="Robustez y eficiencia">
-<summary><span class="card-status">Ejecutado</span><span class="card-id">E13</span>Robustez frente a iluminación y reflejos sintéticos<span class="card-teaser">Piloto controlado: 24 mediciones guardadas. 16/16 condiciones alteradas cambiaron la predicción de profundidad en el soporte evaluado.</span></summary>
+<summary><span class="card-status">Ejecutado</span><span class="card-id">E13</span>Robustez frente a iluminación y reflejos sintéticos<span class="card-teaser">Protocolo completo: 320 mediciones guardadas. 288/288 condiciones alteradas cambiaron la predicción de profundidad en el soporte evaluado.</span></summary>
 <div class="card-content"><dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>Manteniendo la geometría y las cámaras, alterar solo RGB puede cambiar la profundidad y los puntos globales.</dd><dt>Cómo se realizó</dt><dd>Se modifica únicamente RGB con exposición y brillos aditivos controlados; el protocolo completo añade intensidades y variación radial. Cada condición recomputa el encoder. La escala se obtiene en la referencia limpia y permanece fija.</dd><dt>Controles</dt><dd>Pesos oficiales y tres fine-tunings congelados: VN18-C3VD, VN18-SCARED y V9-SCARED. Semilla fija, mismos RGB por condición, intrínsecas y GT constantes, dos pasos TTT. Sin entrenamiento ni sustitución de checkpoints.</dd><dt>Métricas</dt><dd>AbsRel, δ1, XYZ/p95, deriva de D/P y desacuerdo en correspondencias fijas; este último no sustituye GT anatómico.</dd></dl>
-<div class="card-result"><strong>Resultados</strong><p>Piloto controlado: 24 mediciones guardadas. 16/16 condiciones alteradas cambiaron la predicción de profundidad en el soporte evaluado.</p></div>
+<div class="card-result"><strong>Resultados</strong><p>Protocolo completo: 320 mediciones guardadas. 288/288 condiciones alteradas cambiaron la predicción de profundidad en el soporte evaluado.</p></div>
 <details class="protocol-details"><summary>Protocolo y alcance</summary><p>SCARED: anclas medidas de validación del dataset7, sin GT temporal. C3VD: trans_t4_b de validación; solo se puntúan las referencias GT seleccionadas. Profundidad y P directo con escala limpia fija, sin ICP; eficiencia y calidad por contexto se presentan por separado.</p></details>
 <details class="metrics-fold"><summary>Tabla de resultados</summary>
 
@@ -3382,23 +3382,47 @@ Para las variantes VGG-T³ de esta tabla, la secuencia quedó fuera de sus ajust
 
 | Modelo | Caso | N | Condición de mayor ΔAbsRel | ΔAbsRel (%) | ΔXYZ (%) | Vistas GT |
 |---|---|---|---|---|---|---|
-| V9_SCARED | scared7_kf2 | 16 | highlight_0.03 | +1.21 | -6.54 | 1 |
-| V9_SCARED | scared7_kf4 | 16 | highlight_0.03 | +7.05 | -5.37 | 1 |
-| VN18_C3VD | scared7_kf2 | 16 | exposure_0.75 | -1.06 | -0.90 | 1 |
-| VN18_C3VD | scared7_kf4 | 16 | exposure_0.75 | -0.31 | -0.38 | 1 |
-| VN18_SCARED | scared7_kf2 | 16 | highlight_0.03 | -2.70 | +0.93 | 1 |
-| VN18_SCARED | scared7_kf4 | 16 | exposure_0.75 | -2.09 | -1.44 | 1 |
-| zero_shot | scared7_kf2 | 16 | exposure_0.75 | -1.75 | -1.46 | 1 |
-| zero_shot | scared7_kf4 | 16 | highlight_0.03 | +2.89 | +0.02 | 1 |
+| V9_SCARED | scared7_kf1 | 16 | highlight_0.05 | +7.57 | +3.92 | 1 |
+| V9_SCARED | scared7_kf1 | 50 | highlight_0.05 | +9.24 | +5.94 | 1 |
+| V9_SCARED | scared7_kf2 | 16 | radial_04 | +7.19 | -0.04 | 1 |
+| V9_SCARED | scared7_kf2 | 50 | radial_04 | +9.66 | +0.10 | 1 |
+| V9_SCARED | scared7_kf3 | 16 | exposure_1.5 | +6.92 | +3.29 | 1 |
+| V9_SCARED | scared7_kf3 | 50 | exposure_1.5 | +6.91 | +4.36 | 1 |
+| V9_SCARED | scared7_kf4 | 16 | radial_04 | +40.52 | +25.13 | 1 |
+| V9_SCARED | scared7_kf4 | 50 | radial_04 | +40.35 | +30.35 | 1 |
+| VN18_C3VD | scared7_kf1 | 16 | exposure_1.5 | +0.89 | -1.09 | 1 |
+| VN18_C3VD | scared7_kf1 | 50 | exposure_1.5 | +0.87 | -1.80 | 1 |
+| VN18_C3VD | scared7_kf2 | 16 | exposure_1.5 | +6.05 | +1.59 | 1 |
+| VN18_C3VD | scared7_kf2 | 50 | exposure_1.5 | +3.85 | +2.72 | 1 |
+| VN18_C3VD | scared7_kf3 | 16 | exposure_1.5 | +3.49 | -6.24 | 1 |
+| VN18_C3VD | scared7_kf3 | 50 | exposure_1.5 | +1.77 | -2.96 | 1 |
+| VN18_C3VD | scared7_kf4 | 16 | exposure_1.25 | +0.17 | -0.59 | 1 |
+| VN18_C3VD | scared7_kf4 | 50 | exposure_0.75 | +0.63 | -0.56 | 1 |
+| VN18_SCARED | scared7_kf1 | 16 | exposure_1.5 | +2.63 | -1.55 | 1 |
+| VN18_SCARED | scared7_kf1 | 50 | radial_04 | +6.59 | +21.81 | 1 |
+| VN18_SCARED | scared7_kf2 | 16 | exposure_1.5 | +10.23 | -1.12 | 1 |
+| VN18_SCARED | scared7_kf2 | 50 | radial_04 | +11.91 | +33.04 | 1 |
+| VN18_SCARED | scared7_kf3 | 16 | highlight_0.05 | +8.21 | +9.45 | 1 |
+| VN18_SCARED | scared7_kf3 | 50 | combined | +5.43 | +7.45 | 1 |
+| VN18_SCARED | scared7_kf4 | 16 | radial_04 | +31.46 | +26.17 | 1 |
+| VN18_SCARED | scared7_kf4 | 50 | radial_04 | +36.56 | +28.99 | 1 |
+| zero_shot | scared7_kf1 | 16 | exposure_1.5 | +1.77 | +0.72 | 1 |
+| zero_shot | scared7_kf1 | 50 | exposure_1.5 | +2.63 | +0.90 | 1 |
+| zero_shot | scared7_kf2 | 16 | exposure_1.5 | +9.78 | +7.23 | 1 |
+| zero_shot | scared7_kf2 | 50 | exposure_1.5 | +6.57 | +5.43 | 1 |
+| zero_shot | scared7_kf3 | 16 | exposure_1.5 | +4.21 | +6.18 | 1 |
+| zero_shot | scared7_kf3 | 50 | exposure_1.5 | +3.89 | +3.83 | 1 |
+| zero_shot | scared7_kf4 | 16 | highlight_0.05 | +5.55 | +1.26 | 1 |
+| zero_shot | scared7_kf4 | 50 | highlight_0.05 | +4.22 | +3.74 | 1 |
 
 <p>Variación respecto a limpio sobre el mismo soporte visible; valores positivos indican deterioro. Se muestra la condición de mayor ΔAbsRel por caso, modelo y N; las demás condiciones se conservan en el archivo de resultados.</p>
 </details>
 <dl class="card-fields"><dt>Conclusión y confirmación de la hipótesis</dt><dd>Apoyada para estas perturbaciones y ventanas: existe sensibilidad de la predicción al contenido RGB. La dirección del cambio depende del modelo y del caso; no se atribuye a una única causa clínica.</dd><dt>Limitaciones</dt><dd>Los brillos son una perturbación visual sintética, no una simulación física de mucosa húmeda. El efecto observado no identifica por sí solo la causa de un fallo clínico.</dd><dt>Siguiente decisión</dt><dd>Conservar las referencias y usar estos controles para localizar condiciones vulnerables antes de proponer cambios de entrenamiento. Estas pruebas no sustituyen un fine-tuning ni seleccionan nuevos pesos.</dd></dl>
 <details class="trace-details"><summary>Configuración y evidencia</summary><p><a href="tablas/robustez_endoscopia_resultados.json">Resultados estructurados y protocolo</a>. Fuentes históricas y checkpoints conservados. Los controles de identidad, reinicio y máscaras se verifican antes de completar la etapa; los registros técnicos completos permanecen en el proyecto local.</p></details></div></details>
 <details class="experiment-card" id="exp-e14-executed" data-research-card data-experiment data-model="VGG-T³" data-scope="Global" data-datasets="SCARED C3VD" data-status="executed" data-order="110" data-problems="Robustez y eficiencia">
-<summary><span class="card-status">Ejecutado</span><span class="card-id">E14</span>Oclusiones controladas y tejido visible<span class="card-teaser">Piloto controlado: 32 mediciones guardadas. 16/16 condiciones alteradas cambiaron la predicción de profundidad en el soporte evaluado.</span></summary>
+<summary><span class="card-status">Ejecutado</span><span class="card-id">E14</span>Oclusiones controladas y tejido visible<span class="card-teaser">Protocolo completo: 360 mediciones guardadas. 280/280 condiciones alteradas cambiaron la predicción de profundidad en el soporte evaluado.</span></summary>
 <div class="card-content"><dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>Un oclusor puede alterar la predicción del tejido que sigue visible, incluso cuando se excluye el objeto de la evaluación.</dd><dt>Cómo se realizó</dt><dd>Se introducen oclusores sintéticos y una secuencia de aparición/desaparición. Se compara limpio y alterado sobre exactamente los mismos píxeles GT de tejido visible. Se verifica la vuelta a la entrada limpia idéntica.</dd><dt>Controles</dt><dd>Pesos oficiales y tres fine-tunings congelados: VN18-C3VD, VN18-SCARED y V9-SCARED. Semilla fija, mismos RGB por condición, intrínsecas y GT constantes, dos pasos TTT. Sin entrenamiento ni sustitución de checkpoints.</dd><dt>Métricas</dt><dd>AbsRel, δ1, XYZ/p95, deriva de D/P y desacuerdo en correspondencias fijas; este último no sustituye GT anatómico.</dd></dl>
-<div class="card-result"><strong>Resultados</strong><p>Piloto controlado: 32 mediciones guardadas. 16/16 condiciones alteradas cambiaron la predicción de profundidad en el soporte evaluado.</p></div>
+<div class="card-result"><strong>Resultados</strong><p>Protocolo completo: 360 mediciones guardadas. 280/280 condiciones alteradas cambiaron la predicción de profundidad en el soporte evaluado.</p></div>
 <details class="protocol-details"><summary>Protocolo y alcance</summary><p>SCARED: anclas medidas de validación del dataset7, sin GT temporal. C3VD: trans_t4_b de validación; solo se puntúan las referencias GT seleccionadas. Profundidad y P directo con escala limpia fija, sin ICP; eficiencia y calidad por contexto se presentan por separado.</p></details>
 <details class="metrics-fold"><summary>Tabla de resultados</summary>
 
@@ -3406,23 +3430,55 @@ Para las variantes VGG-T³ de esta tabla, la secuencia quedó fuera de sus ajust
 
 | Modelo | Caso | N | Condición de mayor ΔAbsRel | ΔAbsRel (%) | ΔXYZ (%) | Vistas GT |
 |---|---|---|---|---|---|---|
-| V9_SCARED | c3vd_trans4 | 16 | moving_0.15 | +4.18 | -2.85 | 7 |
-| V9_SCARED | scared7_kf4 | 16 | moving_0.15 | +69.81 | +0.53 | 1 |
-| VN18_C3VD | c3vd_trans4 | 16 | moving_0.15 | +44.04 | +24.60 | 7 |
-| VN18_C3VD | scared7_kf4 | 16 | moving_0.15 | +12.61 | -4.95 | 1 |
-| VN18_SCARED | c3vd_trans4 | 16 | moving_0.15 | +42.53 | +18.15 | 7 |
-| VN18_SCARED | scared7_kf4 | 16 | burst_015 | -3.29 | -0.99 | 1 |
-| zero_shot | c3vd_trans4 | 16 | moving_0.15 | +36.10 | -1.95 | 7 |
-| zero_shot | scared7_kf4 | 16 | moving_0.15 | +10.40 | +10.74 | 1 |
+| V9_SCARED | c3vd_trans4 | 16 | static_0.3 | +11.81 | +0.17 | 7 |
+| V9_SCARED | c3vd_trans4 | 50 | moving_0.05 | -5.54 | +0.72 | 16 |
+| V9_SCARED | scared7_kf1 | 16 | moving_0.15 | +16.86 | +20.20 | 1 |
+| V9_SCARED | scared7_kf1 | 50 | static_0.15 | +22.04 | +17.38 | 1 |
+| V9_SCARED | scared7_kf2 | 16 | static_0.05 | -5.23 | -6.00 | 1 |
+| V9_SCARED | scared7_kf2 | 50 | static_0.05 | -0.88 | -4.51 | 1 |
+| V9_SCARED | scared7_kf3 | 16 | moving_0.3 | +14.72 | +32.92 | 1 |
+| V9_SCARED | scared7_kf3 | 50 | moving_0.3 | +26.42 | +32.40 | 1 |
+| V9_SCARED | scared7_kf4 | 16 | static_0.15 | +80.01 | +15.13 | 1 |
+| V9_SCARED | scared7_kf4 | 50 | static_0.15 | +84.90 | +24.22 | 1 |
+| VN18_C3VD | c3vd_trans4 | 16 | moving_0.3 | +79.82 | +44.36 | 7 |
+| VN18_C3VD | c3vd_trans4 | 50 | moving_0.3 | +73.75 | +42.28 | 16 |
+| VN18_C3VD | scared7_kf1 | 16 | moving_0.3 | +22.03 | -1.18 | 1 |
+| VN18_C3VD | scared7_kf1 | 50 | moving_0.3 | +23.18 | -0.69 | 1 |
+| VN18_C3VD | scared7_kf2 | 16 | static_0.3 | +17.25 | +26.95 | 1 |
+| VN18_C3VD | scared7_kf2 | 50 | static_0.3 | +15.37 | +23.09 | 1 |
+| VN18_C3VD | scared7_kf3 | 16 | static_0.3 | +37.35 | +10.00 | 1 |
+| VN18_C3VD | scared7_kf3 | 50 | static_0.3 | +28.20 | -0.84 | 1 |
+| VN18_C3VD | scared7_kf4 | 16 | moving_0.3 | +40.48 | -3.01 | 1 |
+| VN18_C3VD | scared7_kf4 | 50 | moving_0.3 | +46.28 | -6.60 | 1 |
+| VN18_SCARED | c3vd_trans4 | 16 | moving_0.3 | +66.62 | +32.16 | 7 |
+| VN18_SCARED | c3vd_trans4 | 50 | moving_0.3 | +51.94 | +27.02 | 16 |
+| VN18_SCARED | scared7_kf1 | 16 | moving_0.3 | +32.62 | +8.50 | 1 |
+| VN18_SCARED | scared7_kf1 | 50 | moving_0.3 | +42.56 | +12.63 | 1 |
+| VN18_SCARED | scared7_kf2 | 16 | static_0.3 | +67.10 | +27.24 | 1 |
+| VN18_SCARED | scared7_kf2 | 50 | static_0.3 | +61.46 | +24.32 | 1 |
+| VN18_SCARED | scared7_kf3 | 16 | moving_0.3 | +36.95 | -7.68 | 1 |
+| VN18_SCARED | scared7_kf3 | 50 | static_0.3 | +40.30 | -12.03 | 1 |
+| VN18_SCARED | scared7_kf4 | 16 | static_0.05 | +6.95 | +4.07 | 1 |
+| VN18_SCARED | scared7_kf4 | 50 | static_0.05 | +4.09 | +6.33 | 1 |
+| zero_shot | c3vd_trans4 | 16 | moving_0.3 | +65.39 | +4.49 | 7 |
+| zero_shot | c3vd_trans4 | 50 | moving_0.3 | +62.81 | +7.09 | 16 |
+| zero_shot | scared7_kf1 | 16 | moving_0.3 | +16.36 | +10.74 | 1 |
+| zero_shot | scared7_kf1 | 50 | moving_0.3 | +21.60 | +14.02 | 1 |
+| zero_shot | scared7_kf2 | 16 | static_0.3 | +28.14 | +21.34 | 1 |
+| zero_shot | scared7_kf2 | 50 | static_0.15 | +25.26 | +13.73 | 1 |
+| zero_shot | scared7_kf3 | 16 | static_0.3 | +33.45 | +5.06 | 1 |
+| zero_shot | scared7_kf3 | 50 | moving_0.3 | +27.49 | +10.09 | 1 |
+| zero_shot | scared7_kf4 | 16 | static_0.15 | +14.89 | +10.76 | 1 |
+| zero_shot | scared7_kf4 | 50 | static_0.15 | +16.65 | +13.12 | 1 |
 
 <p>Variación respecto a limpio sobre el mismo soporte visible; valores positivos indican deterioro. Se muestra la condición de mayor ΔAbsRel por caso, modelo y N; las demás condiciones se conservan en el archivo de resultados.</p>
 </details>
 <dl class="card-fields"><dt>Conclusión y confirmación de la hipótesis</dt><dd>Apoyada para estas perturbaciones y ventanas: existe sensibilidad de la predicción al contenido RGB. La dirección del cambio depende del modelo y del caso; no se atribuye a una única causa clínica.</dd><dt>Limitaciones</dt><dd>No existe profundidad GT del oclusor. La vuelta a limpio comprueba reinicio y repetibilidad offline; no demuestra recuperación de un sistema de seguimiento online.</dd><dt>Siguiente decisión</dt><dd>Conservar las referencias y usar estos controles para localizar condiciones vulnerables antes de proponer cambios de entrenamiento. Estas pruebas no sustituyen un fine-tuning ni seleccionan nuevos pesos.</dd></dl>
 <details class="trace-details"><summary>Configuración y evidencia</summary><p><a href="tablas/robustez_endoscopia_resultados.json">Resultados estructurados y protocolo</a>. Fuentes históricas y checkpoints conservados. Los controles de identidad, reinicio y máscaras se verifican antes de completar la etapa; los registros técnicos completos permanecen en el proyecto local.</p></details></div></details>
 <details class="experiment-card" id="exp-e15-executed" data-research-card data-experiment data-model="VGG-T³" data-scope="Global" data-datasets="SCARED C3VD" data-status="executed" data-order="110" data-problems="Robustez y eficiencia">
-<summary><span class="card-status">Ejecutado</span><span class="card-id">E15</span>Eficiencia con recomputación del encoder<span class="card-teaser">Piloto controlado: 96 ejecuciones y 24 grupos modelo/caso/N, con calentamientos excluidos y repetición explícita.</span></summary>
+<summary><span class="card-status">Ejecutado</span><span class="card-id">E15</span>Eficiencia con recomputación del encoder<span class="card-teaser">Protocolo completo: 336 ejecuciones y 48 grupos modelo/caso/N, con calentamientos excluidos y repetición explícita.</span></summary>
 <div class="card-content"><dl class="card-fields"><dt>Hipótesis / pregunta</dt><dd>La longitud de contexto cambia el coste de la inferencia completa y su calidad, aunque los pesos permanezcan congelados.</dd><dt>Cómo se realizó</dt><dd>Se repite cada colección con calentamientos excluidos, sincronización CUDA y recomputación RGB completa. Se guardan mediana, intervalo intercuartil, primer resultado denso y memoria máxima; no se incluyen la carga inicial de pesos ni la extracción ZIP.</dd><dt>Controles</dt><dd>Pesos oficiales y tres fine-tunings congelados: VN18-C3VD, VN18-SCARED y V9-SCARED. Semilla fija, mismos RGB por condición, intrínsecas y GT constantes, dos pasos TTT. Sin entrenamiento ni sustitución de checkpoints.</dd><dt>Métricas</dt><dd>Latencia de inferencia, tiempo al primer resultado, pico CUDA y calidad en el ancla común.</dd></dl>
-<div class="card-result"><strong>Resultados</strong><p>Piloto controlado: 96 ejecuciones y 24 grupos modelo/caso/N, con calentamientos excluidos y repetición explícita.</p></div>
+<div class="card-result"><strong>Resultados</strong><p>Protocolo completo: 336 ejecuciones y 48 grupos modelo/caso/N, con calentamientos excluidos y repetición explícita.</p></div>
 <details class="protocol-details"><summary>Protocolo y alcance</summary><p>SCARED: anclas medidas de validación del dataset7, sin GT temporal. C3VD: trans_t4_b de validación; solo se puntúan las referencias GT seleccionadas. Profundidad y P directo con escala limpia fija, sin ICP; eficiencia y calidad por contexto se presentan por separado.</p></details>
 <details class="metrics-fold"><summary>Tabla de resultados</summary>
 
@@ -3430,30 +3486,54 @@ Para las variantes VGG-T³ de esta tabla, la secuencia quedó fuera de sus ajust
 
 | Modelo | Caso | N | Mediana (s) | IQR (s) | Pico CUDA (GiB) | AbsRel ancla | XYZ ancla (cm) |
 |---|---|---|---|---|---|---|---|
-| V9_SCARED | c3vd_trans4 | 4 | 2.678 | 2.678–2.728 | 3.762 | 0.20319 | 0.6348 |
-| V9_SCARED | c3vd_trans4 | 16 | 4.643 | 4.638–4.648 | 4.168 | 0.21524 | 0.6540 |
-| V9_SCARED | c3vd_trans4 | 50 | 10.031 | 10.012–10.057 | 4.971 | 0.22929 | 0.6620 |
-| VN18_C3VD | c3vd_trans4 | 4 | 2.717 | 2.713–2.750 | 3.762 | 0.08004 | 0.4687 |
-| VN18_C3VD | c3vd_trans4 | 16 | 4.661 | 4.652–4.678 | 4.168 | 0.07703 | 0.4648 |
-| VN18_C3VD | c3vd_trans4 | 50 | 10.056 | 10.048–10.071 | 4.971 | 0.07726 | 0.4782 |
-| VN18_SCARED | c3vd_trans4 | 4 | 2.770 | 2.744–2.772 | 3.762 | 0.21193 | 0.6865 |
-| VN18_SCARED | c3vd_trans4 | 16 | 4.779 | 4.745–4.830 | 4.168 | 0.22101 | 0.6724 |
-| VN18_SCARED | c3vd_trans4 | 50 | 10.209 | 10.135–10.242 | 4.971 | 0.22712 | 0.6666 |
-| zero_shot | c3vd_trans4 | 4 | 2.948 | 2.916–3.007 | 3.762 | 0.19034 | 0.7323 |
-| zero_shot | c3vd_trans4 | 16 | 4.682 | 4.657–4.743 | 4.168 | 0.17777 | 0.7019 |
-| zero_shot | c3vd_trans4 | 50 | 10.089 | 10.040–10.101 | 4.971 | 0.17750 | 0.6974 |
-| V9_SCARED | scared7_kf2 | 4 | 2.489 | 2.480–2.602 | 3.704 | 0.13419 | 1.0462 |
-| V9_SCARED | scared7_kf2 | 16 | 4.210 | 4.195–4.231 | 4.089 | 0.14221 | 1.0620 |
-| V9_SCARED | scared7_kf2 | 50 | 8.525 | 8.520–8.527 | 4.727 | 0.14171 | 1.0224 |
-| VN18_C3VD | scared7_kf2 | 4 | 2.478 | 2.475–2.517 | 3.704 | 0.20348 | 1.6754 |
-| VN18_C3VD | scared7_kf2 | 16 | 4.138 | 4.124–4.140 | 4.089 | 0.19353 | 1.5764 |
-| VN18_C3VD | scared7_kf2 | 50 | 8.694 | 8.593–8.699 | 4.727 | 0.19399 | 1.5538 |
-| VN18_SCARED | scared7_kf2 | 4 | 2.758 | 2.753–2.763 | 3.704 | 0.12048 | 0.9362 |
-| VN18_SCARED | scared7_kf2 | 16 | 4.519 | 4.475–4.524 | 4.089 | 0.10251 | 0.8893 |
-| VN18_SCARED | scared7_kf2 | 50 | 8.821 | 8.777–8.894 | 4.727 | 0.10105 | 0.8785 |
-| zero_shot | scared7_kf2 | 4 | 3.250 | 3.240–3.315 | 3.704 | 0.19196 | 1.5975 |
-| zero_shot | scared7_kf2 | 16 | 4.823 | 4.797–4.858 | 4.089 | 0.17942 | 1.4809 |
-| zero_shot | scared7_kf2 | 50 | 8.918 | 8.902–8.960 | 4.727 | 0.17981 | 1.4868 |
+| V9_SCARED | c3vd_trans4 | 1 | 2.996 | 2.880–3.019 | 3.553 | 0.18322 | 0.6305 |
+| V9_SCARED | c3vd_trans4 | 4 | 3.227 | 3.222–3.236 | 3.762 | 0.20319 | 0.6348 |
+| V9_SCARED | c3vd_trans4 | 8 | 4.023 | 4.020–4.027 | 3.960 | 0.20782 | 0.6280 |
+| V9_SCARED | c3vd_trans4 | 16 | 5.233 | 5.201–5.247 | 4.168 | 0.21524 | 0.6540 |
+| V9_SCARED | c3vd_trans4 | 32 | 7.531 | 7.490–7.533 | 4.549 | 0.22336 | 0.6629 |
+| V9_SCARED | c3vd_trans4 | 50 | 10.487 | 10.466–10.495 | 4.971 | 0.22929 | 0.6620 |
+| VN18_C3VD | c3vd_trans4 | 1 | 3.131 | 2.938–3.169 | 3.553 | 0.08184 | 0.4611 |
+| VN18_C3VD | c3vd_trans4 | 4 | 3.405 | 3.379–3.424 | 3.762 | 0.08004 | 0.4687 |
+| VN18_C3VD | c3vd_trans4 | 8 | 4.014 | 4.012–4.015 | 3.960 | 0.07616 | 0.4558 |
+| VN18_C3VD | c3vd_trans4 | 16 | 5.246 | 5.222–5.285 | 4.168 | 0.07703 | 0.4648 |
+| VN18_C3VD | c3vd_trans4 | 32 | 7.503 | 7.492–7.554 | 4.549 | 0.07899 | 0.4651 |
+| VN18_C3VD | c3vd_trans4 | 50 | 10.501 | 10.490–10.523 | 4.971 | 0.07726 | 0.4782 |
+| VN18_SCARED | c3vd_trans4 | 1 | 3.024 | 2.968–3.049 | 3.553 | 0.19451 | 0.6658 |
+| VN18_SCARED | c3vd_trans4 | 4 | 3.457 | 3.383–3.491 | 3.762 | 0.21193 | 0.6865 |
+| VN18_SCARED | c3vd_trans4 | 8 | 4.034 | 4.030–4.037 | 3.960 | 0.21446 | 0.6746 |
+| VN18_SCARED | c3vd_trans4 | 16 | 5.265 | 5.237–5.266 | 4.168 | 0.22101 | 0.6724 |
+| VN18_SCARED | c3vd_trans4 | 32 | 7.564 | 7.526–7.598 | 4.549 | 0.22835 | 0.6727 |
+| VN18_SCARED | c3vd_trans4 | 50 | 10.570 | 10.514–10.610 | 4.971 | 0.22712 | 0.6666 |
+| zero_shot | c3vd_trans4 | 1 | 3.110 | 2.913–3.123 | 3.553 | 0.17977 | 0.7466 |
+| zero_shot | c3vd_trans4 | 4 | 3.390 | 3.389–3.391 | 3.762 | 0.19034 | 0.7323 |
+| zero_shot | c3vd_trans4 | 8 | 4.042 | 4.041–4.093 | 3.960 | 0.18487 | 0.7136 |
+| zero_shot | c3vd_trans4 | 16 | 5.311 | 5.304–5.316 | 4.168 | 0.17777 | 0.7019 |
+| zero_shot | c3vd_trans4 | 32 | 7.676 | 7.631–7.721 | 4.549 | 0.17685 | 0.6890 |
+| zero_shot | c3vd_trans4 | 50 | 10.627 | 10.603–10.632 | 4.971 | 0.17750 | 0.6974 |
+| V9_SCARED | scared7_kf2 | 1 | 2.915 | 2.914–3.129 | 3.538 | 0.11430 | 0.8709 |
+| V9_SCARED | scared7_kf2 | 4 | 3.462 | 3.340–3.489 | 3.704 | 0.13419 | 1.0462 |
+| V9_SCARED | scared7_kf2 | 8 | 4.031 | 4.019–4.057 | 3.913 | 0.14355 | 1.0314 |
+| V9_SCARED | scared7_kf2 | 16 | 5.070 | 5.068–5.074 | 4.089 | 0.14221 | 1.0620 |
+| V9_SCARED | scared7_kf2 | 32 | 7.072 | 7.045–7.099 | 4.392 | 0.14430 | 1.0562 |
+| V9_SCARED | scared7_kf2 | 50 | 9.196 | 9.164–9.210 | 4.727 | 0.14171 | 1.0224 |
+| VN18_C3VD | scared7_kf2 | 1 | 2.944 | 2.928–3.154 | 3.538 | 0.26229 | 1.7393 |
+| VN18_C3VD | scared7_kf2 | 4 | 3.560 | 3.489–3.590 | 3.704 | 0.20348 | 1.6754 |
+| VN18_C3VD | scared7_kf2 | 8 | 4.022 | 3.996–4.105 | 3.913 | 0.19692 | 1.6259 |
+| VN18_C3VD | scared7_kf2 | 16 | 5.133 | 5.109–5.156 | 4.089 | 0.19353 | 1.5764 |
+| VN18_C3VD | scared7_kf2 | 32 | 7.127 | 7.118–7.156 | 4.392 | 0.19354 | 1.5698 |
+| VN18_C3VD | scared7_kf2 | 50 | 9.276 | 9.253–9.321 | 4.727 | 0.19399 | 1.5538 |
+| VN18_SCARED | scared7_kf2 | 1 | 2.953 | 2.904–3.131 | 3.538 | 0.18500 | 1.1456 |
+| VN18_SCARED | scared7_kf2 | 4 | 3.581 | 3.498–3.588 | 3.704 | 0.12048 | 0.9362 |
+| VN18_SCARED | scared7_kf2 | 8 | 4.098 | 4.098–4.115 | 3.913 | 0.11060 | 0.9484 |
+| VN18_SCARED | scared7_kf2 | 16 | 5.114 | 5.088–5.129 | 4.089 | 0.10251 | 0.8893 |
+| VN18_SCARED | scared7_kf2 | 32 | 7.202 | 7.165–7.222 | 4.392 | 0.10281 | 0.8996 |
+| VN18_SCARED | scared7_kf2 | 50 | 9.240 | 9.211–9.257 | 4.727 | 0.10105 | 0.8785 |
+| zero_shot | scared7_kf2 | 1 | 2.983 | 2.943–3.163 | 3.538 | 0.27777 | 2.1190 |
+| zero_shot | scared7_kf2 | 4 | 3.524 | 3.512–3.583 | 3.704 | 0.19196 | 1.5975 |
+| zero_shot | scared7_kf2 | 8 | 4.070 | 4.067–4.102 | 3.913 | 0.18194 | 1.5014 |
+| zero_shot | scared7_kf2 | 16 | 5.184 | 5.163–5.187 | 4.089 | 0.17942 | 1.4809 |
+| zero_shot | scared7_kf2 | 32 | 7.233 | 7.216–7.242 | 4.392 | 0.18024 | 1.4854 |
+| zero_shot | scared7_kf2 | 50 | 9.226 | 9.220–9.260 | 4.727 | 0.17981 | 1.4868 |
 
 <p>Tiempos con encoder y traslados CPU/GPU incluidos. Calidad medida en la misma primera ancla para comparar N. Las mediciones de latencia son operativas en este equipo; no son una comparación directa con A100/H100.</p>
 </details>
@@ -3461,6 +3541,7 @@ Para las variantes VGG-T³ de esta tabla, la secuencia quedó fuera de sus ajust
 <details class="trace-details"><summary>Configuración y evidencia</summary><p><a href="tablas/robustez_endoscopia_resultados.json">Resultados estructurados y protocolo</a>. Fuentes históricas y checkpoints conservados. Los controles de identidad, reinicio y máscaras se verifican antes de completar la etapa; los registros técnicos completos permanecen en el proyecto local.</p></details></div></details>
 </details>
 <!-- END COMPLETED ROBUSTNESS -->
+
 </details>
 
 <details class="experiment-model" id="vggt-experimentos"><summary>VGGT</summary>
