@@ -22,6 +22,7 @@
    let i=0,values=numbers(normalized);const template=normalized.replace(numeric,()=>`@@N${i++}@@`),rule=rules.get(template);
    if(rule!==undefined)translated=rule.replace(/@@N(\d+)@@/g,(_,index)=>values[+index]);
   }
+  if(translated===undefined&&!split&&catalogue[normalized+'.']!==undefined)translated=catalogue[normalized+'.'].replace(/\.$/,'');
   if(translated===undefined&&split){
    const parts=normalized.split(/( · |\. (?=[A-ZÁÉÍÓÚ]))/);
    if(parts.length>1)translated=parts.map((part,i)=>i%2?part:text(part,lang,false)).join('');

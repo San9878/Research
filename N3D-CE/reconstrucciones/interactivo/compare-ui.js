@@ -73,7 +73,7 @@
  function init(){
   observer=new MutationObserver(schedule);refresh();
   const requested=(new URLSearchParams(location.search).get('models')||'').split(',').map(id=>clouds.get(id)||metrics.get(id)||(window.TRAJECTORY_REGISTRY?.trajectories||[]).find(r=>r.id===id)).filter(Boolean),datasets=requested.map(r=>(r.dataset||r.case||'').startsWith('C3VD')?'C3VD':(r.dataset||r.case||'').startsWith('SCARED')?'SCARED':'');
-  if(datasets.length&&datasets[0]&&datasets.every(d=>d===datasets[0])){for(const id of ['metric-dataset','cloud-dataset','trajectory-dataset'])if($(id))$(id).value=datasets[0];const active=document.querySelector('.tabs [aria-selected="true"]')?.id.replace('tab-','')||'clouds';window.BookMetrics?.choose(BookMetrics.selected());$('cloud-filter')?.dispatchEvent(new Event('input'));if(active==='trajectories')window.BookTrajectories?.refresh();activateTab(active)}
+  if(datasets.length&&datasets[0]&&datasets.every(d=>d===datasets[0])){for(const id of ['metric-dataset','cloud-dataset','trajectory-dataset'])if($(id))$(id).value=datasets[0];const active=document.querySelector('.tabs [aria-selected="true"]')?.id.replace('tab-','')||'clouds';window.BookMetrics?.choose(BookMetrics.selected());$('cloud-filter')?.dispatchEvent(new Event('input'));window.BookTrajectories?.refresh();activateTab(active)}
   $('show-archive')?.addEventListener('change',()=>{const active=document.querySelector('.tabs [aria-selected="true"]')?.id.replace('tab-','')||'clouds';window.BookMetrics?.choose(BookMetrics.selected());$('cloud-filter')?.dispatchEvent(new Event('input'));activateTab(active);schedule()});
   window.addEventListener('book-language-change',refresh);
  }
