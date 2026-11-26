@@ -1,0 +1,4 @@
+.book-language-switch{position:sticky;top:0;z-index:1020;display:flex;justify-content:flex-end;align-items:center;gap:.65rem;background:#f7faf8ee;border-bottom:1px solid #dce8e1;padding:.45rem max(1rem,3vw);backdrop-filter:blur(8px);font:500 .85rem system-ui,sans-serif;color:#193c35}
+.book-language-switch select{font:inherit;max-width:230px;background:#fff;color:#193c35;border:1px solid #a9c3b4;border-radius:6px;padding:.3rem .5rem;min-height:34px}
+.book-language-switch select:focus-visible{outline:3px solid #2d8060;outline-offset:2px}
+@media(max-width:600px){.book-language-switch{font-size:.75rem;gap:.4rem;padding:.4rem .7rem}.book-language-switch select{max-width:195px}}

@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded',()=>{
  function filter(){
   const query=normalize($('experiment-search')?.value||''),model=$('experiment-model')?.value||'',dataset=$('experiment-dataset')?.value||'';
   let count=0;
-  for(const {card,text} of entries){card.hidden=!!((query&&!text.includes(query))||(model&&card.dataset.model!==model)||(dataset&&card.dataset.scope!==dataset));if(!card.hidden)count++;}
+  for(const {card,text} of entries){card.hidden=!!((query&&!(text+' '+normalize(card.textContent)).includes(query))||(model&&card.dataset.model!==model)||(dataset&&card.dataset.scope!==dataset));if(!card.hidden)count++;}
   for(const group of root?.querySelectorAll('.experiment-group,.experiment-model')||[]){
    const visible=[...group.querySelectorAll('[data-experiment]')].some(card=>!card.hidden);
    group.hidden=!visible;if(visible&&(query||model||dataset))group.open=true;

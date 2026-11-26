@@ -63,6 +63,10 @@ def main():
     (dst/'Bitacora.qmd').write_text(q,encoding='utf8')
     for rel in ['recursos/bitacora.css','recursos/offline.scss','recursos/navegacion.html','recursos/comparadores_integracion.js','recursos/editorial.css','recursos/book-navigation.js']:
         copy(src/rel,dst/rel)
+    for name in ['en.js','language.js','language.css']:
+        copy(src/'recursos/i18n'/name,dst/'recursos/i18n'/name)
+    for name in ['recursos/usability.css','recursos/reading-tools.js','reconstrucciones/interactivo/compare-ui.js','reconstrucciones/interactivo/trajectory-viewer.js','reconstrucciones/interactivo/trajectories.js','reconstrucciones/interactivo/trajectories.json']:
+        copy(src/name,dst/name)
     for img in (src/'imagenes').glob('*'):
         if img.is_file():copy(img,dst/'imagenes'/img.name)
     app=dst/'reconstrucciones/interactivo';app.mkdir(parents=True,exist_ok=True)

@@ -1,0 +1,17 @@
+/* Zoom only the selected figure; never change browser/page zoom. */
+document.addEventListener('DOMContentLoaded',()=>{
+ const modal=document.createElement('dialog');modal.id='figure-dialog';modal.innerHTML='<div class="figure-toolbar"><strong id="figure-caption"></strong><button type="button" data-figure="minus" aria-label="Reducir imagen">−</button><output id="figure-scale">100 %</output><button type="button" data-figure="plus" aria-label="Ampliar imagen">+</button><button type="button" data-figure="fit">Ajustar</button><button type="button" data-figure="close">Cerrar</button></div><div class="figure-stage"><img alt=""></div>';document.body.append(modal);
+ const stage=modal.querySelector('.figure-stage'),image=stage.querySelector('img');let scale=1,x=0,y=0,pointers=new Map(),pinch=0,currentSource=null;
+ function draw(){image.style.transform='translate('+x+'px,'+y+'px) scale('+scale+')';modal.querySelector('output').value=Math.round(scale*100)+' %'}
+ function reset(){scale=1;x=y=0;draw()}
+ function caption(){if(currentSource)modal.querySelector('strong').textContent=currentSource.closest('figure')?.querySelector('figcaption')?.textContent||currentSource.alt||'Imagen de reconstrucción'}
+ function open(source){currentSource=source;caption();image.src=source.currentSrc||source.src;image.alt=source.alt;reset();modal.showModal()}
+ document.querySelectorAll('main img:not(.cover-up):not(.cover-kaust)').forEach(img=>{img.classList.add('zoomable-figure');img.tabIndex=0;img.setAttribute('title','Ampliar imagen y explorar con zoom');img.addEventListener('click',e=>{e.preventDefault();open(img)});img.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open(img)}})});
+ modal.querySelector('[data-figure=plus]').onclick=()=>{scale=Math.min(12,scale*1.25);draw()};modal.querySelector('[data-figure=minus]').onclick=()=>{scale=Math.max(.4,scale/1.25);draw()};modal.querySelector('[data-figure=fit]').onclick=reset;modal.querySelector('[data-figure=close]').onclick=()=>modal.close();
+ stage.addEventListener('wheel',e=>{e.preventDefault();scale=Math.max(.4,Math.min(12,scale*Math.exp(-e.deltaY*.0015)));draw()},{passive:false});
+ stage.addEventListener('pointerdown',e=>{pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});stage.setPointerCapture(e.pointerId);if(pointers.size===2){const p=[...pointers.values()];pinch=Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y)}});
+ stage.addEventListener('pointermove',e=>{const previous=pointers.get(e.pointerId);if(!previous)return;if(pointers.size===1){x+=e.clientX-previous.x;y+=e.clientY-previous.y}pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});if(pointers.size===2){const p=[...pointers.values()],distance=Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y);if(pinch>0)scale=Math.max(.4,Math.min(12,scale*distance/pinch));pinch=distance}draw()});
+ for(const event of ['pointerup','pointercancel'])stage.addEventListener(event,e=>pointers.delete(e.pointerId));stage.addEventListener('dblclick',reset);modal.addEventListener('close',()=>{image.removeAttribute('src');pointers.clear();currentSource=null});window.addEventListener('book-language-change',caption);
+ document.getElementById('glossary-search')?.addEventListener('input',e=>{const query=e.target.value.toLowerCase();document.querySelectorAll('.glossary-term').forEach(d=>{d.hidden=!d.textContent.toLowerCase().includes(query);if(!d.hidden&&query){d.closest('.reading-fold').open=true;d.open=true}})});
+ window.BookFigures={open,close:()=>modal.close(),snapshot:()=>({open:modal.open,scale,x,y,pageZoom:devicePixelRatio})};
+});
